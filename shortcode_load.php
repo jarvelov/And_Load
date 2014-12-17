@@ -63,7 +63,7 @@ License:
 		$table_name = $wpdb->prefix . self::slug; 
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$sql = "CREATE TABLE $table_name IF NOT EXISTS $table_name (
+		$sql = "CREATE TABLE $table_name $table_name (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			name varchar(255) DEFAULT '' NOT NULL,
 			type varchar(255) DEFAULT '' NOT NULL,
