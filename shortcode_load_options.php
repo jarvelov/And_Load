@@ -306,6 +306,9 @@ Class ShortcodeLoad_Options {
 				<h2>Shortcode Load</h2>
 				
 				<?php
+
+				var_dump( get_option( 'shortcode_load_new_script_options' ) );
+				
 				if($active_tab == 'tab_one') {
 					settings_fields( 'shortcode_load_overview' );
 					do_settings_sections( 'shortcode_load_overview' );
