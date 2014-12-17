@@ -114,7 +114,9 @@ Class ShortcodeLoad_Options {
 
 	/* Save new scripts/styles to database */
 
-	function
+	function shortcode_load_save_to_db($args) {
+		//stuff
+	}
 
 	/*
 	* Callbacks
