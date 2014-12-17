@@ -130,11 +130,11 @@ Class ShortcodeLoad_Options {
 		var_dump($minify);
 
 		if($script_content) {
-			shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => true ) );
+			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => true ) );
 		}
 
 		if($style_content) {
-			shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => true ) );
+			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => true ) );
 		}
 	}
 
