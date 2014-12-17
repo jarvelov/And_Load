@@ -63,7 +63,7 @@ License:
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$sql = "CREATE TABLE $table_name (
+		$sql = "CREATE TABLE IF NOT EXISTS `$table_name` (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			name varchar(255) DEFAULT '' NOT NULL,
 			type varchar(255) DEFAULT '' NOT NULL,
@@ -71,8 +71,8 @@ License:
 			minify boolean DEFAULT '1' NOT NULL,
 			minpath varchar(255) DEFAULT '',
 			revision mediumint(9) DEFAULT '1' NOT NULL,
-			created_timestamp DEFAULT CURRENT_TIMESTAMP,
-			updated_timestamp DEFAULT CURRENT_TIMESTAMP,
+			created_timestamp timestamp DEFAULT '0000-00-00 00:00:00',
+			updated_timestamp timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			UNIQUE KEY id (id)
 			) $charset_collate;";
 
