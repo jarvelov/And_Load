@@ -18,15 +18,17 @@ Class ShortcodeLoad_Options {
 		if ( ! current_user_can('update_plugins') )
 			return;
 
+		/* Default settings section */
+		
 		add_settings_section( 
 			'shortcode_load_default',
-			'Essentials Front Page Options',
+			'Default Settings',
 			array($this, 'shortcode_load_default_options_callback'),
 			'shortcode_load_default_options'
 		);
 		add_settings_field(
 			'shortcode_load_default_text',
-			'Featured Post',
+			'Default Settings Field',
 			array($this, 'shortcode_load_default_text_callback'),
 			'shortcode_load_default_options',
 			'shortcode_load_default'
@@ -34,8 +36,45 @@ Class ShortcodeLoad_Options {
 
 		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
 
+		/* New script section */
+
+		add_settings_section( 
+			'shortcode_load_new_script',
+			'New Script Settings',
+			array($this, 'shortcode_load_new_script_options_callback'),
+			'shortcode_load_new_script_options'
+		);
+		add_settings_field(
+			'shortcode_load_default_text',
+			'Script Content Field',
+			array($this, 'shortcode_load_new_script_textarea_callback'),
+			'shortcode_load_new_script_options',
+			'shortcode_load_new_script'
+		);
+
+		register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options');
+
+		/* New style section */
+
+		add_settings_section( 
+			'shortcode_load_new_style',
+			'New Style Settings',
+			array($this, 'shortcode_load_new_style_options_callback'),
+			'shortcode_load_new_style_options'
+		);
+		add_settings_field(
+			'shortcode_load_default_text',
+			'Style Content Field',
+			array($this, 'shortcode_load_new_style_textarea_callback'),
+			'shortcode_load_new_script_options',
+			'shortcode_load_new_script'
+		);
+
+		register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options');
+
 	}
 
+	/* Default tab callbacks */
 	function shortcode_load_default_options_callback() {
 		echo '<p>Default Options:</p>'; 
 	}	
@@ -43,6 +82,10 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_default_text_callback() {
 		echo '<p>New Script Options:</p>'; 
 	}
+
+	/* New script tab callbacks */
+
+	/* New style tab callbacks */
 
 	function shortcode_load_options_page(  ) { 
 		if( isset( $_GET[ 'tab' ] ) ) {  
@@ -54,9 +97,9 @@ Class ShortcodeLoad_Options {
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
-				<a href="#tab_one" class="nav-tab">Default Options</a>
-				<a href="#tab_two" class="nav-tab">New Script</a>
-				<a href="#tab_three" class="nav-tab">New Style</a>
+				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_one" class="nav-tab">Default Options</a>
+				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_two" class="nav-tab">New Script</a>
+				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_three" class="nav-tab">New Style</a>
 			</h2>
 
 			<form action='options.php' method='post'>
