@@ -22,7 +22,7 @@ Class ShortcodeLoad_Options {
 
 		add_settings_section( 
 			'shortcode_load_overview',
-			'Default Settings',
+			'Registered scripts and styles',
 			array($this, 'shortcode_load_overview_callback'),
 			'shortcode_load_overview'
 		);
@@ -115,7 +115,7 @@ Class ShortcodeLoad_Options {
 	/* Overview tab callbacks */
 
 	function shortcode_load_overview_callback() {
-		echo '<p>Scripts and styles:</p>'; 
+		echo '<p>This overview shows the registered scripts and styles:</p>'; 
 	}	
 
 	function shortcode_load_overview_scripts_callback() {
