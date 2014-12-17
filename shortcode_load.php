@@ -68,7 +68,7 @@ License:
 			name varchar(255) DEFAULT '' NOT NULL,
 			type varchar(255) DEFAULT '' NOT NULL,
 			srcpath varchar(255) DEFAULT '' NOT NULL,
-			minify boolean DEFAULT '1' NOT NULL,
+			minify boolean DEFAULT '0' NOT NULL,
 			minpath varchar(255) DEFAULT '',
 			revision mediumint(9) DEFAULT '1' NOT NULL,
 			created_timestamp timestamp DEFAULT '0000-00-00 00:00:00',

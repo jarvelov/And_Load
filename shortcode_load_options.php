@@ -126,20 +126,19 @@ Class ShortcodeLoad_Options {
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
 
-		$minify = $options_default['default_minify_checkbox'];
-		var_dump($minify);
+		$minify = ( int( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
 		if($script_content) {
-			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => true ) );
+			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => $minify ) );
 		}
 
 		if($style_content) {
-			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => true ) );
+			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => $minify ) );
 		}
 	}
 
 	function shortcode_load_save_to_database($args) {
-
+		var_dump($args);
 	}
 
 	/*
