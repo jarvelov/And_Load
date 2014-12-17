@@ -32,7 +32,7 @@ if (!function_exists('is_admin')) {
     exit();
 }
 
-define( 'SLDIR', WP_PLUGIN_DIR . '/shortcode_load' );
+define( 'SLDIR', WP_PLUGIN_DIR . '/Shortcode_load' );
 define( 'SLURL', WP_PLUGIN_URL . '/shortcode_load' );
 
 class ShortcodeLoad {

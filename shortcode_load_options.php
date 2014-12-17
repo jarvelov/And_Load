@@ -1,6 +1,6 @@
 <?php
 
-Class ShortcodeLoad_Options {
+Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
@@ -123,7 +123,6 @@ Class ShortcodeLoad_Options {
 				<h2>Shortcode Load</h2>
 				
 				<?php
-
 				if($active_tab == 'tab_one') {
 					settings_fields( 'shortcode_load_default_options' );
 					do_settings_sections( 'shortcode_load_default_options' );
