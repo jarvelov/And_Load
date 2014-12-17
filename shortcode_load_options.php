@@ -2,7 +2,6 @@
 
 Class ShortcodeLoad_Options {
 
-
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'sl_add_admin_menu') );
 		add_action( 'admin_init', array($this, 'sl_settings_init') );

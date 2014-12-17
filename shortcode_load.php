@@ -104,7 +104,7 @@ class ShortcodeLoad {
         // Extract the attributes
         extract(shortcode_atts(array(
             'id' => '',
-            'in_header' = false
+            'in_header' => false
             ), $atts));
 
     }
