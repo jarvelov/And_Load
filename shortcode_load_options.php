@@ -84,7 +84,7 @@ Class ShortcodeLoad_Options {
 
 		add_settings_field(
 			'shortcode_load_script_name',
-			'Script Content Field',
+			'Script Name *',
 			array($this, 'shortcode_load_new_script_name_callback'),
 			'shortcode_load_new_script_options',
 			'shortcode_load_new_script'
@@ -92,7 +92,7 @@ Class ShortcodeLoad_Options {
 
 		add_settings_field(
 			'shortcode_load_default_text',
-			'Script Content Field',
+			'Script Content *',
 			array($this, 'shortcode_load_new_script_textarea_callback'),
 			'shortcode_load_new_script_options',
 			'shortcode_load_new_script'
@@ -111,7 +111,7 @@ Class ShortcodeLoad_Options {
 
 		add_settings_field(
 			'shortcode_load_style_name',
-			'Script Content Field',
+			'Style Name *',
 			array($this, 'shortcode_load_new_style_name_callback'),
 			'shortcode_load_new_style_options',
 			'shortcode_load_new_style'
@@ -119,7 +119,7 @@ Class ShortcodeLoad_Options {
 
 		add_settings_field(
 			'shortcode_load_default_text',
-			'Style Content Field',
+			'Style Content *',
 			array($this, 'shortcode_load_new_style_textarea_callback'),
 			'shortcode_load_new_style_options',
 			'shortcode_load_new_style'
