@@ -85,6 +85,17 @@ Class ShortcodeLoad_Options {
 
 	}
 
+	/* Overview tab callbacks */
+
+	function shortcode_load_default_options_callback() {
+		echo '<p>Default Options:</p>'; 
+	}	
+
+	function shortcode_load_default_text_callback() {
+		echo '<p>This is some default text</p>'; 
+	}
+
+
 	/* Default tab callbacks */
 	function shortcode_load_default_options_callback() {
 		echo '<p>Default Options:</p>'; 
@@ -93,6 +104,7 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_default_text_callback() {
 		echo '<p>This is some default text</p>'; 
 	}
+
 
 	function shortcode_load_default_automatically_minify_callback() {
 		$options = get_option( 'shortcode_load_default_options' );
@@ -106,12 +118,17 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_script_options_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
-		echo '<p>New script callback</p>';
+		echo '<p>New script</p>';
 	}
+
+	function shortcode_load_new_script_name_callback() {
+		$options = get_option( 'shortcode_load_new_script_options' );
+		echo '<p>Script Name*</p>';
+	}	
 
 	function shortcode_load_new_script_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
-		echo '<p>New script textarea callback</p>';
+		echo '<p>Paste script into the textarea</p>';
 		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . $options[ 'new_script_textarea' ] . '</textarea>';
 	}
 
@@ -123,7 +140,7 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
-		echo '<p>New style textarea callback</p>';
+		echo '<p>Paste style into the textarea</p>';
 		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
 	}
 
@@ -137,9 +154,10 @@ Class ShortcodeLoad_Options {
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
-				<a href="?page=shortcode_load&amp;tab=tab_one" class="nav-tab">Default Options</a>
-				<a href="?page=shortcode_load&amp;tab=tab_two" class="nav-tab">New Script</a>
-				<a href="?page=shortcode_load&amp;tab=tab_three" class="nav-tab">New Style</a>
+				<a href="?page=shortcode_load&amp;tab=tab_one" class="nav-tab">Overview</a>
+				<a href="?page=shortcode_load&amp;tab=tab_two" class="nav-tab">Default Options</a>
+				<a href="?page=shortcode_load&amp;tab=tab_three" class="nav-tab">New Script</a>
+				<a href="?page=shortcode_load&amp;tab=tab_four" class="nav-tab">New Style</a>
 			</h2>
 
 			<form action='options.php' method='post'>
@@ -148,12 +166,15 @@ Class ShortcodeLoad_Options {
 				
 				<?php
 				if($active_tab == 'tab_one') {
+					settings_fields( 'shortcode_load_overview' );
+					do_settings_sections( 'shortcode_load_overview' );
+				} elseif($active_tab == 'tab_two') {
 					settings_fields( 'shortcode_load_default_options' );
 					do_settings_sections( 'shortcode_load_default_options' );
-				} elseif($active_tab == 'tab_two') {
+				} elseif($active_tab == 'tab_three') {
 					settings_fields( 'shortcode_load_new_script_options' );
 					do_settings_sections( 'shortcode_load_new_script_options' );
-				} elseif($active_tab == 'tab_three') {
+				} elseif($active_tab == 'tab_four') {
 					settings_fields( 'shortcode_load_new_style_options' );
 					do_settings_sections( 'shortcode_load_new_style_options' );
 				}
