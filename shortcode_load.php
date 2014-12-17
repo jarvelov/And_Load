@@ -26,127 +26,146 @@ License:
 */
 
 // don't load directly
-if (!function_exists('is_admin')) {
-    header('Status: 403 Forbidden');
-    header('HTTP/1.1 403 Forbidden');
-    exit();
-}
+  if (!function_exists('is_admin')) {
+	header('Status: 403 Forbidden');
+	header('HTTP/1.1 403 Forbidden');
+	exit();
+  }
 
-define( 'SLDIR', WP_PLUGIN_DIR . '/shortcode_load' );
-define( 'SLURL', WP_PLUGIN_URL . '/shortcode_load' );
+  define( 'SLDIR', WP_PLUGIN_DIR . '/shortcode_load' );
+  define( 'SLURL', WP_PLUGIN_URL . '/shortcode_load' );
 
-class ShortcodeLoad {
+  class ShortcodeLoad {
 
-    /*--------------------------------------------*
-     * Constants
-     *--------------------------------------------*/
-    const name = 'Shortcode Load';
-    const slug = 'shortcode_load';
-    
-    /**
-     * Constructor
-     */
-    function __construct() {
-        //register an activation hook for the plugin
-        register_activation_hook( __FILE__, array( &$this, 'install_shortcode_load' ) );
+	/*--------------------------------------------*
+	 * Constants
+	 *--------------------------------------------*/
+	const name = 'Shortcode Load';
+	const slug = 'shortcode_load';
+	
+	/**
+	 * Constructor
+	 */
+	function __construct() {
+		//register an activation hook for the plugin
+		register_activation_hook( __FILE__, array( &$this, 'install_shortcode_load' ) );
 
-        //Hook up to the init action
-        add_action( 'init', array( &$this, 'init_shortcode_load' ) );
-    }
-  
-    /**
-     * Runs when the plugin is activated
-     */  
-    function install_shortcode_load() {
-        // do not generate any output here
-    }
-  
-    /**
-     * Runs when the plugin is initialized
-     */
-    function init_shortcode_load() {
-        // Setup localization
-        load_plugin_textdomain( self::slug, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
-        // Load JavaScript and stylesheets
-        $this->register_scripts_and_styles();
+		//Hook up to the init action
+		add_action( 'init', array( &$this, 'init_shortcode_load' ) );
+	}
+	
+	/**
+	 * Runs when the plugin is activated
+	 */  
+	function install_shortcode_load() {
+		/* Create database table */
+		global $wpdb;
+		$table_name = $wpdb->prefix . self::slug; 
 
-        // Register the shortcode [shortcode_load]
-        add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
-    
-        if ( is_admin() ) {
-            if (!class_exists("ShortcodeLoad_Options"))
-                require(SLDIR . '/' . self::slug.'_options.php');
-            $this->options = new ShortcodeLoad_Options();
+		$charset_collate = $wpdb->get_charset_collate();
+		$sql = "CREATE TABLE $table_name IF NOT EXISTS $table_name (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			name varchar(255) DEFAULT '' NOT NULL,
+			type varchar(255) DEFAULT '' NOT NULL,
+			srcpath varchar(255) DEFAULT '' NOT NULL,
+			minify boolean DEFAULT '1' NOT NULL,
+			minpath varchar(255) DEFAULT '',
+			revision mediumint(9) DEFAULT '1' NOT NULL,
+			created_timestamp DEFAULT CURRENT_TIMESTAMP,
+			updated_timestamp DEFAULT CURRENT_TIMESTAMP,
+			UNIQUE KEY id (id)
+			) $charset_collate;";
 
-        } else {
-            //this will run when on the frontend
-        }
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
+	}
 
-        /*
-         * TODO: Define custom functionality for your plugin here
-         *
-         * For more information: 
-         * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-         */
-        add_action( 'your_action_here', array( &$this, 'action_callback_method_name' ) );
-        add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );    
-    }
+	/**
+	 * Runs when the plugin is initialized
+	 */
+	function init_shortcode_load() {
+		// Setup localization
+		load_plugin_textdomain( self::slug, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+		// Load JavaScript and stylesheets
+		$this->register_scripts_and_styles();
 
-    function action_callback_method_name() {
-        // TODO define your action method here
-    }
+		// Register the shortcode [shortcode_load]
+		add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
+		
+		if ( is_admin() ) {
+			if (!class_exists("ShortcodeLoad_Options"))
+				require(SLDIR . '/' . self::slug.'_options.php');
+			$this->options = new ShortcodeLoad_Options();
 
-    function filter_callback_method_name() {
-        // TODO define your filter method here
-    }
+		} else {
+			//this will run when on the frontend
+		}
 
-    function render_shortcode($atts) {
-        // Extract the attributes
-        extract(shortcode_atts(array(
-            'id' => '',
-            'in_header' => false
-            ), $atts));
+		/*
+		 * TODO: Define custom functionality for your plugin here
+		 *
+		 * For more information: 
+		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
+		 */
+		add_action( 'your_action_here', array( &$this, 'action_callback_method_name' ) );
+		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );    
+	}
 
-    }
-  
-    /**
-     * Registers and enqueues stylesheets for the administration panel and the
-     * public facing site.
-     */
-    private function register_scripts_and_styles() {
-        if ( is_admin() ) {
-            $this->load_file( self::slug . '-admin-script', '/js/admin.js', true );
-            $this->load_file( self::slug . '-admin-style', '/css/admin.css' );
-        } else {
-            $this->load_file( self::slug . '-script', '/js/widget.js', true );
-            $this->load_file( self::slug . '-style', '/css/widget.css' );
-        } // end if/else
-    } // end register_scripts_and_styles
-    
-    /**
-     * Helper function for registering and enqueueing scripts and styles.
-     *
-     * @name    The     ID to register with WordPress
-     * @file_path       The path to the actual file
-     * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
-     */
-    private function load_file( $name, $file_path, $is_script = false ) {
+	function action_callback_method_name() {
+		// TODO define your action method here
+	}
 
-        $url = plugins_url($file_path, __FILE__);
-        $file = plugin_dir_path(__FILE__) . $file_path;
+	function filter_callback_method_name() {
+		// TODO define your filter method here
+	}
 
-        if( file_exists( $file ) ) {
-            if( $is_script ) {
-                wp_register_script( $name, $url, array('jquery') ); //depends on jquery
-                wp_enqueue_script( $name );
-            } else {
-                wp_register_style( $name, $url );
-                wp_enqueue_style( $name );
-            } // end if
-        } // end if
+	function render_shortcode($atts) {
+		// Extract the attributes
+		extract(shortcode_atts(array(
+			'id' => '',
+			'in_header' => false
+			), $atts));
 
-    } // end load_file
-  
+	}
+	
+	/**
+	 * Registers and enqueues stylesheets for the administration panel and the
+	 * public facing site.
+	 */
+	private function register_scripts_and_styles() {
+		if ( is_admin() ) {
+			$this->load_file( self::slug . '-admin-script', '/js/admin.js', true );
+			$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
+		} else {
+			$this->load_file( self::slug . '-script', '/js/widget.js', true );
+			$this->load_file( self::slug . '-style', '/css/widget.css' );
+		} // end if/else
+	} // end register_scripts_and_styles
+	
+	/**
+	 * Helper function for registering and enqueueing scripts and styles.
+	 *
+	 * @name    The     ID to register with WordPress
+	 * @file_path       The path to the actual file
+	 * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
+	 */
+	private function load_file( $name, $file_path, $is_script = false ) {
+
+		$url = plugins_url($file_path, __FILE__);
+		$file = plugin_dir_path(__FILE__) . $file_path;
+
+		if( file_exists( $file ) ) {
+			if( $is_script ) {
+				wp_register_script( $name, $url, array('jquery') ); //depends on jquery
+				wp_enqueue_script( $name );
+			} else {
+				wp_register_style( $name, $url );
+				wp_enqueue_style( $name );
+			} // end if
+		} // end if
+
+	} // end load_file
+	
 } // end class
 new ShortcodeLoad();
 

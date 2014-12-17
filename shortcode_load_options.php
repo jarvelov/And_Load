@@ -112,6 +112,14 @@ Class ShortcodeLoad_Options {
 
 	}
 
+	/* Save new scripts/styles to database */
+
+	function
+
+	/*
+	* Callbacks
+	**/
+
 	/* Overview tab callbacks */
 
 	function shortcode_load_overview_callback() {
