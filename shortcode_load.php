@@ -63,7 +63,7 @@ License:
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$sql = "CREATE TABLE $table_name $table_name (
+		$sql = "CREATE TABLE $table_name (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			name varchar(255) DEFAULT '' NOT NULL,
 			type varchar(255) DEFAULT '' NOT NULL,
