@@ -105,11 +105,14 @@ Class ShortcodeLoad_Options {
 	/* New script tab callbacks */
 
 	function shortcode_load_new_script_options_callback() {
+		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<p>New script callback</p>';
 	}
 
 	function shortcode_load_new_script_textarea_callback() {
+		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<p>New script textarea callback</p>';
+		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . $options[ 'new_script_textarea' ] . '</textarea>';
 	}
 
 	/* New style tab callbacks */
@@ -120,6 +123,12 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_style_textarea_callback() {
 		echo '<p>New style textarea callback</p>';
+	}
+
+	function shortcode_load_new_style_textarea_callback() {
+		$options = get_option( 'shortcode_load_new_style_options' );
+		echo '<p>New style textarea callback</p>';
+		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
 	}
 
 	function shortcode_load_options_page(  ) { 
