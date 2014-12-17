@@ -18,6 +18,33 @@ Class ShortcodeLoad_Options {
 		if ( ! current_user_can('update_plugins') )
 			return;
 
+		/* Overview section */
+
+		add_settings_section( 
+			'shortcode_load_overview',
+			'Default Settings',
+			array($this, 'shortcode_load_overview_callback'),
+			'shortcode_load_overview'
+		);
+
+		add_settings_field(
+			'shortcode_load_default_text',
+			'Scripts',
+			array($this, 'shortcode_load_overview_scripts_callback'),
+			'shortcode_load_overview',
+			'shortcode_load_overview'
+		);
+
+		add_settings_field(
+			'shortcode_load_default_text',
+			'Styles',
+			array($this, 'shortcode_load_overview_styles_callback'),
+			'shortcode_load_overview',
+			'shortcode_load_overview'
+		);
+
+		register_setting('shortcode_load_overview', 'shortcode_load_overview');
+
 		/* Default settings section */
 
 		add_settings_section( 
@@ -87,14 +114,17 @@ Class ShortcodeLoad_Options {
 
 	/* Overview tab callbacks */
 
-	function shortcode_load_default_options_callback() {
-		echo '<p>Default Options:</p>'; 
+	function shortcode_load_overview_callback() {
+		echo '<p>Scripts and styles:</p>'; 
 	}	
 
-	function shortcode_load_default_text_callback() {
-		echo '<p>This is some default text</p>'; 
+	function shortcode_load_overview_scripts_callback() {
+		echo '<h2>Scripts:</h2>'; 
 	}
 
+	function shortcode_load_overview_styles_callback() {
+		echo '<h2>Styles:</h2>'; 
+	}
 
 	/* Default tab callbacks */
 	function shortcode_load_default_options_callback() {
