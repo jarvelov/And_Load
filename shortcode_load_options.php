@@ -122,10 +122,6 @@ Class ShortcodeLoad_Options {
 	}
 
 	function shortcode_load_new_style_textarea_callback() {
-		echo '<p>New style textarea callback</p>';
-	}
-
-	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>New style textarea callback</p>';
 		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
