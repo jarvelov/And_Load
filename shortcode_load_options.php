@@ -118,7 +118,15 @@ Class ShortcodeLoad_Options {
 	/* Save new scripts/styles to database */
 
 	function shortcode_load_register_scripts_styles($args) {
-		echo "registering";
+		$options_default = get_option( 'shortcode_load_default_options' );
+		$options_scripts = get_option( 'shortcode_load_new_script_options' );
+		$options_styles = get_option( 'shortcode_load_new_styles_options' );
+		
+
+		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
+		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
+
+		var_dump($script_content, $style_content);
 	}
 
 	/*
