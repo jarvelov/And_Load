@@ -117,7 +117,7 @@ Class ShortcodeLoad_Options {
 
 	/* Save new scripts/styles to database */
 
-	function shortcode_load_register_scripts_styles($args) {
+	function shortcode_load_register_scripts_styles() {
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_styles_options' );
@@ -126,7 +126,20 @@ Class ShortcodeLoad_Options {
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
 
-		var_dump($script_content, $style_content);
+		$minify = $options_default['default_minify_checkbox'];
+		var_dump($minify);
+
+		if($script_content) {
+			shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => true ) );
+		}
+
+		if($style_content) {
+			shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => true ) );
+		}
+	}
+
+	function shortcode_load_save_to_database($args) {
+
 	}
 
 	/*
@@ -136,7 +149,7 @@ Class ShortcodeLoad_Options {
 	/* Overview tab callbacks */
 
 	function shortcode_load_overview_callback() {
-		echo '<p>This overview shows the registered scripts and styles:</p>'; 
+		echo '<p>Overview of the currently registered scripts and styles</p>'; 
 	}	
 
 	function shortcode_load_overview_scripts_callback() {
@@ -174,7 +187,7 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_script_name_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
-		echo '<p>Script Name*</p>';
+		echo '<p>Script Name *</p>';
 	}	
 
 	function shortcode_load_new_script_textarea_callback() {
@@ -188,6 +201,11 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_new_style_options_callback() {
 		echo '<p>New style callback</p>';
 	}
+
+	function shortcode_load_new_style_name_callback() {
+		$options = get_option( 'shortcode_load_new_style_options' );
+		echo '<p>Style Name *</p>';
+	}		
 
 	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
