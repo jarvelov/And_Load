@@ -9,7 +9,7 @@ Class ShortcodeLoad_Options {
 
 	function sl_add_admin_menu(  ) { 
 
-		add_options_page( 'Shortcode Load', 'Shortcode Load', 'manage_options', 'shortcode_load', 'shortcode_load_options_page' );
+		add_options_page( 'Shortcode Load', 'Shortcode Load', 'manage_options', 'shortcode_load', array($this, 'sl_options_page') );
 
 	}
 
