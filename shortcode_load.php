@@ -75,7 +75,7 @@ class ShortcodeLoad {
     
         if ( is_admin() ) {
             if (!class_exists("ShortcodeLoad_Options"))
-                require(SLDIR . self::slug.'_options.php');
+                require(SLDIR . '/' . self::slug.'_options.php');
             $this->options = new ShortcodeLoad_Options();
 
         } else {
