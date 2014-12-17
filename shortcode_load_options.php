@@ -28,7 +28,7 @@ Class ShortcodeLoad_Options {
 		);
 
 		add_settings_field(
-			'shortcode_load_default_text',
+			'shortcode_load_overview_scripts',
 			'Scripts',
 			array($this, 'shortcode_load_overview_scripts_callback'),
 			'shortcode_load_overview',
@@ -36,7 +36,7 @@ Class ShortcodeLoad_Options {
 		);
 
 		add_settings_field(
-			'shortcode_load_default_text',
+			'shortcode_load_overview_styles',
 			'Styles',
 			array($this, 'shortcode_load_overview_styles_callback'),
 			'shortcode_load_overview',
