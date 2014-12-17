@@ -258,13 +258,13 @@ Class ShortcodeLoad_Options {
 		$options = get_option( 'shortcode_load_new_script_options' );
 		var_dump($options);
 		echo '<p>Script Name *</p>';
-		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . ( isset ( $options[ 'new_script_name' ] ) ) ? $options[ 'new_script_name' ] : "" . '"/>';
+		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . $options[ 'new_script_name' ] . '"/>';
 	}	
 
 	function shortcode_load_new_script_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<p>Paste script into the textarea</p>';
-		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . ( isset ( $options[ 'new_script_textarea' ] ) ) ? $options[ 'new_script_textarea' ] : "" . '</textarea>';
+		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . $options[ 'new_script_textarea' ] . '</textarea>';
 	}
 
 	/* New style tab callbacks */
@@ -276,13 +276,13 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_new_style_name_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>Style Name *</p>';
-		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . ( isset ( $options[ 'new_style_name' ] ) ) ? $options[ 'new_style_name' ] : "" . '"/>';
+		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . $options[ 'new_style_name' ] . '"/>';
 	}		
 
 	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>Paste style into the textarea</p>';
-		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . ( isset ( $options[ 'new_style_textarea' ] ) ) ? $options[ 'new_style_textarea' ] : "" . '</textarea>';
+		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
 	}
 
 	function shortcode_load_options_page(  ) { 
@@ -308,7 +308,7 @@ Class ShortcodeLoad_Options {
 				<?php
 
 				var_dump( get_option( 'shortcode_load_new_script_options' ) );
-				
+
 				if($active_tab == 'tab_one') {
 					settings_fields( 'shortcode_load_overview' );
 					do_settings_sections( 'shortcode_load_overview' );
