@@ -22,7 +22,7 @@ Class ShortcodeLoad_Options {
 			array($this, 'shortcode_load_default'),
 			'Essentials Front Page Options',
 			array($this, 'shortcode_load_default_options_callback'),
-			array($this, 'shortcode_load_default_options)'
+			array($this, 'shortcode_load_default_options')
 		);
 		add_settings_field(
 			array($this, 'shortcode_load_default_text'),
