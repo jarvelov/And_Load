@@ -66,7 +66,7 @@ Class ShortcodeLoad_Options {
 			'shortcode_load_default_text',
 			'Style Content Field',
 			array($this, 'shortcode_load_new_style_textarea_callback'),
-			'shortcode_load_new_script_options',
+			'shortcode_load_new_style_options',
 			'shortcode_load_new_style'
 		);
 
