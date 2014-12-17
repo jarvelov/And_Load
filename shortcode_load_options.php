@@ -19,7 +19,7 @@ Class ShortcodeLoad_Options {
 			return;
 
 		/* Default settings section */
-		
+
 		add_settings_section( 
 			'shortcode_load_default',
 			'Default Settings',
@@ -70,7 +70,7 @@ Class ShortcodeLoad_Options {
 			'shortcode_load_new_script'
 		);
 
-		register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options');
+		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
 
 	}
 
@@ -80,12 +80,28 @@ Class ShortcodeLoad_Options {
 	}	
 
 	function shortcode_load_default_text_callback() {
-		echo '<p>New Script Options:</p>'; 
+		echo '<p>This is some default text</p>'; 
 	}
 
 	/* New script tab callbacks */
 
+	function shortcode_load_new_script_options_callback() {
+		echo '<p>New script callback</p>';
+	}
+
+	function shortcode_load_new_script_textarea_callback() {
+		echo '<p>New script textarea callback</p>';
+	}
+
 	/* New style tab callbacks */
+
+	function shortcode_load_new_style_options_callback() {
+		echo '<p>New style callback</p>';
+	}
+
+	function shortcode_load_new_style_textarea_callback() {
+		echo '<p>New style textarea callback</p>';
+	}
 
 	function shortcode_load_options_page(  ) { 
 		if( isset( $_GET[ 'tab' ] ) ) {  
