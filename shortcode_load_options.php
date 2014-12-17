@@ -256,8 +256,9 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_script_name_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
+		var_dump($options);
 		echo '<p>Script Name *</p>';
-		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . ( isset ( $options[ 'new_script_name' ] ) ) ? $options[ 'new_script_name' ] : "" . '">';
+		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . ( isset ( $options[ 'new_script_name' ] ) ) ? $options[ 'new_script_name' ] : "" . '"/>';
 	}	
 
 	function shortcode_load_new_script_textarea_callback() {
@@ -275,7 +276,7 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_new_style_name_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>Style Name *</p>';
-		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . ( isset ( $options[ 'new_style_name' ] ) ) ? $options[ 'new_style_name' ] : "" . '">';
+		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . ( isset ( $options[ 'new_style_name' ] ) ) ? $options[ 'new_style_name' ] : "" . '"/>';
 	}		
 
 	function shortcode_load_new_style_textarea_callback() {
