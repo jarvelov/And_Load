@@ -83,6 +83,14 @@ Class ShortcodeLoad_Options {
 		);
 
 		add_settings_field(
+			'shortcode_load_script_name',
+			'Script Content Field',
+			array($this, 'shortcode_load_new_script_name_callback'),
+			'shortcode_load_new_script_options',
+			'shortcode_load_new_script'
+		);		
+
+		add_settings_field(
 			'shortcode_load_default_text',
 			'Script Content Field',
 			array($this, 'shortcode_load_new_script_textarea_callback'),
@@ -102,6 +110,14 @@ Class ShortcodeLoad_Options {
 		);
 
 		add_settings_field(
+			'shortcode_load_style_name',
+			'Script Content Field',
+			array($this, 'shortcode_load_new_style_name_callback'),
+			'shortcode_load_new_style_options',
+			'shortcode_load_new_style'
+		);			
+
+		add_settings_field(
 			'shortcode_load_default_text',
 			'Style Content Field',
 			array($this, 'shortcode_load_new_style_textarea_callback'),
@@ -115,7 +131,7 @@ Class ShortcodeLoad_Options {
 
 	}
 
-	/* Save new scripts/styles to database */
+	/* Database interactions */
 
 	function shortcode_load_register_scripts_styles() {
 		$options_default = get_option( 'shortcode_load_default_options' );
@@ -129,16 +145,67 @@ Class ShortcodeLoad_Options {
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
 		if($script_content) {
-			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'type' => 'script', 'minify' => $minify ) );
+			$name = $options_scripts[ 'new_script_name' ];
+			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'script', 'minify' => $minify ) );
 		}
 
 		if($style_content) {
-			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'type' => 'style', 'minify' => $minify ) );
+			$name = $options_scripts[ 'new_style_name' ];
+			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'style', 'minify' => $minify ) );
 		}
 	}
 
 	function shortcode_load_save_to_database($args) {
 		var_dump($args);
+
+		/*
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+		$wpdb->insert( 
+			$table_name, 
+			array( 
+				'name' => $args['name'],
+				'type' => $args['type'],
+				'srcpath' =>  ''
+			), 
+			array( 
+				'%s',
+				'%d'
+			) 
+		);
+		*/
+	}
+
+	function shortcode_load_save_file($args) {
+		$wp_uploads_path = wp_upload_dir();
+		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
+
+		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
+		$suffix = substr(md5(microtime()),rand(0,26),5);
+
+		$path_src = $args['name'] . $suffix;
+
+		if (!is_dir($path_src)) {
+			wp_mkdir_p($path_src);
+		}
+
+		if (!is_dir($path_min)) {
+			wp_mkdir_p($path_min);
+		}
+
+		$path = $uploads_dir . '/' . $type . $args[]
+
+	}
+
+	function shortcode_load_get_scripts() {
+		$scripts_array = array();
+		return $scripts_array;
+	}
+
+	function shortcode_load_get_styles() {
+		$styles_array = array();
+		return $styles_array;
 	}
 
 	/*
@@ -187,12 +254,13 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_new_script_name_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<p>Script Name *</p>';
+		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . ( isset ( $options[ 'new_script_name' ] ) ) ? $options[ 'new_script_name' ] : "" . '">';
 	}	
 
 	function shortcode_load_new_script_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<p>Paste script into the textarea</p>';
-		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . $options[ 'new_script_textarea' ] . '</textarea>';
+		echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . ( isset ( $options[ 'new_script_textarea' ] ) ) ? $options[ 'new_script_textarea' ] : "" . '</textarea>';
 	}
 
 	/* New style tab callbacks */
@@ -204,12 +272,13 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_new_style_name_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>Style Name *</p>';
+		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . ( isset ( $options[ 'new_style_name' ] ) ) ? $options[ 'new_style_name' ] : "" . '">';
 	}		
 
 	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<p>Paste style into the textarea</p>';
-		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
+		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . ( isset ( $options[ 'new_style_textarea' ] ) ) ? $options[ 'new_style_textarea' ] : "" . '</textarea>';
 	}
 
 	function shortcode_load_options_page(  ) { 

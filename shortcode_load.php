@@ -60,7 +60,7 @@ License:
 	function install_shortcode_load() {
 		/* Create database table */
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'shortcode_load'; 
+		$table_name = $wpdb->prefix . 'shortcode_load';
 
 		$charset_collate = $wpdb->get_charset_collate();
 		$sql = "CREATE TABLE IF NOT EXISTS `$table_name` (
