@@ -5,6 +5,7 @@ Class ShortcodeLoad_Options {
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
 		add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
+		add_action( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
 	}
 
 	function shortcode_load_add_admin_menu(  ) { 
@@ -110,12 +111,14 @@ Class ShortcodeLoad_Options {
 
 		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
 
+		do_action('register_scripts_styles');
+
 	}
 
 	/* Save new scripts/styles to database */
 
-	function shortcode_load_save_to_db($args) {
-		//stuff
+	function shortcode_load_register_scripts_styles($args) {
+		echo "registering";
 	}
 
 	/*
