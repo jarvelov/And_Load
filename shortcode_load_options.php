@@ -28,7 +28,8 @@ Class ShortcodeLoad_Options {
 			'shortcode_load_default_text',
 			'Featured Post',
 			array($this, 'shortcode_load_default_text_callback'),
-			'shortcode_load_default_options'
+			'shortcode_load_default_options',
+			'shortcode_load_default'
 		);
 
 		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
