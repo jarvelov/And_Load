@@ -174,6 +174,9 @@ Class ShortcodeLoad_Options {
 				'%d'
 			) 
 		);
+
+		$id = $wpdb->insert_id;
+
 		*/
 	}
 
