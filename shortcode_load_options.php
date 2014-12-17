@@ -256,7 +256,6 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_script_name_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
-		echo '<p>Script Name *</p>';
 		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . $options[ 'new_script_name' ] . '"/>';
 	}	
 
@@ -274,7 +273,6 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_new_style_name_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
-		echo '<p>Style Name *</p>';
 		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . $options[ 'new_style_name' ] . '"/>';
 	}		
 
