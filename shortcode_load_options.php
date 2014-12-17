@@ -1,6 +1,6 @@
 <?php
 
-Class ShortcodeLoad_Options extends ShortcodeLoad {
+Class ShortcodeLoad_Options {
 
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
@@ -113,9 +113,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
-				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_one" class="nav-tab">Default Options</a>
-				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_two" class="nav-tab">New Script</a>
-				<a href="?page=<?php echo self::slug; ?>&amp;tab=tab_three" class="nav-tab">New Style</a>
+				<a href="?page=shortcode_load&amp;tab=tab_one" class="nav-tab">Default Options</a>
+				<a href="?page=shortcode_load&amp;tab=tab_two" class="nav-tab">New Script</a>
+				<a href="?page=shortcode_load&amp;tab=tab_three" class="nav-tab">New Style</a>
 			</h2>
 
 			<form action='options.php' method='post'>
