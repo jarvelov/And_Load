@@ -197,7 +197,7 @@ Class ShortcodeLoad_Options {
 			wp_mkdir_p($path_min);
 		}
 
-		$path = $uploads_dir . '/' . $type . $args[]
+		//$path = $uploads_dir . '/' . $type . $args[]
 
 	}
 
