@@ -6,7 +6,7 @@ Class ShortcodeLoad_Options {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
 		add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
 		add_filter( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
-		add_filter( 'pre_update_option_new_script_textarea', array($this, 'willitwork'), 10, 2 );
+		add_filter( 'pre_update_option_shortcode_load_default_text', array($this, 'willitwork'), 10, 2 );
 	}
 
 	function shortcode_load_add_admin_menu(  ) { 
