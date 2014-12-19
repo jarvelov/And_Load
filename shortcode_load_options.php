@@ -233,6 +233,8 @@ Class ShortcodeLoad_Options {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
+		var_dump($file_args_array);
+
 		return array();
 	}
 
@@ -241,26 +243,25 @@ Class ShortcodeLoad_Options {
 	* optionally save a minified version
 	*/
 	function shortcode_load_save_file_js($path, $content, $minify) {
-
+		$file_args_array = array()
 		if($minify == true) {
 			$minified_content = $this->shortcode_load_minify_js($content);
 			$name = basename($path, '.js');
 			$path_min = dirname(dirname($path)) . '/min/' . $name . '.min.js';
-			var_dump($path_min);
 		}
-		/*
 
 		try {
 			file_put_contents($path, $content);
-
+			$file_args_array['srcpath'] = $path;
 			if($minify == true) {
 				file_put_contents($path_min, $minified_content);
+				$file_args_array['minpath'] = $path_min;
 			}
 		} catch (Exception $e) {
 			//var_dump($e);
 		}
-		*/
-		return array();
+
+		return $file_args_array;
 	}
 
 	/*
