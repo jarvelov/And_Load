@@ -153,16 +153,18 @@ Class ShortcodeLoad_Options {
 			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 
-		if($file_data['success'] == true){
-			$this->shortcode_load_reset_options();
+		if(isset($file_data)) {
+			if($file_data['success'] == true){
+				$this->shortcode_load_reset_options();
 
-		?>
-			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
-		<?php
-		} elseif($file_data['success'] == false) {
-		?>
-			<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
-		<?php
+			?>
+				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<?php
+			} elseif($file_data['success'] == false) {
+			?>
+				<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<?php
+			}
 		}
 	}
 
