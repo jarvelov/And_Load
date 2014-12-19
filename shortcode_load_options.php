@@ -216,7 +216,7 @@ Class ShortcodeLoad_Options {
 		}
 
 		if($type == 'js') {
-			//$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
+			$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
 		} elseif($type == 'css') {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
