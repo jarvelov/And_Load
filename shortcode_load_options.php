@@ -156,8 +156,8 @@ Class ShortcodeLoad_Options {
 	}
 
 	function shortcode_load_save_to_database($args) {
-		var_dump($args);
-
+		//var_dump($args);
+		$this->shortcode_load_save_file($args);
 		/*
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -187,8 +187,8 @@ Class ShortcodeLoad_Options {
 		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
 		$suffix = substr(md5(microtime()),rand(0,26),5);
 
-		$path_src = $args['name'] . $suffix;
-
+		$path_src = $args['name'] . '.' . $suffix;
+/*
 		if (!is_dir($path_src)) {
 			wp_mkdir_p($path_src);
 		}
@@ -196,7 +196,8 @@ Class ShortcodeLoad_Options {
 		if (!is_dir($path_min)) {
 			wp_mkdir_p($path_min);
 		}
-
+*/
+		var_dump($path_src);
 		//$path = $uploads_dir . '/' . $type . $args[]
 
 	}
