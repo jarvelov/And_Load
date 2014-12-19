@@ -343,16 +343,19 @@ Class ShortcodeLoad_Options {
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_styles_options[' );
 
-		var_dump(get_option('shortcode_load_new_script_options[new_script_name]'));
-/*
+		$scripts_options_array = array();
 		foreach ($options_scripts as $key => $value) {
-			update_option('shortcode_load_new_script_options['.$key.']', '');
+			$scripts_options_array[$key] = "";
 		}
 
+		update_option('shortcode_load_new_script_options' $scripts_options_array);
+
+		$style_options_array = array();
 		foreach ($options_styles as $key => $value) {
-			update_option('shortcode_load_new_style_options['.$key.']', '');
-		}		
-*/
+			$style_options_array[$key] = "";
+		}
+
+		update_option('shortcode_load_new_style_options', $style_options_array);
 	}
 
 	/*
