@@ -237,7 +237,7 @@ Class ShortcodeLoad_Options {
 		$content = $args['content'];
 		$org_name = $args['name'];
 		
-		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
+		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
 		$name = $org_name . '.' . $random5;
 
 		$file_src = $src_dir . $name . '.' . $type;
