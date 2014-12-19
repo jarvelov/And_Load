@@ -233,7 +233,7 @@ Class ShortcodeLoad_Options {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		var_dump($file_args_array);
+		var_dump($file_args);
 
 		return array();
 	}
