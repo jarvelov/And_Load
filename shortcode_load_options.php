@@ -168,37 +168,39 @@ Class ShortcodeLoad_Options {
 
 		var_dump($db_args);
 
-		/*
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'shortcode_load'; 
+		try {
 
-		$wpdb->insert( 
-			$table_name, 
-			array( 
-				'name' => $db_args['name'],
-				'type' => $db_args['type'],
-				'srcpath' =>  $db_args['srcpath'],
-				'minify' => $db_args['minify'],
-				'minpath' => $db_args['minpath'],
-				'revision' => 0, //TODO implement revisions
-				'created_timestamp' => 'NOW()',
-				'updated_timestamp' => 'NOW()'
-			), 
-			array( 
-				'%s',
-				'%s',
-				'%s',
-				'%d', 
-				'%s',
-				'%d',
-				'%s',
-				'%s'
-			) 
-		);
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+			$wpdb->insert( 
+				$table_name, 
+				array( 
+					'name' => $db_args['name'],
+					'type' => $db_args['type'],
+					'srcpath' =>  $db_args['srcpath'],
+					'minify' => $db_args['minify'],
+					'minpath' => $db_args['minpath'],
+					'revision' => 0, //TODO implement revisions
+					'created_timestamp' => 'NOW()',
+					'updated_timestamp' => 'NOW()'
+				), 
+				array( 
+					'%s',
+					'%s',
+					'%s',
+					'%d', 
+					'%s',
+					'%d',
+					'%s',
+					'%s'
+				) 
+			);
+		} catch (Exception $e) {
+			var_dump($e);
+		}
 
 		$id = $wpdb->insert_id;
-
-		*/
 	}
 
 	/*
