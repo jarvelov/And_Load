@@ -158,7 +158,7 @@ Class ShortcodeLoad_Options {
 				$this->shortcode_load_reset_options();
 
 			?>
-				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 			<?php
 			} elseif($file_data['success'] == false) {
 			?>
@@ -356,8 +356,6 @@ Class ShortcodeLoad_Options {
 		foreach ($options_styles as $key => $value) {
 			$style_options_array[$key] = "";
 		}
-
-		var_dump($scripts_options_array, $style_options_array);
 
 		update_option('shortcode_load_new_style_options', $style_options_array);
 	}
