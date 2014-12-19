@@ -143,19 +143,22 @@ Class ShortcodeLoad_Options {
 
 		if($script_content) {
 			$name = $options_scripts[ 'new_script_name' ];
-			$id = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
+			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
 		}
 
 		if($style_content) {
 			$name = $options_styles[ 'new_style_name' ];
-			$id = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
+			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 
-		var_dump($id);
+		if($file_data['success'] != true){
 
-		if($id){
 		?>
-			<div class="updated"><p><strong><?php _e('File has been saved with id: '.$id, 'shortcode_load' ); ?></strong></p></div>
+			<div class="updated"><p><strong><?php _e('File has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='$file_data['id']'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+		<?php
+		} else {
+		?>
+			<div class="error"><p><strong><?php _e('File could not be saved! <a href="?page=shortcode_load&tab_six#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		}
 	}
@@ -163,7 +166,6 @@ Class ShortcodeLoad_Options {
 	/* 
 	* Save a new script or style to the database
 	*/
-
 	function shortcode_load_save_to_database($args) {
 		try {
 			$db_args = $this->shortcode_load_save_file($args);
@@ -199,23 +201,24 @@ Class ShortcodeLoad_Options {
 					'%s'
 				) 
 			);
+
+			$id = $wpdb->insert_id;
 		} catch (Exception $e) {
 			//var_dump($e);
 		}
 
-		$id = $wpdb->insert_id;
-
 		if($id > 0) {
-			return $id;	
+			$return_args = array('success' => true, 'id' => $id, 'name' => $db_args['name']);
 		} else {
-			return false;
+			$return_args =array('success' => false);
 		}
+
+		return $return_args;
 	}
 
 	/*
 	* Save a new script or style to a file in wordpress' uploads folder
 	*/
-
 	function shortcode_load_save_file($args) {
 		$wp_uploads_path = wp_upload_dir();
 		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
@@ -227,7 +230,7 @@ Class ShortcodeLoad_Options {
 		$content = $args['content'];
 		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
-		$name = $args['name'] . $random5;
+		$name = $args['name'] . '.' . $random5;
 
 		$file_src = $src_dir . $name . '.' . $type;
 
