@@ -210,6 +210,7 @@ Class ShortcodeLoad_Options {
 		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
 		$src_dir = $uploads_dir . $type . '/src/';
 		$minify = $args['minify'];
+		$content = $args['content'];
 		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
 
