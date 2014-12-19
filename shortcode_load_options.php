@@ -155,9 +155,17 @@ Class ShortcodeLoad_Options {
 		}
 	}
 
+	/* 
+	* Save a new script or style to the database
+	*/
+
 	function shortcode_load_save_to_database($args) {
-		//var_dump($args);
-		$this->shortcode_load_save_file($args);
+		try {
+			$db_args = $this->shortcode_load_save_file($args);
+		} catch (Exception $e) {
+			//var_dump($e);
+		}
+
 		/*
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -180,40 +188,88 @@ Class ShortcodeLoad_Options {
 		*/
 	}
 
+	/*
+	* Save a new script or style to a file in wordpress' uploads folder
+	*/
+
 	function shortcode_load_save_file($args) {
 		$wp_uploads_path = wp_upload_dir();
 		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
 
+		$src_dir = $uploads_dir . $type . '/src/';
+		$minify = $args['minify'];
 		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
-		$suffix = substr(md5(microtime()),rand(0,26),5);
+		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
 
-		$src_dir = $uploads_dir . '/' . $type . '/src/';
-		$min_dir = $uploads_dir . '/' . $type . '/min/';
+		$file_src = $src_dir . $args['name'] . $random5 . '.' . $type;
 
-		$file_src = $args['name'] . $suffix . '.' . $type;
-
-		if($args['minify']) {
-			$file_min = $args['name'] . $suffix . '.min' . '.' . $type;	
-		}
-/*
-		if (!is_dir($path_src)) {
-			wp_mkdir_p($path_src);
+		if (!is_dir($src_dir)) {
+			wp_mkdir_p($src_dir);
 		}
 
-		if (!is_dir($path_min)) {
-			wp_mkdir_p($path_min);
+		if($minify == true) {
+			$min_dir = $uploads_dir . $type . '/min/';
+
+			if (!is_dir($min_dir)) {
+				wp_mkdir_p($min_dir);
+			}
 		}
-*/
-		var_dump($src_dir, $min_dir);
-		//$path = $uploads_dir . '/' . $type . $args[]
+
+		if($type == 'js') {
+			$file_args = shortcode_load_save_file_js($file_src, $content, $minify);
+		} elseif {
+			$file_args = shortcode_load_save_file_css($file_src, $content, $minify);
+		}
 
 	}
 
-	function shortcode_load_get_scripts() {
+	function shortcode_load_save_file_js($path, $content, $minify) {
+
+		if($minify == true) {
+			$minified_content = shortcode_load_minify_js($content);
+			$path_min = basename($path);
+			var_dump($path_min)
+		}
+/*
+		try {
+			file_put_contents($path, $content);
+
+			if($minify == true) {
+				file_put_contents($path_min, $minified_content);
+			}
+		} catch (Exception $e) {
+			//var_dump($e);
+		}
+		*/	
+	}
+
+	function shortcode_load_save_file_css($path, $content, $minify) {
+
+	}
+
+	/*
+	* Minify javascript code
+	*/
+	function shortcode_load_minify_js($content); {
+		$minified_content = $content;
+		return $minified_content;
+	}
+
+	/*
+	* Minify css code
+	*/
+	function shortcode_load_minify_css($content); {
+		$minified_content = $content;
+		return $minified_content;
+	}
+
+	//not sure if i need these functions
+	function shortcode_load_get_scripts($) {
 		$scripts_array = array();
 		return $scripts_array;
 	}
 
+	//not sure if i need these functions
 	function shortcode_load_get_styles() {
 		$styles_array = array();
 		return $styles_array;
