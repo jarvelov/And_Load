@@ -217,7 +217,7 @@ Class ShortcodeLoad_Options {
 
 		if($type == 'js') {
 			$file_args = shortcode_load_save_file_js($file_src, $content, $minify);
-		} elseif {
+		} elseif($type == 'css') {
 			$file_args = shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
