@@ -348,7 +348,7 @@ Class ShortcodeLoad_Options {
 			$scripts_options_array[$key] = "";
 		}
 
-		update_option('shortcode_load_new_script_options' $scripts_options_array);
+		update_option('shortcode_load_new_script_options', $scripts_options_array);
 
 		$style_options_array = array();
 		foreach ($options_styles as $key => $value) {
