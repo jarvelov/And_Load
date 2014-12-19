@@ -154,7 +154,7 @@ Class ShortcodeLoad_Options {
 		if($file_data['success'] != true){
 
 		?>
-			<div class="updated"><p><strong><?php _e('File has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='$file_data['id']'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="updated"><p><strong><?php _e('File has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		} else {
 		?>
