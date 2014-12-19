@@ -166,8 +166,6 @@ Class ShortcodeLoad_Options {
 			//var_dump($e);
 		}
 
-		var_dump($db_args);
-
 		try {
 
 			global $wpdb;
@@ -197,10 +195,18 @@ Class ShortcodeLoad_Options {
 				) 
 			);
 		} catch (Exception $e) {
-			var_dump($e);
+			//var_dump($e);
 		}
 
 		$id = $wpdb->insert_id;
+
+		if($id > 0) {
+			return true;	
+		} else {
+			return false;
+		}
+
+		var_dump($id);
 	}
 
 	/*
