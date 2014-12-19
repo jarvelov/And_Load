@@ -178,6 +178,8 @@ Class ShortcodeLoad_Options {
 			//var_dump($e);
 		}
 
+		var_dump($db_args);
+
 		try {
 
 			global $wpdb;
