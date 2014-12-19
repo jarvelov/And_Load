@@ -5,7 +5,8 @@ Class ShortcodeLoad_Options {
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
 		add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
-		add_action( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
+		add_filter( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
+		add_filter( 'pre_update_option_new_script_textarea', array($this, 'willitwork'), 10, 2 );
 	}
 
 	function shortcode_load_add_admin_menu(  ) { 
@@ -131,6 +132,11 @@ Class ShortcodeLoad_Options {
 
 	}
 
+	function willitwork($new_value, $old_value) {
+		var_dump($new_value, $old_value);
+		return $old_value;
+	}
+
 	/* Database interactions */
 
 	function shortcode_load_register_scripts_styles() {
@@ -138,7 +144,6 @@ Class ShortcodeLoad_Options {
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_styles_options' );
 		
-
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
 
@@ -201,12 +206,10 @@ Class ShortcodeLoad_Options {
 		$id = $wpdb->insert_id;
 
 		if($id > 0) {
-			return true;	
+			return $id;	
 		} else {
 			return false;
 		}
-
-		var_dump($id);
 	}
 
 	/*
@@ -219,7 +222,7 @@ Class ShortcodeLoad_Options {
 
 		$type = $args['type'];
 		$src_dir = $uploads_dir . $type . '/src/';
-		
+
 		$minify = $args['minify'];
 		$content = $args['content'];
 		
