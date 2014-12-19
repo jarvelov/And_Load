@@ -196,9 +196,10 @@ Class ShortcodeLoad_Options {
 		$wp_uploads_path = wp_upload_dir();
 		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
 
+		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
 		$src_dir = $uploads_dir . $type . '/src/';
 		$minify = $args['minify'];
-		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
+		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
 
 		$file_src = $src_dir . $args['name'] . $random5 . '.' . $type;
