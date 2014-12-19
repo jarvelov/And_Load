@@ -182,8 +182,8 @@ Class ShortcodeLoad_Options {
 					'minify' => $db_args['minify'],
 					'minpath' => $db_args['minpath'],
 					'revision' => 0, //TODO implement revisions
-					'created_timestamp' => 'NOW()',
-					'updated_timestamp' => 'NOW()'
+					'created_timestamp' => current_time('mysql', 1),
+					'updated_timestamp' => current_time('mysql', 1),
 				), 
 				array( 
 					'%s',
