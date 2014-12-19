@@ -214,13 +214,14 @@ Class ShortcodeLoad_Options {
 				wp_mkdir_p($min_dir);
 			}
 		}
-
+/*
 		if($type == 'js') {
 			$file_args = shortcode_load_save_file_js($file_src, $content, $minify);
 		} elseif($type == 'css') {
 			$file_args = shortcode_load_save_file_css($file_src, $content, $minify);
 		}
-
+*/
+		return array();
 	}
 
 	function shortcode_load_save_file_js($path, $content, $minify) {
