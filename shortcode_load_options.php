@@ -344,9 +344,12 @@ Class ShortcodeLoad_Options {
 		$options_styles = get_option( 'shortcode_load_new_styles_options' );
 
 		foreach ($options_scripts as $key => $value) {
-			var_dump($key, $value);
-			//update_option($key, '');
+			update_option($key, '');
 		}
+
+		foreach ($options_styles as $key => $value) {
+			update_option($key, '');
+		}		
 	}
 
 	/*
