@@ -166,6 +166,8 @@ Class ShortcodeLoad_Options {
 			//var_dump($e);
 		}
 
+		var_dump($db_args);
+
 		/*
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -213,8 +215,9 @@ Class ShortcodeLoad_Options {
 		$content = $args['content'];
 		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
+		$name = $args['name'] . $random5;
 
-		$file_src = $src_dir . $args['name'] . $random5 . '.' . $type;
+		$file_src = $src_dir . $name . '.' . $type;
 
 		if (!is_dir($src_dir)) {
 			wp_mkdir_p($src_dir);
@@ -234,9 +237,9 @@ Class ShortcodeLoad_Options {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		var_dump($file_args);
+		$db_args = array('name' => , $name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
 
-		return array();
+		return $db_args;
 	}
 
 	/*
@@ -245,21 +248,27 @@ Class ShortcodeLoad_Options {
 	*/
 	function shortcode_load_save_file_js($path, $content, $minify) {
 		$file_args_array = array();
-		if($minify == true) {
-			$minified_content = $this->shortcode_load_minify_js($content);
-			$name = basename($path, '.js');
-			$path_min = dirname(dirname($path)) . '/min/' . $name . '.min.js';
-		}
 
 		try {
 			file_put_contents($path, $content);
 			$file_args_array['srcpath'] = $path;
-			if($minify == true) {
-				file_put_contents($path_min, $minified_content);
-				$file_args_array['minpath'] = $path_min;
-			}
 		} catch (Exception $e) {
 			//var_dump($e);
+		}
+
+		try {
+			if($minify == true) {
+				$minified_content = $this->shortcode_load_minify_js($content);
+				$name = basename($path, '.js');
+				$path_min = dirname(dirname($path)) . '/min/' . $name . '.min.js';
+				$file_args_array['minpath'] = $path_min;
+
+				file_put_contents($path_min, $minified_content);
+			} else {
+				$file_args_array['minpath'] = "";
+			}
+		} catch (Exception $e) {
+			//var_dump($e);	
 		}
 
 		return $file_args_array;
