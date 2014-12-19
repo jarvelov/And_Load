@@ -154,7 +154,7 @@ Class ShortcodeLoad_Options {
 		}
 
 		if($file_data['success'] == true){
-			shortcode_load_reset_options();
+			$this->shortcode_load_reset_options();
 
 		?>
 			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
