@@ -225,12 +225,13 @@ Class ShortcodeLoad_Options {
 	}
 
 	function shortcode_load_save_file_js($path, $content, $minify) {
-/*
+
 		if($minify == true) {
-			$minified_content = shortcode_load_minify_js($content);
+			$minified_content = $this->shortcode_load_minify_js($content);
 			$path_min = basename($path);
 			var_dump($path_min);
 		}
+		/*
 
 		try {
 			file_put_contents($path, $content);
