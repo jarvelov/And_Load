@@ -343,7 +343,7 @@ Class ShortcodeLoad_Options {
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_styles_options[' );
 
-		var_dump(get_option('shortcode_load_new_script_options[new_script_name]'))
+		var_dump(get_option('shortcode_load_new_script_options[new_script_name]'));
 /*
 		foreach ($options_scripts as $key => $value) {
 			update_option('shortcode_load_new_script_options['.$key.']', '');
@@ -352,7 +352,7 @@ Class ShortcodeLoad_Options {
 		foreach ($options_styles as $key => $value) {
 			update_option('shortcode_load_new_style_options['.$key.']', '');
 		}		
-	*/
+*/
 	}
 
 	/*
