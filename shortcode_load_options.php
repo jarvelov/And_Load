@@ -228,7 +228,7 @@ Class ShortcodeLoad_Options {
 
 		if($minify == true) {
 			$minified_content = $this->shortcode_load_minify_js($content);
-			$path_min = basename($path);
+			$path_min = dirname($path);
 			var_dump($path_min);
 		}
 		/*
