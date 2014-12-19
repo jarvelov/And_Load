@@ -187,7 +187,14 @@ Class ShortcodeLoad_Options {
 		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
 		$suffix = substr(md5(microtime()),rand(0,26),5);
 
-		$path_src = $args['name'] . '.' . $suffix;
+		$src_dir = $uploads_dir . '/' . $type . '/src/';
+		$min_dir = $uploads_dir . '/' . $type . '/min/';
+
+		$file_src = $args['name'] . $suffix . '.' . $type;
+
+		if($args['minify']) {
+			$file_min = $args['name'] . $suffix . '.min' . '.' . $type;	
+		}
 /*
 		if (!is_dir($path_src)) {
 			wp_mkdir_p($path_src);
@@ -197,7 +204,7 @@ Class ShortcodeLoad_Options {
 			wp_mkdir_p($path_min);
 		}
 */
-		var_dump($path_src);
+		var_dump($src_dir, $min_dir);
 		//$path = $uploads_dir . '/' . $type . $args[]
 
 	}
