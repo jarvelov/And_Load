@@ -302,7 +302,31 @@ Class ShortcodeLoad_Options {
 	* optionally save a minified version
 	*/
 	function shortcode_load_save_file_css($path, $content, $minify) {
+		$file_args_array = array();
 
+		try {
+			file_put_contents($path, $content);
+			$file_args_array['srcpath'] = $path;
+		} catch (Exception $e) {
+			//var_dump($e);
+		}
+
+		try {
+			if($minify == true) {
+				$minified_content = $this->shortcode_load_minify_js($content);
+				$name = basename($path, '.css');
+				$path_min = dirname(dirname($path)) . '/min/' . $name . '.min.css';
+				$file_args_array['minpath'] = $path_min;
+
+				file_put_contents($path_min, $minified_content);
+			} else {
+				$file_args_array['minpath'] = "";
+			}
+		} catch (Exception $e) {
+			//var_dump($e);	
+		}
+
+		return $file_args_array;
 	}
 
 	/*
