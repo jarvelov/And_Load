@@ -268,7 +268,7 @@ Class ShortcodeLoad_Options {
 	/* New style tab callbacks */
 
 	function shortcode_load_new_style_options_callback() {
-		echo '<p>New style callback</p>';
+		echo '<p>New style</p>';
 	}
 
 	function shortcode_load_new_style_name_callback() {
