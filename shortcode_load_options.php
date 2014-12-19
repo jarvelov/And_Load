@@ -173,13 +173,24 @@ Class ShortcodeLoad_Options {
 		$wpdb->insert( 
 			$table_name, 
 			array( 
-				'name' => $args['name'],
-				'type' => $args['type'],
-				'srcpath' =>  ''
+				'name' => $db_args['name'],
+				'type' => $db_args['type'],
+				'srcpath' =>  $db_args['srcpath'],
+				'minify' => $db_args['minify'],
+				'minpath' => $db_args['minpath'],
+				'revision' => 0, //TODO implement revisions
+				'created_timestamp' => 'NOW()',
+				'updated_timestamp' => 'NOW()'
 			), 
 			array( 
 				'%s',
-				'%d'
+				'%s',
+				'%s',
+				'%d', 
+				'%s',
+				'%d',
+				'%s',
+				'%s'
 			) 
 		);
 
@@ -225,6 +236,10 @@ Class ShortcodeLoad_Options {
 		return array();
 	}
 
+	/*
+	* Save javascript content to path,
+	* optionally save a minified version
+	*/
 	function shortcode_load_save_file_js($path, $content, $minify) {
 
 		if($minify == true) {
@@ -247,6 +262,10 @@ Class ShortcodeLoad_Options {
 		return array();
 	}
 
+	/*
+	* Save css content to path,
+	* optionally save a minified version
+	*/
 	function shortcode_load_save_file_css($path, $content, $minify) {
 
 	}
