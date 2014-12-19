@@ -157,6 +157,7 @@ Class ShortcodeLoad_Options {
 		?>
 			<div class="updated"><p><strong><?php _e('File has been saved with id: '.$id, 'shortcode_load' ); ?></strong></p></div>
 		<?php
+		}
 	}
 
 	/* 
