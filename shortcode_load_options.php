@@ -136,7 +136,7 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_register_scripts_styles() {
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
-		$options_styles = get_option( 'shortcode_load_new_styles_options' );
+		$options_styles = get_option( 'shortcode_load_new_style_options' );
 		
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
@@ -345,7 +345,7 @@ Class ShortcodeLoad_Options {
 
 	function shortcode_load_reset_options() {
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
-		$options_styles = get_option( 'shortcode_load_new_styles_options[' );
+		$options_styles = get_option( 'shortcode_load_new_style_options[' );
 
 		$scripts_options_array = array();
 		foreach ($options_scripts as $key => $value) {
