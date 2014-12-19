@@ -237,7 +237,7 @@ Class ShortcodeLoad_Options {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		$db_args = array('name' => , $name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
+		$db_args = array('name' => $name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
 
 		return $db_args;
 	}
