@@ -154,11 +154,11 @@ Class ShortcodeLoad_Options {
 		if($file_data['success'] == true){
 
 		?>
-			<div class="updated"><p><strong><?php _e('File has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		} else {
 		?>
-			<div class="error"><p><strong><?php _e('File could not be saved! <a href="?page=shortcode_load&tab_six#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_six#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		}
 	}
@@ -208,7 +208,9 @@ Class ShortcodeLoad_Options {
 		}
 
 		if($id > 0) {
-			$return_args = array('success' => true, 'id' => $id, 'name' => $db_args['name']);
+			$name = $db_args['name'] . '.' . $db_args['type'];
+			$type = ($db_args['type'] == 'js') ? 'Script' : 'Style';
+			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
 		} else {
 			$return_args =array('success' => false);
 		}
