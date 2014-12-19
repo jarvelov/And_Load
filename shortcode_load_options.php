@@ -355,6 +355,8 @@ Class ShortcodeLoad_Options {
 			$style_options_array[$key] = "";
 		}
 
+		var_dump($scripts_options_array, $style_options_array);
+
 		update_option('shortcode_load_new_style_options', $style_options_array);
 	}
 
