@@ -154,7 +154,7 @@ Class ShortcodeLoad_Options {
 		if($file_data['success'] == true){
 
 		?>
-			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		} else {
 		?>
@@ -230,9 +230,10 @@ Class ShortcodeLoad_Options {
 
 		$minify = $args['minify'];
 		$content = $args['content'];
+		$org_name = $args['name'];
 		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random numbers to ensure filename is unique
-		$name = $args['name'] . '.' . $random5;
+		$name = $org_name . '.' . $random5;
 
 		$file_src = $src_dir . $name . '.' . $type;
 
@@ -254,7 +255,7 @@ Class ShortcodeLoad_Options {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		$db_args = array('name' => $name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
+		$db_args = array('name' => $org_name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
 
 		return $db_args;
 	}
