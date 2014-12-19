@@ -129,7 +129,9 @@ Class ShortcodeLoad_Options {
 
 	}
 
-	/* Database interactions */
+	/*
+	* Register new scripts and styles
+	*/
 
 	function shortcode_load_register_scripts_styles() {
 		$options_default = get_option( 'shortcode_load_default_options' );
@@ -152,6 +154,7 @@ Class ShortcodeLoad_Options {
 		}
 
 		if($file_data['success'] == true){
+			shortcode_load_reset_options();
 
 		?>
 			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
@@ -326,6 +329,24 @@ Class ShortcodeLoad_Options {
 	function shortcode_load_get_styles() {
 		$styles_array = array();
 		return $styles_array;
+	}
+
+	/*
+	* Reset saved option
+	* 
+	* Called when a new script or style
+	* has been successfully saved to
+	* the database.
+	*/
+
+	function shortcode_load_reset_options() {
+		$options_scripts = get_option( 'shortcode_load_new_script_options' );
+		$options_styles = get_option( 'shortcode_load_new_styles_options' );
+
+		foreach ($options_scripts as $key => $value) {
+			var_dump($key, $value);
+			//update_option($key, '');
+		}
 	}
 
 	/*
