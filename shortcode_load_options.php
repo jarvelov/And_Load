@@ -250,7 +250,7 @@ Class ShortcodeLoad_Options {
 	/*
 	* Minify javascript code
 	*/
-	function shortcode_load_minify_js($content); {
+	function shortcode_load_minify_js($content) {
 		$minified_content = $content;
 		return $minified_content;
 	}
@@ -258,7 +258,7 @@ Class ShortcodeLoad_Options {
 	/*
 	* Minify css code
 	*/
-	function shortcode_load_minify_css($content); {
+	function shortcode_load_minify_css($content) {
 		$minified_content = $content;
 		return $minified_content;
 	}
