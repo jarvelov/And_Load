@@ -264,7 +264,7 @@ Class ShortcodeLoad_Options {
 	}
 
 	//not sure if i need these functions
-	function shortcode_load_get_scripts($) {
+	function shortcode_load_get_scripts() {
 		$scripts_array = array();
 		return $scripts_array;
 	}
