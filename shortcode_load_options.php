@@ -6,7 +6,6 @@ Class ShortcodeLoad_Options {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
 		add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
 		add_filter( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
-		add_filter( 'pre_update_option_shortcode_load_default_text', array($this, 'willitwork'), 10, 2 );
 	}
 
 	function shortcode_load_add_admin_menu(  ) { 
@@ -128,13 +127,6 @@ Class ShortcodeLoad_Options {
 
 		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
 
-		do_action('register_scripts_styles');
-
-	}
-
-	function willitwork($new_value, $old_value) {
-		var_dump($new_value, $old_value);
-		return $old_value;
 	}
 
 	/* Database interactions */
@@ -151,13 +143,20 @@ Class ShortcodeLoad_Options {
 
 		if($script_content) {
 			$name = $options_scripts[ 'new_script_name' ];
-			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
+			$id = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
 		}
 
 		if($style_content) {
 			$name = $options_styles[ 'new_style_name' ];
-			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
+			$id = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
+
+		var_dump($id);
+
+		if($id){
+		?>
+			<div class="updated"><p><strong><?php _e('File has been saved with id: '.$id, 'shortcode_load' ); ?></strong></p></div>
+		<?php
 	}
 
 	/* 
@@ -408,6 +407,8 @@ Class ShortcodeLoad_Options {
 				<a href="?page=shortcode_load&amp;tab=tab_three" class="nav-tab">New Script</a>
 				<a href="?page=shortcode_load&amp;tab=tab_four" class="nav-tab">New Style</a>
 			</h2>
+
+			<?php do_action('register_scripts_styles'); ?>
 
 			<form action='options.php' method='post'>
 				
