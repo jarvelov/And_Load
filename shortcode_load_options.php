@@ -140,7 +140,7 @@ Class ShortcodeLoad_Options {
 		
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_scripts[ 'new_style_textarea' ] : NULL;
-
+		var_dump($style_content);
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
 		if(!empty($script_content)) {
