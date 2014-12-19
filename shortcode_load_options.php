@@ -154,11 +154,11 @@ Class ShortcodeLoad_Options {
 		if($file_data['success'] == true){
 
 		?>
-			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		} else {
 		?>
-			<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_six#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
+			<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
 		}
 	}
@@ -403,16 +403,18 @@ Class ShortcodeLoad_Options {
 		if( isset( $_GET[ 'tab' ] ) ) {  
 			$active_tab = $_GET[ 'tab' ];  
 		} else {
-			$active_tab = 'tab_one';
+			$active_tab = 'tab_overview';
 		}
 
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
-				<a href="?page=shortcode_load&amp;tab=tab_one" class="nav-tab">Overview</a>
-				<a href="?page=shortcode_load&amp;tab=tab_two" class="nav-tab">Default Options</a>
-				<a href="?page=shortcode_load&amp;tab=tab_three" class="nav-tab">New Script</a>
-				<a href="?page=shortcode_load&amp;tab=tab_four" class="nav-tab">New Style</a>
+				<a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab">Overview</a>
+				<a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab">Default Options</a>
+				<a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab">New Script</a>
+				<a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab">New Style</a>
+				<a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab">Edit file</a>
+				<a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab">Help</a>
 			</h2>
 
 			<?php do_action('register_scripts_styles'); ?>
@@ -423,16 +425,16 @@ Class ShortcodeLoad_Options {
 				
 				<?php
 
-				if($active_tab == 'tab_one') {
+				if($active_tab == 'tab_overview') {
 					settings_fields( 'shortcode_load_overview' );
 					do_settings_sections( 'shortcode_load_overview' );
-				} elseif($active_tab == 'tab_two') {
+				} elseif($active_tab == 'tab_default') {
 					settings_fields( 'shortcode_load_default_options' );
 					do_settings_sections( 'shortcode_load_default_options' );
-				} elseif($active_tab == 'tab_three') {
+				} elseif($active_tab == 'tab_new_script') {
 					settings_fields( 'shortcode_load_new_script_options' );
 					do_settings_sections( 'shortcode_load_new_script_options' );
-				} elseif($active_tab == 'tab_four') {
+				} elseif($active_tab == 'tab_new_style') {
 					settings_fields( 'shortcode_load_new_style_options' );
 					do_settings_sections( 'shortcode_load_new_style_options' );
 				}
