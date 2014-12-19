@@ -151,7 +151,7 @@ Class ShortcodeLoad_Options {
 			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 
-		if($file_data['success'] != true){
+		if($file_data['success'] == true){
 
 		?>
 			<div class="updated"><p><strong><?php _e('File has been saved as: '.$file_data['name'].'! <a href="?page=shortcode_load&tab_five&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
