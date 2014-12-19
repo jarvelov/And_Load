@@ -159,7 +159,7 @@ Class ShortcodeLoad_Options {
 		?>
 			<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <strong>'.$file_data['name'].'</strong> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
-		} else {
+		} elseif($file_data['success'] == false) {
 		?>
 			<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
 		<?php
