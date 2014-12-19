@@ -143,12 +143,12 @@ Class ShortcodeLoad_Options {
 
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
-		if($script_content) {
+		if(!empty($script_content)) {
 			$name = $options_scripts[ 'new_script_name' ];
 			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
 		}
 
-		if($style_content) {
+		if(!empty($style_content)) {
 			$name = $options_styles[ 'new_style_name' ];
 			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
