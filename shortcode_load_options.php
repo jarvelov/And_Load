@@ -146,12 +146,12 @@ Class ShortcodeLoad_Options {
 
 		if($script_content) {
 			$name = $options_scripts[ 'new_script_name' ];
-			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'script', 'minify' => $minify ) );
+			$this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
 		}
 
 		if($style_content) {
-			$name = $options_scripts[ 'new_style_name' ];
-			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'style', 'minify' => $minify ) );
+			$name = $options_styles[ 'new_style_name' ];
+			$this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 	}
 
@@ -217,8 +217,9 @@ Class ShortcodeLoad_Options {
 		$wp_uploads_path = wp_upload_dir();
 		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
 
-		$type = ( $args['type'] == 'script' ) ? 'js' : 'css';
+		$type = $args['type'];
 		$src_dir = $uploads_dir . $type . '/src/';
+		
 		$minify = $args['minify'];
 		$content = $args['content'];
 		
