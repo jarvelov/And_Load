@@ -461,11 +461,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_options_page(  ) {
-		//$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
-
-		if ( is_admin() ) {
-			$this->register_scripts_and_styles();
-		}
+		$this->register_scripts_and_styles();
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
 			$active_tab = $_GET[ 'tab' ];  
