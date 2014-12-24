@@ -464,10 +464,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
 
 		if ( is_admin() ) {
-			if (!class_exists("ShortcodeLoad")) {
+			/*if (!class_exists("ShortcodeLoad")) {
 				require(dirname(__FILE__) . '/shortcode_load.php');
 			}
 			$this->register_scripts_and_styles();
+			*/
+			var_dump(dirname(__FILE__) . '/shortcode_load.php');
 		}
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
