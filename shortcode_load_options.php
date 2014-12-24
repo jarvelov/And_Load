@@ -1,6 +1,6 @@
 <?php
 
-Class ShortcodeLoad_Options extends ShortcodeLoad {
+Class ShortcodeLoad_Options {
 
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
@@ -469,7 +469,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$ShortcodeLoad = new ShortcodeLoad();
 				$ShortcodeLoad->register_scripts_and_styles();
 			} else {
-				var_dump(parent::register_scripts_and_styles());
+				$ShortcodeLoad = new ShortcodeLoad();
+				$ShortcodeLoad->register_scripts_and_styles();
 			}
 		}
 
