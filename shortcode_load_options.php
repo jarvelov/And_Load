@@ -466,7 +466,7 @@ Class ShortcodeLoad_Options {
 		} else {
 			$active_tab = 'tab_overview';
 		}
-		var_dump('troll');
+
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
