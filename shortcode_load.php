@@ -161,6 +161,7 @@ License:
 			} else {
 				wp_register_style( $name, $url );
 				wp_enqueue_style( $name );
+				var_dump($file);
 			} // end if
 		} // end if
 
