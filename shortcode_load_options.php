@@ -465,6 +465,7 @@ Class ShortcodeLoad_Options {
 
 		if ( is_admin() ) {
 			if (!class_exists("ShortcodeLoad")) {
+				var_dump(true);
 				require(dirname(__FILE__) . '/shortcode_load.php');
 				$ShortcodeLoad = new ShortcodeLoad();
 				$ShortcodeLoad->register_scripts_and_styles();
