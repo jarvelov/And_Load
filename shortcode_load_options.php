@@ -461,6 +461,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_options_page(  ) {
+		var_dump(self::slug);
 		$this->register_scripts_and_styles();
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
