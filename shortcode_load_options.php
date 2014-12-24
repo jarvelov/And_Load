@@ -469,7 +469,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$ShortcodeLoad = new ShortcodeLoad();
 				$ShortcodeLoad->register_scripts_and_styles();
 			} else {
-				var_dump($this);
+				parent::register_scripts_and_styles();
 			}
 		}
 
