@@ -461,7 +461,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_options_page(  ) {
-		var_dump(self::slug);
+		wp_register_style( 'myPluginStylesheet', plugins_url(self::slug . '-admin-style/admin.css', __FILE__) );
+		wp_enqueue_style( 'myPluginStylesheet' );
 		$this->register_scripts_and_styles();
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
