@@ -89,6 +89,8 @@ License:
 		// Load JavaScript and stylesheets
 		$this->register_scripts_and_styles();
 
+		 var_dump(self::slug . '-admin-script', '/js/admin.js');
+
 		// Register the shortcode [shortcode_load]
 		add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
 		
@@ -161,7 +163,6 @@ License:
 			} else {
 				wp_register_style( $name, $url );
 				wp_enqueue_style( $name );
-				var_dump($file);
 			} // end if
 		} // end if
 
