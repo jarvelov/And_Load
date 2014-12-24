@@ -125,7 +125,6 @@ License:
 			'id' => '',
 			'in_header' => false
 			), $atts));
-
 	}
 	
 	/**

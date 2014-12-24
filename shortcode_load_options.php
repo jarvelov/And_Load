@@ -460,7 +460,17 @@ Class ShortcodeLoad_Options {
 		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
 	}
 
-	function shortcode_load_options_page(  ) { 
+	function shortcode_load_options_page(  ) {
+		//$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
+
+		if ( is_admin() ) {
+			if (!class_exists("ShortcodeLoad")) {
+				require(dirname(__FILE__) . '/shortcode_load.php');
+				$ShortcodeLoad = new ShortcodeLoad();
+				$ShortcodeLoad->register_scripts_and_styles();
+			}
+		}
+
 		if( isset( $_GET[ 'tab' ] ) ) {  
 			$active_tab = $_GET[ 'tab' ];  
 		} else {
