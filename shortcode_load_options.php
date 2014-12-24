@@ -348,6 +348,11 @@ Class ShortcodeLoad_Options {
 	//not sure if i need these functions
 	function shortcode_load_get_scripts() {
 		$scripts_array = array();
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+
 		return $scripts_array;
 	}
 
@@ -465,12 +470,12 @@ Class ShortcodeLoad_Options {
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
-				<a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab">Overview</a>
-				<a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab">Default Options</a>
-				<a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab">New Script</a>
-				<a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab">New Style</a>
-				<a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab">Edit file</a>
-				<a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab">Help</a>
+				<a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
+				<a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
+				<a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a>
+				<a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a>
+				<a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
+				<a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
 			</h2>
 
 			<?php do_action('register_scripts_styles'); ?>
