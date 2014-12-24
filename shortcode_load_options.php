@@ -1,6 +1,6 @@
 <?php
 
-Class ShortcodeLoad_Options {
+Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function __construct() {
 		add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
@@ -467,9 +467,7 @@ Class ShortcodeLoad_Options {
 			if (!class_exists("ShortcodeLoad")) {
 				require(dirname(__FILE__) . '/shortcode_load.php');
 			}
-			var_dump(true);
-			$ShortcodeLoad = new ShortcodeLoad();
-			$ShortcodeLoad->register_scripts_and_styles();
+			$this->register_scripts_and_styles();
 		}
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
