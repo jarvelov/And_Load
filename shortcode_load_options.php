@@ -469,8 +469,8 @@ Class ShortcodeLoad_Options {
 				$ShortcodeLoad = new ShortcodeLoad();
 				$ShortcodeLoad->register_scripts_and_styles();
 			} else {
-				$ShortcodeLoad = new ShortcodeLoad();
-				$ShortcodeLoad->register_scripts_and_styles();
+				/*$ShortcodeLoad = new ShortcodeLoad();
+				$ShortcodeLoad->register_scripts_and_styles();*/
 			}
 		}
 
