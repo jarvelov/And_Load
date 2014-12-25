@@ -143,17 +143,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
+		$file_datas = array();
+
 		if(!empty($script_content)) {
 			$name = $options_scripts[ 'new_script_name' ];
-			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
+			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
 		}
 
 		if(!empty($style_content)) {
 			$name = $options_styles[ 'new_style_name' ];
-			$file_data = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
+			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 
-		if(isset($file_data)) {
+		foreach $file_datas as $file_data {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
 
@@ -435,7 +437,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_new_script_name_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
 		echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . $options[ 'new_script_name' ] . '"/>';
-	}	
+	}
 
 	function shortcode_load_new_script_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_script_options' );
@@ -452,7 +454,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_new_style_name_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
 		echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . $options[ 'new_style_name' ] . '"/>';
-	}		
+	}
 
 	function shortcode_load_new_style_textarea_callback() {
 		$options = get_option( 'shortcode_load_new_style_options' );
@@ -510,44 +512,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		<?php
 
 	}
-
-	/**
-	 * Registers and enqueues stylesheets for the administration panel and the
-	 * public facing site.
-	 */
-	private function register_scripts_and_styles() {
-		if ( is_admin() ) {
-			$this->load_file( self::slug . '-admin-script', '/js/admin.js', true );
-			$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
-		} else {
-			$this->load_file( self::slug . '-script', '/js/widget.js', true );
-			$this->load_file( self::slug . '-style', '/css/widget.css' );
-		} // end if/else
-	} // end register_scripts_and_styles
-	
-	/**
-	 * Helper function for registering and enqueueing scripts and styles.
-	 *
-	 * @name    The     ID to register with WordPress
-	 * @file_path       The path to the actual file
-	 * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
-	 */
-	private function load_file( $name, $file_path, $is_script = false ) {
-
-		$url = plugins_url($file_path, __FILE__);
-		$file = plugin_dir_path(__FILE__) . $file_path;
-
-		if( file_exists( $file ) ) {
-			if( $is_script ) {
-				wp_register_script( $name, $url, array('jquery') ); //depends on jquery
-				wp_enqueue_script( $name );
-			} else {
-				wp_register_style( $name, $url );
-				wp_enqueue_style( $name );
-			} // end if
-		} // end if
-
-	} // end load_file
 }
 
 ?>
