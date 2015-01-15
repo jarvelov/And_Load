@@ -572,9 +572,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 
 			update_option('shortcode_load_edit_file_options', $options_edit_file);
-
-			echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
 		}
+
+		echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
