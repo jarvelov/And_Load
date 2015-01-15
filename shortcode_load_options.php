@@ -535,8 +535,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	/* Edit file tab callbacks */
 
 	function shortcode_load_edit_file_options_callback() {
-		$id = $_GET['id'];
-		echo '<p>Current file: '.$id.'</p>'; //TODO create a select dropdown here 
+
+		//TODO create a select dropdown in this function
+
+		$id = intval($_GET['id']);
+		if($id) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+			$sql = "SELECT name,created_timestamp,updated_timestamp FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+			$result = $wpdb->get_results($sql, ARRAY_A);
+
+			var_dump($result);
+
+			echo '<p>Current file: '.$id.'</p>'; 
+		}
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
