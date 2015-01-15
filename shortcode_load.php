@@ -129,12 +129,13 @@ License:
 		$result = $wpdb->get_results($sql, ARRAY_A)[0];	
 
 		var_dump($result);
-
+/*
 		if($in_header) {
 			
 		} else {
 
 		}
+*/
 	}
 	
 	/**
