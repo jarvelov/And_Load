@@ -154,7 +154,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$name = $options_styles[ 'new_style_name' ];
 			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
-
+var_dump($file_datas);
 		foreach ($file_datas as $file_data) {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
@@ -353,7 +353,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'js';";
+		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'js'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		var_dump($result);
