@@ -353,7 +353,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,revision FROM ".$table_name." WHERE type = 'js'";
+		$sql = "SELECT id,name,revision FROM ".$table_name." WHERE type = 'js'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
@@ -366,7 +366,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,revision FROM ".$table_name." WHERE type = 'css'";
+		$sql = "SELECT id,name,revision FROM ".$table_name." WHERE type = 'css'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
@@ -434,7 +434,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				<?php
 					foreach ($styles as $style) { ?>
 						<tr>
-							<td><?php var_dump($style); ?></td>
+							<td><?php echo $style['name']; ?></td>
+							<td><?php echo $style['revision']; ?></td>
+							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $style['id']; ?>">Edit</a></td>
 						</tr>
 					<?php } ?>
 			</tbody>
