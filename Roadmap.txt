@@ -4,3 +4,4 @@ Roadmap.txt
 * Inline editor i admin läget
 	- Använd Ace editor: http://ace.c9.io/#nav=embedding
 * Fixa revisions
+* Lägg till select dropdown i Edit läge för att hoppa mellan filer

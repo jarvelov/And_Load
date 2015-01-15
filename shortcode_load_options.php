@@ -535,15 +535,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	/* Edit file tab callbacks */
 
 	function shortcode_load_edit_file_options_callback() {
-		echo '<p>Edit file</p>';
+		echo '<p>Edit file</p>'; //TODO create a select dropdown here 
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
+		$lib_path = plugins_url( 'lib/ace/src-min-noconflict/ace.js', __FILE__ );
 		$file_edit_area = '
 			<style type="text/css" media="screen">
 			    #editor { 
 			        position: absolute;
-			        top: 0;
+			        top: 200px;
 			        right: 0;
 			        bottom: 0;
 			        left: 0;
@@ -553,7 +554,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			    var x = "All this is syntax highlighted";
 			    return x;
 			}</div>
-			<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+			<script src="'.$lib_path.'" type="text/javascript" charset="utf-8"></script>
 			<script>
 			    var editor = ace.edit("editor");
 			    editor.setTheme("ace/theme/monokai");
