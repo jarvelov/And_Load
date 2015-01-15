@@ -119,7 +119,7 @@ License:
 		// Extract the attributes
 		extract(shortcode_atts(array(
 			'id' => '',
-			'in_header' => bool(false)
+			'in_header' => false
 			), $atts));
 
 		global $wpdb;
