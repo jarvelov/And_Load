@@ -2,3 +2,5 @@ Roadmap.txt
 
 * Lägg till minify libs
 * Inline editor i admin läget
+	- Använd Ace editor: http://ace.c9.io/#nav=embedding
+* Fixa revisions

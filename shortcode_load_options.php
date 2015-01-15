@@ -125,6 +125,23 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_new_style'
 		);
 
+		/* Edit file section */
+
+		add_settings_section( 
+			'shortcode_load_edit_file',
+			'Edit file',
+			array($this, 'shortcode_load_edit_file_options_callback'),
+			'shortcode_load_edit_file_options'
+		);
+
+		add_settings_field(
+			'shortcode_load_edit_file',
+			'File source',
+			array($this, 'shortcode_load_edit_file_options_callback'),
+			'shortcode_load_edit_file_options_callback',
+			'shortcode_load_edit_file'
+		);			
+
 		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
 
 	}
@@ -552,6 +569,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				} elseif($active_tab == 'tab_new_style') {
 					settings_fields( 'shortcode_load_new_style_options' );
 					do_settings_sections( 'shortcode_load_new_style_options' );
+				} elseif($active_tab == 'tab_edit') {
+					settings_fields( 'shortcode_load_edit_file_options' );
+					do_settings_sections( 'shortcode_load_edit_file_options' );	
 				}
 
 				submit_button();
