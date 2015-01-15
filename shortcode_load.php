@@ -140,11 +140,12 @@ License:
 			$is_script = ($type == 'js') ? true : false;
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
+			$path_external = str_replace(ABSPATH, '', $path);
 
 			if($is_script) {
 				wp_register_script( $name, $path ); //depends on jquery
 				wp_enqueue_script( $name );
-				var_dump($name, $path);
+				var_dump($name, $path_external);
 			} else {
 				wp_register_style( $name, $path );
 				wp_enqueue_style( $name );
