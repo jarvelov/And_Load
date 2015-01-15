@@ -109,7 +109,7 @@ License:
 		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
 		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
 
-		add_action('wp_enqueue_style','register_scripts_and_styles', 1);
+		add_action('wp_head','register_scripts_and_styles', 10);
 	}
 
 	function action_callback_register_scripts_and_styles() {
