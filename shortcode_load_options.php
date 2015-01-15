@@ -155,7 +155,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
 
-		foreach $file_datas as $file_data {
+		foreach ($file_datas as $file_data) {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
 			?>
