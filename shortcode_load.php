@@ -109,7 +109,8 @@ License:
 		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
 		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
 
-		do_action('wp_print_styles','register_scripts_and_styles', 8);
+		do_action( 'register_scripts_and_styles' );
+
 	}
 
 	function action_callback_register_scripts_and_styles() {
