@@ -135,13 +135,13 @@ License:
 		if ( is_admin() ) {
 			$this->load_file( self::slug . '-admin-script', '/js/admin.js', true );
 			$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
-			$this->load_file( 'bootstrap-js', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			$this->load_file( 'bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
+			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} else {
 			$this->load_file( self::slug . '-script', '/js/widget.js', true );
 			$this->load_file( self::slug . '-style', '/css/widget.css' );
-			$this->load_file( 'bootstrap-js', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			$this->load_file( 'bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
+			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} // end if/else
 	} // end register_scripts_and_styles
 	
@@ -165,7 +165,18 @@ License:
 				wp_register_style( $name, $url );
 				wp_enqueue_style( $name );
 			} // end if
-		} // end if
+		} else { //variable is not of a local file, possibly hosted remotely
+			$remote_url = $file_path;
+			if( ! (filter_var($remote_url, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
+				if( $is_script ) {
+					wp_register_script( $name, $remote_url, array('jquery') ); //depends on jquery
+					wp_enqueue_script( $name );	
+				} else {
+					wp_register_style( $name, $remote_url );
+					wp_enqueue_style( $name );
+				}
+			}
+		}
 
 	} // end load_file
 	
