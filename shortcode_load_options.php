@@ -449,7 +449,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}	
 
 	function shortcode_load_overview_scripts_callback() {
-		echo '<h2>Scripts:</h2>'; 
 		$scripts = $this->shortcode_load_get_scripts();
 
 		?>
@@ -474,7 +473,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_overview_styles_callback() {
-		echo '<h2>Styles:</h2>'; 
 		$styles = $this->shortcode_load_get_styles();
 
 		?>
