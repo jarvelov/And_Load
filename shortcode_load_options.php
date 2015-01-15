@@ -551,9 +551,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$options_edit_file[$key] = $value;
 			}
 
-			var_dump($options_edit_file);
+			update_option('shortcode_load_edit_file_options', $options_edit_file);
 
-			echo '<p>Current file: '.$result['name'].'</p>'; 
+			echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
 		}
 	}
 
