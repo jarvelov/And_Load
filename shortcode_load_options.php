@@ -406,7 +406,7 @@ var_dump($file_datas);
 
 	function shortcode_load_overview_scripts_callback() {
 		echo '<h2>Scripts:</h2>'; 
-		$this->shortcode_load_get_scripts();
+		//$this->shortcode_load_get_scripts();
 	}
 
 	function shortcode_load_overview_styles_callback() {
