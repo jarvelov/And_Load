@@ -158,7 +158,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		foreach $file_datas as $file_data {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
-
 			?>
 				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 			<?php
@@ -354,6 +353,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
+		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'js';";
+		$result = $wpdb->get_results($sql, ARRAY_A);
+
+		var_dump($result);
 
 		return $scripts_array;
 	}
@@ -403,6 +406,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_overview_scripts_callback() {
 		echo '<h2>Scripts:</h2>'; 
+		$this->shortcode_load_get_scripts();
 	}
 
 	function shortcode_load_overview_styles_callback() {
