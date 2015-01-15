@@ -141,7 +141,13 @@ License:
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
 
-			$this->load_file($name, $path, $is_script);
+			if($is_script) {
+				wp_register_script( $name, $path ); //depends on jquery
+				wp_enqueue_script( $name );
+			} else {
+				wp_register_style( $name, $path );
+				wp_enqueue_style( $name );
+			}
 		}
 	}
 	
