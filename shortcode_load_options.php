@@ -420,6 +420,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_overview_styles_callback() {
 		echo '<h2>Styles:</h2>'; 
+		$this->shortcode_load_get_styles();
 	}
 
 	/* Default tab callbacks */
