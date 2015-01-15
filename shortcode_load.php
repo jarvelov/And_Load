@@ -122,7 +122,7 @@ License:
 			'in_header' => false
 			), $atts));
 
-		var_dump($atts);
+		var_dump($id);
 
 /*
 		global $wpdb;
