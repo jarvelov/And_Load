@@ -572,6 +572,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 
 			update_option('shortcode_load_edit_file_options', $options_edit_file);
+		} else {
+			//empty options array if no id was supplied to prevent old data from being presented
+			update_option('shortcode_load_edit_file_options', array()); 
 		}
 
 		echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
@@ -588,17 +591,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		echo $container;
 
+		//Ace editor settings
+		$editor_theme = 'monokai';
+
 		if($options_edit_file['type'] == 'js') {
-			$mode = 'javascript';
+			$editor_mode = 'javascript';
 		} elseif ($options_edit_file['type'] == 'css') { 
-			$mode = 'css';
+			$editor_mode = 'css';
 		}
 
 		?>
 			<script>
 				var editor = ace.edit("editor");
-				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/<?php echo $mode; ?>");
+				editor.setTheme("ace/theme/<?php echo $editor_theme; ?>");
+				editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
 			</script>
 		<?php
 

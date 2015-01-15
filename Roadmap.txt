@@ -1,9 +1,9 @@
 Roadmap.txt
 
-* Lägg till minify libs
+* Lägg till minify libs [ ]
 * Inline editor i admin läget [X]
 	- Använd Ace editor: http://ace.c9.io/#nav=embedding [X]
-	- Skriv sql query för att hämta data om filen
-		- Skicka type som URL param?
+	- Skriv sql query för att hämta data om filen [X]
+		- Skicka type som URL param? [~]
 * Fixa revisions
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
