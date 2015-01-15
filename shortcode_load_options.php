@@ -560,7 +560,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			    editor.getSession().setMode("ace/mode/javascript");
 			</script>
 			';
-		var_dump($file_edit_area);
+		echo($file_edit_area);
 	}
 
 	function shortcode_load_options_page(  ) {
