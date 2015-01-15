@@ -541,7 +541,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_edit_file_source_options_callback() {
 		$container = '<div class="editor-container">';
-		$content = 'function foo(items) { var x = "All this is syntax highlighted"; return x;';
+		$content = 'function foo(items) { var x = "All this is syntax highlighted"; return x; }';
 		$editor = '<div id="editor">'.$content.'</div>';
 		$container .= $editor . '</div>';
 
