@@ -1,0 +1,4 @@
+Roadmap.txt
+
+* Lägg till minify libs
+* Inline editor i admin läget
