@@ -413,9 +413,27 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		echo '<h2>Scripts:</h2>'; 
 		$scripts = $this->shortcode_load_get_scripts();
 
-		foreach ($scripts as $script => $value) {
-			var_dump($script, $value);
-		}
+		?>
+
+		<table id="shortcode-load-scripts-table" class="table table-striped shortcode-load-table">
+			<thead>
+				<th>Name</th>
+				<th>Revision</th>
+				<th>Edit</th>
+			</thead>
+			<tbody>
+				<?php
+					foreach ($scripts as $script) { ?>
+						<tr>
+							<td><?php echo $script['name']; ?></td>
+							<td><?php echo $script['revision']; ?></td>
+							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $script['id']; ?>">Edit</a></td>
+						</tr>
+					<?php } ?>
+			</tbody>
+		</table>
+
+		<?php
 	}
 
 	function shortcode_load_overview_styles_callback() {
@@ -424,7 +442,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		?>
 
-		<table id="shload-styles-table" class="shload-table">
+		<table id="shortcode-load-styles-table" class="table table-striped shortcode-load-table">
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
