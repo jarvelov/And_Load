@@ -150,9 +150,9 @@ License:
 	/**
 	 * Helper function for registering and enqueueing scripts and styles.
 	 *
-	 * @name    The     ID to register with WordPress
-	 * @file_path       The path to the actual file, can be an URL
-	 * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
+	 * @name			The ID to register with WordPress
+	 * @file_path		The path to the actual file, can be an URL
+	 * @is_script		Optional argument for if the incoming file_path is a JavaScript source file.
 	 */
 	private function load_file( $name, $file_path, $is_script = false ) {
 

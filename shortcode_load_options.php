@@ -366,7 +366,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	/*
-	* Return all saved entries of type 'js'
+	* Return all saved entries of type 'js' in database
 	*/
 	function shortcode_load_get_scripts() {
 		global $wpdb;
@@ -379,7 +379,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	/*
-	* Return all entries of type 'css'
+	* Return all entries of type 'css' in database
 	*/
 	function shortcode_load_get_styles() {
 		global $wpdb;
@@ -389,6 +389,26 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
+	}
+
+	/*
+	* Returns a file's content.
+	* If the file isn't found bool(false) is returned.
+	* @path 	Path to file
+	*/
+
+	function shortcode_load_load_file($path) {
+		if( file_exists( $path ) ) {
+			try {
+				$content = file_get_contents($path);
+			} catch (Exception $e) {
+				$content = "Error reading file. Verify file integrity and permissions. Local path: ".$path;
+			}
+		} else {
+			$content = false;
+		}
+
+		return $content;
 	}
 
 	/*
@@ -558,6 +578,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+
+		$content = $this->shortcode_load_load_file($options_edit_file['srcpath']);
+
 		$container = '<div class="editor-container">';
 		$content = 'function foo(items) { var x = "All this is syntax highlighted"; return x; }';
 		$editor = '<div id="editor">'.$content.'</div>';
@@ -573,9 +597,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			</script>
 		<?php
 
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-
-		var_dump($options_edit_file);
+		
 	}
 
 	function shortcode_load_options_page(  ) {
