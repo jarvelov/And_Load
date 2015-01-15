@@ -583,7 +583,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$content = $this->shortcode_load_load_file($options_edit_file['srcpath']);
 
 		$container = '<div class="editor-container">';
-		$content = 'function foo(items) { var x = "All this is syntax highlighted"; return x; }';
 		$editor = '<div id="editor">'.$content.'</div>';
 		$container .= $editor . '</div>';
 
