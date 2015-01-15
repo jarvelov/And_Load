@@ -424,7 +424,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		?>
 
-		<table id="shload-scripts-table" class="shload-table">
+		<table id="shload-styles-table" class="shload-table">
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
@@ -432,13 +432,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			</thead>
 			<tbody>
 				<?php
-					foreach ($styles as $style => $value) {
-						var_dump($style, $value);
-					}
-				?>
+					foreach ($styles as $style => $value) { ?>
+						<tr>
+							<td><?php echo $value; ?></td>
+						</tr>
+					<?php } ?>
 			</tbody>
 		</table>
-		
+
 		<?php
 
 	}
