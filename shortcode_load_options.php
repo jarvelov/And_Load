@@ -545,6 +545,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$editor = '<div id="editor">'.$content.'</div>';
 		$container .= $editor . '</div>';
 
+		echo $container;
+
 		?>
 			<script>
 			    var editor = ace.edit("editor");
@@ -552,8 +554,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			    editor.getSession().setMode("ace/mode/javascript");
 			</script>
 		<?php
-
-		echo $container;
 	}
 
 	function shortcode_load_options_page(  ) {
