@@ -346,34 +346,30 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		return $minified_content;
 	}
 
-	//not sure if i need these functions
+	/*
+	* Return all saved entries of type 'js'
+	*/
 	function shortcode_load_get_scripts() {
-		$scripts_array = array();
-
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
 		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'js'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
-		var_dump($result);
-
-		return $scripts_array;
+		return $result;
 	}
 
-	//not sure if i need these functions
+	/*
+	* Return all entries of type 'css'
+	*/
 	function shortcode_load_get_styles() {
-		$styles_array = array();
-
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
 		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'css'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
-		var_dump($result);
-
-		return $styles_array;
+		return $result;
 	}
 
 	/*
@@ -415,12 +411,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_overview_scripts_callback() {
 		echo '<h2>Scripts:</h2>'; 
-		$this->shortcode_load_get_scripts();
+		$scripts = $this->shortcode_load_get_scripts();
+
+		foreach ($scripts as $script) {
+			var_dump($script);
+		}
 	}
 
 	function shortcode_load_overview_styles_callback() {
 		echo '<h2>Styles:</h2>'; 
-		$this->shortcode_load_get_styles();
+		$styles = $this->shortcode_load_get_styles();
 	}
 
 	/* Default tab callbacks */
