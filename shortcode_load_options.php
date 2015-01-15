@@ -364,6 +364,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	//not sure if i need these functions
 	function shortcode_load_get_styles() {
 		$styles_array = array();
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+		$sql = "SELECT name,type,revision FROM ".$table_name." WHERE type = 'css'";
+		$result = $wpdb->get_results($sql, ARRAY_A);
+
+		var_dump($result);
+
 		return $styles_array;
 	}
 
