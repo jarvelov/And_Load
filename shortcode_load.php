@@ -135,7 +135,7 @@ License:
 		if ( is_admin() ) {
 			$this->load_file( self::slug . '-admin-script', self::slug . '-admin-script/js/admin.js', true );
 			$this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
-			$this->load_file( self::slug . '-ace-js', self::slug . '/lib/ace/src-min-noconflict/ace.js', true );
+			$this->load_file( self::slug . '-ace-js', '/lib/ace/src-min-noconflict/ace.js', true );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
 			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} else {
@@ -157,6 +157,8 @@ License:
 
 		$url = plugins_url($file_path, __FILE__);
 		$file = plugin_dir_path(__FILE__) . $file_path;
+
+		var_dump($file);
 
 		if( file_exists( $file ) ) {
 			if( $is_script ) {
