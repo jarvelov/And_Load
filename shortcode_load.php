@@ -177,9 +177,10 @@ License:
 		$url = plugins_url($file_path, __FILE__);
 		$file = plugin_dir_path(__FILE__) . $file_path;
 
+		var_dump($file);
+
 		if( file_exists( $file ) ) {
 			if( $is_script ) {
-				var_dump($url);
 				wp_register_script( $name, $url, array('jquery') ); //depends on jquery
 				wp_enqueue_script( $name );
 			} else {
