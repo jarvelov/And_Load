@@ -419,15 +419,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
-				<th>Edit</th>
 			</thead>
 			<tbody>
 				<?php
 					foreach ($scripts as $script) { ?>
 						<tr>
-							<td><?php echo $script['name']; ?></td>
+							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $script['id']; ?>"><?php echo $script['name']; ?></a></td>
 							<td><?php echo $script['revision']; ?></td>
-							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $script['id']; ?>">Edit</a></td>
 						</tr>
 					<?php } ?>
 			</tbody>
@@ -446,15 +444,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
-				<th>Edit</th>
 			</thead>
 			<tbody>
 				<?php
 					foreach ($styles as $style) { ?>
 						<tr>
-							<td><?php echo $style['name']; ?></td>
+							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $style['id']; ?>"><?php echo $style['name']; ?></a></td>
 							<td><?php echo $style['revision']; ?></td>
-							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $style['id']; ?>">Edit</a></td>
 						</tr>
 					<?php } ?>
 			</tbody>
