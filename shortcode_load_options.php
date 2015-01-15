@@ -454,7 +454,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		?>
 
-		<table id="shortcode-load-scripts-table" class="table table-striped shortcode-load-table">
+		<table id="shortcode-load-scripts-table" class="table table-bordered table-striped shortcode-load-table">
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
@@ -479,7 +479,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		?>
 
-		<table id="shortcode-load-styles-table" class="table table-striped shortcode-load-table">
+		<table id="shortcode-load-styles-table" class="table table-bordered table-striped shortcode-load-table">
 			<thead>
 				<th>Name</th>
 				<th>Revision</th>
@@ -584,7 +584,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_edit_file_source_options_callback() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 		$file_src = $options_edit_file['srcpath'];
-		
+
 		$content = $this->shortcode_load_load_file( $file_src );
 
 		$container = '<div class="editor-container">';
