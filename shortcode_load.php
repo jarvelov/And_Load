@@ -109,7 +109,7 @@ License:
 		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
 		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
 
-		do_action('wp_enqueue_style','register_scripts_and_styles', 1);
+		do_action('wp_enqueue_style','register_scripts_and_styles', 15);
 	}
 
 	function action_callback_register_scripts_and_styles() {
@@ -144,7 +144,7 @@ License:
 			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
 			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} // end if/else
 	} // end register_scripts_and_styles
 	
