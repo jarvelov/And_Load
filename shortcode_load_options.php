@@ -532,6 +532,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
 	}
 
+	/* Edit file tab callbacks */
+
+	function shortcode_load_edit_file_options_callback() {
+		echo '<p>Edit file</p>';
+	}	
+
 	function shortcode_load_options_page(  ) {
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
