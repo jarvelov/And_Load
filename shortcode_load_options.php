@@ -434,7 +434,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				<?php
 					foreach ($styles as $style) { ?>
 						<tr>
-							<td><?php echo $style; ?></td>
+							<td><?php var_dump($style); ?></td>
 						</tr>
 					<?php } ?>
 			</tbody>
