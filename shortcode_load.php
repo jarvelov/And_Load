@@ -122,6 +122,9 @@ License:
 			'in_header' => false
 			), $atts));
 
+		var_dump($atts);
+
+/*
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
