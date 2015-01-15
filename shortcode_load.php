@@ -100,12 +100,6 @@ License:
 			//this will run when on the frontend
 		}
 
-		/*
-		 * TODO: Define custom functionality for your plugin here
-		 *
-		 * For more information: 
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
 		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
 		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
 
@@ -125,8 +119,22 @@ License:
 		// Extract the attributes
 		extract(shortcode_atts(array(
 			'id' => '',
-			'in_header' => false
+			'in_header' => bool(false)
 			), $atts));
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+		$sql = "SELECT name,srcpath,minpath,minify,type FROM ".$table_name." WHERE id = '".$id." LIMIT 1";
+		$result = $wpdb->get_results($sql, ARRAY_A)[0];	
+
+		var_dump($result);
+
+		if($in_header) {
+			
+		} else {
+
+		}
 	}
 	
 	/**
@@ -140,12 +148,12 @@ License:
 			$this->load_file( self::slug . '-ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
 			$this->load_file( self::slug . '-ace-js', self::slug . '-admin-style/css/ace.css' );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} else {
 			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
 			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} // end if/else
 	} // end register_scripts_and_styles
 	
