@@ -413,14 +413,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		echo '<h2>Scripts:</h2>'; 
 		$scripts = $this->shortcode_load_get_scripts();
 
-		foreach ($scripts as $script) {
-			var_dump($script);
+		foreach ($scripts as $script => $value) {
+			var_dump($script, $value);
 		}
 	}
 
 	function shortcode_load_overview_styles_callback() {
 		echo '<h2>Styles:</h2>'; 
 		$styles = $this->shortcode_load_get_styles();
+
+		foreach ($styles as $style => $value) {
+			var_dump($style, $value);
+		}
 	}
 
 	/* Default tab callbacks */
