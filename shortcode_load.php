@@ -124,12 +124,13 @@ License:
 
 		var_dump($id);
 
-/*
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'shortcode_load'; 
+		if($id) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,srcpath,minpath,minify,type FROM ".$table_name." WHERE id = '".$id." LIMIT 1";
-		$result = $wpdb->get_results($sql, ARRAY_A)[0];	
+			$sql = "SELECT name,srcpath,minpath,minify,type FROM ".$table_name." WHERE id = '".$id." LIMIT 1";
+			$result = $wpdb->get_results($sql, ARRAY_A);
+		}
 
 		var_dump($result);
 /*
