@@ -535,7 +535,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	/* Edit file tab callbacks */
 
 	function shortcode_load_edit_file_options_callback() {
-		echo '<p>Current file: '..'</p>'; //TODO create a select dropdown here 
+		$id = $_GET['id'];
+		echo '<p>Current file: '.$id.'</p>'; //TODO create a select dropdown here 
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
