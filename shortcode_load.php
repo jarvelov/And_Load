@@ -140,7 +140,7 @@ License:
 			$is_script = ($type == 'js') ? true : false;
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
-			
+			var_dump($name, $path, $is_script);
 			$this->load_file($name, $path, $is_script);
 		}
 	}
