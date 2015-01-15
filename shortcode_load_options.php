@@ -535,6 +535,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	/* Edit file tab callbacks */
 
 	function shortcode_load_edit_file_options_callback() {
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
 		//TODO create a select dropdown in this function
 
@@ -543,12 +544,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-			$sql = "SELECT name,created_timestamp,updated_timestamp FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
-			$result = $wpdb->get_results($sql, ARRAY_A);
+			$sql = "SELECT name,created_timestamp,updated_timestamp,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-			var_dump($result);
+			foreach ($result as $key => $value) {
+				$options_edit_file[$key] = $value;
+			}
 
-			echo '<p>Current file: '.$id.'</p>'; 
+			echo '<p>Current file: '.$result['name'].'</p>'; 
 		}
 	}
 
@@ -567,6 +570,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			    editor.getSession().setMode("ace/mode/javascript");
 			</script>
 		<?php
+
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+
+		var_dump($options_edit_file);
 	}
 
 	function shortcode_load_options_page(  ) {
