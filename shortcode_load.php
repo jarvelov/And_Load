@@ -144,6 +144,7 @@ License:
 			if($is_script) {
 				wp_register_script( $name, $path ); //depends on jquery
 				wp_enqueue_script( $name );
+				var_dump($name, $path);
 			} else {
 				wp_register_style( $name, $path );
 				wp_enqueue_style( $name );
@@ -182,8 +183,6 @@ License:
 
 		$url = plugins_url($file_path, __FILE__);
 		$file = plugin_dir_path(__FILE__) . $file_path;
-
-		var_dump($file);
 
 		if( file_exists( $file ) ) {
 			if( $is_script ) {
