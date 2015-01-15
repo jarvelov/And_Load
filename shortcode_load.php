@@ -87,7 +87,6 @@ License:
 		// Setup localization
 		load_plugin_textdomain( self::slug, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 		// Load JavaScript and stylesheets
-		$this->register_scripts_and_styles();
 
 		// Register the shortcode [shortcode_load]
 		add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
@@ -107,12 +106,14 @@ License:
 		 * For more information: 
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( 'your_action_here', array( &$this, 'action_callback_method_name' ) );
-		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );    
+		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
+		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
+
+		add_action('wp_enqueue_style','register_scripts_and_styles', 1);
 	}
 
-	function action_callback_method_name() {
-		// TODO define your action method here
+	function action_callback_register_scripts_and_styles() {
+		$this->register_scripts_and_styles();
 	}
 
 	function filter_callback_method_name() {
