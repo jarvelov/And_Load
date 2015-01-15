@@ -137,8 +137,8 @@ License:
 			$this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
 			$this->load_file( self::slug . '-ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
 			$this->load_file( self::slug . '-ace-js', self::slug . '-admin-style/css/ace.css' );
-			$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
+			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} else {
 			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
 			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
