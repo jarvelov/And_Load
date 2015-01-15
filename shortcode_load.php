@@ -142,17 +142,15 @@ License:
 			$path = ($minify == 1) ? $minpath : $srcpath;
 			$path_external = str_replace(ABSPATH, '', $path);
 
-			$this->load_file( $name, $path_external, $is_script );
-/*
+
 			if($is_script) {
-				wp_register_script( $name, $path ); //depends on jquery
+				wp_register_script( $name, $path_external ); //depends on jquery
 				wp_enqueue_script( $name );
 				var_dump($name, $path_external);
 			} else {
-				wp_register_style( $name, $path );
+				wp_register_style( $name, $path_external );
 				wp_enqueue_style( $name );
 			}
-			*/
 		}
 	}
 	
