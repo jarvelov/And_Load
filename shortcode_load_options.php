@@ -125,6 +125,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_new_style'
 		);
 
+		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
+
 		/* Edit file section */
 
 		add_settings_section( 
@@ -137,12 +139,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		add_settings_field(
 			'shortcode_load_edit_file',
 			'File source',
-			array($this, 'shortcode_load_edit_file_options_callback'),
-			'shortcode_load_edit_file_options_callback',
+			array($this, 'shortcode_load_edit_file_source_options_callback'),
+			'shortcode_load_edit_file_options',
 			'shortcode_load_edit_file'
 		);			
 
-		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
+		register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options');
 
 	}
 
