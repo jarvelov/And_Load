@@ -130,14 +130,19 @@ License:
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 		}
 
-		var_dump($result);
+		if(sizeof($result) > 0 )  {
+			$name = $result['name'];
+			$srcpath = $result['srcpath'];
+			$minpath = $result['minpath'];
+			$minify= $result['minify'];
+			$type = $result['type'];
 
-		if($in_header) {
+			$is_script = ($type == 'js') ? true : false;
+
+			$path = ($minify == 1) ? $minpath : $srcpath;
 			
-		} else {
-
+			$this->load_file($name, $path, $is_script);
 		}
-
 	}
 	
 	/**
