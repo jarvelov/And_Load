@@ -583,8 +583,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_edit_file_source_options_callback() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-
-		$content = $this->shortcode_load_load_file($options_edit_file['srcpath']);
+		$file_src = $options_edit_file['srcpath'];
+		
+		$content = $this->shortcode_load_load_file( $file_src );
 
 		$container = '<div class="editor-container">';
 		$editor = '<div id="editor">'.$content.'</div>';
