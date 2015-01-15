@@ -564,7 +564,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-			$sql = "SELECT name,created_timestamp,updated_timestamp,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+			$sql = "SELECT name,type,created_timestamp,updated_timestamp,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
 			foreach ($result as $key => $value) {
@@ -588,11 +588,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		echo $container;
 
+		if($options_edit_file['type'] == 'js') {
+			$mode = 'javascript';
+		} elseif ($options_edit_file['type'] == 'css') { 
+			$mode = 'css';
+		}
+
 		?>
 			<script>
-			    var editor = ace.edit("editor");
-			    editor.setTheme("ace/theme/monokai");
-			    editor.getSession().setMode("ace/mode/javascript");
+				var editor = ace.edit("editor");
+				editor.setTheme("ace/theme/monokai");
+				editor.getSession().setMode("ace/mode/<?php echo $mode; ?>");
 			</script>
 		<?php
 
