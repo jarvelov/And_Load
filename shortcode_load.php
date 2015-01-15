@@ -133,13 +133,13 @@ License:
 	 */
 	private function register_scripts_and_styles() {
 		if ( is_admin() ) {
-			$this->load_file( self::slug . '-admin-script', '/js/admin.js', true );
-			$this->load_file( self::slug . '-admin-style', '/css/admin.css' );
+			$this->load_file( self::slug . '-admin-script', self::slug . '-admin-script/js/admin.js', true );
+			$this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
 			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} else {
-			$this->load_file( self::slug . '-script', '/js/widget.js', true );
-			$this->load_file( self::slug . '-style', '/css/widget.css' );
+			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
+			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
 			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
 			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} // end if/else
