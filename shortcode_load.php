@@ -140,8 +140,10 @@ License:
 			$is_script = ($type == 'js') ? true : false;
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
-			$path_external = str_replace(ABSPATH, get_site_url() . '/', $path);
+			$site_url = get_site_url();
+			$path_external = str_replace(ABSPATH, $site_url . '/', $path); 
 
+			//TODO make this cleaner and wrap enqueue in a function
 
 			if($is_script) {
 				wp_register_script( $name, $path_external ); //depends on jquery
