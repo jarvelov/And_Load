@@ -154,7 +154,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$name = $options_styles[ 'new_style_name' ];
 			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
 		}
-		var_dump('string');
+
 		foreach ($file_datas as $file_data) {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
@@ -406,7 +406,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_overview_scripts_callback() {
 		echo '<h2>Scripts:</h2>'; 
-		//$this->shortcode_load_get_scripts();
+		$this->shortcode_load_get_scripts();
 	}
 
 	function shortcode_load_overview_styles_callback() {
@@ -467,7 +467,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_options_page(  ) {
-		$this->register_scripts_and_styles();
 
 		if( isset( $_GET[ 'tab' ] ) ) {  
 			$active_tab = $_GET[ 'tab' ];  
