@@ -140,7 +140,7 @@ License:
 			$is_script = ($type == 'js') ? true : false;
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
-			$path_external = str_replace(ABSPATH, get_site_url(), $path);
+			$path_external = str_replace(ABSPATH, get_site_url() . '/', $path);
 
 
 			if($is_script) {
