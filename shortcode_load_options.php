@@ -555,8 +555,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	/* Edit file tab callbacks */
 
 	function shortcode_load_edit_file_options_callback() {
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-
 		//TODO create a select dropdown in this function
 
 		$id = intval($_GET['id']);
@@ -567,6 +565,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$sql = "SELECT name,type,created_timestamp,updated_timestamp,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
+			$options_edit_file = array();
 			foreach ($result as $key => $value) {
 				$options_edit_file[$key] = $value;
 			}
@@ -576,6 +575,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			//empty options array if no id was supplied to prevent old data from being presented
 			update_option('shortcode_load_edit_file_options', array()); 
 		}
+
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
 		echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
 	}
