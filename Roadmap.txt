@@ -9,4 +9,5 @@ Roadmap.txt
 * Fixa revisions
 	- Pallar inte :D
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
-* Fixa enqueue style vid shortcode render [ ]
+* Fixa enqueue vid shortcode render [X]
+	-  Enqueue skulle behöva göras om till en separat funktion
