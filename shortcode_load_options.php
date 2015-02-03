@@ -185,7 +185,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
 			?>
-				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
+				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
 			<?php
 			} elseif($file_data['success'] == false) {
 			?>
@@ -372,15 +372,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$path = $result['srcpath'];
 		$type = $result['type'];
 		$name = $result['name']; 
-		$name_simple = str_replace($type, "", $name);
+		$revision = $result['revision'];
+		$new_revision = ( intval($revision) + 1);
 
 		$srcname = basename($path, $type);
-		$unique_suffix_tmp = str_replace($name_simple, "", $srcname);
+		$unique_suffix_tmp = str_replace($name, "", $srcname);
 		$unique_suffix = str_replace(".", "", $unique_suffix_tmp); //remove any leading or trailing dots
 
 		var_dump($name);
-		var_dump($name_simple);
 		var_dump($unique_suffix);
+
+		$new_name = $name . "." . $unique_suffix . "." . $new_revision;
+
+		var_dump($new_name);
 
 		//TODO
 		//sql query to lookup based on id
