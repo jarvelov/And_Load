@@ -156,9 +156,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_style_options' );
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 		
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
 		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_styles[ 'new_style_textarea' ] : NULL;
+		$edit_file_content = ( $options_edit_file[ 'edit_file_temporary_textarea' ] ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : NULL;
 		
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
@@ -172,6 +174,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		if(!empty($style_content)) {
 			$name = $options_styles[ 'new_style_name' ];
 			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
+		}
+
+		if(!empty($edit_file_content)) {
+			var_dump($edit_file_content);
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -587,7 +593,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$editor = '<div id="editor">'.$content.'</div>';
 		$container .= $editor . '</div>';
 
-		echo $container;		
+		echo $container;	
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
@@ -608,7 +614,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				editor.setTheme("ace/theme/<?php echo $editor_theme; ?>");
 				editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
 			</script>
-		<?php		
+		<?php
+
+		//Create a textarea to temporarily hold the raw data from Ace editor
+		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
+		//The textarea will be continously updated with javascript
+		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
 	}
 
 	function shortcode_load_options_page(  ) {

@@ -101,7 +101,6 @@ License:
 		}
 
 		add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
-		add_filter( 'your_filter_here', array( &$this, 'filter_callback_method_name' ) );
 
 		do_action( 'register_scripts_and_styles' );
 
@@ -109,10 +108,6 @@ License:
 
 	function action_callback_register_scripts_and_styles() {
 		$this->register_scripts_and_styles();
-	}
-
-	function filter_callback_method_name() {
-		// TODO define your filter method here
 	}
 
 	function render_shortcode($atts) {
