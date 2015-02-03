@@ -576,20 +576,22 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
-		echo '<p>Current file: '.$options_edit_file['name'].'</p>'; 
-	}
+		echo '<p>Current file: '.$options_edit_file['name'].'</p>';
 
-	function shortcode_load_edit_file_source_options_callback() {
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+		//Get file content
 		$file_src = $options_edit_file['srcpath'];
-
 		$content = $this->shortcode_load_load_file( $file_src );
 
+		//Build Ace editor
 		$container = '<div class="editor-container">';
 		$editor = '<div id="editor">'.$content.'</div>';
 		$container .= $editor . '</div>';
 
-		echo $container;
+		echo $container;		
+	}
+
+	function shortcode_load_edit_file_source_options_callback() {
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
 		//Ace editor settings
 		$editor_theme = 'monokai';
@@ -606,9 +608,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				editor.setTheme("ace/theme/<?php echo $editor_theme; ?>");
 				editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
 			</script>
-		<?php
-
-		
+		<?php		
 	}
 
 	function shortcode_load_options_page(  ) {
