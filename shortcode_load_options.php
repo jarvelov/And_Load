@@ -177,7 +177,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if(!empty($edit_file_content)) {
-			$options_edit_file[ 'edit_file_current_id' ]
+			$current_id = $options_edit_file[ 'edit_file_current_id' ];
 			var_dump($edit_file_content);
 		}
 
