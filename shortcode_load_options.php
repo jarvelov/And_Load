@@ -177,6 +177,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if(!empty($edit_file_content)) {
+			$options_edit_file[ 'edit_file_current_id' ]
 			var_dump($edit_file_content);
 		}
 
@@ -205,7 +206,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		try {
-
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
@@ -598,6 +598,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_edit_file_source_options_callback() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+		var_dump($options_edit_file);
 
 		//Ace editor settings
 		$editor_theme = 'monokai';
@@ -620,6 +621,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
 		//The textarea will be continously updated with javascript
 		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
+
+		//We also need the id to refer to later, save this to a simple input field as well
+		echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $options_edit_file[ 'edit_file_current_id' ] . '"/>';
+		
 	}
 
 	function shortcode_load_options_page(  ) {
