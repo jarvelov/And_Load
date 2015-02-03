@@ -372,7 +372,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$path = $result['srcpath'];
 		$type = $result['type'];
 		$name = $result['name']; 
-		$name_simple = basename($name, "." . $type);
+		$name_simple = str_replace($type, "", $name);
 
 		var_dump($name_simple);
 
