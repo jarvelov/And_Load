@@ -369,11 +369,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".$id;
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
-		var_dump($result);
+		//var_dump($result);
+
+		$unique_suffix = basename($result['srcpath']);
+
+		var_dump($unique_suffix);
 
 		//TODO
-		//sql query to lookup id
-		//return path of file (src/min)
+		//sql query to lookup based on id
+		//get path of file (src/min)
 		//save new file with: shortcode_load_save_file_js/css
 		//have to reuse random string in name and add rev_x to name when saving
 		//
