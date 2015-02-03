@@ -371,11 +371,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$path = $result['srcpath'];
 		$type = $result['type'];
+		$name = $result['name']; 
 
-		$srcname = basename($path, $type);
-		//$unique_suffix = substr_replace($srcname, replacement, start)
+		$srcname = basename($path, "." . $type);
+		$unique_suffix = str_replace($name . ".", "", $srcname); //append the delimiter dot symbol to the end of $name for easier handling
 
-		var_dump($srcname);
+		var_dump($unique_suffix);
 
 		//TODO
 		//sql query to lookup based on id
