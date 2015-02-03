@@ -366,7 +366,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT id,name,revision FROM ".$table_name;
+		$sql = "SELECT name,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".$id;
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		var_dump($result);
