@@ -177,8 +177,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if(!empty($edit_file_content)) {
-			$current_id = $options_edit_file[ 'edit_file_current_id' ];
-			var_dump($edit_file_content);
+			var_dump($options_edit_file);
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -353,6 +352,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		return $file_args_array;
+	}
+
+	/*
+	* Update a file by
+	* adding a new revision
+	*/
+
+	function shortcode_load_add_file_revision() {
+
 	}
 
 	/*
@@ -598,7 +606,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_edit_file_source_options_callback() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-		var_dump($options_edit_file);
 
 		//Ace editor settings
 		$editor_theme = 'monokai';
