@@ -369,9 +369,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".$id;
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
-		//var_dump($result);
+		var_dump($result);
+		$path = $result['srcpath']
 
-		$unique_suffix = basename($result['srcpath']);
+		var_dump($path);
+
+		$unique_suffix = basename($path);
 
 		var_dump($unique_suffix);
 
