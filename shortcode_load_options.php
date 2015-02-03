@@ -177,7 +177,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if(!empty($edit_file_content)) {
-			var_dump($options_edit_file);
+			$id = $options_edit_file['edit_file_current_id'];
+			$test_file_data = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -359,8 +360,23 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	* adding a new revision
 	*/
 
-	function shortcode_load_add_file_revision() {
+	function shortcode_load_add_file_revision($args) {
+		extract($args); //turn $args array into named variables
 
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'shortcode_load'; 
+
+		$sql = "SELECT id,name,revision FROM ".$table_name;
+		$result = $wpdb->get_results($sql, ARRAY_A);
+
+		var_dump($result);
+
+		//TODO
+		//sql query to lookup id
+		//return path of file (src/min)
+		//save new file with: shortcode_load_save_file_js/css
+		//have to reuse random string in name and add rev_x to name when saving
+		//
 	}
 
 	/*
@@ -624,7 +640,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			</script>
 		<?php
 
-		$current_id = $_GET['id'];
+		$current_id = intval ( $_GET['id'] ); //ensure integer value only
 
 		//Create a textarea to temporarily hold the raw data from Ace editor
 		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
