@@ -4,5 +4,6 @@ editor.getSession().on('change', contentChanged)
 //Get the new data and save it to the temporary textarea
 function contentChanged() {
 	var content = editor.session.getValue();
+	var textarea = document.getElementById('edit_file_temporary_textarea');
 	
 }
