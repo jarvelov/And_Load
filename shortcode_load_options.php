@@ -370,7 +370,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		var_dump($result);
-		$path = $result['srcpath']
+		$path = $result['srcpath'];
 
 		var_dump($path);
 
