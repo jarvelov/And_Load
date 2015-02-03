@@ -374,6 +374,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$name = $result['name']; 
 		$name_simple = basename($name, "." . $type);
 
+		var_dump($name_simple);
+
 		$srcname = basename($path, "." . $type);
 		$unique_suffix = str_replace($name_simple, "", $srcname); //append the delimiter dot symbol to the end of $name for easier handling
 
