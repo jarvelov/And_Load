@@ -678,7 +678,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		<?php
 
 		if(class_exists(ShortcodeLoad)) {
-			var_dump('lel');
+			var_dump(ShortcodeLoad::slug);
 			ShortcodeLoad::load_file( ShortcodeLoad::slug . '-ace-editor-js', ShortcodeLoad::slug . '-script/js/ace_edit.js', true );
 		}
 	}
