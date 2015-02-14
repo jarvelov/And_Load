@@ -163,8 +163,6 @@ License:
 		} else {
 			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
 			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
-			//$this->load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-			//$this->load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
 		} // end if/else
 	} // end register_scripts_and_styles
 	
