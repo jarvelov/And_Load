@@ -657,7 +657,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		
 	}
 
-	function shortcode_load_editor() {
+	function shortcode_load_editor_settings() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
 		//Ace editor settings
@@ -723,9 +723,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					settings_fields( 'shortcode_load_new_style_options' );
 					do_settings_sections( 'shortcode_load_new_style_options' );
 				} elseif($active_tab == 'tab_edit') {
-					$this->shortcode_load_editor();
 					settings_fields( 'shortcode_load_edit_file_options' );
 					do_settings_sections( 'shortcode_load_edit_file_options' );	
+
+					//Load editor settings
+					$this->shortcode_load_editor_settings();
 				}
 
 				submit_button();
