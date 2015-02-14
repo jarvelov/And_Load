@@ -153,6 +153,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	*/
 
 	function shortcode_load_register_scripts_styles() {
+
+		$ShortcodeLoad::load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
+		$ShortcodeLoad::load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_style_options' );
