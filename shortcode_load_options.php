@@ -155,8 +155,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_register_scripts_styles() {
 
 		//Load bootstrap styles and scripts
-		//ShortcodeLoad::load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-		//ShortcodeLoad::load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+		/*
+		ShortcodeLoad::load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
+		ShortcodeLoad::load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
+		*/
 
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
@@ -643,6 +645,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_edit_file_source_options_callback() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
+		$current_id = intval ( $_GET['id'] ); //ensure integer value only
+
+		//Create a textarea to temporarily hold the raw data from Ace editor
+		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
+		//The textarea will be continously updated with javascript
+		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
+
+		//We also need the id to refer to later, save this to a simple input field as well
+		echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+		
+	}
+
+	function shortcode_load_editor() {
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+
 		//Ace editor settings
 		$editor_theme = 'monokai';
 
@@ -660,16 +677,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			</script>
 		<?php
 
-		$current_id = intval ( $_GET['id'] ); //ensure integer value only
-
-		//Create a textarea to temporarily hold the raw data from Ace editor
-		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
-		//The textarea will be continously updated with javascript
-		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
-
-		//We also need the id to refer to later, save this to a simple input field as well
-		echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
-		
+		if(class_exists(ShortcodeLoad)) {
+			ShortcodeLoad::load_file( ShortcodeLoad::slug . '-ace-editor-js', ShortcodeLoad::slug . '-script/js/ace_edit.js', true );
+		}
 	}
 
 	function shortcode_load_options_page(  ) {
@@ -712,6 +722,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					settings_fields( 'shortcode_load_new_style_options' );
 					do_settings_sections( 'shortcode_load_new_style_options' );
 				} elseif($active_tab == 'tab_edit') {
+					$this->shortcode_load_editor();
 					settings_fields( 'shortcode_load_edit_file_options' );
 					do_settings_sections( 'shortcode_load_edit_file_options' );	
 				}
