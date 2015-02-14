@@ -181,6 +181,7 @@ License:
 		if( file_exists( $file ) ) {
 			if( $is_script ) {
 				wp_register_script( $name, $url, array('jquery') ); //depends on jquery
+				var_dump($name);
 				wp_enqueue_script( $name );
 			} else {
 				wp_register_style( $name, $url );
