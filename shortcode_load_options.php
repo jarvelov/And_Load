@@ -186,7 +186,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		if(!empty($edit_file_content)) {
 			$id = $options_edit_file['edit_file_current_id'];
 			$test_file_data = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
-			var_dump($test_file_data);
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -251,7 +250,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$type = ($db_args['type'] == 'js') ? 'Script' : 'Style';
 			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
 		} else {
-			$return_args =array('success' => false);
+			$return_args = array('success' => false);
 		}
 
 		return $return_args;
@@ -264,12 +263,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$wp_uploads_path = wp_upload_dir();
 		$uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
 
-		$type = $args['type'];
-		$src_dir = $uploads_dir . $type . '/src/';
-
 		$minify = $args['minify'];
 		$content = $args['content'];
 		$org_name = $args['name'];
+
+		$type = $args['type'];
+
+		$src_dir = $uploads_dir . $type . '/src/';
+		$min_dir = $uploads_dir . $type . '/min/';
 		
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
 		$name = $org_name . '.' . $random5;
@@ -281,7 +282,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if($minify == true) {
-			$min_dir = $uploads_dir . $type . '/min/';
+			
 
 			if (!is_dir($min_dir)) {
 				wp_mkdir_p($min_dir);
@@ -392,6 +393,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
 		} elseif($type == 'css') {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
+		}
+
+		var_dump($file_args);
+
+		if($success) {
+			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+		} else {
+			$return_args = array('success' => false);
 		}
 	}
 
