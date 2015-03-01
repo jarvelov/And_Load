@@ -393,7 +393,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		var_dump($path);
 
-		var_dump(extract($result));
+		extract($result);
+
+		var_dump($minpath);
 
 		//TODO
 		//sql query to lookup based on id
