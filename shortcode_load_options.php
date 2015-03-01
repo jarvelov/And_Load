@@ -373,33 +373,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+		$sql = "SELECT name,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
 		$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-		extract($result);
-/*
-		$path = $result['srcpath'];
-		$type = $result['type'];
-		$name = $result['name']; 
-		$revision = $result['revision'];
-*/
+		extract($result); //extract array to named variables, see $sql SELECT query
+
 		$new_revision = ( intval($revision) + 1);
 
 		$srcname = basename($srcpath, $type);
-		$unique_suffix_tmp = str_replace($name, "", $srcname);
-		$unique_suffix = str_replace(".", "", $unique_suffix_tmp); //remove any leading or trailing dots
+		$unique_suffix = str_replace($name, "", $srcname);
+		$new_name = $name . $unique_suffix . $new_revision;
 
-		$new_name = $name . "." . $unique_suffix . "." . $new_revision;
+		$file_src_base = basedir($srcpath);
+		$file_src = $file_src_base . $new_name;
 
-		var_dump($new_name);
-		var_dump($minpath, $srcpath);
-
-		//TODO
-		//sql query to lookup based on id
-		//get path of file (src/min)
-		//save new file with: shortcode_load_save_file_js/css
-		//have to reuse random string in name and add rev_x to name when saving
-		//
+		var_dump($file_src);
+/*
+		if($type == 'js') {
+			$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
+		} elseif($type == 'css') {
+			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
+		}
+		*/
 	}
 
 	/*
