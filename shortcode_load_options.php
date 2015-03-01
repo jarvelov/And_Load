@@ -384,17 +384,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$unique_suffix = str_replace($name, "", $srcname);
 		$new_name = $name . $unique_suffix . $new_revision;
 
-		$file_src_base = dirname($srcpath);
+		$file_src_base = dirname($srcpath) . '/';
 		$file_src = $file_src_base . $new_name;
 
-		var_dump($file_src);
-/*
 		if($type == 'js') {
 			$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
 		} elseif($type == 'css') {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
-		*/
 	}
 
 	/*
