@@ -376,14 +376,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
 		$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-		/*
 		$path = $result['srcpath'];
 		$type = $result['type'];
 		$name = $result['name']; 
 		$revision = $result['revision'];
-		*/
 
-		extract($result);
 		$new_revision = ( intval($revision) + 1);
 
 		$srcname = basename($path, $type);
@@ -395,6 +392,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		var_dump($new_name);
 
 		var_dump($path);
+
+		var_dump(extract($result));
 
 		//TODO
 		//sql query to lookup based on id
