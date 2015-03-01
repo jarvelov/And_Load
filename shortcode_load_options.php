@@ -186,7 +186,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		if(!empty($edit_file_content)) {
 			$id = $options_edit_file['edit_file_current_id'];
 			$test_file_data = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
-			var_dump($test_file_data);
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -330,7 +329,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args_array['success'] = false;
 		}
 
-		if($file_args_array['success'] != false) {
+		if($file_args_array['success'] != true) {
 			$file_args_array['success'] = true;
 		}
 
@@ -368,7 +367,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args_array['success'] = false;
 		}
 
-		if($file_args_array['success'] != false) {
+		if($file_args_array['success'] != true) {
 			$file_args_array['success'] = true;
 		}
 
