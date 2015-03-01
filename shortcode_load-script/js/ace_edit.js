@@ -6,5 +6,5 @@ function contentChanged() {
 	var content = editor.session.getValue();
 	var textarea = document.getElementById('edit_file_temporary_textarea');
 	textarea.value = content;
-	console.log("Content updated");
+	//console.log("Content updated");
 }

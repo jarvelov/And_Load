@@ -373,25 +373,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".$id." LIMIT 1";
+		$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
 		$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
+		/*
 		$path = $result['srcpath'];
 		$type = $result['type'];
 		$name = $result['name']; 
 		$revision = $result['revision'];
+		*/
+
+		extract($result);
 		$new_revision = ( intval($revision) + 1);
 
 		$srcname = basename($path, $type);
 		$unique_suffix_tmp = str_replace($name, "", $srcname);
 		$unique_suffix = str_replace(".", "", $unique_suffix_tmp); //remove any leading or trailing dots
 
-		var_dump($name);
-		var_dump($unique_suffix);
-
 		$new_name = $name . "." . $unique_suffix . "." . $new_revision;
 
 		var_dump($new_name);
+
+		var_dump($path);
 
 		//TODO
 		//sql query to lookup based on id
@@ -684,6 +687,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_options_page(  ) {
 
+		do_action('register_scripts_styles');
+
 		if( isset( $_GET[ 'tab' ] ) ) {  
 			$active_tab = $_GET[ 'tab' ];  
 		} else {
@@ -700,8 +705,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				<a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
 				<a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
 			</h2>
-
-			<?php do_action('register_scripts_styles'); ?>
 
 			<form action='options.php' method='post'>
 				
