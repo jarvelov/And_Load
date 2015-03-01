@@ -406,6 +406,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
+		var_dump($file_args);
+
 		if(isset($file_args)) {
 			if($file_args['success'] == true) {
 				$success = true;
