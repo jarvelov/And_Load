@@ -185,7 +185,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		if(!empty($edit_file_content)) {
 			$id = $options_edit_file['edit_file_current_id'];
-			$test_file_data = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
+			$file_datas[] = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
 		}
 
 		foreach ($file_datas as $file_data) {
@@ -282,8 +282,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		if($minify == true) {
-			
-
 			if (!is_dir($min_dir)) {
 				wp_mkdir_p($min_dir);
 			}
@@ -305,13 +303,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	* optionally save a minified version
 	*/
 	function shortcode_load_save_file_js($path, $content, $minify) {
-		$file_args_array = array();
+		$file_args_array = array('success' => NULL);
 
 		try {
 			file_put_contents($path, $content);
 			$file_args_array['srcpath'] = $path;
 		} catch (Exception $e) {
 			//var_dump($e);
+			$file_args_array['success'] = false;
 		}
 
 		try {
@@ -327,6 +326,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		} catch (Exception $e) {
 			//var_dump($e);	
+			$file_args_array['success'] = false;
+		}
+
+		if($file_args_array['success'] != false) {
+			$file_args_array['success'] = true;
 		}
 
 		return $file_args_array;
@@ -337,13 +341,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	* optionally save a minified version
 	*/
 	function shortcode_load_save_file_css($path, $content, $minify) {
-		$file_args_array = array();
+		$file_args_array = array('success' => NULL);
 
 		try {
 			file_put_contents($path, $content);
 			$file_args_array['srcpath'] = $path;
 		} catch (Exception $e) {
 			//var_dump($e);
+			$file_args_array['success'] = false;
 		}
 
 		try {
@@ -358,7 +363,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$file_args_array['minpath'] = "";
 			}
 		} catch (Exception $e) {
-			//var_dump($e);	
+			//var_dump($e);
+			$file_args_array['success'] = false;
+		}
+
+		if($file_args_array['success'] != false) {
+			$file_args_array['success'] = true;
 		}
 
 		return $file_args_array;
@@ -395,13 +405,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		var_dump($file_args);
+		if(isset($file_args)) {
+			if($file_args['success'] == true) {
+				$success = true;
+			}
+		}
 
 		if($success) {
 			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
 		} else {
 			$return_args = array('success' => false);
 		}
+
+		return $return_args;
 	}
 
 	/*
@@ -452,7 +468,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	* @path 	Path to file
 	*/
 
-	function shortcode_load_load_file($path) {
+	function shortcode_load_get_file($path) {
 		if( file_exists( $path ) ) {
 			try {
 				$content = file_get_contents($path);
@@ -635,7 +651,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
-		$content = $this->shortcode_load_load_file( $file_src );
+		$content = $this->shortcode_load_get_file( $file_src );
 
 		//Build Ace editor
 		$container = '<div class="editor-container">';
