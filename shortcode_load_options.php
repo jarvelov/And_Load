@@ -326,7 +326,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$file_args_array['minpath'] = "";
 			}
 		} catch (Exception $e) {
-			//var_dump($e);	
+			//var_dump($e);
 			$file_args_array['success'] = false;
 		}
 
@@ -395,7 +395,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$srcname = basename($srcpath, $type);
 		$unique_suffix = str_replace($name, "", $srcname);
-		$new_name = $name . $unique_suffix . $new_revision;
+		$new_name = $name . $unique_suffix . $new_revision . "." . $type;
 
 		$file_src_base = dirname($srcpath) . '/';
 		$file_src = $file_src_base . $new_name;
