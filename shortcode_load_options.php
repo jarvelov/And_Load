@@ -390,11 +390,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$unique_suffix = str_replace(".", "", $unique_suffix_tmp); //remove any leading or trailing dots
 
 		$new_name = $name . "." . $unique_suffix . "." . $new_revision;
-/*
-		var_dump($new_name);
 
-		var_dump($path);
-*/
+		var_dump($new_name);
 		var_dump($minpath, $srcpath);
 
 		//TODO
