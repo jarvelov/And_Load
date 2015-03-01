@@ -279,7 +279,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			var_dump($result);
 
 		} catch (Exception $e) {
-			//var_dump($e);
+			var_dump($e);
 		}
 	}
 
