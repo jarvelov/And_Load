@@ -273,7 +273,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				array(
 					'%d',
 					's'
-					)
+				),
+				array('%d')
 			);
 
 			var_dump($result);
