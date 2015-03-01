@@ -256,6 +256,33 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		return $return_args;
 	}
 
+	function shortcode_load_update_database_record($args) {
+		try {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load';
+
+			$result = $wpdb->update( 
+				$table_name, 
+				array( 
+					'revision' => $revision,	// int
+					'updated_timestamp' => current_time('mysql', 1),
+				), 
+				array( 
+					'ID' => $id
+				), 
+				array(
+					'%d',
+					's'
+					)
+			);
+
+			var_dump($result);
+
+		} catch (Exception $e) {
+			//var_dump($e);
+		}
+	}
+
 	/*
 	* Save a new script or style to a file in wordpress' uploads folder
 	*/
@@ -405,18 +432,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		}
 
-		var_dump($file_args);
+		
+		$this->shortcode_load_update_database_record( array('id' => (int)$id, 'revision' => $new_revision) );
 
 		if(isset($file_args)) {
 			if($file_args['success'] == true) {
-				$success = true;
+				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+			} else {
+				$return_args = array('success' => false);
 			}
-		}
-
-		if($success) {
-			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
-		} else {
-			$return_args = array('success' => false);
 		}
 
 		return $return_args;
