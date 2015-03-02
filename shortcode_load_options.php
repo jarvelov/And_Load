@@ -702,6 +702,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_src_base = dirname($file_src) . '/';
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		} else {
+			var_dump($revision, $revision_override);
 			$revision = "Source";
 		}
 
