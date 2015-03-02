@@ -275,7 +275,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				), 
 				array(
 					'%d',
-					's'
+					'%s'
 				),
 				array('%d')
 			);
