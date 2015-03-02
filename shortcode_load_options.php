@@ -693,7 +693,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$srcname = basename($file_src, $type);
 			$file_src_base = dirname($file_src) . '/';
 
-			if($revision_override <= $revision) {
+			if($revision_override != false AND $revision_override <= $revision) {
 				$revision = $revision_override;
 			}
 
