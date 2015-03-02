@@ -139,18 +139,16 @@ License:
 			$site_url = get_site_url();
 
 			if($revision > 0) {
-				var_dump($path);
-				var_dump($path_external);
-
-				var_dump($site_url);
-
 				$srcname = basename($file_src, $type);
 				//$file_src = $file_src_base . $srcname . $revision . "." . $type;
-			} else {
-				$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 			}
 
+			var_dump($path);
+			var_dump($site_url);
+
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
+
+			var_dump($path_external);
 
 			//TODO make this cleaner and wrap enqueue in a function
 
