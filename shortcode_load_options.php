@@ -692,21 +692,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
-		$revision = (int)$options_edit_file['revision'];
 		$type = $options_edit_file['type'];
+		$revision = (int)$options_edit_file['revision'];
+		
+		var_dump($revision);
 
 		if($revision > 0) {
-
-			var_dump($revision);
 
 			if($revision_override <= $revision) {
 				$revision = $revision_override;
 			}
 
-			var_dump($revision);
-
 			$srcname = basename($file_src, $type);
 			$file_src_base = dirname($file_src) . '/';
+
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
 
