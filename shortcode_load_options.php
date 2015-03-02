@@ -723,10 +723,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		this data will then be processed when the page is reloaded again (Save Changes button is pressed)
 		The textarea will be continously updated with javascript
 		*/
-		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
+		echo '<textarea id="edit_file_temporary_textarea" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
 
 		//We also need the id to refer to later, save this to a simple input field as well
-		echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+		echo '<input type="text" id="edit_file_current_id" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
 		
 	}
 

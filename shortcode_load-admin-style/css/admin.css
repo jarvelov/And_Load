@@ -1,3 +1,7 @@
 .active-tab {
 	background-color: #EFEFEF;
 }
+
+.hidden-display{
+	display: none;
+}
