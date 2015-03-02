@@ -450,6 +450,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
 
 			if($result['success'] == true) {
+				$type = ($type == 'js') ? 'Script' : 'Style';
 				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
 			} else {
 				$return_args = array('success' => false);
