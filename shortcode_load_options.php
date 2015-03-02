@@ -688,17 +688,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
-		echo '<p>Current file: '.$options_edit_file['name'].'</p>';
-
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
-
 		$revision = $options_edit_file['revision'];
+
 		if($revision > 0) {
-			$file_src = $file_src . "." . $revision;
+			$srcname = basename($srcpath, $type);
+			$file_src_base = dirname($srcpath) . '/';
+			$file_src = $file_src_base . $revision . "." . $type;
 		}
 
 		$content = $this->shortcode_load_get_file( $file_src );
+
+		echo '<p>Current file: '.$options_edit_file['name'].'</p>';
+		echo '<p>Current revision: '.$revision.'</p>';
 
 		//Build Ace editor
 		$container = '<div class="editor-container">';
