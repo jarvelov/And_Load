@@ -185,7 +185,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		if(!empty($edit_file_content)) {
 			$id = $options_edit_file['edit_file_current_id'];
-			$test_file_data = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
+			$file_datas[] = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
 		}
 
 		foreach ($file_datas as $file_data) {
