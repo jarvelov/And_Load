@@ -695,6 +695,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		}
 
+		echo '<p>File: '.$options_edit_file['name'].'</p>';
+		echo '<p>Revision: '.$revision.'</p>';		
+
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
 			$file_src_base = dirname($file_src) . '/';
@@ -702,9 +705,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		$content = $this->shortcode_load_get_file( $file_src );
-
-		echo '<p>File: '.$options_edit_file['name'].'</p>';
-		echo '<p>Revision: '.$revision.'</p>';
 
 		//Build Ace editor
 		$container = '<div class="editor-container">';
