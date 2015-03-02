@@ -693,8 +693,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
 
+		$revision = $options_edit_file['revision'];
 		if($revision > 0) {
-			$file_src = $file_src . "." . $options_edit_file['revision'];
+			$file_src = $file_src . "." . $revision;
 		}
 
 		$content = $this->shortcode_load_get_file( $file_src );
