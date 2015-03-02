@@ -126,11 +126,7 @@ License:
 		}
 
 		if(sizeof($result) > 0 )  {
-			$name = $result['name'];
-			$srcpath = $result['srcpath'];
-			$minpath = $result['minpath'];
-			$minify= $result['minify'];
-			$type = $result['type'];
+			extract($result);
 
 			$is_script = ($type == 'js') ? true : false;
 
@@ -187,13 +183,12 @@ License:
 				wp_enqueue_style( $name );
 			} // end if
 		} else { //variable is not of a local file, possibly hosted remotely
-			$remote_url = $file_path;
-			if( ! (filter_var($remote_url, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
+			if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
 				if( $is_script ) {
-					wp_register_script( $name, $remote_url, array('jquery') ); //depends on jquery
+					wp_register_script( $name, $file_path, array('jquery') ); //depends on jquery
 					wp_enqueue_script( $name );	
 				} else {
-					wp_register_style( $name, $remote_url );
+					wp_register_style( $name, $file_path );
 					wp_enqueue_style( $name );
 				}
 			}

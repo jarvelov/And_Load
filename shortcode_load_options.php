@@ -153,13 +153,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	*/
 
 	function shortcode_load_register_scripts_styles() {
-
-		//Load bootstrap styles and scripts
-		/*
-		ShortcodeLoad::load_file( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js', true );
-		ShortcodeLoad::load_file( 'bootstrap-css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' );
-		*/
-
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$options_styles = get_option( 'shortcode_load_new_style_options' );
@@ -695,11 +688,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$file_src = $options_edit_file['srcpath'];
 		$type = $options_edit_file['type'];
 		$revision = (int)$options_edit_file['revision'];
-
-		var_dump($file_src);
-		
+	
 		if($revision > 0) {
-			if($revision_override) {
+			if($revision_override >= 0) {
 				$revision = $revision_override;
 			}
 
@@ -708,8 +699,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
-
-		var_dump($file_src);
 
 		$content = $this->shortcode_load_get_file( $file_src );
 
