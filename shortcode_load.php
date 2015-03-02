@@ -130,20 +130,27 @@ License:
 
 			$is_script = ($type == 'js') ? true : false;
 
-			$path = ($minify == 1) ? $minpath : $srcpath;
-			$site_url = get_site_url();
+			if($minify == 1) {
+				$path = $minpath;
+			} else {
+				$path = $srcpath;
+			}
 
-			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
+			$site_url = get_site_url();
 
 			if($revision > 0) {
 				var_dump($path);
 				var_dump($path_external);
-				/*
+
+				var_dump($site_url);
+
 				$srcname = basename($file_src, $type);
-				$file_src_base = dirname($file_src) . '/';
-				$file_src = $file_src_base . $srcname . $revision . "." . $type;
-				*/
+				//$file_src = $file_src_base . $srcname . $revision . "." . $type;
+			} else {
+				$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 			}
+
+			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 
 			//TODO make this cleaner and wrap enqueue in a function
 
