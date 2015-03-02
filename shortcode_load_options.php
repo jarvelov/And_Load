@@ -672,7 +672,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-			$sql = "SELECT name,type,created_timestamp,updated_timestamp,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+			$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
 			$options_edit_file = array();
@@ -692,6 +692,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
+
+		if($revision > 0) {
+			$file_src = $file_src . "." . $options_edit_file['revision'];
+		}
+
 		$content = $this->shortcode_load_get_file( $file_src );
 
 		//Build Ace editor
