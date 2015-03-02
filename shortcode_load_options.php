@@ -691,6 +691,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
 		$revision = $options_edit_file['revision'];
+		$type = $options_edit_file['type'];
 
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
