@@ -257,7 +257,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_update_database_record($args) {
-		var_dump($args);
+		//var_dump($args);
 		extract($args);
 
 		try {
@@ -283,7 +283,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			var_dump($result);
 
 		} catch (Exception $e) {
-			var_dump($e);
+			//var_dump($e);
 		}
 	}
 
