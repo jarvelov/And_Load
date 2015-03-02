@@ -146,6 +146,7 @@ License:
 
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 
+			var_dump($path_external);
 
 			//TODO make this cleaner and wrap enqueue in a function
 
