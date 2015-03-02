@@ -692,12 +692,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$revision = (int)$options_edit_file['revision'];
 
 		if($revision_override != false) {
+			var_dump($revision);
 			if($revision_override <= $revision) {
 				$revision = $revision_override;
 			}
 		}
-
-		var_dump($revision);
 
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
