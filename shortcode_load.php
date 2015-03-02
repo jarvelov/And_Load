@@ -140,12 +140,12 @@ License:
 
 			if($revision > 0) {
 				$srcname = basename($path, $type);
-				$path_src_base = dirname($path)
+				$path_src_base = dirname($path);
 				$path = $path_src_base . $srcname . $revision . "." . $type;
 			}
 
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
-			
+
 			//TODO make this cleaner and wrap enqueue in a function
 
 			if($is_script) {
