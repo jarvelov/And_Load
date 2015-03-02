@@ -697,9 +697,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				if($revision_override <= $revision) {
 					$revision = $revision_override;
 				}
-
-				$file_src = $file_src_base . $srcname . $revision . "." . $type;
 			}
+
+			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
 
 		$content = $this->shortcode_load_get_file( $file_src );
