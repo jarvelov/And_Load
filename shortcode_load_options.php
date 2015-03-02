@@ -446,17 +446,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = NULL;
 		}
 
-		
-		$this->shortcode_load_update_database_record( array('id' => (int)$id, 'revision' => $new_revision) );
+		if($file_args['success'] == true) {
+			$result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
 
-		if(!empty($file_args)) {
-			if($file_args['success'] == true) {
-				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
-			} else {
-				$return_args = array('success' => false);
-			}
+			var_dump($result);
+			
+			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+		} else {
 			$return_args = array('success' => false);
 		}
+		$return_args = array('success' => false);
 
 		return $return_args;
 	}
