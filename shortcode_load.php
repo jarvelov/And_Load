@@ -114,7 +114,8 @@ License:
 		// Extract the attributes
 		extract(shortcode_atts(array(
 			'id' => '',
-			'in_header' => false
+			'in_header' => false,
+			'args' => ''
 			), $atts));
 
 		if($id) {
