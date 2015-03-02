@@ -691,7 +691,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$type = $options_edit_file['type'];
 		$revision = (int)$options_edit_file['revision'];
 
-		if($revision_override != false) {
+		if($revision_override !== false) {
 			var_dump($revision);
 			if($revision_override <= $revision) {
 				$revision = $revision_override;
