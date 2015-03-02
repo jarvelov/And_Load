@@ -449,13 +449,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		if($file_args['success'] == true) {
 			$result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
 
-			var_dump($result);
-			
-			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+			if($result['success'] == true) {
+				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+			} else {
+				$return_args = array('success' => false);
+			}
 		} else {
 			$return_args = array('success' => false);
 		}
-		$return_args = array('success' => false);
 
 		return $return_args;
 	}
