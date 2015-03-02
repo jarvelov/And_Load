@@ -697,6 +697,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		}
 
+		var_dump($revision);
+
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
 			$file_src_base = dirname($file_src) . '/';
