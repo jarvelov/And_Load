@@ -11,8 +11,6 @@ Roadmap.txt
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
 * Fixa enqueue vid shortcode render [X]
 	-  Enqueue skulle behöva göras om till en separat funktion
-
-
 * Auto save till temporary_textarea med javascript [X]
 	- Använd: editor.getSession().on('change', callback) 
 
