@@ -257,8 +257,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_update_database_record($args) {
-		//var_dump($args);
 		extract($args);
+
+		$return_args = array('success' => false);
 
 		try {
 			global $wpdb;
@@ -280,11 +281,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				array('%d')
 			);
 
-			var_dump($result);
+			if($result > 0) {
+				$return_args['success'] = true;
+			} else {
+				$return_args['success'] = false;
+			}
 
 		} catch (Exception $e) {
 			//var_dump($e);
+			$return_args['success'] = false;
 		}
+
+		return $return_args;
 	}
 
 	/*
@@ -434,17 +442,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
 		} elseif($type == 'css') {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
+		} else {
+			$file_args = NULL;
 		}
 
 		
 		$this->shortcode_load_update_database_record( array('id' => (int)$id, 'revision' => $new_revision) );
 
-		if(isset($file_args)) {
+		if(!empty($file_args)) {
 			if($file_args['success'] == true) {
 				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
 			} else {
 				$return_args = array('success' => false);
 			}
+			$return_args = array('success' => false);
 		}
 
 		return $return_args;
