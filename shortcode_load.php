@@ -139,17 +139,13 @@ License:
 			$site_url = get_site_url();
 
 			if($revision > 0) {
-				$srcname = basename($file_src, $type);
-				//$file_src = $file_src_base . $srcname . $revision . "." . $type;
+				$srcname = basename($path, $type);
+				$path_src_base = dirname($path)
+				$path = $path_src_base . $srcname . $revision . "." . $type;
 			}
 
-			var_dump($path);
-			var_dump(ABSPATH);
-
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
-
-			var_dump($path_external);
-
+			
 			//TODO make this cleaner and wrap enqueue in a function
 
 			if($is_script) {
