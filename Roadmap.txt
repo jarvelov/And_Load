@@ -6,13 +6,17 @@ Roadmap.txt
 	- Använd Ace editor: http://ace.c9.io/#nav=embedding [X]
 	- Skriv sql query för att hämta data om filen [X]
 		- Skicka type som URL param? [~]
-* Fixa revisions
-	- Pallar inte :D
+* Fixa revisions [X]
+	- Ladda rätt revision i frontend
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
 * Fixa enqueue vid shortcode render [X]
 	-  Enqueue skulle behöva göras om till en separat funktion
 
 
-* Auto save till temporary_textarea med javascript []
+* Auto save till temporary_textarea med javascript [X]
 	- Använd: editor.getSession().on('change', callback) 
-	- 
+
+/*
+* Mål: Klart för leverans 2015-03-15
+*
+*/

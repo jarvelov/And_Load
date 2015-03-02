@@ -121,7 +121,7 @@ License:
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-			$sql = "SELECT name,srcpath,minpath,minify,type FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+			$sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 		}
 
@@ -132,7 +132,18 @@ License:
 
 			$path = ($minify == 1) ? $minpath : $srcpath;
 			$site_url = get_site_url();
-			$path_external = str_replace(ABSPATH, $site_url . '/', $path); 
+
+			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
+
+			if($revision > 0) {
+				var_dump($path);
+				var_dump($path_external);
+				/*
+				$srcname = basename($file_src, $type);
+				$file_src_base = dirname($file_src) . '/';
+				$file_src = $file_src_base . $srcname . $revision . "." . $type;
+				*/
+			}
 
 			//TODO make this cleaner and wrap enqueue in a function
 

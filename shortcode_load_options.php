@@ -407,8 +407,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	/*
-	* Update a file by
-	* adding a new revision
+	* Add a new revision of a file
 	*/
 
 	function shortcode_load_add_file_revision($args) {
@@ -662,9 +661,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//TODO create a select dropdown in this function
 
 		$id = (isset($_GET['id'])) ? intval($_GET['id']) : false;
-		$revision_override = (isset($_GET['revision'])) ? (int)$_GET['revision'] : false;
-
-		var_dump($revision_override);
+		$revision_override = (isset($_GET['revision'])) ? intval($_GET['revision']) : false;
 
 		if($id) {
 			global $wpdb;
@@ -692,7 +689,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$revision = (int)$options_edit_file['revision'];
 
 		if($revision_override !== false) {
-			var_dump($revision);
 			if($revision_override <= $revision) {
 				$revision = $revision_override;
 			}
@@ -703,7 +699,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_src_base = dirname($file_src) . '/';
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		} else {
-			var_dump($revision, $revision_override);
 			$revision = "Source";
 		}
 
