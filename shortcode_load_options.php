@@ -662,7 +662,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		//TODO create a select dropdown in this function
 
 		$id = (isset($_GET['id'])) ? intval($_GET['id']) : false;
-		$revision_override = (isset($_GET['revision'])) ? intval($_GET['revision']) : false;
+		$revision_override = (isset($_GET['revision'])) ? (int)$_GET['revision'] : false;
 
 		if($id) {
 			global $wpdb;
@@ -693,7 +693,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			if( $revision_override <= ($revision) ) {
 				$revision = $revision_override;
 			}
-		}	
+		}
 
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
