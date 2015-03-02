@@ -700,6 +700,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
 
+		var_dump($file_src);
+
 		$content = $this->shortcode_load_get_file( $file_src );
 
 		echo '<p>Current file: '.$options_edit_file['name'].'</p>';
