@@ -144,7 +144,7 @@ License:
 			}
 
 			var_dump($path);
-			var_dump($site_url);
+			var_dump(ABSPATH);
 
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 
