@@ -697,7 +697,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		if($revision > 0) {
 
-			if($revision_override) {
+			if($revision_override <= $revision) {
 				$revision = $revision_override;
 			}
 
@@ -705,8 +705,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_src_base = dirname($file_src) . '/';
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
-
-		var_dump($file_src);
 
 		$content = $this->shortcode_load_get_file( $file_src );
 
@@ -726,9 +724,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$current_id = intval ( $_GET['id'] ); //ensure integer value only
 
-		//Create a textarea to temporarily hold the raw data from Ace editor
-		//this data will then be processed when the page is reloaded again (Save Changes button is pressed)
-		//The textarea will be continously updated with javascript
+		/*Create a textarea to temporarily hold the raw data from Ace editor
+		this data will then be processed when the page is reloaded again (Save Changes button is pressed)
+		The textarea will be continously updated with javascript
+		*/
 		echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
 
 		//We also need the id to refer to later, save this to a simple input field as well
