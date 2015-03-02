@@ -689,13 +689,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$type = $options_edit_file['type'];
 		$revision = (int)$options_edit_file['revision'];
 	
-		if($revision_override > 0) {
-			$revision = $revision_override;
+		if($revision_override != false)
+			if($revision > 0 AND $revision_override <= $revision) {
+				$revision = $revision_override;
+				$srcname = basename($file_src, $type);
+				$file_src_base = dirname($file_src) . '/';
 
-			$srcname = basename($file_src, $type);
-			$file_src_base = dirname($file_src) . '/';
-
-			$file_src = $file_src_base . $srcname . $revision . "." . $type;
+				$file_src = $file_src_base . $srcname . $revision . "." . $type;
+			}
 		}
 
 		$content = $this->shortcode_load_get_file( $file_src );
