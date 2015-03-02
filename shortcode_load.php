@@ -132,16 +132,18 @@ License:
 
 			if($minify == 1) {
 				$path = $minpath;
+				$suffix = '.min.' . $type;
 			} else {
 				$path = $srcpath;
+				$suffix = $type;
 			}
 
 			$site_url = get_site_url();
 
 			if($revision > 0) {
-				$srcname = basename($path, $type);
+				$srcname = basename($path, $suffix);
 				$path_src_base = dirname($path) . '/';
-				$path = $path_src_base . $srcname . $revision . "." . $type;
+				$path = $path_src_base . $srcname . $revision . "." . $suffix;
 			}
 
 			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
