@@ -667,7 +667,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_edit_file_options_callback() {
 		//TODO create a select dropdown in this function
 
-		$id = intval($_GET['id']);
+		$id = isset($_GET['id']) ? intval($_GET['id']);
 		$revision_override = isset($_GET['revision']) ? intval($_GET['revision']) : false;
 
 		if($id) {
@@ -696,9 +696,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$revision = (int)$options_edit_file['revision'];
 		
 		if($revision > 0) {
-
 			if($revision_override) {
-				var_dump($revision_override);
 				$revision = $revision_override;
 			}
 
@@ -707,8 +705,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
-
-		var_dump($file_src);
 
 		$content = $this->shortcode_load_get_file( $file_src );
 
