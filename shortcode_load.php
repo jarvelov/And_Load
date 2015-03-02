@@ -132,7 +132,7 @@ License:
 
 			if($minify == 1) {
 				$path = $minpath;
-				$suffix = '.min.' . $type;
+				$suffix = 'min.' . $type;
 			} else {
 				$path = $srcpath;
 				$suffix = $type;
