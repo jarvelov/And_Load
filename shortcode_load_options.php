@@ -664,6 +664,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$id = (isset($_GET['id'])) ? intval($_GET['id']) : false;
 		$revision_override = (isset($_GET['revision'])) ? (int)$_GET['revision'] : false;
 
+		var_dump((isset($_GET['revision'])));
+
 		if($id) {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'shortcode_load'; 
