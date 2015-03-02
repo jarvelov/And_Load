@@ -690,13 +690,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$revision = (int)$options_edit_file['revision'];
 	
 		if($revision_override != false) {
-			var_dump("what");
-			if($revision_override <= $revision) {
-				$revision = $revision_override;
+			if( $revision_override <= ($revision +1) ) {
+				$revision = $revision_override -1;
 			}
 		}
-
-		var_dump($revision);
 
 		if($revision > 0) {
 			$srcname = basename($file_src, $type);
@@ -704,12 +701,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_src = $file_src_base . $srcname . $revision . "." . $type;
 		}
 
-		var_dump($file_src);
-
 		$content = $this->shortcode_load_get_file( $file_src );
 
-		echo '<p>Current file: '.$options_edit_file['name'].'</p>';
-		echo '<p>Current revision: '.$revision.'</p>';
+		echo '<p>File: '.$options_edit_file['name'].'</p>';
+		echo '<p>Revision: '.$revision.'</p>';
 
 		//Build Ace editor
 		$container = '<div class="editor-container">';
