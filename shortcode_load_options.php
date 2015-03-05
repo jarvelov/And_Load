@@ -196,9 +196,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		}
 
+		var_dump($message);
+
 		if(isset($message)) {
-			add_settings_error($message_setting,$message_setting, $message, $message_type);
+			add_settings_error($message_setting, $message_setting, $message, $message_type);
 		}
+
+		var_dump(get_settings_errors());
 	}
 
 	/* 
