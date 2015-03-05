@@ -608,7 +608,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 	}
 
-	function shortcode_load_new_script_callback_sanitize() {
+	function shortcode_load_new_script_callback_sanitize($args) {
+		var_dump($args);
+		
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$options_scripts = get_option( 'shortcode_load_new_script_options' );
 		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
