@@ -71,7 +71,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_default'
 		);
 
-		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
+		register_setting('shortcode_load_default_options', 'shortcode_load_default_options', $this->shortcode_load_default_options_callback_sanitize);
 
 		/* New script section */
 
@@ -196,18 +196,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		}
 
-		if(! isset($message)) {
+		if(isset($message)) {
 			try {
-				$message_setting = 'file_update';
-				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
-				$message_type = 'error';
 				add_settings_error($message_setting, esc_attr( 'settings_updated' ), $message, $message_type);
 			} catch (Exception $e) {
-				var_dump($e);
+				//var_dump($e);
 			}
 		}
-
-		var_dump(get_settings_errors());
 	}
 
 	/* 
@@ -633,7 +628,24 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options['default_minify_checkbox'] ) ? 1 : 0), false ) . '/>';
 		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 		echo $html;
-}	
+	}
+
+	function shortcode_load_default_options_callback_sanitize() {
+		$options_default = get_option( 'shortcode_load_default_options' );
+
+		$message_setting = 'file_update';
+		$message_setting_slug = 'file_update_slug';
+		$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
+		$message_type = 'error';
+
+		if(isset($message)) {
+			try {
+				add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
+			} catch (Exception $e) {
+				//var_dump($e);
+			}
+		}
+	}
 
 	/* New script tab callbacks */
 
