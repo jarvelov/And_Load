@@ -5,7 +5,6 @@ Roadmap.txt
 * Inline editor i admin läget [X]
 	- Använd Ace editor: http://ace.c9.io/#nav=embedding [X]
 	- Skriv sql query för att hämta data om filen [X]
-		- Skicka type som URL param? [~]
 * Fixa revisions [X]
 	- Ladda rätt revision i frontend
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer

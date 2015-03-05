@@ -579,6 +579,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options['default_minify_checkbox'] ) ? 1 : 0), false ) . '/>';
 		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 		echo $html;
+
+		/* TODO insert a dropdown for Ace editor default theme and other options */
 	}
 
 
@@ -644,6 +646,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+
+		var_dump($options_edit_file);
 
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
@@ -762,6 +766,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	/*
 	* Used by sanitization functions to display messages to user via Settings API
+	* $args = array( 'success' => bool, ['id' => id, 'name' => name] )
 	*/
 
 	function shortcode_load_add_settings_error($array) {
@@ -787,7 +792,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		} catch (Exception $e) {
 			//var_dump($e);
 		}
-	}	
+	}
+
+	/*
+	* Loads Ace editor settings with appropriate environment
+	*/
 
 	function shortcode_load_editor_settings() {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
