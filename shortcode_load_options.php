@@ -643,17 +643,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			extract($result); //turn array into named variables, see $sql SELECT query
 
-			/* select implementation */
-
-			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
-			for ($i=0; $i < $revision; $i++) { 			 
-				$selected = ($revision_override==$i) ? 'selected="selected"' : '';
-				echo '<option value='.$i.' '.$selected.'>'.$i.'</option>';
-			}
-			echo "</select>";
-
-			/* end select implementation */	
-
 			if($revision_override !== false) {
 				if($revision_override <= $revision) {
 					$current_revision = $revision_override;
@@ -661,18 +650,29 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 
 			//Check for newer revisions
-			if($current_revision > 0) {
+			if(isset($current_revision) AND $current_revision > 0) {
 				$srcname = basename($file_src, $type);
 				$file_src_base = dirname($file_src) . '/';
 				$file_src = $file_src_base . $srcname . $revision . "." . $type;
 			} else {
 				$current_revision = "Source";
-			}					
+			}
+
+			/* select implementation */
+
+			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
+			for ($i=0; $i < $revision; $i++) {	 
+				$selected = ($current_revision==$i) ? 'selected="selected"' : '';
+				echo '<option value='.$i.' '.$selected.'>'.$i.'</option>';
+			}
+			echo "</select>";
+
+			/* end select implementation */
 
 			$content = $this->shortcode_load_get_file( $file_src );
 
 			echo '<p>File: '.$name.'</p>';
-			echo '<p>Revision: '.$revision.'</p>';	
+			echo '<p>Revision: '.$current_revision.'</p>';	
 
 			//Build Ace editor
 			$container = '<div class="editor-container">';
