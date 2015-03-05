@@ -639,46 +639,38 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$options_edit_file[$key] = $value;
 			}
 
-			var_dump($result);
+			//Get file source path
+			$file_src = $options_edit_file['srcpath'];
+			$type = $options_edit_file['type'];
+			$revision = (int)$options_edit_file['revision'];
 
-			update_option('shortcode_load_edit_file_options', $options_edit_file);
-		} else {
-			//empty options array if no id was supplied to prevent old data from being presented
-			update_option('shortcode_load_edit_file_options', array()); 
-		}
-
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-
-		//Get file content
-		$file_src = $options_edit_file['srcpath'];
-		$type = $options_edit_file['type'];
-		$revision = (int)$options_edit_file['revision'];
-
-		if($revision_override !== false) {
-			if($revision_override <= $revision) {
-				$revision = $revision_override;
+			if($revision_override !== false) {
+				if($revision_override <= $revision) {
+					$revision = $revision_override;
+				}
 			}
+
+			//Check for newer revisions
+			if($revision > 0) {
+				$srcname = basename($file_src, $type);
+				$file_src_base = dirname($file_src) . '/';
+				$file_src = $file_src_base . $srcname . $revision . "." . $type;
+			} else {
+				$revision = "Source";
+			}
+
+			$content = $this->shortcode_load_get_file( $file_src );
+
+			echo '<p>File: '.$options_edit_file['name'].'</p>';
+			echo '<p>Revision: '.$revision.'</p>';	
+
+			//Build Ace editor
+			$container = '<div class="editor-container">';
+			$editor = '<div id="editor">'.$content.'</div>';
+			$container .= $editor . '</div>';
+
+			echo $container;
 		}
-
-		if($revision > 0) {
-			$srcname = basename($file_src, $type);
-			$file_src_base = dirname($file_src) . '/';
-			$file_src = $file_src_base . $srcname . $revision . "." . $type;
-		} else {
-			$revision = "Source";
-		}
-
-		$content = $this->shortcode_load_get_file( $file_src );
-
-		echo '<p>File: '.$options_edit_file['name'].'</p>';
-		echo '<p>Revision: '.$revision.'</p>';	
-
-		//Build Ace editor
-		$container = '<div class="editor-container">';
-		$editor = '<div id="editor">'.$content.'</div>';
-		$container .= $editor . '</div>';
-
-		echo $container;	
 	}
 
 	function shortcode_load_edit_file_source_options_callback() {
