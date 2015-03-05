@@ -753,6 +753,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					'minify' => $minify
 				)
 			);
+
+			$this->shortcode_load_add_settings_error($file_datas);
 		}
 	}
 
