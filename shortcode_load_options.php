@@ -770,11 +770,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$this->shortcode_load_reset_options();
 
 				$message_setting = 'file_update';
+				$message_setting_slug = 'file_update';
 				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
 				$message_type = 'update';
 				
 			} elseif($file_data['success'] == false) {
 				$message_setting = 'file_update';
+				$message_setting_slug = 'file_update';
 				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
 				$message_type = 'error';
 			}
