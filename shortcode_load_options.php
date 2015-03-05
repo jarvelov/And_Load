@@ -641,15 +641,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-			$options_edit_file = array();
-			foreach ($result as $key => $value) {
-				$options_edit_file[$key] = $value;
-			}
-
-			//Get file source path
-			$file_src = $options_edit_file['srcpath'];
-			$type = $options_edit_file['type'];
-			$revision = (int)$options_edit_file['revision'];
+			extract($result); //turn array into named variables, see $sql SELECT query
 
 			/* select implementation */
 
@@ -664,22 +656,22 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			if($revision_override !== false) {
 				if($revision_override <= $revision) {
-					$revision = $revision_override;
+					$current_revision = $revision_override;
 				}
 			}
 
 			//Check for newer revisions
-			if($revision > 0) {
+			if($current_revision > 0) {
 				$srcname = basename($file_src, $type);
 				$file_src_base = dirname($file_src) . '/';
 				$file_src = $file_src_base . $srcname . $revision . "." . $type;
 			} else {
-				$revision = "Source";
+				$current_revision = "Source";
 			}					
 
 			$content = $this->shortcode_load_get_file( $file_src );
 
-			echo '<p>File: '.$options_edit_file['name'].'</p>';
+			echo '<p>File: '.$name.'</p>';
 			echo '<p>Revision: '.$revision.'</p>';	
 
 			//Build Ace editor
