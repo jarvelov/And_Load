@@ -655,7 +655,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
 			for ($i=0; $i < $revision; $i++) { 			 
-				$selected = ($options['edit_file_revisions_select']==$i) ? 'selected="selected"' : '';
+				$selected = ($revision_override==$i) ? 'selected="selected"' : '';
 				echo '<option value='.$i.' '.$selected.'>'.$i.'</option>';
 			}
 			echo "</select>";
