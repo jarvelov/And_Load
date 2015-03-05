@@ -71,7 +71,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_default'
 		);
 
-		register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize');
+		register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize') );
 
 		/* New script section */
 
