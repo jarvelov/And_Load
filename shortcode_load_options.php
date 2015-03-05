@@ -639,6 +639,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$options_edit_file[$key] = $value;
 			}
 
+			var_dump($result);
+
 			update_option('shortcode_load_edit_file_options', $options_edit_file);
 		} else {
 			//empty options array if no id was supplied to prevent old data from being presented
@@ -646,8 +648,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-
-		var_dump($options_edit_file);
 
 		//Get file content
 		$file_src = $options_edit_file['srcpath'];
