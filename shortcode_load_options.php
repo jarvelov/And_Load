@@ -651,6 +651,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$type = $options_edit_file['type'];
 			$revision = (int)$options_edit_file['revision'];
 
+			/* select implementation */
+
+			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
+			for ($i=0; $i < $revision; $i++) { 			 
+				$selected = ($options['edit_file_revisions_select']==$i) ? 'selected="selected"' : '';
+				echo '<option value='.$i.' '.$selected.'>'.$i.'</option>';
+			}
+			echo "</select>";
+
+			/* end select implementation */	
+
 			if($revision_override !== false) {
 				if($revision_override <= $revision) {
 					$revision = $revision_override;
@@ -664,7 +675,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$file_src = $file_src_base . $srcname . $revision . "." . $type;
 			} else {
 				$revision = "Source";
-			}
+			}					
 
 			$content = $this->shortcode_load_get_file( $file_src );
 
