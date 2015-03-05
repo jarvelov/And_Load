@@ -635,16 +635,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$message_setting = 'file_update';
 		$message_setting_slug = 'file_update_slug';
-		$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
 		$message_type = 'error';
 
-		if(isset($message)) {
-			try {
-				add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
-			} catch (Exception $e) {
-				//var_dump($e);
-			}
+		//$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
+
+		$message = 'test';
+
+		try {
+			add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
+		} catch (Exception $e) {
+			//var_dump($e);
 		}
+
+		var_dump(get_settings_errors());
 	}
 
 	/* New script tab callbacks */
