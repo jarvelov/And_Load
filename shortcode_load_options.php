@@ -44,7 +44,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_overview'
 		);
 
-		register_setting('shortcode_load_overview', 'shortcode_load_overview');
+		register_setting('shortcode_load_overview', 'shortcode_load_overview', array($this, 'shortcode_load_callback_sanitize') );
 
 		/* Default settings section */
 
@@ -71,7 +71,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_default'
 		);
 
-		register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize') );
+		register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_callback_sanitize') );
 
 		/* New script section */
 
@@ -98,7 +98,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_new_script'
 		);
 
-		register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options');
+		register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options', array($this, 'shortcode_load_callback_sanitize') );
 
 		/* New style section */
 
@@ -125,7 +125,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_new_style'
 		);
 
-		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options');
+		register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options', array($this, 'shortcode_load_callback_sanitize'));
 
 		/* Edit file section */
 
@@ -144,7 +144,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_edit_file'
 		);			
 
-		register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options');
+		register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_callback_sanitize'));
 
 	}
 
@@ -153,56 +153,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	*/
 
 	function shortcode_load_register_scripts_styles() {
-		$options_default = get_option( 'shortcode_load_default_options' );
-		$options_scripts = get_option( 'shortcode_load_new_script_options' );
-		$options_styles = get_option( 'shortcode_load_new_style_options' );
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-		
-		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
-		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_styles[ 'new_style_textarea' ] : NULL;
-		$edit_file_content = ( $options_edit_file[ 'edit_file_temporary_textarea' ] ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : NULL;
-		
-		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
-
-		$file_datas = array();
-
-		if(!empty($script_content)) {
-			$name = $options_scripts[ 'new_script_name' ];
-			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
-		}
-
-		if(!empty($style_content)) {
-			$name = $options_styles[ 'new_style_name' ];
-			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
-		}
-
-		if(!empty($edit_file_content)) {
-			$id = $options_edit_file['edit_file_current_id'];
-			$file_datas[] = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
-		}
-
-		foreach ($file_datas as $file_data) {
-			if($file_data['success'] == true){
-				$this->shortcode_load_reset_options();
-
-				$message_setting = 'file_update';
-				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
-				$message_type = 'update';
-				
-			} elseif($file_data['success'] == false) {
-				$message_setting = 'file_update';
-				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
-				$message_type = 'error';
-			}
-		}
-
-		if(isset($message)) {
-			try {
-				add_settings_error($message_setting, esc_attr( 'settings_updated' ), $message, $message_type);
-			} catch (Exception $e) {
-				//var_dump($e);
-			}
-		}
+		//cleared out to sanitize functions 2015-03-05
 	}
 
 	/* 
@@ -630,16 +581,63 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		echo $html;
 	}
 
-	function shortcode_load_default_options_callback_sanitize() {
+	function shortcode_load_callback_sanitize() {
 		$options_default = get_option( 'shortcode_load_default_options' );
+		$options_scripts = get_option( 'shortcode_load_new_script_options' );
+		$options_styles = get_option( 'shortcode_load_new_style_options' );
+		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+		
+		$script_content = ( $options_scripts[ 'new_script_textarea' ] ) ? $options_scripts[ 'new_script_textarea' ] : NULL;
+		$style_content = ( $options_styles[ 'new_style_textarea' ] ) ? $options_styles[ 'new_style_textarea' ] : NULL;
+		$edit_file_content = ( $options_edit_file[ 'edit_file_temporary_textarea' ] ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : NULL;
+		
+		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
+
+		$file_datas = array();
+
+		if(!empty($script_content)) {
+			$name = $options_scripts[ 'new_script_name' ];
+			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $script_content, 'name' => $name, 'type' => 'js', 'minify' => $minify ) );
+		}
+
+		if(!empty($style_content)) {
+			$name = $options_styles[ 'new_style_name' ];
+			$file_datas[] = $this->shortcode_load_save_to_database( array( 'content' => $style_content, 'name' => $name, 'type' => 'css', 'minify' => $minify ) );
+		}
+
+		if(!empty($edit_file_content)) {
+			$id = $options_edit_file['edit_file_current_id'];
+			$file_datas[] = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
+		}
+
+		foreach ($file_datas as $file_data) {
+			if($file_data['success'] == true){
+				$this->shortcode_load_reset_options();
+
+				$message_setting = 'file_update';
+				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
+				$message_type = 'update';
+				
+			} elseif($file_data['success'] == false) {
+				$message_setting = 'file_update';
+				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
+				$message_type = 'error';
+			}
+		}
+
+		if(isset($message)) {
+			try {
+				add_settings_error($message_setting, esc_attr( 'settings_updated' ), $message, $message_type);
+			} catch (Exception $e) {
+				//var_dump($e);
+			}
+		}
 
 		$message_setting = 'file_update';
 		$message_setting_slug = 'file_update_slug';
 		$message_type = 'error';
 
-		//$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
-
-		$message = 'test';
+		$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
 
 		try {
 			add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
