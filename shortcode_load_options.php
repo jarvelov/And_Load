@@ -593,6 +593,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
+		var_dump($minify);
+
 		$file_datas = array();
 
 		if(!empty($script_content)) {
@@ -625,27 +627,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 		}
 
-		if(isset($message)) {
-			try {
-				add_settings_error($message_setting, esc_attr( 'settings_updated' ), $message, $message_type);
-			} catch (Exception $e) {
-				//var_dump($e);
-			}
-		}
-
-		$message_setting = 'file_update';
-		$message_setting_slug = 'file_update_slug';
-		$message_type = 'error';
-
-		$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
-
 		try {
 			add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
 		} catch (Exception $e) {
 			//var_dump($e);
 		}
-
-		var_dump(get_settings_errors());
 	}
 
 	/* New script tab callbacks */
