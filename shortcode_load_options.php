@@ -375,13 +375,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_add_file_revision($args) {
 		extract($args); //turn $args array into named variables
 
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'shortcode_load'; 
+		try {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT name,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
-		$result = $wpdb->get_results($sql, ARRAY_A)[0];
+			$sql = "SELECT name,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+			$result = $wpdb->get_results($sql, ARRAY_A)[0];
+		} catch (Exception $e) {
+			//var_dump($e);
+			$error_id = 2; //2 = database lookup error, does entry with $id exist?
+		}
 
-		extract($result); //extract array to named variables, see $sql SELECT query
+		extract($result); //extract array to named variables, see $sql SELECT query above
 
 		$new_revision = ( intval($revision) + 1);
 
@@ -398,6 +403,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
 		} else {
 			$file_args = NULL;
+			$error_id = 3; //3 = invalid file type specified, column type for row with id in database is malformed
 		}
 
 		if($file_args['success'] == true) {
@@ -407,10 +413,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$type = ($type == 'js') ? 'Script' : 'Style';
 				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'revision');
 			} else {
-				$return_args = array('success' => false);
+				$return_args = array('success' => false, 'error_id' => $error_id);
 			}
 		} else {
-			$return_args = array('success' => false);
+			$return_args = array('success' => false, 'error_id' => $error_id);
 		}
 
 		return $return_args;
