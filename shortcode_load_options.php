@@ -163,7 +163,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		try {
 			$db_args = $this->shortcode_load_save_file($args);
 		} catch (Exception $e) {
-			//var_dump($e);
+			$error_id = 0; //0 = could not write file to local path specified. Check permissions.
 		}
 
 		try {
@@ -197,14 +197,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$id = $wpdb->insert_id;
 		} catch (Exception $e) {
 			//var_dump($e);
+			$error_id = 1;
 		}
 
-		if($id > 0) {
+		if( ( ! isset($error_id) ) ) {
 			$name = $db_args['name'] . '.' . $db_args['type'];
 			$type = ($db_args['type'] == 'js') ? 'Script' : 'Style';
-			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+			$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'saved');
 		} else {
-			$return_args = array('success' => false);
+			$return_args = array('success' => false, 'error_id' => $error_id);
 		}
 
 		return $return_args;
@@ -322,7 +323,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args_array['success'] = false;
 		}
 
-		if($file_args_array['success'] != true) {
+		if($file_args_array['success'] != false) {
 			$file_args_array['success'] = true;
 		}
 
@@ -360,7 +361,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_args_array['success'] = false;
 		}
 
-		if($file_args_array['success'] != true) {
+		if($file_args_array['success'] != false) {
 			$file_args_array['success'] = true;
 		}
 
@@ -404,7 +405,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			if($result['success'] == true) {
 				$type = ($type == 'js') ? 'Script' : 'Style';
-				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type);
+				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'revision');
 			} else {
 				$return_args = array('success' => false);
 			}
@@ -766,17 +767,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_add_settings_error($array) {
 		foreach ($array as $file_data) {
 			if($file_data['success'] == true){
-				$this->shortcode_load_reset_options();
+				$this->shortcode_load_reset_options(); //clear all the data in temporary fields
 
 				$message_setting = 'file_update';
 				$message_setting_slug = 'file_update';
-				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
+				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
 				$message_type = 'updated';
 				
 			} elseif($file_data['success'] == false) {
 				$message_setting = 'file_update';
 				$message_setting_slug = 'file_update';
-				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
+				$message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#file_error_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
 				$message_type = 'error';
 			}
 		}
