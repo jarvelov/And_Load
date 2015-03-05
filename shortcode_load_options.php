@@ -181,19 +181,23 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$file_datas[] = $this->shortcode_load_add_file_revision( array( 'content' => $edit_file_content, 'id' => $id, 'minify' => $minify ) );
 		}
 
-		var_dump(get_settings_errors());
-
 		foreach ($file_datas as $file_data) {
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options();
-			?>
-				<div class="updated"><p><strong><?php _e($file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>', 'shortcode_load' ); ?></strong></p></div>
-			<?php
+
+				$message_setting = 'file_update';
+				$message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been saved successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
+				$message_type = 'update';
+				
 			} elseif($file_data['success'] == false) {
-			?>
-				<div class="error"><p><strong><?php _e($file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>', 'shortcode_load' ); ?></strong></p></div>
-			<?php
+				$message_setting = 'file_update';
+				$message = $file_data['type'] . ' file could not be saved! <a href="?page=shortcode_load&tab_help#file_error" target="_blank">Click here for more info.</a>';
+				$message_type = 'error';
 			}
+		}
+
+		if(isset($message)) {
+			add_settings_error($message_setting,$message_setting, $message, $message_type);
 		}
 	}
 
