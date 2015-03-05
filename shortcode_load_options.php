@@ -643,17 +643,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			extract($result); //turn array into named variables, see $sql SELECT query
 
+
+			//Check for revision override ad 
 			if($revision_override !== false) {
 				if($revision_override <= $revision) {
 					$current_revision = $revision_override;
+	
+					$srcname = basename($file_src, $type);
+					$file_src_base = dirname($file_src) . '/';
+					$file_src = $file_src_base . $srcname . $current_revision . "." . $type;
 				}
-			}
-
-			//Check for newer revisions
-			if(isset($current_revision) AND $current_revision > 0) {
-				$srcname = basename($file_src, $type);
-				$file_src_base = dirname($file_src) . '/';
-				$file_src = $file_src_base . $srcname . $revision . "." . $type;
 			} else {
 				$current_revision = "Source";
 			}
@@ -661,9 +660,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			/* select implementation */
 
 			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
-			for ($i=0; $i < $revision; $i++) {	 
-				$selected = ($current_revision==$i) ? 'selected="selected"' : '';
-				echo '<option value='.$i.' '.$selected.'>'.$i.'</option>';
+			for ($i=$revision; $i >= 0; $i--) {
+				$selected = ($current_revision==$i) ? ' selected="selected"' : '';
+				echo '<option value='.$i.$selected.'>'.$i.'</option>';
 			}
 			echo "</select>";
 
