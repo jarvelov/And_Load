@@ -660,7 +660,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				}
 			}
 
-			echo '<p><strong>File: </strong>'.$name.'</p>';
+			echo '<p><strong>File: </strong>' . $name . '</p>';
 
 			/* Select revision dropdown */
 
