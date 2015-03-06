@@ -78,7 +78,44 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			array($this, 'shortcode_load_default_editor_settings_callback'),
 			'shortcode_load_default_options',
 			'shortcode_load_default',
-			array('default_editor_theme' => 'monokai')
+			array(
+				'default_editor_theme' => 'monokai',
+				'editor_themes' => array(
+					'textmate',
+					'clouds',
+					'kuroir',
+					'vibrant_ink',
+					'dreamweaver',
+					'ambiance',
+					'idle_fingers',
+					'merbivore_soft',
+					'tomorrow_night_bright',
+					'clouds_midnight',
+					'tomorrow_night_eighties',
+					'tomorrow_night',
+					'github',
+					'dawn',
+					'xcode',
+					'chrome',
+					'pastel_on_dark',
+					'merbivore',
+					'mono_industrial',
+					'tomorrow',
+					'kr_theme',
+					'solarized_dark',
+					'chaos',
+					'crimson_editor',
+					'katzenmilch',
+					'eclipse',
+					'twilight',
+					'tomorrow_night_blue',
+					'terminal',
+					'cobalt',
+					'solarized_light',
+					'monokai'
+				)
+			)
+
 		);
 
 		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
@@ -603,10 +640,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		/* TODO insert a dropdown for Ace editor default theme and other options */
 		$options_default = get_option( 'shortcode_load_default_options' );
 
-
-		$default_editor_theme = $args['default_editor_theme'];
-
-		isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : $default_editor_theme;
+		$default_editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : $args['default_editor_theme'];;
 		$selected = () ? ' selected="selected"' : '';
 
 		$html = '<select id="default_editor_theme" name="shortcode_load_default_options[default_editor_theme]">';
