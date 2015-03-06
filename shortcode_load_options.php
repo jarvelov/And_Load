@@ -660,7 +660,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				}
 			}
 
-			/* select revision dropdown */
+			echo '<p><strong>File: </strong>'.$name.'</p>';
+
+			/* Select revision dropdown */
 
 			echo '<p><strong>Revision: </strong>'.$current_revision.'</p>';
 			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
@@ -670,17 +672,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 			echo "</select>";
 
-			echo '<p><strong>File: </strong>'.$name.'</p>';
-
 			$content = $this->shortcode_load_get_file( $srcpath );
 
 			if($content) {
-				//Build Ace editor
-				$container = '<div class="editor-container">';
-				$editor = '<div id="editor">'.$content.'</div>';
-				$container .= $editor . '</div>';
-
-				echo $container;
+				//init editor with content
+				$this->shortcode_load_editor_init($content);
 			} else {
 				//TODO handle error
 			}
@@ -805,10 +801,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	/*
-	* Loads Ace editor settings with appropriate environment
+	* Loads Ace editor settings with appropriate environment and content
 	*/
 
-	function shortcode_load_editor_settings() {
+	function shortcode_load_editor_init($content) {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
 		//Ace editor settings
@@ -819,6 +815,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		} elseif ($options_edit_file['type'] == 'css') { 
 			$editor_mode = 'css';
 		}
+
+		//Build Ace editor
+		$container = '<div class="editor-container">';
+		$editor = '<div id="editor">'.$content.'</div>';
+		$container .= $editor . '</div>';
+
+		echo $container;
 
 		?>
 			<script>
@@ -875,9 +878,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				} elseif($active_tab == 'tab_edit') {
 					settings_fields( 'shortcode_load_edit_file_options' );
 					do_settings_sections( 'shortcode_load_edit_file_options' );	
-
-					//Load editor settings
-					$this->shortcode_load_editor_settings();
 				}
 
 				submit_button();
