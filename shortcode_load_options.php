@@ -643,15 +643,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			extract($result); //turn array into named variables, see $sql SELECT query
 
-
 			//Check for revision override ad 
 			if($revision_override !== false) {
 				if($revision_override <= $revision) {
 					$current_revision = $revision_override;
 	
-					$srcname = basename($file_src, $type);
-					$file_src_base = dirname($file_src) . '/';
-					$file_src = $file_src_base . $srcname . $current_revision . "." . $type;
+					$srcname = basename($srcpath, $type);
+					$srcpath_base = dirname($srcpath) . '/';
+					$srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
 				}
 			} else {
 				$current_revision = "Source";
@@ -668,9 +667,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			/* end select implementation */
 
-			var_dump($file_src);
+			var_dump($srcpath);
 
-			$content = $this->shortcode_load_get_file( $file_src );
+			$content = $this->shortcode_load_get_file( $srcpath );
 
 			echo '<p>File: '.$name.'</p>';
 			echo '<p>Revision: '.$current_revision.'</p>';	
