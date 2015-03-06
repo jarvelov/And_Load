@@ -671,8 +671,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			/* end select implementation */
 
-			var_dump($srcpath);
-
 			$content = $this->shortcode_load_get_file( $srcpath );
 
 			echo '<p>File: '.$name.'</p>';
