@@ -68,7 +68,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'Auto minify',
 			array($this, 'shortcode_load_default_automatically_minify_callback'),
 			'shortcode_load_default_options',
-			'shortcode_load_default'
+			'shortcode_load_default',
+			array('editor_theme' => 'monokai')
 		);
 
 		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
@@ -178,7 +179,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					'srcpath' =>  $db_args['srcpath'],
 					'minify' => $db_args['minify'],
 					'minpath' => $db_args['minpath'],
-					'revision' => 0, //TODO implement revisions
+					'revision' => 0,
 					'created_timestamp' => current_time('mysql', 1),
 					'updated_timestamp' => current_time('mysql', 1),
 				), 
@@ -580,7 +581,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 
-	function shortcode_load_default_automatically_minify_callback() {
+	function shortcode_load_default_automatically_minify_callback($args) {
 		$options = get_option( 'shortcode_load_default_options' );
 
 		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options['default_minify_checkbox'] ) ? 1 : 0), false ) . '/>';
@@ -588,6 +589,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		echo $html;
 
 		/* TODO insert a dropdown for Ace editor default theme and other options */
+
+		var_dump($args)	;
 	}
 
 
