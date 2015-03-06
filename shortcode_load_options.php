@@ -660,8 +660,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				}
 			}
 
-			/* select implementation */
+			/* select revision dropdown */
 
+			echo '<p><strong>Revision: </strong>'.$current_revision.'</p>';
 			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
 			for ($i=$revision; $i >= 0; $i--) {
 				$selected = ($current_revision==$i) ? ' selected="selected"' : '';
@@ -669,19 +670,22 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			}
 			echo "</select>";
 
-			/* end select implementation */
+			echo '<p><strong>File: </strong>'.$name.'</p>';
 
 			$content = $this->shortcode_load_get_file( $srcpath );
 
-			echo '<p>File: '.$name.'</p>';
-			echo '<p>Revision: '.$current_revision.'</p>';	
+			if($content) {
+				//Build Ace editor
+				$container = '<div class="editor-container">';
+				$editor = '<div id="editor">'.$content.'</div>';
+				$container .= $editor . '</div>';
 
-			//Build Ace editor
-			$container = '<div class="editor-container">';
-			$editor = '<div id="editor">'.$content.'</div>';
-			$container .= $editor . '</div>';
-
-			echo $container;
+				echo $container;
+			} else {
+				//TODO handle error
+			}
+		} else {
+			//TODO write out error message about no file selected
 		}
 	}
 
