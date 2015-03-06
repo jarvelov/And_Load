@@ -69,7 +69,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			array($this, 'shortcode_load_default_automatically_minify_callback'),
 			'shortcode_load_default_options',
 			'shortcode_load_default',
-			array('editor_theme' => 'monokai')
+			array('default' => 1) //set default to auto minify for all file types
+		);
+
+		add_settings_field(
+			'shortcode_load_default_editor_settings',
+			'Ace editor settings',
+			array($this, 'shortcode_load_default_editor_settings_callback'),
+			'shortcode_load_default_options',
+			'shortcode_load_default',
+			array('default_editor_theme' => 'monokai')
 		);
 
 		register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
@@ -582,15 +591,30 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 
 	function shortcode_load_default_automatically_minify_callback($args) {
-		$options = get_option( 'shortcode_load_default_options' );
+		$options_default = get_option( 'shortcode_load_default_options' );
+		$default_value = $args['default'];
 
-		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options['default_minify_checkbox'] ) ? 1 : 0), false ) . '/>';
+		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
 		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 		echo $html;
+	}
 
+	function shortcode_load_default_editor_settings_callback($args) {
 		/* TODO insert a dropdown for Ace editor default theme and other options */
+		$options_default = get_option( 'shortcode_load_default_options' );
 
-		var_dump($args)	;
+
+		$default_editor_theme = $args['default_editor_theme'];
+
+		isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : $default_editor_theme;
+		$selected = () ? ' selected="selected"' : '';
+
+		$html = '<select id="default_editor_theme" name="shortcode_load_default_options[default_editor_theme]">';
+		$html .= '<option value='.$i.$selected.'>'.$i.'</option>';
+		$html .= "</select>";
+		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
+
+		echo $html;
 	}
 
 
