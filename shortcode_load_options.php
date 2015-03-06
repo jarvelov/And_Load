@@ -653,7 +653,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					$srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
 				}
 			} else {
-				$current_revision = "Source";
+				if($revision > 0) {
+					$current_revision = $revision;
+				} else {
+					$current_revision = "Source";
+				}
 			}
 
 			/* select implementation */
