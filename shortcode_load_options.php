@@ -641,10 +641,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$options_default = get_option( 'shortcode_load_default_options' );
 
 		$default_editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : $args['default_editor_theme'];;
-		$selected = () ? ' selected="selected"' : '';
+
+		$editor_themes = $args['editor_themes'];
 
 		$html = '<select id="default_editor_theme" name="shortcode_load_default_options[default_editor_theme]">';
-		$html .= '<option value='.$i.$selected.'>'.$i.'</option>';
+
+		for ($i=0; $i < sizeof($editor_themes); $i++) { 
+			$editor_theme = $editor_themes[$i];
+			$selected = ($default_editor_theme == $editor_theme) ? ' selected="selected"' : '';
+			$html .= '<option value='.$editor_theme.$selected.'>'.$editor_theme.'</option>';
+		}
+
 		$html .= "</select>";
 		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 
