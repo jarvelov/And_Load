@@ -10,8 +10,6 @@ jQuery(document).ready(function() {
 		var revisionParamBase = location.search.split('revision=')[0];
 		var revisionParam = location.search.split('revision=')[1];
 
-		console.log(revisionParamBase);
-
 		if(typeof(revisionParam) == 'undefined') {
 			newUrl = urlBase + '&revision=' + revision;
 		} else {
