@@ -6,11 +6,11 @@ jQuery(document).ready(function() {
 		var urlBase = window.location;
 
 	    var idParam = location.search.split('id=')[1];
-		var argsParam = '?page=shortcode_load&tab=tab_edit&id=';
+		//var argsParam = '?page=shortcode_load&tab=tab_edit&id=';
 
 		console.log(urlBase + argsParam);
 
-		var newUrl = urlBase + argsParam + idParam + "&revision=" + revision;
+		var newUrl = urlBase + idParam + "&revision=" + revision;
 
 		location.href = newUrl;
 	})
