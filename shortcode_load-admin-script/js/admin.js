@@ -10,13 +10,14 @@ jQuery(document).ready(function() {
 		var idParam = location.search.split('id=')[1];
 		var revisionParam = location.search.split('revision=')[1];
 
+		console.log(revisionParam);
+
 		if(typeof(revisionParam) == 'undefined') {
 			newUrl = urlBase + '&revision=' + revision;
 		} else {
 			newUrl = urlBase + '&revision=' + revision;
 		}
 
-		console.log(urlBase);
 		console.log(newUrl);
 
 		location.href = newUrl;
