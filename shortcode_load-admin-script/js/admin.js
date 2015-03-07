@@ -18,8 +18,8 @@ jQuery(document).ready(function() {
 			newUrl = urlBase + '&revision=' + revision;
 		}
 
-		console.log(newUrl);
+		//console.log(newUrl);
 
-		location.href = newUrl;
+		//location.href = newUrl;
 	})
 })
