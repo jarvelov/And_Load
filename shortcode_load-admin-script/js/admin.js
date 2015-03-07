@@ -3,7 +3,6 @@ jQuery(document).ready(function() {
 	//Check for change in revision dropdown and redirect to URL with &revision=value param
 	jQuery('#edit_file_revisions_select').change(function() {
 		var revision = this.value;
-		var revision = 1;
 		var urlBase = window.location.toString();
 		var newUrl;
 
