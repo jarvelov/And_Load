@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
 	    var idParam = location.search.split('id=')[1];
 		var argsParam = '?page=shortcode_load&tab=tab_edit&id=';
 
-		console.log(urlBase, argsParam);
+		console.log(urlBase + argsParam);
 
 		var newUrl = urlBase + argsParam + idParam + "&revision=" + revision;
 
