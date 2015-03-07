@@ -5,12 +5,13 @@ jQuery(document).ready(function() {
 		var revision = this.value;
 		var urlBase = window.location;
 
+		//URL GET parameters
 	    var idParam = location.search.split('id=')[1];
-		//var argsParam = '?page=shortcode_load&tab=tab_edit&id=';
+	    var revisionParam = location.search.split('id=')[1];
 
-		console.log(urlBase + argsParam);
+		var newUrl = urlBase + "&revision=" + revision;
 
-		var newUrl = urlBase + idParam + "&revision=" + revision;
+		console.log(newUrl);
 
 		location.href = newUrl;
 	})
