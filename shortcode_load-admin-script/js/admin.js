@@ -7,10 +7,10 @@ jQuery(document).ready(function() {
 		var newUrl;
 
 		//URL GET parameters
-		var idParam = location.search.split('id=')[1];
+		var revisionParamBase = location.search.split('revision=')[0];
 		var revisionParam = location.search.split('revision=')[1];
 
-		console.log(revisionParam);
+		console.log(revisionParamBase);
 
 		if(typeof(revisionParam) == 'undefined') {
 			newUrl = urlBase + '&revision=' + revision;
