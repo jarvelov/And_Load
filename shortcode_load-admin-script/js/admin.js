@@ -3,7 +3,8 @@ jQuery(document).ready(function() {
 	//Check for change in revision dropdown and redirect to URL with &revision=value param
 	jQuery('#edit_file_revisions_select').change(function() {
 		var revision = this.value;
-		var urlBase = window.location;
+		var revision = 1;
+		var urlBase = window.location.toString();
 		var newUrl;
 
 		//URL GET parameters
@@ -13,11 +14,10 @@ jQuery(document).ready(function() {
 		if(typeof(revisionParam) == 'undefined') {
 			newUrl = urlBase + '&revision=' + revision;
 		} else {
-			newUrl = urlBase + '&revision=' + revision;
+			var tmpUrl = urlBase.substr(0, urlBase.indexOf('&revision=') );
+			newUrl = tmpUrl + '&revision=' + revision;
 		}
 
-		//console.log(newUrl);
-
-		//location.href = newUrl;
+		location.href = newUrl;
 	})
 })
