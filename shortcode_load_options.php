@@ -874,9 +874,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_editor_init($content) {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
+		$options_default = get_option( 'shortcode_load_default_options' );
 
 		//Ace editor settings
-		$editor_theme = 'monokai';
+		$editor_theme = $options_default['default_editor_theme'];
 
 		if($options_edit_file['type'] == 'js') {
 			$editor_mode = 'javascript';
