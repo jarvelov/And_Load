@@ -4,7 +4,13 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) 
     exit();
 
-$option_names = array('shortcode_load_new_script_options','shortcode_load_default_options','shortcode_load_new_style_options','shortcode_load_edit_file_options','shortcode_load_default_options');
+$option_names = array(
+	'shortcode_load_new_script_options',
+	'shortcode_load_default_options',
+	'shortcode_load_new_style_options',
+	'shortcode_load_edit_file_options',
+	'shortcode_load_default_options'
+);
 
 foreach ($option_names as $option_name) {
 	delete_option( $option_name );
