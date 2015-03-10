@@ -61,11 +61,11 @@
     color: #000;
 }
 
-.shortcode-load-file-style {
+.shortcode-load-file-css {
 	background-color: #FF8000;
 }
 
-.shortcode-load-file-script {
+.shortcode-load-file-js {
 	background-color: #FE2E2E;
 }
 

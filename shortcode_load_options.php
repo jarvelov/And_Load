@@ -27,7 +27,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			array($this, 'shortcode_load_overview_callback'),
 			'shortcode_load_overview'
 		);
-
+/*
 		add_settings_field(
 			'shortcode_load_overview_scripts',
 			'Scripts',
@@ -43,6 +43,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			'shortcode_load_overview',
 			'shortcode_load_overview'
 		);
+*/
+		add_settings_field(
+			'shortcode_load_overview_styles',
+			'Overview',
+			array($this, 'shortcode_load_overview_scripts_styles_callback'),
+			'shortcode_load_overview',
+			'shortcode_load_overview'
+		);		
 
 		register_setting('shortcode_load_overview', 'shortcode_load_overview');
 
@@ -506,7 +514,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	/*
-	* Return all saved entries of type 'js' in database
+	* Return all saved entries regardless of type in database
 	*/
 	function shortcode_load_get_scripts_styles() {
 		global $wpdb;
@@ -609,11 +617,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			foreach ($styles as $style) {
 				$style_id = $style['id'];
 				$style_name = $style['name'];
-				$file_type = strtoupper($style['type']);
 				$last_updated = $style['updated_timestamp'];
 
 				$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
-				$html .= '<p class="shortcode-load-file-block-tag">'.$file_type.'</p>';
+				$html .= '<p class="shortcode-load-file-block-tag">'.$last_updated.'</p>';
 				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
 				$html .= '</div>';
 			}
@@ -625,33 +632,33 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		echo $html;
 	}
-/*
+
 	function shortcode_load_overview_scripts_styles_callback() {
-		$styles = $this->shortcode_load_get_scripts_styles();
+		$files = $this->shortcode_load_get_scripts_styles();
 
 		$html = '<div class="shortcode-load-file-block-container">';
 
-		if(sizeof($styles) > 0) {
-			foreach ($styles as $style) {
-				$style_id = $style['id'];
-				$style_name = $style['name'];
-				$file_type = strtoupper($style['type']);
-				$last_updated = $style['updated_timestamp'];
+		if(sizeof($files) > 0) {
+			foreach ($files as $file) {
+				$file_id = $file['id'];
+				$file_name = $file['name'];
+				$file_type = $file['type'];
+				$last_updated = $file['updated_timestamp'];
 
-				$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
-				$html .= '<p class="shortcode-load-file-block-tag">'.$file_type.'</p>';
-				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
+				$html .= '<div id="shortcode-load-id-'.$file_id.'" class="shortcode-load-file-'.$file_type.' shortcode-load-file-block">';
+				$html .= '<p class="shortcode-load-file-block-tag">'.strtoupper($file_type).'</p>';
+				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="'.$last_updated.'">'.$file_name.'</a></span>';
 				$html .= '</div>';
 			}
 		} else {
-			$html .= '<h2>No styles created yet. <a href="?page=shortcode_load&amp;tab=tab_new_style">Click here</a> to create a new or click the New Style tab above.</h2>';
+			$html .= '<h2>No scripts or styles created yet. Click the "New Style" or "New Script" tab above to get started!</h2>';
 		}
 
 		$html .= '</div>';
 
 		echo $html;
 	}
-*/
+
 
 	/* Default tab callbacks */
 	function shortcode_load_default_options_callback() {
