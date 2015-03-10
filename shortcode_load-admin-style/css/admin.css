@@ -22,11 +22,7 @@
 	padding: 16px;	
 }
 
-.shortcode-load-file-style {
-	background-color: #FFA500;
-}
-
-.shortcode-load-file-style > span {
+.shortcode-load-file-block > span {
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -34,4 +30,12 @@
 	bottom: 0;
 	height: 50%;
 	margin: auto;
+}
+
+.shortcode-load-file-style {
+	background-color: #FF8000;
+}
+
+.shortcode-load-file-script {
+	background-color: #FE2E2E;
 }

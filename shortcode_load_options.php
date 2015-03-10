@@ -571,25 +571,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_overview_scripts_callback() {
 		$scripts = $this->shortcode_load_get_scripts();
 
-		?>
+		$html = '<div class="shortcode-load-file-block-container">';
 
-		<table id="shortcode-load-scripts-table" class="table table-bordered table-striped shortcode-load-table">
-			<thead>
-				<th>Name</th>
-				<th>Revision</th>
-			</thead>
-			<tbody>
-				<?php
-					foreach ($scripts as $script) { ?>
-						<tr>
-							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $script['id']; ?>"><?php echo $script['name']; ?></a></td>
-							<td><?php echo $script['revision']; ?></td>
-						</tr>
-					<?php } ?>
-			</tbody>
-		</table>
+		foreach ($scripts as $script) {
+			$script_id = $script['id'];
+			$script_name = $script['name'];
+			$html .= '<div id="shortcode-load-style-'.$script_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
+			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
+			$html .= '</div>';
+		}
 
-		<?php
+		$html .= '</div>';
+
+		echo $html;
 	}
 
 	function shortcode_load_overview_styles_callback() {
