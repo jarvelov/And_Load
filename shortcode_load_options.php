@@ -598,7 +598,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		foreach ($styles as $style) {
 			$style_id = $style['id'];
 			$style_name = $style['name'];
-			$html = '<div id="'.$style_id.'" class="shortcode_load_styles"><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></div>';
+			$html = '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-styles"><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></div>';
 
 			echo $html;
 		}
