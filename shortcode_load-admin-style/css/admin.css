@@ -30,6 +30,7 @@
 	bottom: 0;
 	height: 100%;
 	margin: 5px auto;
+	color: #D7CEB2;
 }
 
 .shortcode-load-file-block > span > a {
@@ -50,7 +51,7 @@
 
 /* mouse over link */
 .shortcode-load-file-block > span > a:hover {
-    color: #FF00FF;
+    color: #000;
 }
 
 .shortcode-load-file-style {
