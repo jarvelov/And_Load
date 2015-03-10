@@ -24,12 +24,12 @@
 
 .shortcode-load-file-block > span {
 	position: absolute;
-	top: 50%;
+	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: 50%;
-	margin: auto;
+	height: 100%;
+	margin: 5px auto;
 }
 
 /* unvisited link */
