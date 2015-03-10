@@ -319,7 +319,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
 		$name = $org_name . '.' . $random5;
 
-		$name = shortcode_load_filter_string($name); //filter out any characters we don't want in path
+		$name = $this->shortcode_load_filter_string($name); //filter out any characters we don't want in path
 
 		$file_src = $src_dir . $name . '.' . $type;
 
