@@ -581,7 +581,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 				$html .= '<div id="shortcode-load-id-'.$file_id.'" class="shortcode-load-file-'.$file_type.' shortcode-load-file-block">';
 				$html .= '<p class="shortcode-load-file-block-tag">'.strtoupper($file_type).'</p>';
-				$html .= '<a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$last_updated.'"><span>'.$file_name.'</span></a>';
+				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$last_updated.'">'.$file_name.'</a></span>';
 				$html .= '</div>';
 			}
 		} else {
