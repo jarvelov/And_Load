@@ -576,7 +576,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		foreach ($scripts as $script) {
 			$script_id = $script['id'];
 			$script_name = $script['name'];
+			$last_updated = $script['updated_timestamp'];
+
 			$html .= '<div id="shortcode-load-script-'.$script_id.'" class="shortcode-load-file-script shortcode-load-file-block">';
+			$html .= '<p><strong>'.$last_updated.'</strong></p>';
 			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
 			$html .= '</div>';
 		}
