@@ -32,6 +32,12 @@
 	margin: 5px auto;
 }
 
+.shortcode-load-file-block > span > a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
 /* unvisited link */
 .shortcode-load-file-block > span > a:link {
     color: #000;
@@ -45,11 +51,6 @@
 /* mouse over link */
 .shortcode-load-file-block > span > a:hover {
     color: #FF00FF;
-}
-
-/* selected link */
-.shortcode-load-file-block > span > a:active {
-    color: #0000FF;
 }
 
 .shortcode-load-file-style {
