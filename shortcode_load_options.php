@@ -882,7 +882,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		if($type == 'js') {
 			$editor_mode = 'javascript';
-		} elseif ($type) == 'css') { 
+		} elseif ($type == 'css') { 
 			$editor_mode = 'css';
 		}
 
