@@ -576,7 +576,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		foreach ($scripts as $script) {
 			$script_id = $script['id'];
 			$script_name = $script['name'];
-			$html .= '<div id="shortcode-load-style-'.$script_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
+			$html .= '<div id="shortcode-load-script-'.$script_id.'" class="shortcode-load-file-script shortcode-load-file-block">';
 			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
 			$html .= '</div>';
 		}
