@@ -712,7 +712,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			//Check for revision override ad 
 			if($revision_override !== false) {
-				if($revision_override <= $revision) {
+				if($revision_override <= $revision AND $revision_override > 0) {
 					$current_revision = $revision_override;
 	
 					$srcname = basename($srcpath, $type);
