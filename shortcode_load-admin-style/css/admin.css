@@ -6,7 +6,12 @@
 	display: none;
 }
 
+.shortcode-load-styles-container {
+	position: absolute;
+}
+
 .shortcode-load-styles {
+	position: relative;
 	float: left;
 	display: inline-block;
 	background-color: #FFA500;
