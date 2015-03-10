@@ -7,7 +7,7 @@
 }
 
 .shortcode-load-file-block-container {
-	max-width: 80%;
+	max-width: 100%;
 }
 
 .shortcode-load-file-block {
@@ -30,6 +30,26 @@
 	bottom: 0;
 	height: 50%;
 	margin: auto;
+}
+
+/* unvisited link */
+.shortcode-load-file-block > span > a:link {
+    color: #FF0000;
+}
+
+/* visited link */
+.shortcode-load-file-block > span > a:visited {
+    color: #00FF00;
+}
+
+/* mouse over link */
+.shortcode-load-file-block > span > a:hover {
+    color: #FF00FF;
+}
+
+/* selected link */
+.shortcode-load-file-block > span > a:active {
+    color: #0000FF;
 }
 
 .shortcode-load-file-style {
