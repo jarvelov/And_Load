@@ -884,6 +884,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$editor_mode = 'css';
 		}
 
+		var_dump($editor_mode);
+
 		//Build Ace editor
 		$container = '<div class="editor-container">';
 		$editor = '<div id="editor">'.$content.'</div>';
