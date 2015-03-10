@@ -19,7 +19,10 @@ Roadmap.txt
 */
 
 
-* Bygg om overview med div boxar istället
-* Färgschema på boxar med märkning
+* Bygg om overview med div boxar istället [X]
+* Färgschema på boxar med märkning [X]
+	- Kan göras bättre
 
-* Bugg Default Options editor theme
+* Bugg Default Options editor theme [X]
+
+* New script/style upload button
