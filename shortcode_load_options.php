@@ -817,6 +817,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	}
 
 	function shortcode_load_edit_file_callback_sanitize($args) {
+		var_dump($args);
+		break;
+		
 		$options_default = get_option( 'shortcode_load_default_options' );		
 		$edit_file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
 		$minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
@@ -832,8 +835,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					'minify' => $minify
 				)
 			);
-
-			var_dump($file_datas);
 
 			$this->shortcode_load_add_settings_error($file_datas);
 		}
