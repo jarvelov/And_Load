@@ -846,6 +846,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_add_settings_error($array) {
 		foreach ($array as $file_data) {
+			var_dump($file_data);
 			if($file_data['success'] == true){
 				$this->shortcode_load_reset_options(); //clear all the data in temporary fields
 
