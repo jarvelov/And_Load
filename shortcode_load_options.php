@@ -634,7 +634,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$options_default = get_option( 'shortcode_load_default_options' );
 		$default_value = $args['default'];
 
-		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
+		$html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 0, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
 		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 		echo $html;
 	}

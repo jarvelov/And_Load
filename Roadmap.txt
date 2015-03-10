@@ -1,28 +1,33 @@
 Roadmap.txt
 
-* Lägg till minify libs [ ]
-	- https://code.google.com/p/minify/
-* Inline editor i admin läget [X]
-	- Använd Ace editor: http://ace.c9.io/#nav=embedding [X]
-	- Skriv sql query för att hämta data om filen [X]
-* Fixa revisions [X]
-	- Ladda rätt revision i frontend
-* Lägg till select dropdown i Edit läge för att hoppa mellan filer
-* Fixa enqueue vid shortcode render [X]
-	-  Enqueue skulle behöva göras om till en separat funktion
-* Auto save till temporary_textarea med javascript [X]
-	- Använd: editor.getSession().on('change', callback) 
-
 /*
 * Mål: Klart för leverans 2015-03-15
 *
 */
 
+KLART:
+
+* Lägg till minify libs [X]
+	- https://code.google.com/p/minify/ [X]
+* Inline editor i admin läget [X]
+	- Använd Ace editor: http://ace.c9.io/#nav=embedding [X]
+	- Skriv sql query för att hämta data om filen [X]
+* Fixa revisions [X]
+	- Ladda rätt revision i frontend [X]
+* Fixa enqueue vid shortcode render [X]
+	-  Enqueue skulle behöva göras om till en separat funktion
+* Auto save till temporary_textarea med javascript [X]
+	- Använd: editor.getSession().on('change', callback) 
+
 
 * Bygg om overview med div boxar istället [X]
 * Färgschema på boxar med märkning [X]
 	- Kan göras bättre
-
 * Bugg Default Options editor theme [X]
 
+Ej klart
+
+* Lägg till select dropdown i Edit läge för att hoppa mellan filer
+	- Även felmeddelande vid inga filer tillgängliga likt overview
 * New script/style upload button
+* Faktiskt minifiera script/style med minify lib
