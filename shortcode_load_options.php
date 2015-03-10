@@ -574,7 +574,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$last_updated = $script['updated_timestamp'];
 
 				$html .= '<div id="shortcode-load-script-'.$script_id.'" class="shortcode-load-file-script shortcode-load-file-block">';
-				$html .= '<p><strong>'.$last_updated.'</strong></p>';
+				$html .= '<p class="shortcode-load-file-block-tag">JS/p>';
 				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
 				$html .= '</div>';
 			}
@@ -599,7 +599,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$last_updated = $style['updated_timestamp'];
 
 				$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
-				$html .= '<p><strong>'.$last_updated.'</strong></p>';
+				$html .= '<p class="shortcode-load-file-block-tag">CSS/p>';
 				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
 				$html .= '</div>';
 			}
