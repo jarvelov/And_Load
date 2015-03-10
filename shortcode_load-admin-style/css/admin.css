@@ -9,8 +9,9 @@
 .shortcode-load-styles {
 	float: left;
 	display: inline-block;
-	min-width: 150px;
 	background-color: #FFA500;
+	text-align: center;
+	min-width: 150px;
 	min-height: 100px;
 	margin: 20px;
 	padding: 10px;
