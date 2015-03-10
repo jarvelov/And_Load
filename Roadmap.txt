@@ -31,4 +31,4 @@ Ej klart
 	- Även felmeddelande vid inga filer tillgängliga likt overview
 * Upload button för new script/style
 * Faktiskt minifiera script/style med minify lib
-* Skriv Help section och lägg till &error_id=# i felmeddelanden
+* Skriv Help section och lägg till #error_id=(int) i felmeddelanden
