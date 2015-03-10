@@ -595,26 +595,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_overview_styles_callback() {
 		$styles = $this->shortcode_load_get_styles();
 
-		?>
+		foreach ($styles as $style) {
+			$style_id = $style['id'];
+			$style_name = $style['name'];
+			$html = '<div id="'.$style_id.'" class="shortcode_load_styles"><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></div>';
 
-		<table id="shortcode-load-styles-table" class="table table-bordered table-striped shortcode-load-table">
-			<thead>
-				<th>Name</th>
-				<th>Revision</th>
-			</thead>
-			<tbody>
-				<?php
-					foreach ($styles as $style) { ?>
-						<tr>
-							<td><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=<?php echo $style['id']; ?>"><?php echo $style['name']; ?></a></td>
-							<td><?php echo $style['revision']; ?></td>
-						</tr>
-					<?php } ?>
-			</tbody>
-		</table>
-
-		<?php
-
+			echo $html;
+		}
 	}
 
 	/* Default tab callbacks */
