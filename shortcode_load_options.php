@@ -731,13 +731,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			/* Select revision dropdown */
 
-			echo '<p><strong>Revision: </strong>'.$current_revision.'</p>';
+			echo '<p><strong>Revision: </strong>';
 			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
 			for ($i=$revision; $i >= 0; $i--) {
 				$selected = ($current_revision==$i) ? ' selected="selected"' : '';
 				echo '<option value='.$i.$selected.'>'.$i.'</option>';
 			}
-			echo "</select>";
+			echo "</select></p>";
 
 			$content = $this->shortcode_load_get_file( $srcpath );
 
