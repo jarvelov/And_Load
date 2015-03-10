@@ -595,12 +595,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_overview_styles_callback() {
 		$styles = $this->shortcode_load_get_styles();
 
-		$html = '<div class="shortcode-load-styles-container">';
+		$html = '<div class="shortcode-load-file-block-container">';
 
 		foreach ($styles as $style) {
 			$style_id = $style['id'];
 			$style_name = $style['name'];
-			$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-styles">';
+			$html .= '<div id="shortcode-load-style-'.$style_id.'" class=".shortcode-load-file-style">';
 			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
 			$html .= '</div>';
 		}

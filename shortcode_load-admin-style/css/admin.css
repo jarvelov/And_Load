@@ -6,26 +6,27 @@
 	display: none;
 }
 
-.shortcode-load-styles-container {
+.shortcode-load-file-block-container {
 	position: absolute;
 }
 
-.shortcode-load-styles {
+.shortcode-load-file-block {
 	position: relative;
 	float: left;
 	display: inline-block;
 	text-align: center;
-
 	border-radius: 15px;
-	background-color: #FFA500;
-	
 	min-width: 150px;
 	min-height: 100px;
 	margin: 20px;
-	padding: 16px;
+	padding: 16px;	
 }
 
-.shortcode-load-styles > span {
+.shortcode-load-file-style {
+	background-color: #FFA500;
+}
+
+.shortcode-load-file-style > span {
 	position: absolute;
 	top: 50%;
 	left: 0;
