@@ -32,9 +32,13 @@
 	margin: 5px auto;
 }
 
-.shortcode-load-file-block > p {
+.shortcode-load-file-block-tag {
 	color: #D7CEB2;
-	text-shadow: 3px 3px 0px #2C2E38, 5px 5px 0px #5C5F72;
+	/*text-shadow: 2px 2px 0px #2C2E38, 3px 3px 0px #5C5F72;*/
+	text-shadow: 0px 1px 1px #4d4d4d;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 .shortcode-load-file-block > span > a {
