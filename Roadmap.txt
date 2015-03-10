@@ -22,14 +22,42 @@ KLART:
 * Färgschema på boxar med märkning [X]
 * Bugg Default Options editor theme [X]
 
+
 Ej klart
 
-* Minifiera script/style med minify lib
-* Lägg till select dropdown i Edit läge för att hoppa mellan filer
-	- Även felmeddelande vid inga filer tillgängliga likt overview
-* Upload button för new script/style
-* Skriv Help section
-	- lägg till #error_id=(int) i felmeddelanden till relevanta sectioner
+/*
+* Overview
+*/
+
 * Style:a overview bättre
 	- Behöver lägga till att bara visa 30 i taget eller dylikt, sen more/less eller next page liknande.
-	- Lägg till sökruta
+* Lägg till sökruta/filter
+	- Filtrera baserat på type (css/js)
+	- lägg till .change listener och filtrera med searchFileBlocks(string)
+
+/*
+* Edit file
+*/
+
+* Lägg till select dropdown i Edit läge för att hoppa mellan filer
+	- Även felmeddelande vid inga filer tillgängliga likt overview
+
+/* 
+* New script/style
+*/
+
+* Slå ihop new script/style med Edit tab eller ladda editor även där.
+* Upload button för new script/style
+
+/* 
+* General
+*/
+
+* Minifiera script/style med minify lib
+
+/* 
+* Help
+*/
+
+* Skriv Help section
+	- lägg till #error_id=(int) i felmeddelanden till relevanta sectioner

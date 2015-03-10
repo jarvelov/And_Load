@@ -20,3 +20,51 @@ jQuery(document).ready(function() {
 		location.href = newUrl;
 	})
 })
+
+function hideElement(element) {
+	jQuery(element).hide();
+}
+
+function showElement(element) {
+	jQuery(element).show();
+}
+
+/*
+* Returns an array with objects consisting of
+* the element with class shortcode-load-file-block
+* and the text in the 'span' element.
+*/
+
+function getFileBlocks() {
+	var fileBlocks = [];
+	jQuery('.shortcode-load-file-block').each(function() {
+		var blockText = jQuery(this).find('span').text();
+		var blockObj = {parent:this,text:blockText};
+
+		fileBlocks.push(blockObj);
+	})
+
+	return fileBlocks;
+}
+
+/*
+* Search each object in the fileBlocks array returned by getFileBlocks()
+* for the string supplied and hide/show elements accordingly 
+*
+* searchFileBlocks('nameOfMyFile')
+*/
+
+function searchFileBlocks(string) {
+	var fileBlocks = getFileBlocks()
+	for (var i = fileBlocks.length - 1; i >= 0; i--) {
+		var currentBlock = fileBlocks[i];
+		var text = currentBlock['text'];
+		var parent = currentBlock['parent'];
+		
+		if (text.indexOf(string) > -1) {
+			showElement(parent);
+		} else {
+			hideElement(parent);
+		}
+	};
+}
