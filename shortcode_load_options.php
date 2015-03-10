@@ -492,7 +492,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT id,name,revision FROM ".$table_name." WHERE type = 'js'";
+		$sql = "SELECT id,name,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'js'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
@@ -505,7 +505,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT id,name,revision FROM ".$table_name." WHERE type = 'css'";
+		$sql = "SELECT id,name,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'css'";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
@@ -594,6 +594,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		foreach ($styles as $style) {
 			$style_id = $style['id'];
 			$style_name = $style['name'];
+			$last_updated = $style['updated_timestamp'];
+
+			$html .= '<p><strong>'.$last_updated.'</strong></p>';
 			$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
 			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
 			$html .= '</div>';
