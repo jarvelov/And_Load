@@ -7,7 +7,10 @@
 }
 
 .shortcode-load-styles {
-	display: block;
+	display: inline-block;
 	min-width: 150px;
 	background-color: #FFA500;
+	min-height: 100px;
+	margin: 20px;
+	padding: 10px;
 }
