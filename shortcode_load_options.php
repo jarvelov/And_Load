@@ -74,7 +74,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		add_settings_field(
 			'shortcode_load_default_editor_settings',
-			'Ace editor settings',
+			'Editor settings',
 			array($this, 'shortcode_load_default_editor_settings_callback'),
 			'shortcode_load_default_options',
 			'shortcode_load_default',
@@ -653,7 +653,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		}
 
 		$html .= "</select>";
-		$html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts?</small></label>';
 
 		echo $html;
 	}

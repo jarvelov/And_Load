@@ -17,3 +17,9 @@ Roadmap.txt
 * Mål: Klart för leverans 2015-03-15
 *
 */
+
+
+* Bygg om overview med div boxar istället
+* Färgschema på boxar med märkning
+
+* Bugg Default Options editor theme
