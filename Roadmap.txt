@@ -27,8 +27,9 @@ KLART:
 
 Ej klart
 
+* Minifiera script/style med minify lib
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
 	- Även felmeddelande vid inga filer tillgängliga likt overview
 * Upload button för new script/style
-* Faktiskt minifiera script/style med minify lib
-* Skriv Help section och lägg till #error_id=(int) i felmeddelanden
+* Skriv Help section
+	- lägg till #error_id=(int) i felmeddelanden till relevanta sectioner
