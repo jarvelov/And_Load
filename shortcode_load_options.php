@@ -575,15 +575,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$html = '<div class="shortcode-load-file-block-container">';
 
-		foreach ($scripts as $script) {
-			$script_id = $script['id'];
-			$script_name = $script['name'];
-			$last_updated = $script['updated_timestamp'];
+		if(sizeof($scripts) > 0) {
+			foreach ($scripts as $script) {
+				$script_id = $script['id'];
+				$script_name = $script['name'];
+				$last_updated = $script['updated_timestamp'];
 
-			$html .= '<div id="shortcode-load-script-'.$script_id.'" class="shortcode-load-file-script shortcode-load-file-block">';
-			$html .= '<p><strong>'.$last_updated.'</strong></p>';
-			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
-			$html .= '</div>';
+				$html .= '<div id="shortcode-load-script-'.$script_id.'" class="shortcode-load-file-script shortcode-load-file-block">';
+				$html .= '<p><strong>'.$last_updated.'</strong></p>';
+				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$script_id.'">'.$script_name.'</a></span>';
+				$html .= '</div>';
+			}
+		} else {
+			$html .= '<h2>No scripts created yet. <a href="?page=shortcode_load&amp;tab=tab_new_script">Click here</a> to create a new or click the New Script tab above.</h2>'
 		}
 
 		$html .= '</div>';
@@ -596,15 +600,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 		$html = '<div class="shortcode-load-file-block-container">';
 
-		foreach ($styles as $style) {
-			$style_id = $style['id'];
-			$style_name = $style['name'];
-			$last_updated = $style['updated_timestamp'];
+		if(sizeof($styles) > 0) {
+			foreach ($styles as $style) {
+				$style_id = $style['id'];
+				$style_name = $style['name'];
+				$last_updated = $style['updated_timestamp'];
 
-			$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
-			$html .= '<p><strong>'.$last_updated.'</strong></p>';
-			$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
-			$html .= '</div>';
+				$html .= '<div id="shortcode-load-style-'.$style_id.'" class="shortcode-load-file-style shortcode-load-file-block">';
+				$html .= '<p><strong>'.$last_updated.'</strong></p>';
+				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$style_id.'">'.$style_name.'</a></span>';
+				$html .= '</div>';
+			}
+		} else {
+			$html .= '<h2>No styles created yet. <a href="?page=shortcode_load&amp;tab=tab_new_style">Click here</a> to create a new or click the New Style tab above.</h2>'
 		}
 
 		$html .= '</div>';
