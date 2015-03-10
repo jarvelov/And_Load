@@ -5,3 +5,9 @@
 .hidden-display{
 	display: none;
 }
+
+.shortcode-load-styles {
+	display: block;
+	min-width: 150px;
+	background-color: #FFA500;
+}
