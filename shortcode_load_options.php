@@ -56,14 +56,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		);
 
 		add_settings_field(
-			'shortcode_load_default_text',
-			'Default Settings Field',
-			array($this, 'shortcode_load_default_text_callback'),
-			'shortcode_load_default_options',
-			'shortcode_load_default'
-		);
-
-		add_settings_field(
 			'shortcode_load_automatically_minify',
 			'Auto minify',
 			array($this, 'shortcode_load_default_automatically_minify_callback'),
@@ -622,13 +614,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	/* Default tab callbacks */
 	function shortcode_load_default_options_callback() {
-		echo '<p>Default Options:</p>'; 
-	}	
-
-	function shortcode_load_default_text_callback() {
-		echo '<p>This is some default text</p>'; 
+		echo '<p>Default options to configure editor settings and minify behaviour.</p>'; 
 	}
-
 
 	function shortcode_load_default_automatically_minify_callback($args) {
 		$options_default = get_option( 'shortcode_load_default_options' );
