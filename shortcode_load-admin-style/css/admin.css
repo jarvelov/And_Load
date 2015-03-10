@@ -34,12 +34,12 @@
 
 /* unvisited link */
 .shortcode-load-file-block > span > a:link {
-    color: #FF0000;
+    color: #000;
 }
 
 /* visited link */
 .shortcode-load-file-block > span > a:visited {
-    color: #00FF00;
+    color: #000;
 }
 
 /* mouse over link */
