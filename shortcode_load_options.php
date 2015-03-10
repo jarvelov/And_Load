@@ -743,7 +743,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			if($content) {
 				//init editor with content
-				$this->shortcode_load_editor_init($content);
+				$this->shortcode_load_editor_init($content, $type);
 			} else {
 				//TODO handle error
 			}
@@ -869,18 +869,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	/*
 	* Loads Ace editor settings with appropriate environment and content
+	*
+	* shortcode_load_editor_init( string , 'js|css')
 	*/
 
-	function shortcode_load_editor_init($content) {
+	function shortcode_load_editor_init($content, $type) {
 		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 		$options_default = get_option( 'shortcode_load_default_options' );
 
 		//Ace editor settings
 		$editor_theme = $options_default['default_editor_theme'];
 
-		if($options_edit_file['type'] == 'js') {
+		if($type == 'js') {
 			$editor_mode = 'javascript';
-		} elseif ($options_edit_file['type'] == 'css') { 
+		} elseif ($type) == 'css') { 
 			$editor_mode = 'css';
 		}
 
