@@ -460,7 +460,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 			if($result['success'] == true) {
 				$type = ($type == 'js') ? 'Script' : 'Style';
-				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'revision');
+				$return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
 			} else {
 				$return_args = array('success' => false, 'error_id' => $error_id);
 			}
