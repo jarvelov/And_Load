@@ -7,7 +7,7 @@
 }
 
 .shortcode-load-file-block-container {
-	position: absolute;
+	max-width: 80%;
 }
 
 .shortcode-load-file-block {
