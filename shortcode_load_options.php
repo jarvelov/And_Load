@@ -453,6 +453,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$error_id = 3; //3 = invalid file type specified, column type for row with id in database is malformed
 		}
 
+		var_dump($file_args);
+		break;
+
 		if($file_args['success'] == true) {
 			$result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
 
@@ -832,9 +835,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 					'minify' => $minify
 				)
 			);
-
-			var_dump($file_datas);
-			break;
 
 			$this->shortcode_load_add_settings_error($file_datas);
 		}
