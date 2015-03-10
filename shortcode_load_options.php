@@ -316,6 +316,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
 		$name = $org_name . '.' . $random5;
 
+		$name = shortcode_load_filter_string($name); //filter out any characters we don't want in path
+
 		$file_src = $src_dir . $name . '.' . $type;
 
 		if (!is_dir($src_dir)) {
@@ -763,7 +765,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	/*
 	* Sanitization functions
+	* Both for wordpress callbacks and for custom functions
 	*/
+
+	function shortcode_load_filter_string($string) {
+		$string = preg_replace("/[^a-zA-Z0-9]+/", "", $string);
+		return $string;
+	}
 
 	function shortcode_load_new_style_callback_sanitize($args) {
 		$options_default = get_option( 'shortcode_load_default_options' );
