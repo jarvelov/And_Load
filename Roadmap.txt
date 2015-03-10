@@ -18,11 +18,8 @@ KLART:
 	-  Enqueue skulle behöva göras om till en separat funktion
 * Auto save till temporary_textarea med javascript [X]
 	- Använd: editor.getSession().on('change', callback) 
-
-
 * Bygg om overview med div boxar istället [X]
 * Färgschema på boxar med märkning [X]
-	- Kan göras bättre
 * Bugg Default Options editor theme [X]
 
 Ej klart
@@ -33,3 +30,6 @@ Ej klart
 * Upload button för new script/style
 * Skriv Help section
 	- lägg till #error_id=(int) i felmeddelanden till relevanta sectioner
+* Style:a overview bättre
+	- Behöver lägga till att bara visa 30 i taget eller dylikt, sen more/less eller next page liknande.
+	- Lägg till sökruta
