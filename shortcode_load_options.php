@@ -587,7 +587,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$html .= '</div>';
 			}
 		} else {
-			$html .= '<h2>No scripts created yet. <a href="?page=shortcode_load&amp;tab=tab_new_script">Click here</a> to create a new or click the New Script tab above.</h2>'
+			$html .= '<h2>No scripts created yet. <a href="?page=shortcode_load&amp;tab=tab_new_script">Click here</a> to create a new or click the New Script tab above.</h2>';
 		}
 
 		$html .= '</div>';
@@ -612,7 +612,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$html .= '</div>';
 			}
 		} else {
-			$html .= '<h2>No styles created yet. <a href="?page=shortcode_load&amp;tab=tab_new_style">Click here</a> to create a new or click the New Style tab above.</h2>'
+			$html .= '<h2>No styles created yet. <a href="?page=shortcode_load&amp;tab=tab_new_style">Click here</a> to create a new or click the New Style tab above.</h2>';
 		}
 
 		$html .= '</div>';
