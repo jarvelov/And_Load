@@ -512,7 +512,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'shortcode_load'; 
 
-		$sql = "SELECT id,name,revision,updated_timestamp,created_timestamp FROM ".$table_name." ORDER BY created_timestamp DESC";
+		$sql = "SELECT id,name,type,revision,updated_timestamp,created_timestamp FROM ".$table_name." ORDER BY created_timestamp DESC";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 
 		return $result;
