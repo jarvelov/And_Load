@@ -874,7 +874,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	*/
 
 	function shortcode_load_editor_init($content, $type) {
-		$options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 		$options_default = get_option( 'shortcode_load_default_options' );
 
 		//Ace editor settings
@@ -885,8 +884,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		} elseif ($type == 'css') { 
 			$editor_mode = 'css';
 		}
-
-		var_dump($options_edit_file);
 
 		//Build Ace editor
 		$container = '<div class="editor-container">';
