@@ -30,7 +30,11 @@
 	bottom: 0;
 	height: 100%;
 	margin: 5px auto;
+}
+
+.shortcode-load-file-block > p {
 	color: #D7CEB2;
+	text-shadow: 3px 3px 0px #2C2E38, 5px 5px 0px #5C5F72;
 }
 
 .shortcode-load-file-block > span > a {
