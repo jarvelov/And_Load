@@ -916,6 +916,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$active_tab = 'tab_overview';
 		}
 
+		if($active_tab == 'purge') {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'shortcode_load'; 
+			$result = $wpdb->query( "DROP TABLE IF EXISTS " . $table_name );
+
+			var_dump($result);
+		}
+
 		?>
 		<div class="wrap">
 			<h2 class="nav-tab-wrapper">
