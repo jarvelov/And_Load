@@ -727,7 +727,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$shortcode_display = 'shortcode_load id=' . $id;
 
 			$html .= '<div id="shortcode-load-shortcode-display-container">';
-			$html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/>'
+			$html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/>';
 			$html .= '</div>';
 			$html .= '</p>';
 
