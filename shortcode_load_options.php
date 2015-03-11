@@ -731,6 +731,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			$html .= '</div>';
 			$html .= '</p>';
 
+			echo $html;
+
 			$content = $this->shortcode_load_get_file( $srcpath );
 
 			if($content) {
