@@ -579,11 +579,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				$file_id = $file['id'];
 				$file_name = $file['name'];
 				$file_type = $file['type'];
-				$last_updated = $file['updated_timestamp'];
+				$file_updated = $file['updated_timestamp'];
+				$file_revision = $file['revision'];
 
 				$html .= '<div id="shortcode-load-id-'.$file_id.'" class="shortcode-load-file-'.$file_type.' shortcode-load-file-block">';
 				$html .= '<p class="shortcode-load-file-block-tag">'.strtoupper($file_type).'</p>';
-				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$last_updated.'">'.$file_name.'</a></span>';
+				$html .= '<p class="shortcode-load-file-block-revision">'.$file_revision.'</p>';
+				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$file_updated.'">'.$file_name.'</a></span>';
 				$html .= '</div>';
 			}
 		} else {

@@ -31,9 +31,9 @@ Ej klart
 
 * Style:a overview bättre
 	- Behöver lägga till att bara visa 30 i taget eller dylikt, sen more/less eller next page liknande.
-* Lägg till sökruta/filter
-	- Filtrera baserat på type (css/js)
+* Lägg till sökruta/filter [X]
 	- lägg till .change listener och filtrera med searchFileBlocks(string)
+* Filtrera baserat på type (css/js)	
 
 /*
 * Edit file
