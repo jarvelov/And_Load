@@ -19,6 +19,11 @@ jQuery(document).ready(function() {
 
 		location.href = newUrl;
 	})
+
+	jQuery('#overview_filter').keyup(function() {
+		var value = jQuery(this).val();
+		searchFileBlocks(value);
+	})
 })
 
 function hideElement(element) {
