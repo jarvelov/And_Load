@@ -124,39 +124,39 @@ License:
 
 			$sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
 			$result = $wpdb->get_results($sql, ARRAY_A)[0];
-		}
 
-		if(sizeof($result) > 0 )  {
-			extract($result);
+			if(sizeof($result) > 0 )  {
+				extract($result);
 
-			$is_script = ($type == 'js') ? true : false;
+				$is_script = ($type == 'js') ? true : false;
 
-			if($minify == 1) {
-				$path = $minpath;
-				$suffix = 'min.' . $type;
-			} else {
-				$path = $srcpath;
-				$suffix = $type;
-			}
+				if($minify == 1) {
+					$path = $minpath;
+					$suffix = 'min.' . $type;
+				} else {
+					$path = $srcpath;
+					$suffix = $type;
+				}
 
-			$site_url = get_site_url();
+				$site_url = get_site_url();
 
-			if($revision > 0) {
-				$srcname = basename($path, $suffix);
-				$path_src_base = dirname($path) . '/';
-				$path = $path_src_base . $srcname . $revision . "." . $suffix;
-			}
+				if($revision > 0) {
+					$srcname = basename($path, $suffix);
+					$path_src_base = dirname($path) . '/';
+					$path = $path_src_base . $srcname . $revision . "." . $suffix;
+				}
 
-			$path_external = str_replace(ABSPATH, $site_url . '/', $path);
+				$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 
-			//TODO make this cleaner and wrap enqueue in a function
+				//TODO make this cleaner and wrap enqueue in a function
 
-			if($is_script) {
-				wp_register_script( $name, $path_external ); //depends on jquery
-				wp_enqueue_script( $name );
-			} else {
-				wp_register_style( $name, $path_external );
-				wp_enqueue_style( $name );
+				if($is_script) {
+					wp_register_script( $name, $path_external ); //depends on jquery
+					wp_enqueue_script( $name );
+				} else {
+					wp_register_style( $name, $path_external );
+					wp_enqueue_style( $name );
+				}
 			}
 		}
 	}
