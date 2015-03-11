@@ -565,6 +565,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 	function shortcode_load_overview_callback() {
 		echo '<p>Overview of the currently registered scripts and styles</p>'; 
+
+		echo '<input type="text" id="overview_filter" name="shortcode_load_overview[overview_filter]" placeholder="Type to filter..." />';
 	}	
 
 	function shortcode_load_overview_scripts_styles_callback() {
