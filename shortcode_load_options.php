@@ -708,22 +708,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 				}
 			}
 
-			echo '<p><strong>File: </strong>' . $name . '</p>';
+			$html = '<p><strong>File: </strong>' . $name . '</p>';
 
 			/* Select revision dropdown */
 
-			echo '<p><strong>Revision: </strong>';
-			echo '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
+			$html .= '<p><strong>Revision: </strong>';
+			$html .= '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
 			for ($i=$revision; $i >= 0; $i--) {
 				$selected = ($current_revision==$i) ? ' selected="selected"' : '';
-				echo '<option value='.$i.$selected.'>'.$i.'</option>';
+				$html .= '<option value='.$i.$selected.'>'.$i.'</option>';
 			}
-			echo "</select></p>";
+			$html .= "</select></p>";
 
 			/* shortcode displayed in input field */
 
+			$html .= '<p><strong>Shortcode: </strong>';
+
 			$shortcode_display = 'shortcode_load id=' . $id;
-			echo '<div id="shortcode-load-shortcode-display-container"><input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/></div>';
+
+			$html .= '<div id="shortcode-load-shortcode-display-container">';
+			$html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/>'
+			$html .= '</div>';
+			$html .= '</p>';
 
 			$content = $this->shortcode_load_get_file( $srcpath );
 
