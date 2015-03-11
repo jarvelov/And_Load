@@ -148,15 +148,7 @@ License:
 
 				$path_external = str_replace(ABSPATH, $site_url . '/', $path);
 
-				//TODO make this cleaner and wrap enqueue in a function
-
-				if($is_script) {
-					wp_register_script( $name, $path_external ); //depends on jquery
-					wp_enqueue_script( $name );
-				} else {
-					wp_register_style( $name, $path_external );
-					wp_enqueue_style( $name );
-				}
+				$this->load_file( $name, $path_external, $is_script );
 			}
 		}
 	}
