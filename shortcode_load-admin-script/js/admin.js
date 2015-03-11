@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
 	})
 
 	jQuery('#overview_filter').keyup(function() {
-		var value = jQuery(this).val();
+		var value = jQuery(this).val().toLowerCase();
 		searchFileBlocks(value);
 	})
 })
@@ -63,7 +63,7 @@ function searchFileBlocks(string) {
 	var fileBlocks = getFileBlocks()
 	for (var i = fileBlocks.length - 1; i >= 0; i--) {
 		var currentBlock = fileBlocks[i];
-		var text = currentBlock['text'];
+		var text = currentBlock['text'].toLowerCase();
 		var parent = currentBlock['parent'];
 		
 		if (text.indexOf(string) > -1) {
