@@ -723,7 +723,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 			/* shortcode displayed in input field */
 
 			$shortcode_display = 'shortcode_load id=' . $id;
-			echo '<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" value="'.$shortcode_display.'"/>';
+			echo '<div id="shortcode-load-shortcode-display-container"><input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/></div>';
 
 			$content = $this->shortcode_load_get_file( $srcpath );
 
