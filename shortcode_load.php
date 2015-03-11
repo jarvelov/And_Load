@@ -130,7 +130,7 @@ License:
 
 				$is_script = ($type == 'js') ? true : false;
 
-				if($minify == 1) {
+				if($minify) {
 					$path = $minpath;
 					$suffix = 'min.' . $type;
 				} else {
