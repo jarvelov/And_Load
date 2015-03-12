@@ -584,7 +584,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
 				$html .= '<div id="shortcode-load-id-'.$file_id.'" class="shortcode-load-file-'.$file_type.' shortcode-load-file-block">';
 				$html .= '<p class="shortcode-load-file-block-tag">'.strtoupper($file_type).'</p>';
-				$html .= '<p class="shortcode-load-file-block-revision">'.$file_revision.'</p>';
+				$html .= '<p class="shortcode-load-file-block-id">'.$file_id.'</p>';
 				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$file_updated.'">'.$file_name.'</a></span>';
 				$html .= '</div>';
 			}
@@ -876,7 +876,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 		$options_default = get_option( 'shortcode_load_default_options' );
 
 		//Ace editor settings
-		$editor_theme = $options_default['default_editor_theme'];
+		$editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : 'monokai';
 
 		if($type == 'js') {
 			$editor_mode = 'javascript';
