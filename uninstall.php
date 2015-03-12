@@ -4,19 +4,42 @@
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) 
     exit();
 
-$option_names = array(
-	'shortcode_load_new_script_options',
-	'shortcode_load_default_options',
-	'shortcode_load_new_style_options',
-	'shortcode_load_edit_file_options',
-	'shortcode_load_default_options'
-);
+function deleteOptions() {
+	$option_names = array(
+		'shortcode_load_new_script_options',
+		'shortcode_load_default_options',
+		'shortcode_load_new_style_options',
+		'shortcode_load_edit_file_options',
+		'shortcode_load_default_options'
+	);
 
-foreach ($option_names as $option_name) {
-	delete_option( $option_name );
+	foreach ($option_names as $option_name) {
+		delete_option( $option_name );
+	}	
 }
 
-//drop shortcode_load db table
-global $wpdb;
-$table_name = $wpdb->prefix . 'shortcode_load'; 
-$wpdb->query( "DROP TABLE IF EXISTS " . $table_name );
+function dropTable() {
+	//drop shortcode_load db table
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'shortcode_load'; 
+	$wpdb->query( "DROP TABLE IF EXISTS " . $table_name );
+}
+
+if ( !is_multisite() ) {
+	deleteOptions();
+	dropTable();
+} else {
+    global $wpdb;
+    $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+    $original_blog_id = get_current_blog_id();
+
+    foreach ( $blog_ids as $blog_id ) 
+    {
+        switch_to_blog( $blog_id );
+		deleteOptions();
+		dropTable();
+    }
+
+    restore_current_blog();
+}
+
