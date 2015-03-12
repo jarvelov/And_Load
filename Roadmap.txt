@@ -40,7 +40,7 @@ Ej klart
 */
 
 * Lägg till select dropdown i Edit läge för att hoppa mellan filer
-	- Även felmeddelande vid inga filer tillgängliga likt overview
+* Felmeddelande vid inga filer tillgängliga likt overview / ingen fil vald
 
 /* 
 * New script/style
