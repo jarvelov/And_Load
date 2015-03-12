@@ -6,11 +6,10 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 
 function deleteOptions() {
 	$option_names = array(
-		'shortcode_load_new_script_options',
 		'shortcode_load_default_options',
+		'shortcode_load_new_script_options',
 		'shortcode_load_new_style_options',
 		'shortcode_load_edit_file_options',
-		'shortcode_load_default_options'
 	);
 
 	foreach ($option_names as $option_name) {
