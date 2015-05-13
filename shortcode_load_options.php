@@ -572,27 +572,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 	function shortcode_load_overview_scripts_styles_callback() {
 		$files = $this->shortcode_load_get_scripts_styles();
 
-		$html = '<div class="shortcode-load-file-block-container">';
-
 		if(sizeof($files) > 0) {
-			foreach ($files as $file) {
-				$file_id = $file['id'];
-				$file_name = $file['name'];
-				$file_type = $file['type'];
-				$file_updated = $file['updated_timestamp'];
-				$file_revision = $file['revision'];
+			$html = '<table class="shortcode-load-file-block-container">';
+			$html .= '<thead><th>Id</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
+			$html .= '<tbody>';
 
-				$html .= '<div id="shortcode-load-id-'.$file_id.'" class="shortcode-load-file-'.$file_type.' shortcode-load-file-block">';
-				$html .= '<p class="shortcode-load-file-block-tag">'.strtoupper($file_type).'</p>';
-				$html .= '<p class="shortcode-load-file-block-id">'.$file_id.'</p>';
-				$html .= '<span><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id='.$file_id.'" title="Updated: '.$file_updated.'">'.$file_name.'</a></span>';
-				$html .= '</div>';
+			foreach ($files as $file) {
+				extract($file); //id, name, type, revision, updated_timestamp, created_timestamp
+
+				$html .= '<tr id="shortcode-load-id-'. $id .'" class="shortcode-load-file-'. $type . '">';
+				$html .= '<td>' . $id . '</td>';
+				$html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="Updated: ' . $updated_timestamp . '">' . $name . '</a></td>';
+				$html .= '<td>' . $revision . '</td>';
+				$html .= '<td>' . $updated_timestamp . '</td>';
+				$html .= '<td>' . $created_timestamp . '</td>';
+
+				$html .= '</tr>';
 			}
+
+			$html .= '</tbody>';
 		} else {
 			$html .= '<h2>No scripts or styles created yet. Click the "New Style" or "New Script" tab above to get started!</h2>';
 		}
-
-		$html .= '</div>';
 
 		echo $html;
 	}
