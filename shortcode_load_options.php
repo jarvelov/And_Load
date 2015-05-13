@@ -563,7 +563,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $files = $this->shortcode_load_get_scripts_styles();
 
         if(sizeof($files) > 0) {
-            $html = '<table class="table table-hover table-striped table-bordered shortcode-load-file-block-container">';
+            $html = '<div class="shortcode-load-table-container">';
+            $html .= '<table class="table table-hover table-striped table-bordered">';
             $html .= '<thead><th>Id</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 
@@ -580,7 +581,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '</tr>';
             }
 
-            $html .= '</tbody>';
+            $html .= '</tbody></table></div>';
         } else {
             $html .= '<h2>No scripts or styles created yet. Click the "New Style" or "New Script" tab above to get started!</h2>';
         }
