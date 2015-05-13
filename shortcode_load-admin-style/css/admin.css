@@ -68,3 +68,13 @@ body {
 .margin-bottom-5 {
   margin-bottom: 5px !important;
 }
+
+/* Datatables CSS */
+
+.overview-table_info {
+  float: left;
+}
+
+.overview-table_paginate {
+  float: right;
+}

@@ -888,8 +888,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             </script>
         <?php
 
-        if(class_exists(ShortcodeLoad)) {
-            ShortcodeLoad::load_file( ShortcodeLoad::slug . '-ace-editor-js', ShortcodeLoad::slug . '-script/js/ace_edit.js', true );
+        $this->shortcode_load_load_file('ace-editor-js', 'script/js/ace_edit.js', true, true);
+    }
+
+    function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = true) {
+        if( class_exists(ShortcodeLoad) ) {
+            if($prefixSlug) {
+                $name = ShortcodeLoad::slug . '-' . $name;
+                $path = ShortcodeLoad::slug . '-' . $path;
+            }
+
+            ShortcodeLoad::load_file($name, $path, $is_script );
         }
     }
 
@@ -923,6 +932,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 if($active_tab == 'tab_overview') {
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
+
+                    $this->shortcode_load_load_file('overview-script', 'script/js/tab_overview.js', true, true);
                 } elseif($active_tab == 'tab_default') {
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
