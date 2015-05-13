@@ -20,62 +20,8 @@ jQuery(document).ready(function() {
         location.href = newUrl;
     });
 
-    //Filter results in overview table
-    jQuery('#overview_filter').keyup(function() {
-        var value = jQuery(this).val().toLowerCase();
-        searchFileBlocks(value);
-    });
-
     //Select all text in shortcode input element when user clicks on it
     jQuery('#edit_file_shortcode_display').on('focus', function() {
         jQuery(this).select();
     });
 })
-
-function hideElement(element) {
-    jQuery(element).hide();
-}
-
-function showElement(element) {
-    jQuery(element).show();
-}
-
-/*
-* Returns an array with objects consisting of
-* the element with class shortcode-load-file-block
-* and the text in the 'span' element.
-*/
-
-function getFileBlocks() {
-    var fileBlocks = [];
-    jQuery('.shortcode-load-file-block').each(function() {
-        var blockText = jQuery(this).find('span').text();
-        var blockObj = {parent:this,text:blockText};
-
-        fileBlocks.push(blockObj);
-    });
-
-    return fileBlocks;
-}
-
-/*
-* Search each object in the fileBlocks array returned by getFileBlocks()
-* for the string supplied and hide/show elements accordingly 
-*
-* searchFileBlocks('nameOfMyFile')
-*/
-
-function searchFileBlocks(string) {
-    var fileBlocks = getFileBlocks()
-    for (var i = fileBlocks.length - 1; i >= 0; i--) {
-        var currentBlock = fileBlocks[i];
-        var text = currentBlock['text'].toLowerCase();
-        var parent = currentBlock['parent'];
-        
-        if (text.indexOf(string) > -1) {
-            showElement(parent);
-        } else {
-            hideElement(parent);
-        }
-    };
-}
