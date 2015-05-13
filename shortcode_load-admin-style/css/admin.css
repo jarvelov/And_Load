@@ -12,15 +12,14 @@ body {
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
-  background-color: #FFDB70;
-  border-bottom: 2px solid #C19000;
-  display: inline-block;
+  border-bottom: 5px solid #C19000;
+  display: block;
 }
 
 .nav-tab {
   font-size: 1.2em;
   line-height: 1em;
-  color: #C19000;
+  color: #3D3D3D;
   background-color: #EFB716;
   border-bottom: 5px solid #F3F3F3;
 }
