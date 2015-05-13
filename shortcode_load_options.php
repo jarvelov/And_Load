@@ -892,6 +892,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
+        var_dump('HEOEOEO');
         if( class_exists(ShortcodeLoad) ) {
             if($prefixSlug) {
                 $name = ShortcodeLoad::slug . '-' . $name;
