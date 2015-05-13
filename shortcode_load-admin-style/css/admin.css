@@ -1,19 +1,25 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body {
   background-color: #E9E9E9;
 }
 
+.wrap {
+  font-family: 'Lato', sans-serif;
+}
+
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
-  background-color: #E9E9E9;
+  background-color: #FFDB70;
   border-bottom: 2px solid #C19000;
+  display: inline-block;
 }
 
 .nav-tab {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1em;
   color: #C19000;
   background-color: #EFB716;
   border-bottom: 5px solid #F3F3F3;
@@ -24,7 +30,7 @@ body {
 }
 
 .active-tab {
-  background-color: #FFDB70;
+  background-color: #F2C84E;
 }
 
 .tab_overview {
