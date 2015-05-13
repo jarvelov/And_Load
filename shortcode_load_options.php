@@ -563,7 +563,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $files = $this->shortcode_load_get_scripts_styles();
 
         if(sizeof($files) > 0) {
-            $html = '<table class="shortcode-load-file-block-container">';
+            $html = '<table class="table table-hover shortcode-load-file-block-container">';
             $html .= '<thead><th>Id</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 

@@ -12,50 +12,6 @@
 	max-width: 100%;
 }
 
-.shortcode-load-file-block {
-	position: relative;
-	float: left;
-	display: inline-block;
-	text-align: center;
-	border-radius: 15px;
-	min-width: 150px;
-	min-height: 100px;
-	margin: 20px;
-	padding: 16px;	
-}
-
-.shortcode-load-file-block > span {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 100%;
-	margin: 5px auto;
-}
-
-.shortcode-load-file-block-tag {
-	color: #222;
-	text-shadow: 0px 1px 1px #4D4D4D;
-	position: absolute;
-	top: 0;
-	right: 10px;
-}
-
-.shortcode-load-file-block-id {
-	color: #222;
-	text-shadow: 0px 1px 1px #4D4D4D;
-	position: absolute;
-	top: 0;
-	left: 10px;	
-}
-
-.shortcode-load-file-block > span > a {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-
 /* unvisited link */
 .shortcode-load-file-block > span > a:link {
     color: #000;
