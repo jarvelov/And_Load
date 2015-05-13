@@ -938,7 +938,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_edit_file_options' ); 
                 }
 
-                submit_button();
+                if($active_tab != 'tab_overview') {
+                    submit_button();
+                }
+                
                 ?>
                 
             </form>
