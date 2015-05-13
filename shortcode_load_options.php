@@ -887,7 +887,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             </script>
         <?php
 
-        $this->shortcode_load_load_file('ace-editor-js', 'script/js/ace_edit.js', true, true);
+        $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
