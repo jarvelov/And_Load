@@ -907,12 +907,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
         <div class="wrap">
             <div class="nav-tab-wrapper">
-                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
-                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab tab_new_script <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab tab_new_style <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a>
-                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
-                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a></h2>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a></h2>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab tab_new_script <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a></h2>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab tab_new_style <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a></h2>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a></h2>
+                <h2><a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a></h2>
             </div>
 
             <form action='options.php' method='post'>
