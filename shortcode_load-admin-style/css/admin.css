@@ -1,5 +1,14 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
 
+body {
+	background: #F3F3F3;
+}
+
+h1, h2, h3, h4, h5, h6,
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+	color: #FFF;
+}
+
 .active-tab {
 	background-color: #EFEFEF;
 }
