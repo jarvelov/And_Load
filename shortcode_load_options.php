@@ -929,11 +929,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 <?php
 
                 if($active_tab == 'tab_overview') {
-                    settings_fields( 'shortcode_load_overview' );
-                    do_settings_sections( 'shortcode_load_overview' );
-
                     $this->shortcode_load_load_file('datatables-style', 'admin-style/css/jquery.dataTables.min.css', false, true);
                     $this->shortcode_load_load_file('datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false);
+
+                    settings_fields( 'shortcode_load_overview' );
+                    do_settings_sections( 'shortcode_load_overview' );
+                    
                     $this->shortcode_load_load_file('overview-table-script', 'admin-script/js/tab_overview.js', true, true);
 
                 } elseif($active_tab == 'tab_default') {
@@ -946,11 +947,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     settings_fields( 'shortcode_load_new_style_options' );
                     do_settings_sections( 'shortcode_load_new_style_options' );
                 } elseif($active_tab == 'tab_edit') {
-                    settings_fields( 'shortcode_load_edit_file_options' );
-                    do_settings_sections( 'shortcode_load_edit_file_options' );
-
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('ace-css', '-admin-style/css/ace.css', false, true);
+
+                    settings_fields( 'shortcode_load_edit_file_options' );
+                    do_settings_sections( 'shortcode_load_edit_file_options' );
                 }
 
                 if($active_tab != 'tab_overview') {
