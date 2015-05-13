@@ -932,7 +932,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
 
-                    $this->shortcode_load_load_file('overview-script', 'admin-script/js/tab_overview.js', true, true);
+                    $this->shortcode_load_load_file('overview-table-script', 'admin-script/js/tab_overview.js', true, true);
+                    $this->shortcode_load_load_file('overview-table-style', 'admin-style/css/jquery.dataTables.min.css', false, true);
                 } elseif($active_tab == 'tab_default') {
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
