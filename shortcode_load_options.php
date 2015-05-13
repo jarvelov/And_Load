@@ -898,7 +898,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $path = ShortcodeLoad::slug . '-' . $path;
             }
 
-            var_dump($name, $path);
             ShortcodeLoad::load_file($name, $path, $is_script );
         }
     }
