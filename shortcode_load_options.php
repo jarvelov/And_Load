@@ -947,7 +947,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_new_style_options' );
                 } elseif($active_tab == 'tab_edit') {
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
-                    $this->shortcode_load_load_file('ace-css', '-admin-style/css/ace.css', false, true);
+                    $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
