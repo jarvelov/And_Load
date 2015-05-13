@@ -12,6 +12,8 @@ body {
 }
 
 .nav-tab {
+  font-size: 16px;
+  font-weight: bold;
   color: #C19000;
   background-color: #EFB716;
   border-bottom: 5px solid #F3F3F3;
