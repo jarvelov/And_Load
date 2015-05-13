@@ -886,8 +886,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
             </script>
         <?php
-
-        $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
@@ -934,7 +932,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
-                    
+
                     $this->shortcode_load_load_file('overview-table-script', 'admin-script/js/tab_overview.js', true, true);
 
                 } elseif($active_tab == 'tab_default') {
@@ -952,6 +950,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
+
+                    $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
                 }
 
                 if($active_tab != 'tab_overview') {
