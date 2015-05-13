@@ -885,7 +885,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     var editor = ace.edit("editor");
                     editor.setTheme("ace/theme/<?php echo $editor_theme; ?>");
                     editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
-                }
+                });
             </script>
         <?php
     }
