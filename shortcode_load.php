@@ -159,14 +159,8 @@ License:
 	 */
 	private function register_scripts_and_styles() {
 		if ( is_admin() ) {
-			//Scripts
 			$this->load_file( self::slug . '-admin-script', self::slug . '-admin-script/js/admin.js', true );
-			$this->load_file( self::slug . '-datatables-js', 'lib/datatables/media/js/jquery.dataTables.min.js', true );
-
-			//Styles
 			$this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
-			$this->load_file( self::slug . '-ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
-			$this->load_file( self::slug . '-ace-css', self::slug . '-admin-style/css/ace.css' );
 		} else {
 			$this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
 			$this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
