@@ -830,7 +830,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     */
 
     function shortcode_load_add_settings_error($array) {
-        var_dump($array);
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
                 $this->shortcode_load_reset_options(); //clear all the data in temporary fields
@@ -892,14 +891,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
-        var_dump('HEOEOEO');
         if( class_exists(ShortcodeLoad) ) {
             if($prefixSlug) {
                 $name = ShortcodeLoad::slug . '-' . $name;
                 $path = ShortcodeLoad::slug . '-' . $path;
             }
 
-            var_dump($name, $path);
             ShortcodeLoad::load_file($name, $path, $is_script );
         }
     }
@@ -935,7 +932,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
 
-                    $this->shortcode_load_load_file('overview-script', 'script/js/tab_overview.js', true, true);
+                    $this->shortcode_load_load_file('overview-script', 'admin-script/js/tab_overview.js', true, true);
                 } elseif($active_tab == 'tab_default') {
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
