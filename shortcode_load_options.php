@@ -891,12 +891,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $this->shortcode_load_load_file('ace-editor-js', 'script/js/ace_edit.js', true, true);
     }
 
-    function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = true) {
+    function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
         if( class_exists(ShortcodeLoad) ) {
             if($prefixSlug) {
                 $name = ShortcodeLoad::slug . '-' . $name;
                 $path = ShortcodeLoad::slug . '-' . $path;
             }
+
+            var_dump($name, $path);
 
             ShortcodeLoad::load_file($name, $path, $is_script );
         }
