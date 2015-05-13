@@ -8,4 +8,4 @@ function contentChanged() {
 jQuery(document).ready(function() {
 	//Register a listen event on any changes made with editor
 	editor.getSession().on('change', contentChanged);
-}
+});
