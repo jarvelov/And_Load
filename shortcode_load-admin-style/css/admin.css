@@ -1,33 +1,62 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
 
 body {
-	background: #F3F3F3;
+  background-color: #E9E9E9;
 }
 
-.nav-tab > h2 {
-	color: #FFF;
+/* Nav bar tabs */
+
+.nav-tab-wrapper {
+  background-color: #E9E9E9;
+  border-bottom: 2px solid #C19000;
+}
+
+.nav-tab {
+  color: #C19000;
+  background-color: #EFB716;
+  border-bottom: 5px solid #F3F3F3;
+}
+
+.nav-tab:hover {
+  background-color: #EFEFEF;
 }
 
 .active-tab {
-	background-color: #EFEFEF;
+  background-color: #FFDB70;
+}
+
+.tab_overview {
+  background-color: #E0F0D3;
+}
+
+.tab_default {
+
+}
+
+.tab_new_style {
+
+}
+
+.tab_new_script {
+
+}
+
+.tab_edit {
+
+}
+
+.tab_help {
+
 }
 
 .hidden-display{
-	display: none;
+  display: none;
 }
 
 .shortcode-load-file-block-container {
-	max-width: 100%;
-}
-
-.shortcode-load-file-css {
-	background-color: #FCF8E3;
-}
-
-.shortcode-load-file-js {
-	background-color: #D9EDF7;
+  max-width: 100%;
 }
 
 .margin-bottom-5 {
-	margin-bottom: 5px !important;
+  margin-bottom: 5px !important;
 }

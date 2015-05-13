@@ -716,7 +716,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $shortcode_display = 'shortcode_load id=' . $id;
 
-            $html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="'.$shortcode_display.'"/>';
+            $html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
             $html .= '</p>';
 
             echo $html;
@@ -906,14 +906,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         ?>
         <div class="wrap">
-            <h2 class="nav-tab-wrapper">
-                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
-                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a>
-                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
-                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
-            </h2>
+            <div class="nav-tab-wrapper">
+                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
+                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
+                <a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab tab_new_script <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a>
+                <a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab tab_new_style <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a>
+                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
+                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
+            </div>
 
             <form action='options.php' method='post'>
                 
@@ -941,7 +941,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 if($active_tab != 'tab_overview') {
                     submit_button();
                 }
-                
+
                 ?>
                 
             </form>
