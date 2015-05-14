@@ -10,6 +10,7 @@ jQuery(document).ready(function() {
 	editor.getSession().on('change', contentChanged);
 
 	jQuery('#new_file_type').on('change', function() {
+		console.log(this.value);
 		editor.getSession().setMode("ace/mode/" + this.value);
 	})
 });
