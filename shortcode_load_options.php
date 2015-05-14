@@ -732,7 +732,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             echo '<input type="text" id="new_file_name" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter file name" />';
             echo '<select id="new_file_type" name="shortcode_load_edit_file_options[new_file_type]"><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
 
-            $this->shortcode_load_editor_init('Enter a file name and type to begin...', 'js');
+            $this->shortcode_load_editor_init('Enter a file name and type to begin...', 'plain_text');
         }
     }
 
@@ -874,7 +874,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /*
     * Loads Ace editor settings with appropriate environment and content
     *
-    * shortcode_load_editor_init( string , 'js|css')
+    * shortcode_load_editor_init( string , 'js|css|plain_text')
     */
 
     function shortcode_load_editor_init($content, $type) {
@@ -886,7 +886,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if($type == 'js') {
             $editor_mode = 'javascript';
         } elseif ($type == 'css') { 
-            $editor_mode = 'css';
+            $editor_mode = $type;
+        } elseif($type == 'plain_text') {
+            $editor_mode = $type;
         }
 
         //Build Ace editor
