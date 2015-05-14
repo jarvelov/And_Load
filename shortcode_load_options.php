@@ -826,7 +826,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
             } else { //new file, save it
                 $name = $args[ 'new_file_name' ];
-                $type = ( $args[ 'new_file_type' ] == 'javascript' ? 'js' : 'css';
+                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : 'css';
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
