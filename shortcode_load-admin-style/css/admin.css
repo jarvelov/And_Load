@@ -16,8 +16,17 @@ body {
   display: block;
 }
 
+.nav-tab {
+  font-size: 1.2em;
+  line-height: 1em;
+}
+
+.nav-tab:hover {
+  background-color: #EFEFEF;
+}
+
 .active-tab {
-  background-color: #F2C84E;
+  background-color: #F3F3F3;
 }
 
 .hidden-display{
