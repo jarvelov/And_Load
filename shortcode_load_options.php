@@ -476,7 +476,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if(sizeof($files) > 0) {
             $html = '<div class="shortcode-load-table-container">';
-            $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered">';
+            $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered display">';
             $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 
