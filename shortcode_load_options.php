@@ -782,8 +782,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 if($active_tab == 'tab_overview') {
                     $this->shortcode_load_load_file('datatables-style-bootstrap', 'admin-style/css/dataTables.bootstrap.css', false, true);
-                    $this->shortcode_load_load_file('datatables-script-bootstrap', 'admin-script/js/dataTables.bootstrap.js', true, true);
                     $this->shortcode_load_load_file('datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false);
+                    $this->shortcode_load_load_file('datatables-script-bootstrap', 'admin-script/js/xdataTables.bootstrap.js', true, true);
 
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
