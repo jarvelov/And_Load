@@ -802,9 +802,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
 
-                    submit_button('Save file');
+                    submit_button('Save file', 'large');
                 }
-                
+
                 ?>
                 
             </form>
