@@ -788,10 +788,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_overview' );
 
                     $this->shortcode_load_load_file('overview-table-script', 'admin-script/js/tab_overview.js', true, true);
-
                 } elseif($active_tab == 'tab_default') {
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
+
+                    submit_button();
                 } elseif($active_tab == 'tab_edit') {
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
@@ -800,12 +801,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
                     $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
-                }
 
-                if($active_tab != 'tab_overview') {
-                    submit_button();
+                    submit_button('Save file');
                 }
-
+                
                 ?>
                 
             </form>

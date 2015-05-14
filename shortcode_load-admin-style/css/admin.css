@@ -12,6 +12,7 @@ body {
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
+  margin-top: 1em;
   border-bottom: 5px solid #FEFEFE;
   display: block;
 }
