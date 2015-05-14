@@ -8,4 +8,8 @@ function contentChanged() {
 jQuery(document).ready(function() {
 	//Register a listen event on any changes made with editor
 	editor.getSession().on('change', contentChanged);
+
+	jQuery('#new_file_type').on('change', function() {
+		editor.getSession().setMode("ace/mode/" + this.value);
+	})
 });

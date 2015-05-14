@@ -411,7 +411,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $error_id = 2; //2 = database lookup error, does entry with $id exist?
         }
 
-        extract($result); //extract array to named variables, see $sql SELECT query above
+        extract($result); //extract array to named variables, see $sql SELECT query above for variable names
 
         $new_revision = ( intval($revision) + 1);
 
@@ -662,21 +662,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /* Edit file tab callbacks */
 
     function shortcode_load_edit_file_options_callback() {
-        //TODO create a select dropdown in this function
-
         $id = (isset($_GET['id'])) ? intval($_GET['id']) : false;
         $revision_override = (isset($_GET['revision'])) ? intval($_GET['revision']) : false;
 
-        if($id) {
+        if($id) { //check if file id is supplied and load the content
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
             $sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-            extract($result); //turn array into named variables, see $sql SELECT query
+            extract($result); //turn array into named variables, see $sql SELECT query above for variable names
 
-            //Check for revision override ad 
+            //Check for revision override
             if($revision_override !== false) {
                 if($revision_override <= $revision AND $revision_override > 0) {
                     $current_revision = $revision_override;
@@ -729,7 +727,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 //TODO handle error
             }
         } else {
-            //TODO write out error message about no file selected
+            //No file is selected, this is a new file
+
+            echo '<input type="text" id="new_file_name" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter file name" />';
+            echo '<select id="new_file_type" name="shortcode_load_edit_file_options[new_file_type]"><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
+
+            $this->shortcode_load_editor_init('Enter a file name and type to begin...', 'js');
         }
     }
 
@@ -742,13 +745,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         this data will then be processed when the page is reloaded again (Save Changes button is pressed)
         The textarea will be continously updated with javascript
         */
-
-        echo '<div class="edit_file_content_container">';
         echo '<textarea id="edit_file_temporary_textarea" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
 
         //We also need the id to refer to later, save this to a simple input field as well
         echo '<input type="text" id="edit_file_current_id" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
-        echo '</div>';
         
     }
 
@@ -808,21 +808,35 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_edit_file_callback_sanitize($args) {
         $options_default = get_option( 'shortcode_load_default_options' );      
-        $edit_file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
+        $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
         $minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
         $file_datas = array();
 
-        if(!empty($edit_file_content)) {
-            $id = $args['edit_file_current_id'];
-            $file_datas[] = $this->shortcode_load_add_file_revision(
-                array(
-                    'content' => $edit_file_content,
-                    'id' => $id,
-                    'minify' => $minify
-                )
-            );
+        if(!empty($file_content)) {
+            var_dump($args['edit_file_current_id']);
+            break;
 
+            $id = $args['edit_file_current_id'];
+            if($id) { //file already exists, add revision
+                $file_datas[] = $this->shortcode_load_add_file_revision(
+                    array(
+                        'content' => $file_content,
+                        'id' => $id,
+                        'minify' => $minify
+                    )
+                );
+            } else { //new file, save it
+                $name = $args[ 'new_file_name' ];
+                $file_datas[] = $this->shortcode_load_save_to_database(
+                    array(
+                        'content' => $file_content,
+                        'name' => $name,
+                        'type' => 'js',
+                        'minify' => $minify
+                    )
+                );                
+            }
             $this->shortcode_load_add_settings_error($file_datas);
         }
     }
