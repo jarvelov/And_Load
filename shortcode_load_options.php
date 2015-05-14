@@ -486,7 +486,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '<tr id="shortcode-load-id-'. $id .'" class="shortcode-load-file-'. $type . '">';
                 $html .= '<td>' . $id . '</td>';
                 $html .= '<td>' . strtoupper($type) . '</td>';
-                $html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="Updated: ' . $updated_timestamp . '">' . $name . '</a></td>';
+                $html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="">' . $name . '</a></td>';
                 $html .= '<td>' . $revision . '</td>';
                 $html .= '<td>' . $updated_timestamp . '</td>';
                 $html .= '<td>' . $created_timestamp . '</td>';
@@ -496,7 +496,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '</tbody></table></div>';
         } else {
-            $html .= '<h2>No scripts or styles created yet. Click the "New Style" or "New Script" tab above to get started!</h2>';
+            $html .= '<div id="get-started">No scripts or styles created yet! <a href="?page=shortcode_load&amp;tab=tab_edit">Click here or the "Edit file" tab above to get started!</div>';
         }
 
         echo $html;        
