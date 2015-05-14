@@ -12,48 +12,12 @@ body {
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
-  border-bottom: 5px solid #C19000;
+  border-bottom: 5px solid #FEFEFE;
   display: block;
-}
-
-.nav-tab {
-  font-size: 1.2em;
-  line-height: 1em;
-  color: #3D3D3D;
-  background-color: #EFB716;
-  border-bottom: 5px solid #F3F3F3;
-}
-
-.nav-tab:hover {
-  background-color: #EFEFEF;
 }
 
 .active-tab {
   background-color: #F2C84E;
-}
-
-.tab_overview {
-
-}
-
-.tab_default {
-
-}
-
-.tab_new_style {
-
-}
-
-.tab_new_script {
-
-}
-
-.tab_edit {
-
-}
-
-.tab_help {
-
 }
 
 .hidden-display{

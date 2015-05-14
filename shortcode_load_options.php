@@ -123,9 +123,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
-            var_dump($e);
-            break;
-            $error_id = 0; //0 = could not write file to local path specified. Check path and permissions.
+            //var_dump($e);
+            $error_id = $e['code'];
         }
 
         try {
@@ -158,6 +157,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $id = $wpdb->insert_id;
         } catch (Exception $e) {
+            //var_dump($e);
             $error_id = 1; //error writing to database
         }
 
@@ -249,7 +249,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } elseif($type == 'css') {
             $file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
         } else {
-            throw new Exception("Unknown file type", 1);
+            throw new Exception("Unknown file type", 0); //0 = could not write file to local path specified. Check path and permissions.
             
         }
 
