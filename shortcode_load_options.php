@@ -739,7 +739,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_edit_file_source_options_callback() {
         $options_edit_file = get_option( 'shortcode_load_edit_file_options' );
 
-        $current_id = intval ( $_GET['id'] ); //ensure integer value only
+        $current_id = isset($_GET['id']) ? ( intval ( $_GET['id'] ) ) : false;
 
         /*Create a textarea to temporarily hold the raw data from Ace editor
         this data will then be processed when the page is reloaded again (Save Changes button is pressed)
@@ -815,7 +815,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if(!empty($file_content)) {
             var_dump($args['edit_file_current_id']);
-            break;
+            break;  
 
             $id = $args['edit_file_current_id'];
             if($id) { //file already exists, add revision
