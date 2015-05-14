@@ -123,7 +123,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
-            $error_id = 0; //0 = could not write file to local path specified. Check permissions.
+            var_dump($e);
+            break;
+            $error_id = 0; //0 = could not write file to local path specified. Check path and permissions.
         }
 
         try {
@@ -156,8 +158,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $id = $wpdb->insert_id;
         } catch (Exception $e) {
-            //var_dump($e);
-            $error_id = 1;
+            $error_id = 1; //error writing to database
         }
 
         if( ( ! isset($error_id) ) ) {
@@ -247,6 +248,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
         } elseif($type == 'css') {
             $file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
+        } else {
+            throw new Exception("Unknown file type", 1);
+            
         }
 
         $db_args = array('name' => $org_name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
@@ -657,7 +661,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
             } else { //new file, save it
                 $name = $args[ 'new_file_name' ];
-                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : 'css';
+                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $type;
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
