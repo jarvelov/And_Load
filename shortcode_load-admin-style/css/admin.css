@@ -44,18 +44,18 @@ body {
 
 /* Datatables CSS */
 
-.overview-table_length {
+#overview-table_length {
   float: left;
 }
 
-.overview-table_filter {
+#overview-table_filter {
   float: right;
 }
 
-.overview-table_info {
+#overview-table_info {
   float: left;
 }
 
-.overview-table_paginate {
+#overview-table_paginate {
   float: right;
 }
