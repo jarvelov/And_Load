@@ -814,11 +814,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_datas = array();
 
         if(!empty($file_content)) {
-            var_dump($args['edit_file_current_id']);
-            break;  
-
             $id = $args['edit_file_current_id'];
             if($id) { //file already exists, add revision
+                var_dump('1');
+                break;
+
                 $file_datas[] = $this->shortcode_load_add_file_revision(
                     array(
                         'content' => $file_content,
@@ -827,6 +827,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     )
                 );
             } else { //new file, save it
+                var_dump('2');
+                break;
                 $name = $args[ 'new_file_name' ];
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
