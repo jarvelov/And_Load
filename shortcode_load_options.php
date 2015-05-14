@@ -523,33 +523,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     /*
-    * Reset saved option
-    * 
-    * Called when a new script or style
-    * has been successfully saved to
-    * the database.
-    */
-
-    function shortcode_load_reset_options() {
-        $options_scripts = get_option( 'shortcode_load_new_script_options' );
-        $options_styles = get_option( 'shortcode_load_new_style_options[' );
-
-        $scripts_options_array = array();
-        foreach ($options_scripts as $key => $value) {
-            $scripts_options_array[$key] = "";
-        }
-
-        update_option('shortcode_load_new_script_options', $scripts_options_array);
-
-        $style_options_array = array();
-        foreach ($options_styles as $key => $value) {
-            $style_options_array[$key] = "";
-        }
-
-        update_option('shortcode_load_new_style_options', $style_options_array);
-    }
-
-    /*
     * Callbacks
     **/
 
@@ -563,7 +536,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if(sizeof($files) > 0) {
             $html = '<div class="shortcode-load-table-container">';
             $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered">';
-            $html .= '<thead><th>Id</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
+            $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 
             foreach ($files as $file) {
@@ -571,6 +544,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '<tr id="shortcode-load-id-'. $id .'" class="shortcode-load-file-'. $type . '">';
                 $html .= '<td>' . $id . '</td>';
+                $html .= '<td>' . strtoupper($type) . '</td>';
                 $html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="Updated: ' . $updated_timestamp . '">' . $name . '</a></td>';
                 $html .= '<td>' . $revision . '</td>';
                 $html .= '<td>' . $updated_timestamp . '</td>';
@@ -621,42 +595,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= "</select>";
 
         echo $html;
-    }
-
-
-    /* New script tab callbacks */
-
-    function shortcode_load_new_script_options_callback() {
-        $options = get_option( 'shortcode_load_new_script_options' );
-        echo '<p>New script</p>';
-    }
-
-    function shortcode_load_new_script_name_callback() {
-        $options = get_option( 'shortcode_load_new_script_options' );
-        echo '<input type="text" id="new_script_name" name="shortcode_load_new_script_options[new_script_name]" value="' . $options[ 'new_script_name' ] . '"/>';
-    }
-
-    function shortcode_load_new_script_textarea_callback() {
-        $options = get_option( 'shortcode_load_new_script_options' );
-        echo '<p>Paste script into the textarea</p>';
-        echo '<textarea id="new_script_textarea" name="shortcode_load_new_script_options[new_script_textarea]" rows="5" cols="50">' . $options[ 'new_script_textarea' ] . '</textarea>';
-    }
-
-    /* New style tab callbacks */
-
-    function shortcode_load_new_style_options_callback() {
-        echo '<p>New style</p>';
-    }
-
-    function shortcode_load_new_style_name_callback() {
-        $options = get_option( 'shortcode_load_new_style_options' );
-        echo '<input type="text" id="new_style_name" name="shortcode_load_new_style_options[new_style_name]" value="' . $options[ 'new_style_name' ] . '"/>';
-    }
-
-    function shortcode_load_new_style_textarea_callback() {
-        $options = get_option( 'shortcode_load_new_style_options' );
-        echo '<p>Paste style into the textarea</p>';
-        echo '<textarea id="new_style_textarea" name="shortcode_load_new_style_options[new_style_textarea]" rows="5" cols="50">' . $options[ 'new_style_textarea' ] . '</textarea>';
     }
 
     /* Edit file tab callbacks */
@@ -762,50 +700,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         return $string;
     }
 
-    function shortcode_load_new_style_callback_sanitize($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
-        $style_content = ( $args[ 'new_style_textarea' ] ) ? $args[ 'new_style_textarea' ] : NULL;
-
-        $minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
-
-        if(!empty($style_content)) {
-            $name = $args[ 'new_style_name' ];
-            $file_datas[] = $this->shortcode_load_save_to_database(
-                array(
-                    'content' => $style_content,
-                    'name' => $name,
-                    'type' => 'css',
-                    'minify' => $minify
-                )
-            );
-
-            $this->shortcode_load_add_settings_error($file_datas);
-        }
-    }
-
-    function shortcode_load_new_script_callback_sanitize($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
-        $script_content = ( $args[ 'new_script_textarea' ] ) ? $args[ 'new_script_textarea' ] : NULL;
-
-        $file_datas = array();
-
-        $minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
-
-        if(!empty($script_content)) {
-            $name = $args[ 'new_script_name' ];
-            $file_datas[] = $this->shortcode_load_save_to_database(
-                array(
-                    'content' => $script_content,
-                    'name' => $name,
-                    'type' => 'js',
-                    'minify' => $minify
-                )
-            );
-
-            $this->shortcode_load_add_settings_error($file_datas);
-        }
-    }
-
     function shortcode_load_edit_file_callback_sanitize($args) {
         $options_default = get_option( 'shortcode_load_default_options' );      
         $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
@@ -849,7 +743,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_add_settings_error($array) {
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
-                $this->shortcode_load_reset_options(); //clear all the data in temporary fields
 
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
