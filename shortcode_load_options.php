@@ -5,7 +5,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function __construct() {
         add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
         add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
-        add_filter( 'register_scripts_styles', array($this, 'shortcode_load_register_scripts_styles') );
     }
 
     function shortcode_load_add_admin_menu(  ) { 
@@ -96,60 +95,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
 
-        /* New script section */
-
-        add_settings_section( 
-            'shortcode_load_new_script',
-            'New Script Settings',
-            array($this, 'shortcode_load_new_script_options_callback'),
-            'shortcode_load_new_script_options'
-        );
-
-        add_settings_field(
-            'shortcode_load_script_name',
-            'Script Name *',
-            array($this, 'shortcode_load_new_script_name_callback'),
-            'shortcode_load_new_script_options',
-            'shortcode_load_new_script'
-        );      
-
-        add_settings_field(
-            'shortcode_load_default_text',
-            'Script Content *',
-            array($this, 'shortcode_load_new_script_textarea_callback'),
-            'shortcode_load_new_script_options',
-            'shortcode_load_new_script'
-        );
-
-        register_setting('shortcode_load_new_script_options', 'shortcode_load_new_script_options', array($this, 'shortcode_load_new_script_callback_sanitize') );
-
-        /* New style section */
-
-        add_settings_section( 
-            'shortcode_load_new_style',
-            'New Style Settings',
-            array($this, 'shortcode_load_new_style_options_callback'),
-            'shortcode_load_new_style_options'
-        );
-
-        add_settings_field(
-            'shortcode_load_style_name',
-            'Style Name *',
-            array($this, 'shortcode_load_new_style_name_callback'),
-            'shortcode_load_new_style_options',
-            'shortcode_load_new_style'
-        );          
-
-        add_settings_field(
-            'shortcode_load_default_text',
-            'Style Content *',
-            array($this, 'shortcode_load_new_style_textarea_callback'),
-            'shortcode_load_new_style_options',
-            'shortcode_load_new_style'
-        );
-
-        register_setting('shortcode_load_new_style_options', 'shortcode_load_new_style_options', array($this, 'shortcode_load_new_style_callback_sanitize'));
-
         /* Edit file section */
 
         add_settings_section( 
@@ -169,14 +114,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_edit_file_callback_sanitize'));
 
-    }
-
-    /*
-    * Register new scripts and styles
-    */
-
-    function shortcode_load_register_scripts_styles() {
-        //cleared out to sanitize functions 2015-03-05
     }
 
     /* 
@@ -829,8 +766,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             <div class="nav-tab-wrapper">
                 <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
                 <a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_script" class="nav-tab tab_new_script <?php echo $active_class = ($active_tab == 'tab_new_script') ? 'active-tab' : '' ?>">New Script</a>
-                <a href="?page=shortcode_load&amp;tab=tab_new_style" class="nav-tab tab_new_style <?php echo $active_class = ($active_tab == 'tab_new_style') ? 'active-tab' : '' ?>">New Style</a>
                 <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
                 <a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
             </div>
@@ -853,12 +788,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } elseif($active_tab == 'tab_default') {
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
-                } elseif($active_tab == 'tab_new_script') {
-                    settings_fields( 'shortcode_load_new_script_options' );
-                    do_settings_sections( 'shortcode_load_new_script_options' );
-                } elseif($active_tab == 'tab_new_style') {
-                    settings_fields( 'shortcode_load_new_style_options' );
-                    do_settings_sections( 'shortcode_load_new_style_options' );
                 } elseif($active_tab == 'tab_edit') {
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
