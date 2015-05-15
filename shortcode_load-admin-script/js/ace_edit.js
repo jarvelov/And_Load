@@ -75,5 +75,8 @@ jQuery(document).ready(function() {
     jQuery('#new_file_upload').on('change', function() {
         setAceDisabled();
         setAceContent('The editor has been disabled. Please click "Save File" to upload the selected file to edit it or click the "Reset" link to clear the upload and continue editing.')
+
+        //Set file name as the value of the #new_file_upload_file_name element
+        jQuery('#new_file_upload_file_name').val( this.val() );
     });
 });
