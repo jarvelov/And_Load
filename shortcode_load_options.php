@@ -135,6 +135,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $table_name, 
                 array( 
                     'name' => $db_args['name'],
+                    'slug' => $db_args['slug'],
                     'type' => $db_args['type'],
                     'srcpath' =>  $db_args['srcpath'],
                     'minify' => $db_args['minify'],
@@ -144,14 +145,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     'updated_timestamp' => current_time('mysql', 1),
                 ), 
                 array( 
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%d', 
-                    '%s',
-                    '%d',
-                    '%s',
-                    '%s'
+                    '%s', //name
+                    '%s', //slug
+                    '%s', //type
+                    '%s', //srcpath
+                    '%d', //minify
+                    '%s', //minpath
+                    '%d', //revision
+                    '%s', //created_timestamp
+                    '%s' //updated_timestamp
                 ) 
             );
 
@@ -191,10 +193,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     'ID' => $id
                 ), 
                 array(
-                    '%d',
-                    '%s'
+                    '%d', //revision
+                    '%s' //updated_timestamp
                 ),
-                array('%d')
+                array('%d') //id
             );
 
             if($result > 0) {
@@ -228,11 +230,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $min_dir = $uploads_dir . $type . '/min/';
         
         $random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
-        $name = $org_name . '.' . $random5;
+        $slug = $org_name . '.' . $random5;
 
-        $name = $this->shortcode_load_filter_string($name); //filter out any characters we don't want in path
+        $slug = $this->shortcode_load_filter_string($name); //filter out any characters we don't want in path
 
-        $file_src = $src_dir . $name . '.' . $type;
+        $file_src = $src_dir . $slug . '.' . $type;
 
         if (!is_dir($src_dir)) {
             wp_mkdir_p($src_dir);
@@ -253,7 +255,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             
         }
 
-        $db_args = array('name' => $org_name, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
+        $db_args = array('name' => $org_name, 'slug' => $slug, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
 
         return $db_args;
     }
@@ -276,8 +278,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             if($minify == true) {
                 $minified_content = $this->shortcode_load_minify_js($content);
-                $name = basename($path, '.js');
-                $path_min = dirname(dirname($path)) . '/min/' . $name . '.min.js';
+                $slug = basename($path, '.js');
+                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.js';
                 $file_args_array['minpath'] = $path_min;
 
                 file_put_contents($path_min, $minified_content);
@@ -314,8 +316,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             if($minify == true) {
                 $minified_content = $this->shortcode_load_minify_js($content);
-                $name = basename($path, '.css');
-                $path_min = dirname(dirname($path)) . '/min/' . $name . '.min.css';
+                $slug = basename($path, '.css');
+                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.css';
                 $file_args_array['minpath'] = $path_min;
 
                 file_put_contents($path_min, $minified_content);
@@ -345,7 +347,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+            $sql = "SELECT name,slug,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
         } catch (Exception $e) {
             //var_dump($e);
@@ -357,11 +359,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $new_revision = ( intval($revision) + 1);
 
         $srcname = basename($srcpath, $type);
-        $unique_suffix = str_replace($name, "", $srcname);
-        $new_name = $name . $unique_suffix . $new_revision . "." . $type;
+        $unique_suffix = str_replace($slug, "", $srcname);
+        $new_slug = $slug . $unique_suffix . $new_revision . "." . $type;
 
         $file_src_base = dirname($srcpath) . '/';
-        $file_src = $file_src_base . $new_name;
+        $file_src = $file_src_base . $new_slug;
 
         if($type == 'js') {
             $file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
@@ -411,7 +413,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         global $wpdb;
         $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-        $sql = "SELECT id,name,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'js' ORDER BY created_timestamp DESC";
+        $sql = "SELECT id,name,slug,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'js' ORDER BY created_timestamp DESC";
         $result = $wpdb->get_results($sql, ARRAY_A);
 
         return $result;
@@ -424,7 +426,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         global $wpdb;
         $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-        $sql = "SELECT id,name,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'css' ORDER BY created_timestamp DESC";
+        $sql = "SELECT id,name,slug,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'css' ORDER BY created_timestamp DESC";
         $result = $wpdb->get_results($sql, ARRAY_A);
 
         return $result;
@@ -437,7 +439,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         global $wpdb;
         $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-        $sql = "SELECT id,name,type,revision,updated_timestamp,created_timestamp FROM ".$table_name." ORDER BY created_timestamp DESC";
+        $sql = "SELECT id,name,slug,type,revision,updated_timestamp,created_timestamp FROM ".$table_name." ORDER BY created_timestamp DESC";
         $result = $wpdb->get_results($sql, ARRAY_A);
 
         return $result;
@@ -481,7 +483,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<tbody>';
 
             foreach ($files as $file) {
-                extract($file); //id, name, type, revision, updated_timestamp, created_timestamp
+                extract($file); //id, name, slug, type, revision, updated_timestamp, created_timestamp
 
                 $html .= '<tr id="shortcode-load-id-'. $id .'" class="shortcode-load-file-'. $type . '">';
                 $html .= '<td>' . $id . '</td>';
@@ -548,7 +550,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+            $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
             extract($result); //turn array into named variables, see $sql SELECT query above for variable names
@@ -757,8 +759,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_options_page(  ) {
 
-        do_action('register_scripts_styles');
-
         if( isset( $_GET[ 'tab' ] ) ) {  
             $active_tab = $_GET[ 'tab' ];  
         } else {
@@ -794,14 +794,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_default_options' );
 
                     submit_button();
-                } elseif($active_tab == 'tab_edit') {
+                } elseif($active_tab == 'tab_edit') {                  
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
+                    $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
-
-                    $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
 
                     submit_button('Save file', 'large');
                 }

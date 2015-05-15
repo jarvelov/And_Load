@@ -66,6 +66,7 @@ License:
         $sql = "CREATE TABLE IF NOT EXISTS `$table_name` (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             name varchar(255) DEFAULT '' NOT NULL,
+            slug varchar(255) DEFAULT '' NOT NULL,
             type varchar(255) DEFAULT '' NOT NULL,
             srcpath varchar(255) DEFAULT '' NOT NULL,
             minify boolean DEFAULT '0' NOT NULL,
@@ -100,14 +101,10 @@ License:
             //this will run when on the frontend
         }
 
-        add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
+        add_action( 'register_scripts_and_styles', array( &$this, 'register_scripts_and_styles' ) );
 
         do_action( 'register_scripts_and_styles' );
 
-    }
-
-    function action_callback_register_scripts_and_styles() {
-        $this->register_scripts_and_styles();
     }
 
     function render_shortcode($atts) {
