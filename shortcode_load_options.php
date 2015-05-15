@@ -515,6 +515,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_default_automatically_minify_callback($args) {
+        var_dump('HELLO');
         $options_default = get_option( 'shortcode_load_default_options' );
         $default_value = $args['default'];
 
