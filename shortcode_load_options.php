@@ -776,9 +776,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     mode:<?php echo $editor_mode; ?>
                 };
                 */
-                var editorSettings = 'hello lol';
             </script>
         <?php
+            echo 'var editorSettings = {fontSize:12,theme:' . $editor_theme . ',mode:' . $editor_mode . '};'; 
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
