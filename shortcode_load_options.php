@@ -99,7 +99,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         add_settings_section( 
             'shortcode_load_edit_file',
-            'Edit file',
+            '',
             array($this, 'shortcode_load_edit_file_options_callback'),
             'shortcode_load_edit_file_options'
         );
