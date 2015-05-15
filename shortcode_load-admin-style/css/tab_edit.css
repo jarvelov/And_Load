@@ -33,6 +33,7 @@
 
 #edit_file_file_upload_container > input.file {
   max-width: 150px;
+  display: inline-block;
 }
 
 #edit_file_revisions_select {
