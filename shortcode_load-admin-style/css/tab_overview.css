@@ -10,6 +10,11 @@
   margin: 15px 0 15px 0;
 }
 
+#new-file-button:hover {
+  background: #EFEFEF;
+  color: #4CB2E7;
+}
+
 /* Datatables CSS */
 
 .shortcode-load-table-container {

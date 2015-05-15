@@ -24,6 +24,7 @@ body {
 
 .nav-tab:hover {
   background-color: #EFEFEF;
+  color: #4CB2E7;
 }
 
 .active-tab {
