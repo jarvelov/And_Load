@@ -9,9 +9,10 @@
   margin-top: 15px;
   margin-bottom: 15px;
   border: 3px double #FEFEFE;
+  padding: 15px 0 15px 0;
 }
 
-select {
+#edit_file_input_container > select {
   max-width: 120px;
   display: inline-block;
   height: 34px;
@@ -19,7 +20,7 @@ select {
   padding: 6px 12px
 }
 
-input {
+#edit_file_input_container > input {
   max-width: 250px;
   display: inline-block;
   margin-right: 10px;
