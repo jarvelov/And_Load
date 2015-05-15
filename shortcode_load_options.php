@@ -634,6 +634,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             //File upload
             $html .= '<div id="edit_file_file_upload_container">';
+            $html .= '<div id="new_file_upload_reset_button"></div>';
             $html .= '<input type="text" id="new_file_upload_file_name" class="form-control" disabled="disabled" placeholder="Select File..." />';
 
             $html .= '<div id="new_file_upload_button" class="btn btn-primary"><span>Upload File</span>';
