@@ -55,6 +55,11 @@
   height: 34px;
 }
 
+#new_file_upload_reset_button {
+  display: none;
+  margin-right: 2px;
+}
+
 #edit_file_revisions_select {
   margin-top: -5px;
 }

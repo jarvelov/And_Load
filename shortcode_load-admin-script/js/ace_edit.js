@@ -88,20 +88,29 @@ jQuery(document).ready(function() {
     })
 
     jQuery('#new_file_upload').on('change', function() {
-        //Set file name as the value of the #new_file_upload_file_name element
-        jQuery('#new_file_upload_file_name').val( jQuery(this).val() );
+        jQuery('#new_file_upload_file_name').val( jQuery(this).val() ); //Set file name as the value of the #new_file_upload_file_name element
+        jQuery('#new_file_upload_reset_button').css({display:'inline-block'}); //Show reset button
 
         /*Check if ace is disabled (i.e. a file is already selected when this function triggers.
-            we don't want to overwrite the temporary content with our message to the user) */
+            we don't want to overwrite the temporary content with our message to the user.
+
+            ...that'd be awkward when we restore the content should the user cancel the upload) */
 
         if( ! ( isAceDisabled() ) ) {
-            var tmpContent = getAceContent;
+            var tmpContent = getAceContent();
 
             setAceDisabled();
-            setAceContent('The editor has been disabled.\n\nPlease click "Save File" to upload the selected file to edit it.\nTo cancel the upload click the red "X" next to the uploaded file\'s name to continue editing.')
+            setAceContent('The editor has been disabled.\n\nPlease click "Save File" to upload the selected file to edit it.\nTo cancel the upload click the "X" mark next to the uploaded file\'s name to continue editing.')
             setAceFontSize(20);
 
-            setTemporaryContent(tmpContent);
+            setTemporaryContent(tmpContent); //save the content that was entered before a file was selected for upload to the temporary textarea so we can restore it on 
         }
     });
+
+    jQuery('#new_file_upload_reset_button').on('click', function() {
+        jQuery('#new_file_upload').val('');
+        jQuery(this).hide();
+    });
+
+
 });
