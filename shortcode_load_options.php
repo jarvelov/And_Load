@@ -835,7 +835,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {                  
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
-                    $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
                     $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);

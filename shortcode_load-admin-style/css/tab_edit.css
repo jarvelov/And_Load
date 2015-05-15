@@ -6,7 +6,6 @@
 }
 
 #edit_file_input_container {
-  margin-top: 15px;
   margin-bottom: 15px;
   border: 3px double #FEFEFE;
   padding: 15px 0 15px 0;
@@ -59,6 +58,25 @@
 
 #edit_file_revisions_select {
   margin-top: -5px;
+}
+
+/* Ace styles */
+
+.editor-container {
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+#editor {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* Wordpress core styling */
+
+p.submit {
+  margin-top: 0;
 }
 
 .form-table {
