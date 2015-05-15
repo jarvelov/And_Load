@@ -67,6 +67,10 @@ body {
 
 /* Edit file form elements */
 
+.control-label {
+  margin-right: 5px;
+}
+
 #edit_file_input_container {
   margin-top: 15px;
   margin-bottom: 15px;
