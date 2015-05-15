@@ -505,9 +505,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
         }
 
-        $html .= '<a id="new-file-button" class="btn btn-block btn-info" href="?page=shortcode_load&amp;tab=tab_edit">New file &rarr;</a>';
-
         $html .= '</div>';
+        $html .= '<a id="new-file-button" class="btn btn-block btn-info" href="?page=shortcode_load&amp;tab=tab_edit">New file &gt;</a>';
 
         echo $html;        
     }
