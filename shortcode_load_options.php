@@ -808,8 +808,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
-                    $submit_button = get_submit_button('Save file', 'btn btn-lg btn-success');
-                    var_dump($submit_button);
+                    submit_button('Save file', 'btn btn-lg btn-success');
                 }
 
                 ?>

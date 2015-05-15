@@ -23,4 +23,6 @@ jQuery(document).ready(function() {
     jQuery('#edit_file_shortcode_display').on('focus', function() {
         jQuery(this).select();
     });
+
+    jQuery('input#submit').removeClass('button');
 });
