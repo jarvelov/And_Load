@@ -71,12 +71,13 @@ body {
   max-width: 120px;
   display: inline-block;
   height: 34px;
-  border-radius: 10px
+  border-radius: 7px;
+  padding: 6px 12px
 }
 
 #new_file_name {
   max-width: 250px;
   display: inline-block;
   margin: 0 20px 20px 0;
-  border-radius: 10px;
+  border-radius: 7px;
 }
