@@ -16,7 +16,7 @@ body {
 /* Overview */
 
 #get-started-container {
-    text-align: center;
+    border: 1px dotted #F3F3F3;
 }
 
 #get-started {
