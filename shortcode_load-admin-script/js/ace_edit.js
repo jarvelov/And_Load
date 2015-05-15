@@ -19,6 +19,7 @@ function setAceType(type) {
         case 'plain_text':
             setAceMode(type);
             setAceTabSize(4);
+            break;
         default:
             console.log('Unknown mode type: ' + type);
             break;
