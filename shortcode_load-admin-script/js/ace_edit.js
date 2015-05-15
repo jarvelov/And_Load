@@ -110,6 +110,7 @@ jQuery(document).ready(function() {
     jQuery('#new_file_upload_reset_button').on('click', function() {
         jQuery('#new_file_upload').val('');
         jQuery(this).hide();
+        setAceContent( getTemporaryContent() ); //restore previous editor content
     });
 
 
