@@ -590,7 +590,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             /* Shortcode displayed in an input field */
 
-            $html .= '<label class="control-label">Shortcode</label>';
+            $html .= '<label class="control-label">Shortcode:</label>';
 
             $shortcode_display = 'shortcode_load id=' . $id;
 
@@ -599,7 +599,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             /* Select revision dropdown */
 
-            $html .= '<label class="control-label">Current revision</label>';
+            $html .= '<label class="control-label">Current revision:</label>';
             $html .= '<select id="edit_file_revisions_select" class="form-control" name="edit_file_revisions_select">';
             for ($i=$revision; $i >= 0; $i--) {
                 $selected = ($current_revision==$i) ? ' selected="selected"' : '';
@@ -623,10 +623,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             //No file is selected, this is a new file
 
             $html = '<div id="edit_file_input_container">';
+
+            //File name input
             $html .= '<label class="control-label">File name</label>';
             $html .= '<input type="text" id="new_file_name" class="form-control" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter a file name" />';
+
+            //File type select
             $html .= '<label class="control-label">File type</label>';
             $html .= '<select id="new_file_type" class="form-control" name="shortcode_load_edit_file_options[new_file_type]"><option selected=selected value="plain_text">File type</option><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
+
+            //File upload
+            $html .= '<label class="control-label">Upload file</label>';
+            $html .= '<input type="file" id="new_file_upload" class="form-control" name="shortcode_load_edit_file_options[new_file_upload]" accept=".js|.css|.txt" />';
+
             $html .= '</div>';
 
             echo $html;
@@ -760,11 +769,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
             <script>
                 var editor;
-                jQuery(document).ready(function() {
-                    editor = ace.edit("editor");
-                    editor.setTheme("ace/theme/<?php echo $editor_theme; ?>");
-                    editor.getSession().setMode("ace/mode/<?php echo $editor_mode; ?>");
-                });
+                var editorSettings = {
+                    fontSize:12,
+                    theme:<?php echo $editor_theme; ?>,
+                    mode:<?php echo $editor_mode; ?>
+                };
             </script>
         <?php
     }

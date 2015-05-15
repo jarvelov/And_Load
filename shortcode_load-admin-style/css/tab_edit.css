@@ -27,6 +27,10 @@
   border-radius: 7px;
 }
 
+#edit_file_revisions_select {
+  margin-top: -5px;
+}
+
 .form-table {
   display: none;
 }
