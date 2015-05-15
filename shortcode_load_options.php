@@ -480,9 +480,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<div id="overview-container">';
 
         if(sizeof($files) > 0) {
+            $html .= '<p id="overview-help-text"><em>Tip!</em> Click the name of the file in the table to view/edit it.</p>';
             $html .= '<div class="shortcode-load-table-container">';
             $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered display">';
-            $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revision</th><th>Last Updated</th><th>Created</th></thead>';
+            $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 
             foreach ($files as $file) {
@@ -583,26 +584,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
-            $html = '<p><strong>File: </strong>' . $name . '</p>';
+            $html = '<div id="edit_file_input_container">';
+
+            $html .= '<label class="control-label">File name: <em>' . $name . '</em></label>';
 
             /* Select revision dropdown */
 
-            $html .= '<p><strong>Revision: </strong>';
-            $html .= '<select id="edit_file_revisions_select" name="edit_file_revisions_select">';
+            $html .= '<label class="control-label">Revision</label>';
+            $html .= '<select id="edit_file_revisions_select" class="form-control" name="edit_file_revisions_select">';
             for ($i=$revision; $i >= 0; $i--) {
                 $selected = ($current_revision==$i) ? ' selected="selected"' : '';
                 $html .= '<option value='.$i.$selected.'>'.$i.'</option>';
             }
-            $html .= "</select></p>";
+            $html .= "</select>";
 
-            /* shortcode displayed in input field */
+            /* Shortcode displayed in an input field */
 
-            $html .= '<p><strong>Shortcode: </strong>';
+            $html .= '<label class="control-label">Shortcode</label>';
 
             $shortcode_display = 'shortcode_load id=' . $id;
 
-            $html .='<input type="text" id="edit_file_shortcode_display" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
-            $html .= '</p>';
+            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
+            $html .= '</div>';
 
             echo $html;
 
