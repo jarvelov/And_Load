@@ -635,8 +635,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             //File upload
             $html .= '<div id="edit_file_file_upload_container">';
             $html .= '<label class="control-label">Upload file</label>';
+
+            $html .= '<div id="new_file_upload_button" class="btn btn-primary">';
             $html .= '<input type="file" id="new_file_upload" class="form-control" name="shortcode_load_edit_file_options[new_file_upload]" accept="*.js|*.css|*.txt" />'; //accept="*.js|*.css|*.txt"
-            $html .= '</div>';
+            $html .= '</div></div>';
 
             $html .= '</div>';
 

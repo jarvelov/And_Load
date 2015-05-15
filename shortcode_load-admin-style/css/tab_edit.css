@@ -35,7 +35,11 @@
 #new_file_upload {
   max-width: 150px;
   display: inline-block;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
+
 
 #edit_file_revisions_select {
   margin-top: -5px;
