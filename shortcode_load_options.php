@@ -128,7 +128,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = $e['code'];
+            $error_id = $e->getCode();
         }
 
         try {
@@ -680,7 +680,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
             } else { //new file, save it
                 $name = $args[ 'new_file_name' ];
-                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $type;
+                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $args[ 'new_file_type' ];
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
