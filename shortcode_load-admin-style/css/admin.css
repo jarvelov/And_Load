@@ -22,7 +22,7 @@ body {
 
 #new-file-button {
   max-width: 200px;
-  margin-top: 20px;
+  margin: 15px 0 15px 0;
 }
 
 /* Nav bar tabs */
