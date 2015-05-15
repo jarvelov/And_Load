@@ -64,3 +64,19 @@ body {
 #overview-table_paginate {
   float: right;
 }
+
+/* Edit file form elements */
+
+#new_file_type {
+  max-width: 120px;
+  display: inline-block;
+  height: 34px;
+  border-radius: 10px
+}
+
+#new_file_name {
+  max-width: 250px;
+  display: inline-block;
+  margin: 0 20px 20px 0;
+  border-radius: 10px;
+}
