@@ -634,7 +634,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             //File upload
             $html .= '<label class="control-label">Upload file</label>';
-            $html .= '<input type="file" id="new_file_upload" class="form-control" name="shortcode_load_edit_file_options[new_file_upload]" accept=".js|.css|.txt" />';
+            $html .= '<input type="file" id="new_file_upload" class="form-control" name="shortcode_load_edit_file_options[new_file_upload]" accept="*.js|*.css|*.txt" />'; //accept="*.js|*.css|*.txt"
 
             $html .= '</div>';
 
@@ -769,11 +769,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
             <script>
                 var editor;
+                /*
                 var editorSettings = {
                     fontSize:12,
                     theme:<?php echo $editor_theme; ?>,
                     mode:<?php echo $editor_mode; ?>
                 };
+                */
+                var editorSettings = 'hello lol';
             </script>
         <?php
     }
