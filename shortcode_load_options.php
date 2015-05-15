@@ -750,6 +750,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Ace editor settings
         $editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : 'monokai';
+        $editor_default_font_size = 12;
 
         if($type == 'js') {
             $editor_mode = 'javascript';
@@ -768,18 +769,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         ?>
             <script>
-                var editor;
-                var editorSettings;
-                /*
+                var editor;               
                 var editorSettings = {
-                    fontSize:12,
-                    theme:<?php echo $editor_theme; ?>,
-                    mode:<?php echo $editor_mode; ?>
+                    fontSize:"<?php echo $editor_default_font_size; ?>",
+                    theme:"<?php echo $editor_theme; ?>",
+                    mode:"<?php echo $editor_mode; ?>"
                 };
-                */
             </script>
         <?php
-            echo 'editorSettings = {fontSize:12,theme:' . $editor_theme . ',mode:' . $editor_mode . '};'; 
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {
