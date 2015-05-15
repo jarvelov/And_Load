@@ -840,6 +840,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
 
+                    submit_button('Save file', 'btn btn-lg btn-success');
+
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
