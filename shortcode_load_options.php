@@ -699,17 +699,22 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_add_settings_error($array) {
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
-
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
-                $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully! <a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
                 $message_type = 'updated';
+
+                $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
+
+                if($file_data['operation'] =='updated') {
+                    $message .= '<a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
+                }
                 
             } elseif($file_data['success'] == false) {
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
-                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#file_error_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
                 $message_type = 'error';
+
+                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#file_error_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
             }
         }
 
