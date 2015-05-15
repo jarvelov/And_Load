@@ -705,7 +705,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
 
-                if($file_data['operation'] =='updated') {
+                if($file_data['operation'] == 'saved') {
                     $message .= '<a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'">Click here to view/edit.</a>';
                 }
                 
