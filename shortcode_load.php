@@ -101,10 +101,14 @@ License:
             //this will run when on the frontend
         }
 
-        add_action( 'register_scripts_and_styles', array( &$this, 'register_scripts_and_styles' ) );
+        add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
 
         do_action( 'register_scripts_and_styles' );
 
+    }
+
+    function action_callback_register_scripts_and_styles() {
+        $this->register_scripts_and_styles();
     }
 
     function render_shortcode($atts) {
