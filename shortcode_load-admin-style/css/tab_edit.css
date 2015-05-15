@@ -28,7 +28,7 @@
 
 #edit_file_file_upload_container {
   position: absolute;
-  right: 100px;
+  right: 50px;
   display: inline-block;
 }
 
@@ -47,6 +47,11 @@
 #new_file_upload_button {
   position: relative;
   overflow: hidden;
+}
+
+#new_file_upload_file_name {
+  display: inline-block;
+  max-width: 120px;
 }
 
 
