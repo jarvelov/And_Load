@@ -779,7 +779,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             <script>
                 var editor;               
                 var editorSettings = {
-                    fontSize:"<?php echo $editor_default_font_size; ?>",
+                    fontSize:<?php echo $editor_default_font_size; ?>,
                     theme:"<?php echo $editor_theme; ?>",
                     mode:"<?php echo $editor_mode; ?>"
                 };
