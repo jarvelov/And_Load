@@ -1,3 +1,5 @@
+/* Ace Functions */
+
 function setAceTabSize(size) {
     editor.getSession().setTabSize(size);
 }
@@ -68,6 +70,34 @@ function getTemporaryContent() {
     return jQuery('#edit_file_temporary_textarea').val();   
 }
 
+function handleUpload(fileName) {
+    jQuery('#new_file_upload_file_name').val( fileName ); //Set file name of the selected file as the value of the #new_file_upload_file_name input element
+    jQuery('#new_file_upload_reset_button').css( { display: 'inline-block' } ); //Show reset button
+
+    /*Check if ace is disabled (i.e. a file is already selected when this function triggers.
+        we don't want to overwrite the temporary content with our message to the user.
+
+        ...that'd be awkward when we restore the content should the user cancel the upload) */
+
+    if( ! ( isAceDisabled() ) ) {
+        var tmpContent = getAceContent();
+
+        setAceDisabled();
+        setAceContent('The editor has been disabled.\n\nPlease click "Save File" to upload the selected file to edit it.\nTo cancel the upload click the "X" mark next to the uploaded file\'s name to continue editing.')
+        setAceFontSize(20);
+
+        setTemporaryContent(tmpContent); //save the content that was entered before a file was selected for upload to the temporary textarea so we can restore it on 
+    }
+}
+
+function handleUploadCanceled() {
+    jQuery('#new_file_upload').val(''); //reset file upload
+    jQuery('#new_file_upload_file_name').val(''); //blank input element holding selected file's name
+
+    setAceFontSize('default'); //set default Ace font size
+    setAceContent( getTemporaryContent() ); //restore previous editor content
+}
+
 //Get the new data and save it to the temporary textarea
 function contentChanged() {
     setTemporaryContent( getAceContent() );
@@ -76,6 +106,8 @@ function contentChanged() {
 jQuery(document).ready(function() {
     //Initialize Ace with default settings
     editor = ace.edit("editor");
+    editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
+
     setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
 
@@ -88,34 +120,12 @@ jQuery(document).ready(function() {
     })
 
     jQuery('#new_file_upload').on('change', function() {
-        jQuery('#new_file_upload_file_name').val( jQuery(this).val() ); //Set file name as the value of the #new_file_upload_file_name element
-        jQuery('#new_file_upload_reset_button').css({display:'inline-block'}); //Show reset button
-
-        /*Check if ace is disabled (i.e. a file is already selected when this function triggers.
-            we don't want to overwrite the temporary content with our message to the user.
-
-            ...that'd be awkward when we restore the content should the user cancel the upload) */
-
-        if( ! ( isAceDisabled() ) ) {
-            var tmpContent = getAceContent();
-
-            setAceDisabled();
-            setAceContent('The editor has been disabled.\n\nPlease click "Save File" to upload the selected file to edit it.\nTo cancel the upload click the "X" mark next to the uploaded file\'s name to continue editing.')
-            setAceFontSize(20);
-
-            setTemporaryContent(tmpContent); //save the content that was entered before a file was selected for upload to the temporary textarea so we can restore it on 
-        }
+        fileName = jQuery(this).val();
+        handleUpload(fileName);
     });
 
     jQuery('#new_file_upload_reset_button').on('click', function() {
-        jQuery('#new_file_upload').val(''); //reset file upload
-        jQuery('#new_file_upload_file_name').val(''); //blank input element holding selected file's name
-        
+        handleUploadCanceled();
         jQuery(this).hide(); //hide reset button
-
-        setAceFontSize('default'); //set default Ace font size
-        setAceContent( getTemporaryContent() ); //restore previous editor content
     });
-
-
 });
