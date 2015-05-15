@@ -9,22 +9,6 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-.hidden-display{
-  display: none;
-}
-
-/* Overview */
-
-#overview-container {
-    border: 5px double #F3F3F3;
-    padding: 0 20px 20px 20px;
-}
-
-#new-file-button {
-  max-width: 200px;
-  margin: 15px 0 15px 0;
-}
-
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
@@ -46,59 +30,6 @@ body {
   background-color: #F3F3F3;
 }
 
-.shortcode-load-table-container {
-  max-width: 100%;
-  margin-top: 20px;
-}
-
 .margin-bottom-5 {
   margin-bottom: 5px !important;
-}
-
-/* Datatables CSS */
-
-#overview-table_length {
-  float: left;
-}
-
-#overview-table_filter {
-  float: right;
-}
-
-#overview-table_info {
-  float: left;
-}
-
-#overview-table_paginate {
-  float: right;
-}
-
-/* Edit file form elements */
-
-.control-label {
-  margin-right: 5px;
-}
-
-#edit_file_input_container {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-#new_file_type {
-  max-width: 120px;
-  display: inline-block;
-  height: 34px;
-  border-radius: 7px;
-  padding: 6px 12px
-}
-
-#new_file_name {
-  max-width: 250px;
-  display: inline-block;
-  margin-right: 10px;
-  border-radius: 7px;
-}
-
-.form-table {
-  display: none;
 }

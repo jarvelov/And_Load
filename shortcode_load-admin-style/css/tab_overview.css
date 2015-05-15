@@ -1,0 +1,35 @@
+/* Overview */
+
+#overview-container {
+    border: 5px double #F3F3F3;
+    padding: 0 20px 20px 20px;
+}
+
+#new-file-button {
+  max-width: 200px;
+  margin: 15px 0 15px 0;
+}
+
+/* Datatables CSS */
+
+.shortcode-load-table-container {
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+
+#overview-table_length {
+  float: left;
+}
+
+#overview-table_filter {
+  float: right;
+}
+
+#overview-table_info {
+  float: left;
+}
+
+#overview-table_paginate {
+  float: right;
+}

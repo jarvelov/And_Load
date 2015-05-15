@@ -517,7 +517,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_default_automatically_minify_callback($args) {
-        var_dump('HELLO');
         $options_default = get_option( 'shortcode_load_default_options' );
         $default_value = $args['default'];
 
@@ -640,10 +639,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         this data will then be processed when the page is reloaded again (Save Changes button is pressed)
         The textarea will be continously updated with javascript
         */
-        echo '<textarea id="edit_file_temporary_textarea" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
+        echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $options_edit_file[ 'edit_file_temporary_textarea' ] . '</textarea>';
 
         //We also need the id to refer to later, save this to a simple input field as well
-        echo '<input type="text" id="edit_file_current_id" class="hidden-display" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+        echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
         
     }
 
@@ -799,7 +798,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_load_file('datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false);
                     $this->shortcode_load_load_file('datatables-script-bootstrap', 'admin-script/js/dataTables.bootstrap.js', true, true);
 
-                    $this->shortcode_load_load_file('tab_overview', 'admin-script/js/tab_overview.js', true, true);
+                    $this->shortcode_load_load_file('tab_overview_js', 'admin-script/js/tab_overview.js', true, true);
+                    $this->shortcode_load_load_file('tab_overview_css', 'admin-style/css/tab_overview.css', false, true);
 
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
@@ -813,7 +813,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('ace-css', 'admin-style/css/ace.css', false, true);
                     $this->shortcode_load_load_file('ace-editor-js', 'admin-script/js/ace_edit.js', true, true);
-                    $this->shortcode_load_load_file('tab_edit', 'admin-script/js/tab_edit.js', true, true);
+                    $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
+                    $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
