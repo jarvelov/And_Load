@@ -610,8 +610,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } else {
             //No file is selected, this is a new file
 
-            echo '<input type="text" id="new_file_name" class="form-control" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter file name" />';
-            echo '<select id="new_file_type" class="form-control" name="shortcode_load_edit_file_options[new_file_type]"><option selected=selected value="plain_text">File type</option><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
+            $html = '<div id="edit_file_input_container">';
+            $html .= '<label class="control-label">File name</label>';
+            $html .= '<input type="text" id="new_file_name" class="form-control" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter a file name" />';
+            $html .= '<label class="control-label">File type</label>';
+            $html .= '<select id="new_file_type" class="form-control" name="shortcode_load_edit_file_options[new_file_type]"><option selected=selected value="plain_text"></option><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
+            $html .= '</div>';
+
+            echo $html;
 
             $this->shortcode_load_editor_init('Enter a file name and type to begin...', 'plain_text');
         }

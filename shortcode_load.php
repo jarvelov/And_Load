@@ -89,7 +89,7 @@ License:
         load_plugin_textdomain( self::slug, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
         // Load JavaScript and stylesheets
 
-        // Register the shortcode [shortcode_load]
+        // Register the shortcode: [shortcode_load]
         add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
         
         if ( is_admin() ) {
@@ -97,8 +97,6 @@ License:
                 require(SLDIR . '/' . self::slug.'_options.php');
             $this->options = new ShortcodeLoad_Options();
 
-        } else {
-            //this will run when on the frontend
         }
 
         add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
@@ -119,6 +117,7 @@ License:
             'args' => ''
             ), $atts));
 
+        //TODO handle in_header arg
         if($id) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 

@@ -67,6 +67,11 @@ body {
 
 /* Edit file form elements */
 
+#edit_file_input_container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #new_file_type {
   max-width: 120px;
   display: inline-block;
@@ -78,6 +83,6 @@ body {
 #new_file_name {
   max-width: 250px;
   display: inline-block;
-  margin: 0 20px 20px 0;
+  margin-right: 10px;
   border-radius: 7px;
 }
