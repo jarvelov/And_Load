@@ -13,8 +13,11 @@ body {
   display: none;
 }
 
-.center {
+/* Overview */
+
+#get-started {
     text-align: center;
+    margin: 30px 20%;
 }
 
 /* Nav bar tabs */
@@ -89,4 +92,8 @@ body {
   display: inline-block;
   margin-right: 10px;
   border-radius: 7px;
+}
+
+.form-table {
+  display: none;
 }
