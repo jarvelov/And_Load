@@ -109,6 +109,8 @@ jQuery(document).ready(function() {
 
     jQuery('#new_file_upload_reset_button').on('click', function() {
         jQuery('#new_file_upload').val(''); //reset file upload
+        jQuery('#new_file_upload_file_name').val(''); //blank input element holding selected file's name
+        
         jQuery(this).hide(); //hide reset button
 
         setAceFontSize('default'); //set default Ace font size
