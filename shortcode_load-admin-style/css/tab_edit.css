@@ -23,8 +23,16 @@
 #edit_file_input_container > input {
   max-width: 250px;
   display: inline-block;
-  margin-right: 10px;
   border-radius: 7px;
+}
+
+#edit_file_file_upload_container {
+  display: inline-block;
+  text-align: right;
+}
+
+#edit_file_file_upload_container > input.file {
+  max-width: 150px;
 }
 
 #edit_file_revisions_select {

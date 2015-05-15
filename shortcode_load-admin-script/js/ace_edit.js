@@ -16,8 +16,11 @@ function setAceType(type) {
             setAceMode(type);
             setAceTabSize(2);
             break;
+        case 'plain_text':
+            setAceMode(type);
+            setAceTabSize(4);
         default:
-            console.log('Unknown mode type');
+            console.log('Unknown mode type: ' + type);
             break;
     }
 }
