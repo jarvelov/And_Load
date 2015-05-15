@@ -108,8 +108,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery('#new_file_upload_reset_button').on('click', function() {
-        jQuery('#new_file_upload').val('');
-        jQuery(this).hide();
+        jQuery('#new_file_upload').val(''); //reset file upload
+        jQuery(this).hide(); //hide reset button
+
+        setAceFontSize('default'); //set default Ace font size
         setAceContent( getTemporaryContent() ); //restore previous editor content
     });
 
