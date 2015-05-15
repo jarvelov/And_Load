@@ -1,3 +1,8 @@
+function setSubmitButtonClass() {
+    console.log('eteee');
+    jQuery('input#submit').removeClass('button');
+}
+
 jQuery(document).ready(function() {
     //Check for change in revision dropdown and redirect to URL with &revision=value param
     jQuery('#edit_file_revisions_select').change(function() {
@@ -24,5 +29,5 @@ jQuery(document).ready(function() {
         jQuery(this).select();
     });
 
-    jQuery('input#submit').removeClass('button');
+    setSubmitButtonClass();
 });
