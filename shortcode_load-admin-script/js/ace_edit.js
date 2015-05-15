@@ -8,7 +8,7 @@ function setAceType(type) {
 
 function setAceMode(type) {
     switch(type) {
-        case 'js':
+        case 'javascript':
             setAceType(type);
             setAceTabSize(4);
             break;
