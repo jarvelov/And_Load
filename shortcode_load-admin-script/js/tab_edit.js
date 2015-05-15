@@ -1,5 +1,4 @@
 function setSubmitButtonClass() {
-    console.log('eteee');
     jQuery('input#submit').removeClass('button');
 }
 
