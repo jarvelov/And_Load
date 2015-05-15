@@ -769,6 +769,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
             <script>
                 var editor;
+                var editorSettings;
                 /*
                 var editorSettings = {
                     fontSize:12,
@@ -778,7 +779,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 */
             </script>
         <?php
-            echo 'var editorSettings = {fontSize:12,theme:' . $editor_theme . ',mode:' . $editor_mode . '};'; 
+            echo 'editorSettings = {fontSize:12,theme:' . $editor_theme . ',mode:' . $editor_mode . '};'; 
     }
 
     function shortcode_load_load_file($name, $path, $is_script = false, $prefixSlug = false) {

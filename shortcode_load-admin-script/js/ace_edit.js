@@ -58,8 +58,9 @@ function contentChanged() {
 jQuery(document).ready(function() {
     //Initialize Ace with default settings
     editor = ace.edit("editor");
-    setAceTheme( editorSettings['theme'] );
+/*    setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
+    */
 
     //Register a listen event on any changes made with editor
     editor.getSession().on('change', contentChanged);
