@@ -501,8 +501,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<div id="get-started-container">';
             $html .= '<h2>No scripts or styles created yet!</h2>';
             $html .= '<div id="get-started">';
-            $html .= '<a class="btn btn-lg btn-info" href="?page=shortcode_load&amp;tab=tab_edit">Click here</a>';
-            $html .= '<p>or the "Edit file" tab above to get started!</p>';
+            $html .= '<p>To begin click the button below or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
+            $html .= '<a class="btn btn-lg btn-info" href="?page=shortcode_load&amp;tab=tab_edit">New file</a>';
+            $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
             $html .= '</div></div>';
         }
 

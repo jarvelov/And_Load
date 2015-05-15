@@ -15,9 +15,16 @@ body {
 
 /* Overview */
 
-#get-started {
+#get-started-container {
     text-align: center;
-    margin: 30px 20%;
+}
+
+#get-started {
+  border: 5px solid #FEFEFE;
+  border-radius: 15px;
+  padding: 20px;
+  margin-right: 15px;
+  display: inline-block;
 }
 
 /* Nav bar tabs */
