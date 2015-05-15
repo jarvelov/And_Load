@@ -2,14 +2,16 @@
 
 .control-label {
   margin-right: 5px;
+  margin-left: 10px;
 }
 
 #edit_file_input_container {
   margin-top: 15px;
   margin-bottom: 15px;
+  border: 3px double #FEFEFE;
 }
 
-#new_file_type {
+select {
   max-width: 120px;
   display: inline-block;
   height: 34px;
@@ -17,7 +19,7 @@
   padding: 6px 12px
 }
 
-#new_file_name {
+input {
   max-width: 250px;
   display: inline-block;
   margin-right: 10px;
