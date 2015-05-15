@@ -477,7 +477,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $files = $this->shortcode_load_get_scripts_styles();
 
         $html = '<div id="overview-container">';
-        
+        $html .= '<a id="new-file-button" class="btn btn-block btn-info" href="?page=shortcode_load&amp;tab=tab_edit">New file &rarr;</a>';
+
         if(sizeof($files) > 0) {
             $html .= '<div class="shortcode-load-table-container">';
             $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered display">';
@@ -501,9 +502,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '</tbody></table></div>';
         } else {
             $html .= '<h2>No scripts or styles created yet!</h2>';
-            $html .= '<p>To begin click the button below or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
+            $html .= '<p>To begin click the button above or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
-            $html .= '<a id="get-started-button" class="btn btn-lg btn-block btn-info" href="?page=shortcode_load&amp;tab=tab_edit">New file &rarr;</a>';
         }
 
         $html .= '</div>';
