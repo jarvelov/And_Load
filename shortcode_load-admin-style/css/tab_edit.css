@@ -27,11 +27,12 @@
 }
 
 #edit_file_file_upload_container {
+  position: absolute;
+  right: 100px;
   display: inline-block;
-  text-align: right;
 }
 
-#edit_file_file_upload_container > input.file {
+#new_file_upload {
   max-width: 150px;
   display: inline-block;
 }
