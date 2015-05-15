@@ -9,6 +9,14 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.hidden-display{
+  display: none;
+}
+
+.center {
+    text-align: center;
+}
+
 /* Nav bar tabs */
 
 .nav-tab-wrapper {
@@ -28,10 +36,6 @@ body {
 
 .active-tab {
   background-color: #F3F3F3;
-}
-
-.hidden-display{
-  display: none;
 }
 
 .shortcode-load-table-container {

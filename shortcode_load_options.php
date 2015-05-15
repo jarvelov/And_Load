@@ -498,7 +498,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '</tbody></table></div>';
         } else {
-            $html .= '<div id="get-started">No scripts or styles created yet! <a href="?page=shortcode_load&amp;tab=tab_edit">Click here or the "Edit file" tab above to get started!</div>';
+            $html .= '<div id="get-started" class="center"><h2>No scripts or styles created yet!</h2><a class="btn btn-lg btn-info" href="?page=shortcode_load&amp;tab=tab_edit">Click here</a><p>or the "Edit file" tab above to get started!</p></div>';
         }
 
         echo $html;        
