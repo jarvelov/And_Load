@@ -160,7 +160,9 @@ function handleUploadCanceled() {
     setAceFontSize('default'); //set default Ace font size
     setAceContent( getTemporaryContent() ); //restore previous editor content
     setAceType( editorSettings['mode'] ); //set ace editor type mode back to default
-    setAceEnabled();
+    jQuery('#new_file_type').val( editorSettings['mode'] ); //set drop down type to default
+
+    setAceEnabled(); //enable editor again
 }
 
 /* Listeners */
