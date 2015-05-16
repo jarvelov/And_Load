@@ -872,6 +872,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_upload = ( $args[ 'new_file_upload' ] ) ? $args[ 'new_file_upload' ] : NULL;
 
         var_dump($args);
+        var_dump(( empty( $id ) );
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
 
