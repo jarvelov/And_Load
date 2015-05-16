@@ -476,7 +476,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $files = $this->shortcode_load_get_scripts_styles();
 
-        $html = '<a id="new-file-button" class="btn btn-block btn-default" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
+        $html = '<a id="new-file-button" class="btn btn-block btn-sm btn-default" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
         $html .= '<div id="overview-container">';
 
         if(sizeof($files) > 0) {
