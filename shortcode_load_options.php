@@ -558,8 +558,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         $default_value = $args['default'];
 
-        $html = '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
-        $html .= '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts? --BROKEN--</small></label>';
+        $html = '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts</small></label>';
+        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
+
         echo $html;
     }
 
@@ -923,6 +924,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace editor settings
 
         //TODO after plugin is installed the default options need to be saved to the database
+        var_dump($options_default['editor_default_theme']);
         extract( $options_default['editor_default_theme'] );
 
         switch ($editor_default_mode_type) {
