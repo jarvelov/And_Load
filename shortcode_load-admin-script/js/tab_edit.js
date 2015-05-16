@@ -3,7 +3,9 @@
 function setAceOptions(optionName, optionValue) {
     options = {};
     options[optionName] = optionValue;
-    
+
+    console.log('setting option ' + optionName + 'to value: ' + optionValue );
+
     editor.setOptions(options);
 }
 
@@ -18,7 +20,7 @@ function setAceMode(mode) {
 }
 
 function setAceLineNumbers(state) {
-    setAceOptions('showLineNumbers', state);
+    setAceOptions( 'showLineNumbers', state );
 }
 
 function setAceType(type) {
@@ -51,7 +53,7 @@ function setAceFontSize(size) {
         size = editorSettings['fontSize'];
     }
 
-    setAceOptions('fontSize', size);
+    setAceOptions( 'fontSize', parseInt(size) );
 }
 
 /* Ace content functions */
@@ -69,11 +71,11 @@ function isAceDisabled() {
 }
 
 function setAceDisabled() {
-    editor.setReadOnly(true);
+    setAceOptions( 'readOnly', true);
 }
 
 function setAceEnabled() {
-    editor.setReadOnly(false);
+    setAceOptions( 'readOnly', false);
 }
 
 /* Temporary content functions */
