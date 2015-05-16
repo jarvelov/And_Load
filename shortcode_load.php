@@ -4,7 +4,7 @@
 Plugin Name: Shortcode Load
 Plugin URI: http://jarvelov.se/portfolio/shortcode_load
 Description: Load style or script files using a shortcode.
-Version: 0.8a
+Version: 0.9a
 Author: Tobias Järvelöv
 Author Email: tobias@jarvelov.se
 License:
