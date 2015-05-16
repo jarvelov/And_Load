@@ -1,7 +1,7 @@
 /** Default Tab CSS **/
 
 .default_editor_setting_container {
-  border: 3px double #FEFEFE;
+  display: inline-block;
 }
 
 .default_editor_setting_container > select {
