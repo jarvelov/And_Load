@@ -1,6 +1,6 @@
 /* Overview */
 
-#overview-help-text {
+#overview_help_text {
   font-size: 11px;
   top: 10px;
   left: -10px;
@@ -11,49 +11,49 @@
   padding: 3px;
 }
 
-#help-title {
+#help_title {
   font-weight: bold;
 }
 
-#help-text {
+#help_text {
   margin-left: 2px;
 }
 
-#overview-container {
+#overview_container {
     border: 5px double #F3F3F3;
     padding: 0 20px 20px 20px;
 }
 
-#new-file-button {
+#new_file_button {
   max-width: 200px;
   margin: 15px 0 15px 0;
 }
 
-#new-file-button:hover {
+#new_file_button:hover {
   background: #EFEFEF;
   color: #4CB2E7;
 }
 
 /* Datatables CSS */
 
-.shortcode-load-table-container {
+.shortcode_load_table_container {
   max-width: 100%;
   margin-top: 20px;
 }
 
 
-#overview-table_length {
+#overview_table_length {
   float: left;
 }
 
-#overview-table_filter {
+#overview_table_filter {
   float: right;
 }
 
-#overview-table_info {
+#overview_table_info {
   float: left;
 }
 
-#overview-table_paginate {
+#overview_table_paginate {
   float: right;
 }

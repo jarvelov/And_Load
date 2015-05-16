@@ -12,26 +12,26 @@ body {
 
 /* Nav bar tabs */
 
-.nav-tab-wrapper {
+.nav_tab_wrapper {
   margin-top: 1em;
   border-bottom: 5px solid #FEFEFE;
   display: block;
 }
 
-.nav-tab {
+.nav_tab {
   font-size: 1.2em;
   line-height: 1em;
 }
 
-.nav-tab:hover {
+.nav_tab:hover {
   background-color: #EFEFEF;
   color: #4CB2E7;
 }
 
-.active-tab {
+.active_tab {
   background-color: #F3F3F3;
 }
 
-.margin-bottom-5 {
+.margin_bottom_5 {
   margin-bottom: 5px !important;
 }

@@ -504,20 +504,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $files = $this->shortcode_load_get_scripts_styles();
 
-        $html = '<a id="new-file-button" class="btn btn-block btn-sm btn-default" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
-        $html .= '<div id="overview-container">';
+        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
+        $html .= '<div id="overview_container">';
 
         if(sizeof($files) > 0) {
-            $html .= '<p id="overview-help-text"><span id="help-title">Tip!</span><span id="help-text">Click the name of the file in the table to view/edit it.</span></p>';
-            $html .= '<div class="shortcode-load-table-container">';
-            $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered display">';
+            $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
+            $html .= '<div class="shortcode_load_table_container">';
+            $html .= '<table id="overview_table" class="table table-hover table-striped table-bordered display">';
             $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
 
             foreach ($files as $file) {
                 extract($file); //id, name, slug, type, revision, updated_timestamp, created_timestamp
 
-                $html .= '<tr id="shortcode-load-id-'. $id .'" class="shortcode-load-file-'. $type . '">';
+                $html .= '<tr>';
                 $html .= '<td>' . $id . '</td>';
                 $html .= '<td>' . strtoupper($type) . '</td>';
                 $html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="">' . $name . '</a></td>';
@@ -562,7 +562,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $editor_themes = $args['editor_themes'];
 
-        $html = '<p class="margin-bottom-5"><strong><small>Theme</p></strong></small>';
+        $html = '<p class="margin_bottom_5"><strong><small>Theme</p></strong></small>';
         $html .= '<select id="default_editor_theme" name="shortcode_load_default_options[default_editor_theme]">';
 
         for ($i=0; $i < sizeof($editor_themes); $i++) { 
@@ -701,6 +701,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_help_callback() {
         $html = '<div id="shortcode_load_help">';
         $html .= '<h4>Help and how-to</h4>';
+        $html .= '<div id="shortcode_load_help_getting_started">';
+        $html .= '</div>'; // ./shortcode_load_help_getting_started
         $html .= '</div>'; // ./shortcode_load_help
 
         echo $html;
@@ -860,7 +862,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         //Build Ace editor
-        $container = '<div class="editor-container">';
+        $container = '<div class="editor_container">';
         $editor = '<div id="editor">'.$content.'</div>';
         $container .= $editor . '</div>';
 
@@ -899,11 +901,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         ?>
         <div class="wrap">
-            <div class="nav-tab-wrapper">
-                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav-tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active-tab' : '' ?>">Overview</a>
-                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav-tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active-tab' : '' ?>">Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav-tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active-tab' : '' ?>">Edit file</a>
-                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav-tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active-tab' : '' ?>">Help</a>
+            <div class="nav_tab_wrapper">
+                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>">Overview</a>
+                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>">Default Options</a>
+                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>">Edit file</a>
+                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>">Help</a>
             </div>
 
             <form action='options.php' method='post'>
