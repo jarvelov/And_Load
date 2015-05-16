@@ -705,7 +705,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_help_documentation_callback() {
         $html = '<div id="shortcode_load_help_documentation">';
-        $html .= '<p>'
+        $html .= '<p>';
         $html .= '</div>'; // ./shortcode_load_help_documentation
         echo $html;
     }
