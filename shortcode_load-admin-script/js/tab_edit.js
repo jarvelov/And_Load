@@ -81,7 +81,9 @@ function setAceEnabled() {
 /* Temporary content storage functions */
 
 function setTemporaryContent(content) {
-    jQuery('#edit_file_temporary_textarea').val(content);
+    if( ! ( isAceDisabled ) ) {
+        jQuery('#edit_file_temporary_textarea').val(content);
+    }
 }
 
 function getTemporaryContent() {
