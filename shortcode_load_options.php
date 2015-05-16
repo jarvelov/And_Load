@@ -597,7 +597,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</div>'; // ./editor_default_font_size_setting
 
         //Ace editor default type
-        $html .= '<label><strong><small>Theme</small></strong></label>';
+        $html .= '<label><strong><small>Default type</small></strong></label>';
         $editor_default_type = isset ( $options_default['editor_default_type'] ) ? $options_default['editor_default_type'] : $args['editor_default_type'];
 
         //Ace editor default print margin
