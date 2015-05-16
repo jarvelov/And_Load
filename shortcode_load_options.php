@@ -875,7 +875,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
        
         $file_datas = array();
 
-        var_dump($id);
+        var_dump($file_content);
         break;
 
         if( ! ( empty( $id ) ) ) { //file already exists, add revision
