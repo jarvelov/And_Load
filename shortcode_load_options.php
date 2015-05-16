@@ -859,11 +859,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_edit_file_callback_sanitize($args) {
         $options_default = get_option( 'shortcode_load_default_options' );      
         $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
+        $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
+
         $minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
 
         $file_datas = array();
 
-        if(!empty($file_content)) {
+        if( ! ( empty( $file_content ) ) ) {
             $id = $args['edit_file_current_id'];
 
             if($id) { //file already exists, add revision
@@ -874,20 +876,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
-            } else { //new file, save it
-                $name = $args[ 'new_file_name' ];
-                $type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $args[ 'new_file_type' ];
+            } elseif( ! (empty( $file_name ) ) ) { //new file, save it
+                $file_type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $args[ 'new_file_type' ];
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
                         'content' => $file_content,
-                        'name' => $name,
-                        'type' => $type,
+                        'name' => $file_name,
+                        'type' => $file_type,
                         'minify' => $minify
                     )
-                );                
+                );
             }
             $this->shortcode_load_add_settings_error($file_datas);
+        } elseif( ! ( empty() ) ) {
+
         }
     }
 
@@ -961,8 +964,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 var editorSettings = {
                     fontSize:<?php echo $editor_default_font_size; ?>,
                     tabSize: <?php echo $editor_default_tab_size; ?>,
-                    theme:"ace/theme/<?php echo $editor_default_theme; ?>",
-                    mode:"ace/mode/<?php echo $editor_default_mode_type; ?>",
+                    theme:"<?php echo $editor_default_theme; ?>",
+                    mode:"<?php echo $editor_default_mode_type; ?>",
                     showPrintMargin: "<?php echo $editor_default_print_margin; ?>",
                     printMarginColumn: "<?php echo $editor_default_print_margin_column; ?>",
                     showLineNumbers: <?php echo $editor_default_show_line_numbers; ?>
