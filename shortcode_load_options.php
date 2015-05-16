@@ -716,7 +716,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_help_credits_callback() {
         $html = '<div id="shortcode_load_help_credits">';
-        $html .= '<h4>Credits</h4>'
+        $html .= '<h4>Credits</h4>';
         $html .= '</div>'; // ./shortcode_load_help_credits
 
         echo $html;
