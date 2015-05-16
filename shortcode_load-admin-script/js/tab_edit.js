@@ -20,7 +20,7 @@ function setAceMode(mode) {
 }
 
 function setAceTheme(theme) {
-    setAceOptions('theme', 'ace/theme' + theme);
+    setAceOptions('theme', 'ace/theme/' + theme);
 }
 
 function setAceLineNumbers(state) {
