@@ -1040,7 +1040,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>">Help</a>
             </div>
 
-            <form action='options.php' method='post'>
+            <form action='options.php' method='post' enctype="multipart/form-data">
                 
                 <h2>Shortcode Load</h2>
                 
