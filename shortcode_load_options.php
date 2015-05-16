@@ -632,7 +632,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Print margin column</small></strong></label>';
-        $html .= '<input type="text" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column] class="form-control" value="<?php echo $editor_default_print_margin_column; ?>" />';
+        $html .= '<input type="text" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column] class="form-control" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
         //Ace editor default show line numbers
