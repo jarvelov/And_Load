@@ -668,6 +668,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $id = (isset($_GET['id'])) ? intval($_GET['id']) : false;
         $revision_override = (isset($_GET['revision'])) ? intval($_GET['revision']) : false;
 
+        $options_default = get_option( 'shortcode_load_default_options' );
+        $editor_default_mode_type = $options_default['editor_default_mode_type'];
+
         if($id) { //check if file id is supplied and load the content
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -730,7 +733,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 //init editor with content
                 $this->shortcode_load_editor_init($content, $type);
             } else {
-                //TODO handle error
+                $this->shortcode_load_editor_init('File content was not found! Please report this error to the developer!', $editor_default_mode_type);
             }
         } else {
             //No file is selected, this is a new file
@@ -761,8 +764,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             echo $html;
 
-            $options_default = get_option( 'shortcode_load_default_options' );
-            $editor_default_mode_type = $options_default['editor_default_mode_type'];
             $this->shortcode_load_editor_init(false, $editor_default_mode_type);
         }
     }
@@ -1039,7 +1040,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>">Help</a>
             </div>
 
-            <form id="shortcode_load_form" action='options.php' method='post' enctype="multipart/form-data">
+            <form action='options.php' method='post' enctype="multipart/form-data">
                 
                 <h2>Shortcode Load</h2>
                 
