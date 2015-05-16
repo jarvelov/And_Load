@@ -871,6 +871,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //This is NULL if no file was selected for upload on POST
         $file_upload = ( $args[ 'new_file_upload' ] ) ? $args[ 'new_file_upload' ] : NULL;
 
+        var_dump($args);
+
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
 
         $file_datas = array();
