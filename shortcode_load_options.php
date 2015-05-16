@@ -539,7 +539,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '</tbody></table></div>';
         } else {
             $html .= '<h2>No scripts or styles created yet!</h2>';
-            $html .= '<p>To begin click the button below or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
+            $html .= '<p>To begin click the <em>"New file &raquo;"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
         }
 
@@ -560,8 +560,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $default_minify_checkbox = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value;
 
-        $html = '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts</small></label>';
+        $html = '<div class="default_minify_setting_container">';
+
+        $html .= '<label><strong><small>Automatically minify styles and scripts</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
+
+        $html .= '</div>'; // ./default_minify_setting_container
 
         echo $html;
     }
@@ -581,7 +585,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
             $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
-            $html .= '<option value='.$editor_theme_slug.$selected.'>'.$editor_theme_name.'</option>';
+            $html .= '<option value=' . $editor_theme_slug . $selected . '>' . $editor_theme_name . '</option>';
         }
 
         $html .= "</select>";
@@ -599,7 +603,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control">';
         foreach ($editor_font_sizes as $editor_font_size) {
             $selected = ($editor_default_font_size == $editor_font_size) ? ' selected="selected"' : '';
-            $html .= '<option value='.$editor_font_size.$selected.'>'.$editor_font_size.'</option>';
+            $html .= '<option value=' . $editor_font_size . $selected . '>' . $editor_font_size . '</option>';
         }
         $html .= "</select>";
         $html .= '</div>'; // ./editor_default_font_size_setting
@@ -616,7 +620,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<select id="editor_default_mode_type" name="shortcode_load_default_options[editor_default_mode_type]" class="form-control">';
         foreach ($editor_mode_types as $editor_mode_type_name => $editor_mode_type_slug) {
             $selected = ($editor_default_mode_type == $editor_mode_type_slug) ? ' selected="selected"' : '';
-            $html .= '<option value='.$editor_mode_type_slug.$selected.'>'.$editor_mode_type_name.'</option>';
+            $html .= '<option value=' . $editor_mode_type_slug . $selected . '>' . $editor_mode_type_name . '</option>';
         }
         $html .= "</select>";
         $html .= '</div>'; // ./editor_default_mode_type_setting
