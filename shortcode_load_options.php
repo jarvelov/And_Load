@@ -728,6 +728,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             if($content) {
                 //init editor with content
+                var_dump($type);
                 $this->shortcode_load_editor_init($content, $type);
             } else {
                 //TODO handle error
@@ -762,7 +763,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             echo $html;
 
             $options_default = get_option( 'shortcode_load_default_options' );
-            $this->shortcode_load_editor_init(false, $options_default['editor_default_mode_type']);
+            $editor_default_mode_type = $options_default['editor_default_mode_type'];
+            var_dump($editor_default_mode_type);
+            $this->shortcode_load_editor_init(false, );
         }
     }
 
@@ -963,9 +966,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //TODO after plugin is installed the default options need to be saved to the database
         extract( $options_default);
 
-        if($content) {
+        if($content) { //if an existing file is loaded, set the file's type as specified
             $editor_mode_type = $type;
-        } else {
+        } else { //this is a new file, load the default mode type
             switch ($editor_default_mode_type) {
                 case 'js':
                     $editor_mode_type = 'javascript';
