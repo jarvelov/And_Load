@@ -874,10 +874,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
 
-        var_dump($_POST);
-        var_dump($args);
-        var_dump($id);
-
+        var_dump($_FILES);
+        
         $file_datas = array();
 
         if( ! ( empty( $id ) ) ) { //file already exists, add revision
@@ -891,7 +889,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } elseif( ! ( empty($file_upload) ) ) { //file is being uploaded
             try {
                 $file_content = file_get_contents( $file_upload ); //get the raw content from the uploaded file
-                var_dump($file_content);
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
@@ -1040,7 +1037,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>">Help</a>
             </div>
 
-            <form action='options.php' method='post'>
+            <form action='options.php' method='post' enctype='multipart/form-data'>
                 
                 <h2>Shortcode Load</h2>
                 
