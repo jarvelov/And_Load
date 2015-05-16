@@ -131,7 +131,7 @@ jQuery(document).ready(function() {
 
     //Register a listener to trigger an event on any changes made within the Ace editor
     editor.getSession().on('change', function() {
-        setTemporaryContent( getAceContent() );`//Get the new data and save it to the temporary textarea
+        setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
     });
 });
 
