@@ -110,9 +110,37 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_edit_file_source_options_callback'),
             'shortcode_load_edit_file_options',
             'shortcode_load_edit_file'
-        );          
+        );
 
         register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_edit_file_callback_sanitize'));
+
+        /* Edit file section */
+
+        add_settings_section( 
+            'shortcode_load_help',
+            'Help',
+            array($this, 'shortcode_load_help_callback'),
+            'shortcode_load_help_section'
+        );
+
+        add_settings_field(
+            'shortcode_load_help',
+            'Documentation',
+            array($this, 'shortcode_load_help_documentation_callback'),
+            'shortcode_load_help_section',
+            'shortcode_load_help'
+        );
+
+        add_settings_field(
+            'shortcode_load_help',
+            'Credits',
+            array($this, 'shortcode_load_help_credits_callback'),
+            'shortcode_load_help_section',
+            'shortcode_load_help'
+        );        
+
+        register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
+
 
     }
 
@@ -668,6 +696,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         
     }
 
+    /* Help tab callbacks */
+
+    function shortcode_load_help_callback() {
+        $html = '<div>Help and howto</div>';
+        echo $html;
+    }
+
+    function shortcode_load_help_documentation_callback() {
+        $html = '<div id="shortcode_load_help_documentation">';
+        $html .= '<p>'
+        $html .= '</div>'; // ./shortcode_load_help_documentation
+        echo $html;
+    }
+
     /*
     * Sanitization functions
     * Both for wordpress callbacks and for custom functions
@@ -837,7 +879,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_default_options' );
 
                     submit_button();
-                } elseif($active_tab == 'tab_edit') {                  
+                } elseif($active_tab == 'tab_edit') {
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
                     $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
@@ -848,6 +890,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
                     submit_button('Save file', 'btn btn-lg btn-success');
+                } elseif($active_tab == 'tab_help') {
+                    settings_fields( 'shortcode_load_help' );
+                    do_settings_sections( 'shortcode_load_help' );
                 }
 
                 ?>
