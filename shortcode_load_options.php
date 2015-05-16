@@ -723,35 +723,35 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<label class="control-label">Ace</label>';
         $html .= '<p>Project URL: <a href="http://ace.c9.io/">Ace</a></p>';
         $html .= '<p>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE">BSD license</a></p>'
-        $html .= '</div>' // ./shortcode_load_help_credits_ace
+        $html .= '</div>'; // ./shortcode_load_help_credits_ace
 
         //Datatables credits
         $html .= '<div id="shortcode_load_help_credits_datatables">';
         $html .= '<label class="control-label">DataTables</label>';
         $html .= '<p>Project URL: <a href="http://www.datatables.net">DataTables</a></p>';
         $html .= '<p>License: <a href="http://www.datatables.net/license/mit">MIT License</a></p>'
-        $html .= '</div>' // ./shortcode_load_help_credits_datatables
+        $html .= '</div>'; // ./shortcode_load_help_credits_datatables
 
         //Minify libs credits
         $html .= '<div id="shortcode_load_help_credits_minify">';
         $html .= '<label class="control-label">Minify</label>';
         $html .= '<p>Project URL: <a href="http://code.google.com/p/minify/">Minify (Google Code)</a></p>';
         $html .= '<p>License: <a href="http://opensource.org/licenses/BSD-3-Clause">BSD License</a></p>'
-        $html .= '</div>' // ./shortcode_load_help_credits_minify
+        $html .= '</div>'; // ./shortcode_load_help_credits_minify
 
         //JShrink credits
         $html .= '<div id="shortcode_load_help_credits_jshrink">';
         $html .= '<label class="control-label">Minify</label>';
         $html .= '<p>Project URL: <a href="http://code.google.com/p/minify/">JShrink (GitHub)</a></p>';
-        $html .= '<p>License: <a href="http://github.com/tedious/JShrink/blob/master/LICENSE">BSD License</a></p>'
-        $html .= '</div>' // ./shortcode_load_help_credits_jshrink
+        $html .= '<p>License: <a href="http://github.com/tedious/JShrink/blob/master/LICENSE">BSD License</a></p>';
+        $html .= '</div>'; // ./shortcode_load_help_credits_jshrink
 
         //Bootstrap credits
         $html .= '<div id="shortcode_load_help_credits_bootstrap">';
         $html .= '<label class="control-label">Bootstrap</label>';
         $html .= '<p>Project URL: <a href="http://code.google.com/p/minify/">Bootstrap/a></p>';
-        $html .= '<p>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE">MIT License</a></p>'
-        $html .= '</div>' // ./shortcode_load_help_credits_bootstrap
+        $html .= '<p>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE">MIT License</a></p>';
+        $html .= '</div>'; // ./shortcode_load_help_credits_bootstrap
 
         $html .= '</div>'; // ./shortcode_load_help_credits
 
