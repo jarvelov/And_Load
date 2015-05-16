@@ -85,7 +85,12 @@ function setTemporaryContent(content) {
 }
 
 function getTemporaryContent() {
-    return jQuery('#edit_file_temporary_textarea').val();   
+    value = jQuery('#edit_file_temporary_textarea').val();
+    if(value) {
+        return value;
+    } else {
+        return null;
+    }
 }
 
 /* File upload handling functions */
