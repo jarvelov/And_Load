@@ -891,8 +891,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     submit_button('Save file', 'btn btn-lg btn-success');
                 } elseif($active_tab == 'tab_help') {
-                    settings_fields( 'shortcode_load_help' );
-                    do_settings_sections( 'shortcode_load_help' );
+                    settings_fields( 'shortcode_load_help_section' );
+                    do_settings_sections( 'shortcode_load_help_section' );
                 }
 
                 ?>
