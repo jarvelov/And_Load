@@ -558,8 +558,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         $default_value = $args['default'];
 
+        $default_minify_checkbox = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value
+
         $html = '<label for="default_minify_checkbox"><small>Automatically minify styles and scripts</small></label>';
-        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, ( isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value), false ) . '/>';
+        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
 
         echo $html;
     }
@@ -624,7 +626,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Show print margin</strong></small></label>';
-        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( 1, ( $editor_default_print_margin_column ), false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( $editor_default_print_margin_column, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
         /*Ace editor default print margin column
@@ -641,7 +643,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_line_numbers_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Show editor line numbers</small></strong></label>';
-        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( 1, ( $editor_default_show_line_numbers ), false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
         $html .= '</div>'; // ./default_editor_container
@@ -929,10 +931,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         switch ($editor_default_mode_type) {
             case 'js':
-                $editor_mode = 'javascript';
+                $editor_default_mode_type = 'javascript';
                 break;
             default:
-                $editor_mode = $editor_default_mode_type;
+                $editor_default_mode_type = $editor_default_mode_type;
                 break;
         }
 
@@ -949,11 +951,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 var editorSettings = {
                     fontSize:<?php echo $editor_default_font_size; ?>,
                     tabSize: <?php echo $editor_default_tab_size; ?>,
-                    theme:"ace/theme/<?php echo $editor_theme; ?>",
-                    mode:"ace/mode/<?php echo $editor_mode; ?>",
+                    theme:"ace/theme/<?php echo $editor_default_theme; ?>",
+                    mode:"ace/mode/<?php echo $editor_default_mode_type; ?>",
                     showPrintMargin: "<?php echo $editor_default_print_margin; ?>",
                     printMarginColumn: "<?php echo $editor_default_print_margin_column; ?>",
-                    showLineNumbers: "<?php echo $editor_default_show_line_numbers; ?>"
+                    showLineNumbers: <?php echo $editor_default_show_line_numbers; ?>
                 };
             </script>
         <?php
