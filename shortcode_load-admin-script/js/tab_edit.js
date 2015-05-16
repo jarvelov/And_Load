@@ -5,7 +5,7 @@ function setAceTabSize(size) {
 }
 
 function setAceMode(mode) {
-    editor.getSession().setMode("ace/mode/" + mode);
+    editor.getSession().setMode(mode);
 }
 
 function setAceLineNumbers(state) {
@@ -15,6 +15,7 @@ function setAceLineNumbers(state) {
 }
 
 function setAceType(type) {
+    type = type.substring( type.lastIndexOf('/') +1 ); //get the 'basename' of ace mode type
     switch(type) {
         case 'javascript':
             setAceMode(type);
@@ -35,7 +36,7 @@ function setAceType(type) {
 }
 
 function setAceTheme(theme) {
-    editor.setTheme("ace/theme/" + theme);
+    editor.setTheme(theme);
 }
 
 function setAceFontSize(size) {  
@@ -107,6 +108,7 @@ function contentChanged() {
     setTemporaryContent( getAceContent() );
 }
 
+//Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
 function setSubmitButtonClass() {
     jQuery('input#submit').removeClass('button');
 }

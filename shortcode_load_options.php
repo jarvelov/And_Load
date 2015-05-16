@@ -91,6 +91,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 ),
                 'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
                 'editor_default_font_size' => 12,
+                'editor_default_tab_size' => 4,
                 'editor_default_type' => 'plain_text',
                 'editor_default_print_margin' => true,
                 'editor_default_print_margin_column' => 80,
@@ -546,7 +547,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;        
     }
 
-    /* Default tab callbacks */
+    /* Default options tab callbacks */
+
     function shortcode_load_default_options_callback() {
         echo '<p>Default options to configure editor settings and minify behaviour.</p>'; 
     }
@@ -570,7 +572,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html = '<div class="default_editor_container">';
 
         $html .= '<div id="editor_default_theme_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Theme</strong></small><label>';
+        $html .= '<label><strong><small>Theme</strong></small></label>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
@@ -672,7 +674,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $shortcode_display = 'shortcode_load id=' . $id;
 
             $html .='<input type="text" id="edit_file_shortcode_display" class="form-control" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
-
 
             /* Select revision dropdown */
 
@@ -901,20 +902,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace editor settings
 
         //TODO after plugin is installed the default options need to be saved to the database
-        $editor_theme = isset($options_default['editor_default_theme']) ? $options_default['editor_default_theme'] : 'monokai'; 
-        $editor_font_size = $options_default['editor_default_font_size'];
-        $editor_type = $options_default['editor_default_type'];
-        $editor_print_margin = $options_default['editor_default_print_margin'];
-        $editor_print_margin_column = $options_default['editor_default_print_margin_column'];
-        $editor_show_line_numbers = $options_default['editor_default_show_line_numbers'];
+        extract( $options_default['editor_default_theme'] );
 
-        switch ($type) {
+        switch ($editor_default_type) {
             case 'js':
                 $editor_mode = 'javascript';
                 break;
-            
             default:
-                $editor_mode = $type;
+                $editor_mode = $editor_default_type;
                 break;
         }
 
@@ -930,8 +925,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 var editor;               
                 var editorSettings = {
                     fontSize:<?php echo $editor_default_font_size; ?>,
-                    theme:"<?php echo $editor_theme; ?>",
-                    mode:"<?php echo $editor_mode; ?>"
+                    tabSize: <?php echo $editor_default_tab_size; ?>,
+                    theme:"ace/theme/<?php echo $editor_theme; ?>",
+                    mode:"ace/mode/<?php echo $editor_mode; ?>",
+                    showPrintMargin: "<?php echo $editor_default_print_margin; ?>",
+                    printMarginColumn: "<?php echo $editor_default_print_margin_column; ?>",
+                    showLineNumbers: "<?php echo $editor_default_show_line_numbers; ?>"
                 };
             </script>
         <?php
