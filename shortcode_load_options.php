@@ -915,10 +915,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 <?php
 
                 if($active_tab == 'tab_overview') {
+                    //Libraries
                     $this->shortcode_load_load_file('datatables-style-bootstrap', 'admin-style/css/dataTables.bootstrap.css', false, true);
                     $this->shortcode_load_load_file('datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false);
                     $this->shortcode_load_load_file('datatables-script-bootstrap', 'admin-script/js/dataTables.bootstrap.js', true, true);
 
+                    //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_overview_js', 'admin-script/js/tab_overview.js', true, true);
                     $this->shortcode_load_load_file('tab_overview_css', 'admin-style/css/tab_overview.css', false, true);
 
@@ -931,10 +933,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {
+                    //Libraries
                     $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
+
+                    //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
 
+                    //Place a save button on top of page as well
                     submit_button('Save file', 'btn btn-lg btn-success');
 
                     settings_fields( 'shortcode_load_edit_file_options' );
@@ -942,6 +948,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     submit_button('Save file', 'btn btn-lg btn-success');
                 } elseif($active_tab == 'tab_help') {
+                    //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
 
                     settings_fields( 'shortcode_load_help_section' );
