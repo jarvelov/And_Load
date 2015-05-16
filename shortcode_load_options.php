@@ -623,7 +623,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Show print margin</strong></small></label>';
-        $html = '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( 1, ( $editor_default_print_margin_column ), false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( 1, ( $editor_default_print_margin_column ), false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
         /*Ace editor default print margin column
@@ -632,7 +632,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Print margin column</small></strong></label>';
-        $html = '<input type="checkbox" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" value="1"' . checked( 1, ( $editor_default_print_margin_column ), false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" value="1"' . checked( 1, ( $editor_default_print_margin_column ), false ) . '/>';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
         //Ace editor default show line numbers
@@ -640,7 +640,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_line_numbers_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Show editor line numbers</small></strong></label>';
-        $html = '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( 1, ( $editor_default_show_line_numbers ), false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( 1, ( $editor_default_show_line_numbers ), false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
         $html .= '</div>'; // ./default_editor_container
