@@ -125,7 +125,7 @@ jQuery(document).ready(function() {
     //Initialize Ace with default settings
     editor = ace.edit("editor");
     editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
-
+/*
     setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
 
@@ -134,6 +134,7 @@ jQuery(document).ready(function() {
         console.log('change');
         //setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
     });
+*/
 });
 
 /* Listeners */
