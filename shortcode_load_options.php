@@ -610,13 +610,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<div id="editor_default_mode_type_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Default type</small></strong></label>';
 
-        //Ace editor default tab size
-        $editor_default_tab_size = isset ( $options_default['editor_default_tab_size'] ) ? $options_default['editor_default_tab_size'] : $args['editor_default_tab_size'];
-        $html .= '<div id="editor_default_tab_size_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Default tab size</small></strong></label>';
-        $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control" value="' . $editor_default_tab_size . '" />';
-        $html .= '</div>'; // ./editor_default_tab_size_setting
-
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
 
@@ -627,6 +620,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
         $html .= "</select>";
         $html .= '</div>'; // ./editor_default_mode_type_setting
+
+        //Ace editor default tab size
+        $editor_default_tab_size = isset ( $options_default['editor_default_tab_size'] ) ? $options_default['editor_default_tab_size'] : $args['editor_default_tab_size'];
+        $html .= '<div id="editor_default_tab_size_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Default tab size</small></strong></label>';
+        $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control" value="' . $editor_default_tab_size . '" />';
+        $html .= '</div>'; // ./editor_default_tab_size_setting        
 
         //Ace editor default print margin
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
