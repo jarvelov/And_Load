@@ -24,7 +24,15 @@ function setAceTheme(theme) {
 }
 
 function setAceLineNumbers(state) {
-    setAceOptions( 'showLineNumbers', state );
+    setAceOptions( 'showLineNumbers', parseInt( state ) );
+}
+
+function setAcePrintMargin(state) {
+    setAceOptions( 'showPrintMargin', parseInt( state ) );
+}
+
+function setAcePrintMarginColumn(number) {
+    setAceOptions ( 'printMarginColumn', parseInt( number ) );
 }
 
 function setAceType(modeType) {
@@ -210,19 +218,27 @@ jQuery('#new_file_upload').on('change', function() {
 jQuery('#new_file_upload_reset_button').on('click', function() {
     handleUploadCanceled();
     jQuery(this).hide(); //hide reset button
-}); 
+});
 
 /* document ready 'init' function */
 
 jQuery(document).ready(function() {
     jQuery('input#submit').removeClass('button'); //Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
 
-    //Initialize Ace with default settings
+    //Initialize Ace editor
     editor = ace.edit("editor");
     editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
 
+    //Set Ace default settings
     setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
+    setAceTabSize( editorSettings['tabSize'] );
+    setAceFontSize( editorSettings['fontSize'] );
+
+    setAceLineNumbers( editorSettings['showLineNumbers'] );
+    setAcePrintMargin( editorSettings['showPrintMargin'] );
+    setAcePrintMarginColumn( editorSettings['printMarginColumn'] );
+
 
     //Register a listener to trigger an event on any changes made within the Ace editor
     editor.getSession().on('change', function() {
