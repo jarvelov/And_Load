@@ -958,7 +958,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * shortcode_load_editor_init( string , 'js|css|plain_text')
     */
 
-    function shortcode_load_editor_init($content, $type) {
+    function shortcode_load_editor_init($content, $mode_type) {
         $options_default = get_option( 'shortcode_load_default_options' );
 
         //Ace editor settings
@@ -967,7 +967,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         extract( $options_default);
 
         if($content) { //if an existing file is loaded, set the file's type as specified
-            $editor_mode_type = $type;
+            switch ($mode_type) {
+                case 'js':
+                    $editor_mode_type = 'javascript';
+                    break;
+                default:
+                    $editor_mode_type = $mode_type;
+                    break;
+            }
         } else { //this is a new file, load the default mode type
             switch ($editor_default_mode_type) {
                 case 'js':
