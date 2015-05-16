@@ -588,7 +588,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //font sizes
         $editor_font_sizes = $args['editor_font_sizes'];
-        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
+        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]">';
         foreach ($editor_font_sizes as $editor_font_size) {
             $selected = ($editor_default_font_size == $editor_font_size) ? ' selected="selected"' : '';
             $html .= '<option value='.$editor_font_size.$selected.'>'.$editor_font_size.'</option>';
