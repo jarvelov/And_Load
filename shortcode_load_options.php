@@ -961,9 +961,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_editor_init($content, $mode_type) {
         $options_default = get_option( 'shortcode_load_default_options' );
 
-        //Ace editor settings
-
-        //TODO after plugin is installed the default options need to be saved to the database
+        //Ace default editor settings
         extract( $options_default);
 
         if($content) { //if an existing file is loaded, set the file's type as specified
