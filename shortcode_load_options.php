@@ -260,7 +260,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $content = $args['content'];
         $org_name = $args['name'];
 
-        $type = $args['type'];
+        $type = ( $args['type'] == 'javascript' ) ? 'js' : $args['type'];
 
         $src_dir = $uploads_dir . $type . '/src/';
         $min_dir = $uploads_dir . $type . '/min/';
@@ -857,18 +857,23 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_edit_file_callback_sanitize($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );      
-        $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
-        $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
+        //Get the default options
+        $options_default = get_option( 'shortcode_load_default_options' );
+        $minify = $options_default['default_minify_checkbox'];
 
-        $minify = ( isset( $options_default['default_minify_checkbox'] ) ) ? true : false;
+        //Get the file name, content and type
+        $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
+        $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
+        $file_type = ( $args[ 'new_file_type' ] ) ? $args[ 'new_file_type' ] : NULL;
+
+        //This is NULL if no file was selected for upload on POST
+        $file_upload = ( $args[ 'new_file_upload' ] ) ? $args[ 'new_file_upload' ] : NULL;
+
+        $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
 
         $file_datas = array();
 
-        if( ! ( empty( $file_content ) ) ) {
-            $id = $args['edit_file_current_id'];
-
-            if($id) { //file already exists, add revision
+        if( ! ( empty( $id ) ) ) { //file already exists, add revision
                 $file_datas[] = $this->shortcode_load_add_file_revision(
                     array(
                         'content' => $file_content,
@@ -876,8 +881,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
-            } elseif( ! (empty( $file_name ) ) ) { //new file, save it
-                $file_type = ( $args[ 'new_file_type' ] == 'javascript' ) ? 'js' : $args[ 'new_file_type' ];
+        } elseif( ! ( empty($file_upload) ) ) { //file is being uploaded
+            try {
+                $file_content = file_get_contents( $file_upload ); //get the raw content from the uploaded file
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
@@ -887,11 +893,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
+            } catch (Exception $e) {
+                //var_dump($e);
             }
-            $this->shortcode_load_add_settings_error($file_datas);
-        } elseif( ! ( empty() ) ) {
-
+        } elseif( ! (empty( $file_name ) ) ) { //new file, save it
+            $file_datas[] = $this->shortcode_load_save_to_database(
+                array(
+                    'content' => $file_content,
+                    'name' => $file_name,
+                    'type' => $file_type,
+                    'minify' => $minify
+                )
+            );
         }
+
+        $this->shortcode_load_add_settings_error($file_datas);
     }
 
     /*

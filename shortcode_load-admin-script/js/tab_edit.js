@@ -106,8 +106,10 @@ function handleUpload(fileName) {
             break;
         case '.css':
             fileType = 'css';
+            break;
         default:
             fileType = false;
+            break;
     }
 
     //Set the file name (without extension) to the input name element
