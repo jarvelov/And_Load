@@ -907,7 +907,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             );
         }
 
-        $this->shortcode_load_add_settings_error($file_datas);
+        if( isset( $file_datas ) ) {
+            $this->shortcode_load_add_settings_error($file_datas);
+        } else {
+            //TODO handle error
+        }
     }
 
     /*
