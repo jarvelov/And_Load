@@ -1,17 +1,24 @@
 /* Ace Functions */
 
+function setAceOptions(optionName, optionValue) {
+    options = {};
+    options[optionName] = optionValue;
+    
+    editor.setOptions(options);
+}
+
+/* Ace style functions */
+
 function setAceTabSize(size) {
-    editor.getSession().setTabSize(size);
+    setAceOptions('tabSize', size);
 }
 
 function setAceMode(mode) {
-    editor.getSession().setMode(mode);
+    setAceOptions('mode', mode)
 }
 
 function setAceLineNumbers(state) {
-    editor.setOptions({
-        showLineNumbers:state
-    });
+    setAceOptions('showLineNumbers', state);
 }
 
 function setAceType(type) {
@@ -36,7 +43,7 @@ function setAceType(type) {
 }
 
 function setAceTheme(theme) {
-    editor.setTheme(theme);
+    setAceOptions('theme', theme);
 }
 
 function setAceFontSize(size) {  
@@ -44,8 +51,10 @@ function setAceFontSize(size) {
         size = editorSettings['fontSize'];
     }
 
-    editor.setFontSize(size);
+    setAceOptions('fontSize', size);
 }
+
+/* Ace content functions */
 
 function getAceContent() {
     return editor.session.getValue();
@@ -67,6 +76,8 @@ function setAceEnabled() {
     editor.setReadOnly(false);
 }
 
+/* Temporary content functions */
+
 function setTemporaryContent(content) {
     jQuery('#edit_file_temporary_textarea').val(content);
 }
@@ -74,6 +85,8 @@ function setTemporaryContent(content) {
 function getTemporaryContent() {
     return jQuery('#edit_file_temporary_textarea').val();   
 }
+
+/* File pload handling functions */
 
 function handleUpload(fileName) {
     jQuery('#new_file_upload_file_name').val( fileName ); //Set file name of the selected file as the value of the #new_file_upload_file_name input element
@@ -103,18 +116,9 @@ function handleUploadCanceled() {
     setAceContent( getTemporaryContent() ); //restore previous editor content
 }
 
-//Get the new data and save it to the temporary textarea
-function contentChanged() {
-    setTemporaryContent( getAceContent() );
-}
-
-//Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
-function setSubmitButtonClass() {
-    jQuery('input#submit').removeClass('button');
-}
-
+//Document ready 'init' function
 jQuery(document).ready(function() {
-    setSubmitButtonClass();
+    jQuery('input#submit').removeClass('button'); //Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
 
     //Initialize Ace with default settings
     editor = ace.edit("editor");
@@ -124,7 +128,7 @@ jQuery(document).ready(function() {
     setAceType( editorSettings['mode'] );
 
     //Register a listen event on any changes made with editor
-    editor.getSession().on('change', contentChanged);   
+    editor.getSession().on('change', setTemporaryContent( getAceContent() ) ); //Get the new data and save it to the temporary textarea
 });
 
 /* Listeners */

@@ -937,7 +937,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace editor settings
 
         //TODO after plugin is installed the default options need to be saved to the database
-        var_dump($options_default);
         extract( $options_default);
 
         switch ($editor_default_mode_type) {
