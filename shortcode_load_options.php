@@ -569,8 +569,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div class="default_editor_container">';
 
-        $html .= '<p class="default_editor_sub_setting"><strong><small>Theme</p></strong></small>';
+        $html .= '<div id="editor_default_theme_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Theme</strong></small><label>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
+        $html .= '</div>'; // ./editor_default_theme_setting
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
             $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
@@ -580,7 +582,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= "</select>";
 
         //Ace editor default font size
-        $html .= '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
+        $html .= '<div id="editor_default_font_size_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Default font size</small></strong></label>';
         $editor_default_font_size = isset( $options_default['editor_default_font_size'] ) ? $options_default['editor_default_font_size'] : $args['editor_default_font_size'];
 
         //font sizes
@@ -591,25 +594,33 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<option value='.$editor_font_size.$selected.'>'.$editor_font_size.'</option>';
         }
         $html .= "</select>";
+        $html .= '</div>'; // ./editor_default_font_size_setting
 
         //Ace editor default type
-        $html .= '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
+        $html .= '<label><strong><small>Theme</small></strong></label>';
         $editor_default_type = isset ( $options_default['editor_default_type'] ) ? $options_default['editor_default_type'] : $args['editor_default_type'];
 
         //Ace editor default print margin
-        $html .= '<label class="default_editor_sub_setting"><strong><small>Show print margin</strong></small></label>';
+        $html .= '<div id="editor_default_show_print_margin_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Show print margin</strong></small></label>';
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
+        $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
         /*Ace editor default print margin column
             hide this section if print margin is disabled */
-        $html .= '<label class="default_editor_sub_setting" id="editor_setting_print_margin_column"><strong><small>Print margin column</small></strong></label>';
+        
+        $html .= '<div id="editor_default_print_margin_column_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Print margin column</small></strong></label>';
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
+        $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
         //Ace editor default show line numbers
-        $html .= '<label class="default_editor_sub_setting" id="editor_setting_show_line_numbers"><strong><small>Show editor line numbers</small></strong></label>';
+        $html .= '<div id="editor_default_show_line_numbers_setting" class="default_editor_sub_setting">';
+        $html .= '<label><strong><small>Show editor line numbers</small></strong></label>';
         $editor_default_show_line_numbers = isset ( $options_default['editor_default_show_line_numbers'] ) ? $options_default['editor_default_show_line_numbers'] : $args['editor_default_show_line_numbers'];
+        $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
-        $html .= '</div>>'; // ./default_editor_container
+        $html .= '</div>'; // ./default_editor_container
 
         echo $html;
     }
