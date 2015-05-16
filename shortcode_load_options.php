@@ -699,14 +699,26 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /* Help tab callbacks */
 
     function shortcode_load_help_callback() {
-        $html = '<div>Help and howto</div>';
+        $html = '<div id="shortcode_load_help">';
+        $html .= '<h4>Help and how-to</h4>';
+        $html .= '</div>'; // ./shortcode_load_help
+
         echo $html;
     }
 
     function shortcode_load_help_documentation_callback() {
         $html = '<div id="shortcode_load_help_documentation">';
-        $html .= '<p>';
+        $html .= '<h4>Documentation</h4>';
         $html .= '</div>'; // ./shortcode_load_help_documentation
+
+        echo $html;
+    }
+
+    function shortcode_load_help_credits_callback() {
+        $html = '<div id="shortcode_load_help_credits">';
+        $html .= '<h4>Credits</h4>'
+        $html .= '</div>'; // ./shortcode_load_help_credits
+
         echo $html;
     }
 
