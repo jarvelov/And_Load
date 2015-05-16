@@ -876,6 +876,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
        
         $file_datas = array();
 
+        var_dump($_POST);
+
         if( ! ( empty( $id ) ) ) { //file already exists, add revision
                 $file_datas[] = $this->shortcode_load_add_file_revision(
                     array(
@@ -886,9 +888,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
         } elseif( ! ( empty($file_upload) ) ) { //file is being uploaded
             try {
-                $file_content = file_get_contents( $_FILES['tmp_name'][$file_upload] ); //get the raw content from the uploaded file
+                $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name'][$file_upload] ); //get the raw content from the uploaded file
                 var_dump($file_content);
-                
+                break;
+
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
                         'content' => $file_content,
