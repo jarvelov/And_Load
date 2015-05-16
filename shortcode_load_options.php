@@ -562,7 +562,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div class="default_minify_setting_container">';
 
-        $html .= '<label><strong><small>Automatically minify styles and scripts</strong></small></label>';
+        $html .= '<label class="control-label"><strong><small>Automatically minify styles and scripts</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
@@ -579,8 +579,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div class="default_editor_setting_container">';
 
-        $html .= '<div id="editor_default_theme_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Theme</strong></small></label>';
+        $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Theme</strong></small></label>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
@@ -594,8 +594,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace editor default font size
         $editor_default_font_size = isset( $options_default['editor_default_font_size'] ) ? $options_default['editor_default_font_size'] : $args['editor_default_font_size'];
 
-        $html .= '<div id="editor_default_font_size_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Default font size</small></strong></label>';
+        $html .= '<div id="editor_default_font_size_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Default font size</small></strong></label>';
 
         //Get all available font sizes and check which one is currently selected
         $editor_font_sizes = $args['editor_font_sizes'];
@@ -611,8 +611,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace editor default mode type
         $editor_default_mode_type = isset ( $options_default['editor_default_mode_type'] ) ? $options_default['editor_default_mode_type'] : $args['editor_default_mode_type'];
 
-        $html .= '<div id="editor_default_mode_type_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Default type</small></strong></label>';
+        $html .= '<div id="editor_default_mode_type_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Default type</small></strong></label>';
 
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
@@ -627,16 +627,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Ace editor default tab size
         $editor_default_tab_size = isset ( $options_default['editor_default_tab_size'] ) ? $options_default['editor_default_tab_size'] : $args['editor_default_tab_size'];
-        $html .= '<div id="editor_default_tab_size_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Default tab size</small></strong></label>';
+        $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Default tab size</small></strong></label>';
         $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control" value="' . $editor_default_tab_size . '" />';
         $html .= '</div>'; // ./editor_default_tab_size_setting        
 
         //Ace editor default print margin
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
 
-        $html .= '<div id="editor_default_show_print_margin_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Show print margin</strong></small></label>';
+        $html .= '<div id="editor_default_show_print_margin_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Show print margin</strong></small></label>';
         $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( $editor_default_print_margin, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
@@ -644,16 +644,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             hide this section if print margin is disabled */
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
 
-        $html .= '<div id="editor_default_print_margin_column_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Print margin column</small></strong></label>';
+        $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Print margin column</small></strong></label>';
         $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
         //Ace editor default show line numbers
         $editor_default_show_line_numbers = isset ( $options_default['editor_default_show_line_numbers'] ) ? $options_default['editor_default_show_line_numbers'] : $args['editor_default_show_line_numbers'];
 
-        $html .= '<div id="editor_default_show_line_numbers_setting" class="default_editor_sub_setting">';
-        $html .= '<label><strong><small>Show editor line numbers</small></strong></label>';
+        $html .= '<div id="editor_default_show_line_numbers_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label"><strong><small>Show editor line numbers</small></strong></label>';
         $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 

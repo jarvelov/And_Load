@@ -8,12 +8,12 @@
   max-width: 200px;
 }
 
-.default_editor_sub_setting {
+.default_options_sub_setting {
   padding: 10px;
   margin-bottom: 5px !important;
 }
 
-.default_editor_sub_setting > label {
+.default_options_sub_setting > label {
   margin: 5px;
   border-bottom: 1px solid #000;
 }
