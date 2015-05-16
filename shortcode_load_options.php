@@ -562,7 +562,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
-        $html .= '<label class="control-label"><strong><small>Automatically minify styles and scripts</strong></small></label>';
+        $html .= '<label class="control-label"><strong><small>Automatically minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
