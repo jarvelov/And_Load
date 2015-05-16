@@ -593,7 +593,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= "</select>";
 
         //Ace editor default type
-        $html = '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
+        $html .= '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
         $editor_default_type = isset ( $options_default['editor_default_type'] ) ? $options_default['editor_default_type'] : $args['editor_default_type'];
 
         //Ace editor default print margin
@@ -602,7 +602,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         /*Ace editor default print margin column
             hide this section if print margin is disabled */
-        $html .= '<label class="default_editor_sub_setting" id="editor_setting_print_margin_column"><strong><small>Print margin column</small>/strong></label>';
+        $html .= '<label class="default_editor_sub_setting" id="editor_setting_print_margin_column"><strong><small>Print margin column</small></strong></label>';
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
 
         //Ace editor default show line numbers
