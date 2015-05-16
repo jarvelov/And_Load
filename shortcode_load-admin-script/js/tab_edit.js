@@ -131,9 +131,6 @@ function handleUpload(fileName) {
         message += messageCancel;
     }
 
-    setAceContent(message);
-    setAceFontSize(20);
-
     /*Check if ace is disabled (i.e. a file is already selected when this function triggers).
         we don't want to overwrite the temporary content with our message to the user.
 
@@ -148,6 +145,9 @@ function handleUpload(fileName) {
         var tmpContent = getAceContent();
         setTemporaryContent(tmpContent);
     }
+
+    setAceContent(message);
+    setAceFontSize(20);    
 }
 
 function handleUploadCanceled() {
