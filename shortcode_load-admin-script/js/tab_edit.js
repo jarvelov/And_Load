@@ -81,7 +81,7 @@ function setAceEnabled() {
 /* Temporary content storage functions */
 
 function setTemporaryContent(content) {
-    if( ! ( isAceDisabled ) ) {
+    if( isAceDisabled ) {
         jQuery('#edit_file_temporary_textarea').val(content);
     }
 }
