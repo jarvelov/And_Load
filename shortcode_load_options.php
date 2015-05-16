@@ -124,7 +124,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_help',
+            'shortcode_load_help_documentation',
             'Documentation',
             array($this, 'shortcode_load_help_documentation_callback'),
             'shortcode_load_help_section',
@@ -132,7 +132,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_help',
+            'shortcode_load_help_credits',
             'Credits',
             array($this, 'shortcode_load_help_credits_callback'),
             'shortcode_load_help_section',
