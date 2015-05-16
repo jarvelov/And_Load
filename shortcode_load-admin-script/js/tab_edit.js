@@ -23,19 +23,19 @@ function setAceLineNumbers(state) {
     setAceOptions( 'showLineNumbers', state );
 }
 
-function setAceType(type) {
-    type = type.substring( type.lastIndexOf('/') +1 ); //get the 'basename' of ace mode type
+function setAceType(modeType) {
+    type = modeType.substring( modeType.lastIndexOf('/') +1 ); //get the 'basename' of ace mode type
     switch(type) {
         case 'javascript':
-            setAceMode(type);
+            setAceMode(modeType);
             setAceTabSize(4);
             break;
         case 'css':
-            setAceMode(type);
+            setAceMode(modeType);
             setAceTabSize(2);
             break;
         case 'plain_text':
-            setAceMode(type);
+            setAceMode(modeType);
             setAceTabSize(4);
             break;
         default:
@@ -125,16 +125,14 @@ jQuery(document).ready(function() {
     //Initialize Ace with default settings
     editor = ace.edit("editor");
     editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
-/*
+
     setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
 
     //Register a listener to trigger an event on any changes made within the Ace editor
     editor.getSession().on('change', function() {
-        console.log('change');
-        //setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
+        setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
     });
-*/
 });
 
 /* Listeners */
