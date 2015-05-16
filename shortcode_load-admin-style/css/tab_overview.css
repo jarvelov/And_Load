@@ -1,13 +1,14 @@
 /* Overview */
 
 #overview-help-text {
-  font-size: 12px;
+  font-size: 11px;
   top: 5px;
-  border-bottom: 3px dotted #FEFEFE;
+  left: -10px;
   position: relative;
   overflow: hidden;
   display: inline;
   background-color: #F8F8EF;
+  padding: 3px;
 }
 
 #help-title {
@@ -15,7 +16,7 @@
 }
 
 #help-text {
-  margin-left: 5px;
+  margin-left: 2px;
 }
 
 #overview-container {
