@@ -634,7 +634,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Ace editor default print margin
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
-        var_dump($editor_default_print_margin);
+        var_dump($options_default);
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label"><strong><small>Show print margin</strong></small></label>';
