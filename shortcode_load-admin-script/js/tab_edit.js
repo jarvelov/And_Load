@@ -8,6 +8,12 @@ function setAceMode(mode) {
     editor.getSession().setMode("ace/mode/" + mode);
 }
 
+function setAceLineNumbers(state) {
+    editor.setOptions({
+        showLineNumbers:state
+    });
+}
+
 function setAceType(type) {
     switch(type) {
         case 'javascript':
@@ -37,9 +43,7 @@ function setAceFontSize(size) {
         size = editorSettings['fontSize'];
     }
 
-    jQuery('#editor').css({
-        fontSize: size
-    });
+    editor.setFontSize(size);
 }
 
 function getAceContent() {

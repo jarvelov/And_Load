@@ -54,41 +54,46 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'shortcode_load_default_options',
             'shortcode_load_default',
             array(
-                'default_editor_theme' => 'monokai',
+                'editor_default_theme' => 'monokai',
                 'editor_themes' => array(
-                    'ambiance',
-                    'chaos',
-                    'chrome',
-                    'clouds',
-                    'clouds_midnight',
-                    'cobalt',
-                    'crimson_editor',
-                    'dawn',
-                    'dreamweaver',
-                    'eclipse',
-                    'github',
-                    'idle_fingers',
-                    'katzenmilch',
-                    'kr_theme',
-                    'kuroir',
-                    'merbivore',
-                    'merbivore_soft',
-                    'monokai',
-                    'mono_industrial',
-                    'pastel_on_dark',
-                    'solarized_dark',
-                    'solarized_light',
-                    'terminal',
-                    'textmate',
-                    'tomorrow',
-                    'tomorrow_night',
-                    'tomorrow_night_blue',
-                    'tomorrow_night_bright',
-                    'tomorrow_night_eighties',
-                    'twilight',
-                    'vibrant_ink',
-                    'xcode'
-                )
+                    'Ambiance' => 'ambiance',
+                    'Chaos' => 'chaos',
+                    'Chrome' => 'chrome',
+                    'Clouds' => 'clouds',
+                    'Clouds Midnight' => 'clouds_midnight',
+                    'Cobalt' => 'cobalt',
+                    'Crimson Editor' => 'crimson_editor',
+                    'Dawn' => 'dawn',
+                    'Dreamweaver' => 'dreamweaver',
+                    'Eclipse' => 'eclipse',
+                    'GitHub' => 'github',
+                    'Idle Fingers' => 'idle_fingers',
+                    'Katzenmilch' => 'katzenmilch',
+                    'Kr Theme' => 'kr_theme',
+                    'Kuroir' => 'kuroir',
+                    'Merbivore' => 'merbivore',
+                    'Merbivore Soft' => 'merbivore_soft',
+                    'Monokai (default)' => 'monokai',
+                    'Mono Industrial' => 'mono_industrial',
+                    'Pastel on Dark' => 'pastel_on_dark',
+                    'Solarized Dark' => 'solarized_dark',
+                    'Solarized Light' => 'solarized_light',
+                    'Terminal' => 'terminal',
+                    'Textmate' => 'textmate',
+                    'Tomorrow' => 'tomorrow',
+                    'Tomorrow Night' => 'tomorrow_night',
+                    'Tomorrow Night Blue' => 'tomorrow_night_blue',
+                    'Tomorrow Night Bright' => 'tomorrow_night_bright',
+                    'Tomorrow Night Eighties' => 'tomorrow_night_eighties',
+                    'Twilight' => 'twilight',
+                    'Vibrant Ink' => 'vibrant_ink',
+                    'Xcode' => 'xcode'
+                ),
+                'editor_default_font_size' => 12,
+                'editor_default_type' => 'plain_text',
+                'editor_default_print_margin' => true
+                'editor_default_print_margin_column' => 80,
+                'editor_default_show_line_numbers' => true
             )
 
         );
@@ -558,17 +563,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         /* TODO insert a dropdown for Ace editor default theme and other options */
         $options_default = get_option( 'shortcode_load_default_options' );
 
-        $default_editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : $args['default_editor_theme'];;
+        $editor_default_theme = isset($options_default['editor_default_theme']) ? $options_default['editor_default_theme'] : $args['editor_default_theme'];;
 
         $editor_themes = $args['editor_themes'];
 
         $html = '<p class="margin_bottom_5"><strong><small>Theme</p></strong></small>';
-        $html .= '<select id="default_editor_theme" name="shortcode_load_default_options[default_editor_theme]">';
+        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
 
-        for ($i=0; $i < sizeof($editor_themes); $i++) { 
-            $editor_theme = $editor_themes[$i];
-            $selected = ($default_editor_theme == $editor_theme) ? ' selected="selected"' : '';
-            $html .= '<option value='.$editor_theme.$selected.'>'.$editor_theme.'</option>';
+        foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
+            $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
+            $html .= '<option value='.$editor_theme_slug.$selected.'>'.$editor_theme_name.'</option>';
         }
 
         $html .= "</select>";
@@ -850,15 +854,23 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
 
         //Ace editor settings
-        $editor_theme = isset($options_default['default_editor_theme']) ? $options_default['default_editor_theme'] : 'monokai';
-        $editor_default_font_size = 12;
 
-        if($type == 'js') {
-            $editor_mode = 'javascript';
-        } elseif ($type == 'css') { 
-            $editor_mode = $type;
-        } elseif($type == 'plain_text') {
-            $editor_mode = $type;
+        //TODO after plugin is installed the default options need to be saved to the database
+        $editor_theme = isset($options_default['editor_default_theme']) ? $options_default['editor_default_theme'] : 'monokai'; 
+        $editor_font_size = isset($options_default['editor_default_font_size']) ? $options_default['editor_default_font_size'];
+        $editor_type = isset($options_default['editor_default_type']) ? $options_default['editor_default_type'];
+        $editor_print_margin = isset($options_default['editor_default_print_margin']) ? $options_default['editor_default_print_margin'];
+        $editor_print_margin_column = isset($options_default['editor_default_print_margin_column']) ? $options_default['editor_default_print_margin_column'];
+        $editor_show_line_numbers = isset($options_default['editor_default_show_line_numbers']) ? $options_default['editor_default_show_line_numbers'];
+
+        switch ($type) {
+            case 'js':
+                $editor_mode = 'javascript';
+                break;
+            
+            default:
+                $editor_mode = $type;
+                break;
         }
 
         //Build Ace editor
