@@ -573,7 +573,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_theme_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Theme</strong></small></label>';
-        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
+        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
             $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
@@ -590,7 +590,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //font sizes
         $editor_font_sizes = $args['editor_font_sizes'];
-        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]">';
+        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control">';
         foreach ($editor_font_sizes as $editor_font_size) {
             $selected = ($editor_default_font_size == $editor_font_size) ? ' selected="selected"' : '';
             $html .= '<option value='.$editor_font_size.$selected.'>'.$editor_font_size.'</option>';
@@ -612,7 +612,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         /*Ace editor default print margin column
             hide this section if print margin is disabled */
-        
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Print margin column</small></strong></label>';
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
