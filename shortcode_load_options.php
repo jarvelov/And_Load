@@ -569,7 +569,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_theme = isset( $options_default['editor_default_theme'] ) ? $options_default['editor_default_theme'] : $args['editor_default_theme'];;
         $editor_themes = $args['editor_themes'];
 
-        $html = '<div class="default_editor_container">';
+        $html = '<div class="default_editor_setting_container">';
 
         $html .= '<div id="editor_default_theme_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Theme</strong></small></label>';
@@ -980,10 +980,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_load_file('tab_overview_js', 'admin-script/js/tab_overview.js', true, true);
                     $this->shortcode_load_load_file('tab_overview_css', 'admin-style/css/tab_overview.css', false, true);
 
+                    //Tab sections and fields 
                     settings_fields( 'shortcode_load_overview' );
                     do_settings_sections( 'shortcode_load_overview' );
 
                 } elseif($active_tab == 'tab_default') {
+                    //Tab styles and scripts
+                    $this->shortcode_load_load_file('tab_default_css', 'admin-style/css/tab_default.css', false, true);
+
+                    //Tab sections and fields 
                     settings_fields( 'shortcode_load_default_options' );
                     do_settings_sections( 'shortcode_load_default_options' );
 
@@ -999,6 +1004,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Place a save button on top of page as well
                     submit_button('Save file', 'btn btn-lg btn-success');
 
+                    //Tab sections and fields 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
@@ -1007,6 +1013,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
 
+                    //Tab sections and fields 
                     settings_fields( 'shortcode_load_help_section' );
                     do_settings_sections( 'shortcode_load_help_section' );
                 }

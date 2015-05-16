@@ -1,5 +1,10 @@
 /** Default Tab CSS **/
 
+.default_editor_setting_container {
+  border: 3px double #FEFEFE;
+}
+
 .default_editor_sub_setting {
+  
   margin-bottom: 5px !important;
 }
