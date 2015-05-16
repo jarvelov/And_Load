@@ -868,7 +868,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
         $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
         $file_type = ( $args[ 'new_file_type' ] ) ? $args[ 'new_file_type' ] : NULL;
-        $file_upload = 'new_file_upload';
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
        
@@ -884,9 +883,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
         } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
             try {
-                $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name'][$file_upload] ); //get the raw content from the uploaded file
-                var_dump($file_content);
-                break;
+                $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
@@ -915,7 +912,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } else {
             //TODO handle error
         }
-        break;
     }
 
     /*
