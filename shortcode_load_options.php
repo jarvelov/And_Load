@@ -567,6 +567,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_theme = isset( $options_default['editor_default_theme'] ) ? $options_default['editor_default_theme'] : $args['editor_default_theme'];;
         $editor_themes = $args['editor_themes'];
 
+        $html = '<div class="default_editor_container">';
+
         $html = '<p class="default_editor_sub_setting"><strong><small>Theme</p></strong></small>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]">';
 
@@ -578,7 +580,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= "</select>";
 
         //Ace editor default font size
-        $html = '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
+        $html .= '<label class="default_editor_sub_setting"><strong><small>Theme</small></strong></label>';
         $editor_default_font_size = isset( $options_default['editor_default_font_size'] ) ? $options_default['editor_default_font_size'] : $args['editor_default_font_size'];
 
         //font sizes
@@ -595,17 +597,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_type = isset ( $options_default['editor_default_type'] ) ? $options_default['editor_default_type'] : $args['editor_default_type'];
 
         //Ace editor default print margin
-        $html = '<label class="default_editor_sub_setting"><strong><small>Show print margin</strong></small></label>';
+        $html .= '<label class="default_editor_sub_setting"><strong><small>Show print margin</strong></small></label>';
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
 
         /*Ace editor default print margin column
             hide this section if print margin is disabled */
-        $html = '<label class="default_editor_sub_setting" id="editor_setting_print_margin_column"><strong><small>Print margin column</small>/strong></label>';
+        $html .= '<label class="default_editor_sub_setting" id="editor_setting_print_margin_column"><strong><small>Print margin column</small>/strong></label>';
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
 
         //Ace editor default show line numbers
-        $html = '<label class="default_editor_sub_setting" id="editor_setting_show_line_numbers"><strong><small>Show editor line numbers</small></strong></label>';
+        $html .= '<label class="default_editor_sub_setting" id="editor_setting_show_line_numbers"><strong><small>Show editor line numbers</small></strong></label>';
         $editor_default_show_line_numbers = isset ( $options_default['editor_default_show_line_numbers'] ) ? $options_default['editor_default_show_line_numbers'] : $args['editor_default_show_line_numbers'];
+
+        $html .= '</div>>'; // ./default_editor_container
 
         echo $html;
     }
