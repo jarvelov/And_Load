@@ -129,8 +129,10 @@ jQuery(document).ready(function() {
     setAceTheme( editorSettings['theme'] );
     setAceType( editorSettings['mode'] );
 
-    //Register a listen event on any changes made with editor
-    editor.getSession().on('change', setTemporaryContent( getAceContent() ) ); //Get the new data and save it to the temporary textarea
+    //Register a listener to trigger an event on any changes made within the Ace editor
+    editor.getSession().on('change', function() {
+        setTemporaryContent( getAceContent() );`//Get the new data and save it to the temporary textarea
+    });
 });
 
 /* Listeners */
