@@ -729,9 +729,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $content = $this->shortcode_load_get_file( $srcpath );
 
-            var_dump($content);
-
-            if($content) {
+            if($content !== false) {
                 //init editor with content
                 $this->shortcode_load_editor_init($content, $type);
             } else {
