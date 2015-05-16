@@ -602,7 +602,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<div id="editor_default_type_setting" class="default_editor_sub_setting">';
         $html .= '<label><strong><small>Default type</small></strong></label>';
         $editor_default_type = isset ( $options_default['editor_default_type'] ) ? $options_default['editor_default_type'] : $args['editor_default_type'];
-        $html .= '</div>' // ./editor_default_type_setting
+        $html .= '</div>'; // ./editor_default_type_setting
 
         //Ace editor default print margin
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_editor_sub_setting">';
