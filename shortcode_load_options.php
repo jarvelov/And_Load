@@ -44,7 +44,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_automatically_minify_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array('default' => 1) //set default to auto minify for all file types
+            array('do_not_minify' => false) //set default to auto minify for all file types
         );
 
         add_settings_field(
@@ -556,13 +556,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_default_automatically_minify_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
-        $default_value = $args['default'];
+        $default_value = $args['do_not_minify'];
 
         $default_minify_checkbox = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value;
 
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
-        $html .= '<label class="control-label"><strong><small>Automatically minify files</strong></small></label>';
+        $html .= '<label class="control-label"><strong><small>Do not minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
