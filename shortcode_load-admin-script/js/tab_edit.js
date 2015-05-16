@@ -4,7 +4,7 @@ function setAceOptions(optionName, optionValue) {
     options = {};
     options[optionName] = optionValue;
 
-    console.log('setting option ' + optionName + 'to value: ' + optionValue );
+    //console.log('setting option: ' + optionName + ' to value: ' + optionValue );
 
     editor.setOptions(options);
 }
@@ -12,7 +12,7 @@ function setAceOptions(optionName, optionValue) {
 /* Ace style functions */
 
 function setAceTabSize(size) {
-    setAceOptions('tabSize', size);
+    setAceOptions('tabSize', parseInt( size ) );
 }
 
 function setAceMode(mode) {
@@ -43,7 +43,7 @@ function setAceType(modeType) {
             setAceTabSize(4);
             break;
         default:
-            console.log('Unknown mode type: ' + type);
+            //console.log('Unknown mode type: ' + type);
             break;
     }
 }
@@ -53,7 +53,7 @@ function setAceFontSize(size) {
         size = editorSettings['fontSize'];
     }
 
-    setAceOptions( 'fontSize', parseInt(size) );
+    setAceOptions( 'fontSize', parseInt( size ) );
 }
 
 /* Ace content functions */

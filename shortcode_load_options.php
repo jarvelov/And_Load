@@ -761,7 +761,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             echo $html;
 
-            $this->shortcode_load_editor_init('Enter a file name and type to begin...', 'plain_text');
+            $this->shortcode_load_editor_init('', 'plain_text');
         }
     }
 
@@ -982,13 +982,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             <script>
                 var editor;               
                 var editorSettings = {
-                    fontSize:<?php echo $editor_default_font_size; ?>,
-                    tabSize: <?php echo $editor_default_tab_size; ?>,
+                    fontSize:"<?php echo $editor_default_font_size; ?>",
+                    tabSize:"<?php echo $editor_default_tab_size; ?>",
                     theme:"<?php echo $editor_default_theme; ?>",
                     mode:"<?php echo $editor_default_mode_type; ?>",
-                    showPrintMargin: "<?php echo $editor_default_print_margin; ?>",
-                    printMarginColumn: "<?php echo $editor_default_print_margin_column; ?>",
-                    showLineNumbers: <?php echo $editor_default_show_line_numbers; ?>
+                    showPrintMargin:"<?php echo $editor_default_print_margin; ?>",
+                    printMarginColumn:"<?php echo $editor_default_print_margin_column; ?>",
+                    showLineNumbers:"<?php echo $editor_default_show_line_numbers; ?>"
                 };
             </script>
         <?php
