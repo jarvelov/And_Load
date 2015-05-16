@@ -886,8 +886,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } elseif( ! ( empty($file_upload) ) ) { //file is being uploaded
             try {
                 $file_content = file_get_contents( $file_upload ); //get the raw content from the uploaded file
-                var_dump($_FILES);
-                break;
+                var_dump($file_content);
 
                 $file_datas[] = $this->shortcode_load_save_to_database(
                     array(
@@ -916,6 +915,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } else {
             //TODO handle error
         }
+        break;
     }
 
     /*
