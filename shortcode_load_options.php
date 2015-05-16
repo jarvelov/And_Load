@@ -480,7 +480,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<div id="overview-container">';
 
         if(sizeof($files) > 0) {
-            $html .= '<p id="overview-help-text"><em>Tip!</em> Click the name of the file in the table to view/edit it.</p>';
+            $html .= '<p id="overview-help-text"><span id="help-title">Tip!</span><span id="help-text">Click the name of the file in the table to view/edit it.</span></p>';
             $html .= '<div class="shortcode-load-table-container">';
             $html .= '<table id="overview-table" class="table table-hover table-striped table-bordered display">';
             $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
