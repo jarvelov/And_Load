@@ -765,7 +765,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $options_default = get_option( 'shortcode_load_default_options' );
             $editor_default_mode_type = $options_default['editor_default_mode_type'];
             var_dump($editor_default_mode_type);
-            $this->shortcode_load_editor_init(false, );
+            $this->shortcode_load_editor_init(false, $editor_default_mode_type);
         }
     }
 
