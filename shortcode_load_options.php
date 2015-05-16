@@ -940,6 +940,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                     submit_button('Save file', 'btn btn-lg btn-success');
                 } elseif($active_tab == 'tab_help') {
+                    $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
+
                     settings_fields( 'shortcode_load_help_section' );
                     do_settings_sections( 'shortcode_load_help_section' );
                 }
