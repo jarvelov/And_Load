@@ -750,7 +750,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Bootstrap credits
         $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_bootstrap">';
         $html .= '<label class="control-label">Bootstrap</label>';
-        $html .= '<p>Project URL: <a href="http://getbootstrap.com">Bootstrap/a></p>';
+        $html .= '<p>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></p>';
         $html .= '<p>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></p>';
         $html .= '</div>'; // ./shortcode_load_help_credits_bootstrap
 
