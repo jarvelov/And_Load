@@ -563,7 +563,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
         $html .= '<label class="control-label"><strong><small>Automatically minify files</strong></small></label>';
-        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( 1, $default_minify_checkbox, false ) . '/>';
+        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
 
@@ -634,10 +634,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Ace editor default print margin
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
+        var_dump($editor_default_print_margin);
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label"><strong><small>Show print margin</strong></small></label>';
-        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( 1, $editor_default_print_margin, false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( $editor_default_print_margin, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
         /*Ace editor default print margin column
@@ -654,7 +655,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_line_numbers_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label"><strong><small>Show editor line numbers</small></strong></label>';
-        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( 1, $editor_default_show_line_numbers, false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
         $html .= '</div>'; // ./default_editor_container
