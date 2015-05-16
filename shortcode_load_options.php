@@ -580,7 +580,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html = '<div class="default_editor_setting_container">';
 
         $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Theme</strong></small></label>';
+        $html .= '<label class="control-label"><strong><small>Default theme</strong></small></label>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
