@@ -185,7 +185,7 @@ jQuery('#edit_file_shortcode_display').on('focus', function() {
 
 //Editor file type changed
 jQuery('#new_file_type').on('change', function() {
-    if( ! (isAceDisabled) ) { //don't trigger if ace editor is disabled
+    if( isAceDisabled ) { //don't trigger if ace editor is disabled
         setAceFontSize('default');
         setAceType(this.value);
     }
