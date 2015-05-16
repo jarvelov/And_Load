@@ -2,6 +2,20 @@
 
 #overview-help-text {
   font-size: 12px;
+  top: 5px;
+  border-bottom: 3px dotted #FEFEFE;
+  position: relative;
+  overflow: hidden;
+  display: inline;
+  background-color: #F8F8EF;
+}
+
+#help-title {
+  font-weight: bold;
+}
+
+#help-text {
+  margin-left: 5px;
 }
 
 #overview-container {
