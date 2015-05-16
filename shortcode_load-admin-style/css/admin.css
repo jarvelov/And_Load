@@ -21,6 +21,20 @@ body {
 .nav_tab {
   font-size: 1.2em;
   line-height: 1em;
+  border-width: 1px 1px medium;
+  border-style: solid solid none;
+  border-color: #CCC #CCC -moz-use-text-color;
+  -moz-border-top-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  border-image: none;
+  background: #E4E4E4 none repeat scroll 0% 0%;
+  color: #555;
+  display: inline-block;
+  padding: 4px 14px 6px;
+  text-decoration: none;
+  margin: -4px 4px -1px 0px;  
 }
 
 .nav_tab:hover {
