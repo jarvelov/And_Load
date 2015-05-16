@@ -868,15 +868,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
         $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
         $file_type = ( $args[ 'new_file_type' ] ) ? $args[ 'new_file_type' ] : NULL;
-
-        //This is NULL if no file was selected for upload on POST
-        $file_upload = ( $args[ 'new_file_upload' ] ) ? $args[ 'new_file_upload' ] : NULL;
+        $file_upload = 'new_file_upload';
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
        
         $file_datas = array();
-
-        var_dump($_FILES);
 
         if( ! ( empty( $id ) ) ) { //file already exists, add revision
                 $file_datas[] = $this->shortcode_load_add_file_revision(
@@ -886,7 +882,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
-        } elseif( ! ( empty($file_upload) ) ) { //file is being uploaded
+        } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
             try {
                 $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name'][$file_upload] ); //get the raw content from the uploaded file
                 var_dump($file_content);
