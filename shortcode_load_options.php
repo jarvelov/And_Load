@@ -729,6 +729,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $content = $this->shortcode_load_get_file( $srcpath );
 
+            var_dump($srcpath);
+
             if($content) {
                 //init editor with content
                 $this->shortcode_load_editor_init($content, $type);
@@ -881,7 +883,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
-        } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
+        } elseif( ! ( empty($_FILES) ) ) { //file(s) are being uploaded
             try {
                 $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
 
@@ -893,6 +895,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         'minify' => $minify
                     )
                 );
+
+                //Go over every file that was uploaded and set operation to 'uploaded'
+                for ($i=0; $i < sizeof($file_datas); $i++) { 
+                    $file_datas[$i]['operation'] = 'uploaded';
+                }
             } catch (Exception $e) {
                 //var_dump($e);
             }
