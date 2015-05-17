@@ -572,12 +572,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_default_general_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
+
+        $html = '<div id="default_general_container">';
+
+        //Auto minify files
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $$args['default_minify'];
-
-        $html = '<div id="default_general_container" class="default_options_sub_setting">';
-
         $html .= '<div id="default_minify_setting_container" class="default_options_sub_setting">';
-
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
@@ -959,6 +959,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_default_options_callback_sanitize($args) {
         //TODO go over all the default option settings and figure out some way to get the default value submitted in the add_section function
         $options_default = get_option( 'shortcode_load_default_options' );
+
+        var_dump($args);
         
         //Checkboxes
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
