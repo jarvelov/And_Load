@@ -961,6 +961,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
 
         var_dump($args);
+        break;
         
         //Checkboxes
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
