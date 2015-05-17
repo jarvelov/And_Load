@@ -959,9 +959,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_default_options_callback_sanitize($args) {
         //TODO go over all the default option settings and figure out some way to get the default value submitted in the add_section function
         $options_default = get_option( 'shortcode_load_default_options' );
-
-        var_dump($args);
-        break;
         
         //Checkboxes
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
