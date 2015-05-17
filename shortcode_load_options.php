@@ -870,6 +870,35 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
+    function shortcode_load_help_debug_callback() {
+        $html = '<div id="shortcode_load_help_debug">';
+
+        $html .= '<div id="error_id_0" class="shortcode_load_help_debug_section">';
+        $html .= '<p>Error #0</p><span>Could not save file to Wordpress\' "uploads" folder.</span>';
+        $html .= '<p>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</p>';
+        $html .= '</div>'; // ./error_id_0
+        //could not write file to local path specified. Check path and permissions.
+
+        $html .= '<div id="error_id_1" class="shortcode_load_help_debug_section">';
+        $html .= '<p>Error #1</p><span>Could not create a new entry in the database when saving file.</span>';
+        $html .= '<p>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</p>';
+        $html .= '</div>'; // ./error_id_1
+
+        $html .= '<div id="error_id_2" class="shortcode_load_help_debug_section">';
+        $html .= '<p>Error #2</p><span>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</span>';
+        $html .= '<p>Solution: Delete the file and save it again.</p>';
+        $html .= '</div>'; // ./error_id_2
+
+        $html .= '<div id="error_id_3" class="shortcode_load_help_debug_section">';
+        $html .= '<p>Error #3</p><span>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</span>';
+        $html .= '<p>Solution: Delete the file and save it again.</p>';
+        $html .= '</div>'; // ./error_id_3                        
+
+        $html .= '</div>'; // ./shortcode_load_help_debug
+
+        echo $html;
+    }
+
     /*
     * Sanitization functions
     * Both for wordpress callbacks and for custom functions
@@ -985,7 +1014,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_setting_slug = 'file_update';
                 $message_type = 'error';
 
-                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#file_error_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
+                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#error_id_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
             }
         }
 
