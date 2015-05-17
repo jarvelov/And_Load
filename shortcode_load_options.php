@@ -576,9 +576,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
-        //Overview tab default settings
-        $html .= '<div id="default_overview_setting_container" class="default_options_sub_setting">';
-
         //Overview table default column to sort by
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
         $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control">';
@@ -605,9 +602,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<option value=' . $overview_default_table_sort_type . $selected . '>' . $overview_default_table_sort_type . '</option>';
         }
 
-        $html .= '</select>'; // ./overview_default_table_order_column        
-
-        $html .= '</div>'; // ./default_overview_setting_container
+        $html .= '</select>'; // ./overview_default_table_order_column
 
         $html .= '</div>'; // ./default_general_container
 
