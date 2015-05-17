@@ -579,7 +579,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</div>'; // ./default_minify_setting_container
 
         //Overview tab default settings
-        $html = '<div id="default_overview_setting_container" class="default_options_sub_setting">';
+        $html .= '<div id="default_overview_setting_container" class="default_options_sub_setting">';
 
         //Overview table default column to sort by
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
