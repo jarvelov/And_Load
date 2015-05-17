@@ -717,8 +717,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html = '<div id="edit_file_input_container">';
 
-            $html .= '<div id="edit_file_info_container">';
-
             $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
 
             /* Shortcode displayed in an input field */
@@ -727,24 +725,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $shortcode_display = 'shortcode_load id=' . $id;
 
-            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
+            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
             /* Select revision dropdown */
 
             $html .= '<label class="control-label">Current revision:</label>';
-            $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
+            $html .= '<select id="edit_file_revisions_select" class="form-control" name="edit_file_revisions_select">';
             for ($i=$revision; $i >= 0; $i--) {
                 $selected = ($current_revision==$i) ? ' selected="selected"' : '';
                 $html .= '<option value='.$i.$selected.'>'.$i.'</option>';
             }
             $html .= '</select>';
 
-            $html .= '</div>'; // ./edit_file_info_container
-
-            $html .= '<div id="edit_file_editor_settings_container">';
-            $html .= '<label class="control-label">Font size:</label>';
-            $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="0">0</option></select>';
-            $html .= '</div>'; // ./edit_file_editor_settings_container
+            $html .= '<div id="clearfix"></div>';
 
             $html .= '</div>'; // ./edit_file_input_container
 
