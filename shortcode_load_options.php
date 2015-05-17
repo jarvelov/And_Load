@@ -44,7 +44,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_automatically_minify_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array('default_minify' => true) //set default to auto minify for all file types
+            array(
+                'default_minify' => true, //set default to auto minify for all file types
+                'overview_table_order_column' => 0,
+                'overview_table_order_columns' => array(
+                    'ID' => 0,
+                    'Type' => 1,
+                    'Name' => 2,
+                    'Revisions' => 3,
+                    'Last Updated' => 4,
+                    'Created' => 5
+                ),
+                'overview_default_table_sort' => 'desc',
+                'overview_default_table_sort_types' => array('asc', 'desc')
+            )
         );
 
         add_settings_field(
@@ -252,7 +265,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         } catch (Exception $e) {
             //var_dump($e);
-            $return_args['success'] = false;
+            throw new Exception("Could not update database record", 4);
         }
 
         return $return_args;
@@ -420,12 +433,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         if($file_args['success'] == true) {
-            $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
-
-            if($result['success'] == true) {
+            try {
+                $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
                 $type = ($type == 'js') ? 'Script' : 'Style';
                 $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
-            } else {
+            } catch(Exception $e) {
+                $e->getCode();
                 $return_args = array('success' => false, 'error_id' => $error_id);
             }
         } else {
@@ -449,32 +462,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_minify_css($content) {
         $minified_content = $content;
         return $minified_content;
-    }
-
-    /*
-    * Return all saved entries of type 'js' in database
-    */
-    function shortcode_load_get_scripts() {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'shortcode_load'; 
-
-        $sql = "SELECT id,name,slug,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'js' ORDER BY created_timestamp DESC";
-        $result = $wpdb->get_results($sql, ARRAY_A);
-
-        return $result;
-    }
-
-    /*
-    * Return all entries of type 'css' in database
-    */
-    function shortcode_load_get_styles() {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'shortcode_load'; 
-
-        $sql = "SELECT id,name,slug,revision,updated_timestamp,created_timestamp FROM ".$table_name." WHERE type = 'css' ORDER BY created_timestamp DESC";
-        $result = $wpdb->get_results($sql, ARRAY_A);
-
-        return $result;
     }
 
     /*
@@ -546,13 +533,27 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             $html .= '</tbody></table></div>';
+
+            $options_default = get_option( 'shortcode_load_default_options' ); 
+            $overview_table_order_column = $options_default['overview_table_order_column'];
+            $overview_table_order_type = $options_default['overview_table_order_type'];
+
+            ?>
+                <script>
+                var overviewSettings = {
+                    order_column:"<?php echo $overview_table_order_column; ?>",
+                    order_type:"<?php echo $overview_table_order_type; ?>"
+                };
+                </script>
+            <?php
+
         } else {
             $html .= '<h2>No scripts or styles created yet!</h2>';
             $html .= '<p>To begin click the <em>"New file &raquo;"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
         }
 
-        $html .= '</div>';
+        $html .= '</div>'; // ./overview_container
 
         echo $html;        
     }
@@ -568,16 +569,47 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_default_automatically_minify_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
-        $default_minify_value = $args['default_minify'];
-
-        $minify_checkbox_value = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_minify_value;
+        $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $$args['default_minify'];
 
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
-        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
+
+        //Overview tab default settings
+        $html = '<div id="default_overview_setting_container" class="default_options_sub_setting">';
+
+        //Overview table default column to sort by
+        $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
+        $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control">';
+
+        $overview_table_order_column = isset ( $options_default['overview_table_order_column'] ) ? $options_default['overview_table_order_column'] : $args['overview_table_order_column'];
+        $overview_table_order_columns = $args['overview_table_order_columns'];
+
+        foreach ($overview_table_order_columns as $overview_table_order_column_name => $overview_table_order_column_id) {
+            $selected = ($overview_table_order_column == $overview_table_order_column_id) ? ' selected="selected"' : '';
+            $html .= '<option value=' . $overview_table_order_column_id . $selected . '>' . $overview_table_order_column_name . '</option>';
+        }
+
+        $html .= '</select>'; // ./overview_default_table_order_column
+
+        //Overview table default sort order
+        $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
+        $html .= '<select id="overview_default_table_sort" name="shortcode_load_default_options[overview_default_table_sort]" class="form-control">';
+
+        $overview_default_table_sort = isset ( $options_default['overview_default_table_sort'] ) ? $options_default['overview_default_table_sort'] : $args['overview_default_table_sort'];
+        $overview_default_table_sort_types = $args['overview_default_table_sort_types'];
+
+        foreach ($overview_default_table_sort_types as $overview_default_table_sort_type) {
+            $selected = ($overview_default_table_sort == $overview_default_table_sort_type) ? ' selected="selected"' : '';
+            $html .= '<option value=' . $overview_default_table_sort_type . $selected . '>' . $overview_default_table_sort_type . '</option>';
+        }
+
+        $html .= '</select>'; // ./overview_default_table_order_column        
+
+        $html .= '</div>'; // ./default_overview_setting_container
 
         echo $html;
     }
@@ -922,7 +954,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         
         //Checkboxes
-        $options_default['default_minify_checkbox'] = isset ( $args['default_minify_checkbox'] ) ? $args['default_minify_checkbox'] : false;
+        $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? $args['editor_default_print_margin'] : false;
         $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? $args['editor_default_show_line_numbers'] : false;
         $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? $args['editor_default_tab_size_override'] : false;
@@ -942,7 +974,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_edit_file_callback_sanitize($args) {
         //Get the default options
         $options_default = get_option( 'shortcode_load_default_options' );
-        $minify = $options_default['default_minify_checkbox'];
+        $minify = $options_default['default_minify'];
 
         //Get the file name, content and type
         $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
