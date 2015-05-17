@@ -157,18 +157,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_help_credits',
-            'Credits',
-            array($this, 'shortcode_load_help_credits_callback'),
+            'shortcode_load_help_debug',
+            'Debug',
+            array($this, 'shortcode_load_help_debug_callback'),
             'shortcode_load_help_section',
             'shortcode_load_help'
         );
 
-
         add_settings_field(
-            'shortcode_load_help_debug',
+            'shortcode_load_help_credits',
             'Credits',
-            array($this, 'shortcode_load_help_debug_callback'),
+            array($this, 'shortcode_load_help_credits_callback'),
             'shortcode_load_help_section',
             'shortcode_load_help'
         );
