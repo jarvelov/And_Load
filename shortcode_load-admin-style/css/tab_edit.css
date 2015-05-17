@@ -13,7 +13,7 @@
   padding: 15px 0 15px 0;
 }
 
-#edit_file_input_container > select {
+.edit_file_select {
   max-width: 120px;
   display: inline-block;
   height: 34px;
@@ -21,7 +21,7 @@
   padding: 6px 12px
 }
 
-#edit_file_input_container > input {
+.edit_file_input {
   max-width: 250px;
   display: inline-block;
   border-radius: 7px;
