@@ -737,10 +737,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
             $html .= '</select>';
 
-            $html .= '<div id="edit_file_editor_settings_container">';
             $html .= '<label class="control-label">Font size:</label>';
             $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
-            $html .= '</div>'; // ./edit_file_editor_settings_container
 
             $html .= '</div>'; // ./edit_file_input_container
 
