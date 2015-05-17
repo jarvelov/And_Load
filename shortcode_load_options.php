@@ -664,8 +664,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         /*Ace editor default print margin column
             hide this section if print margin is disabled */
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
+        $show_editor_default_print_margin_column = ( $editor_default_tab_size_override ) ? 'inline-block' : 'none'; //show setting section if default tab override is set to true
 
-        $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting">';
+        $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting" style="display:' . $show_editor_default_print_margin_column. '">';
         $html .= '<label class="control-label" title="Print margin column width. Default: 80."><strong><small>Print margin column</small></strong></label>';
         $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
