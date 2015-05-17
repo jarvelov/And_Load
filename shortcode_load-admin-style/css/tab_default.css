@@ -4,7 +4,7 @@
   display: inline-block;
 }
 
-.default_editor_setting_container > select {
+.default_select {
   max-width: 200px;
 }
 

@@ -585,7 +585,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Overview table default column to sort by
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
-        $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control">';
+        $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control default_select">';
 
         $overview_table_order_column = isset ( $options_default['overview_table_order_column'] ) ? $options_default['overview_table_order_column'] : $args['overview_table_order_column'];
         $overview_table_order_columns = $args['overview_table_order_columns'];
@@ -599,7 +599,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Overview table default sort order
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
-        $html .= '<select id="overview_default_table_sort" name="shortcode_load_default_options[overview_default_table_sort]" class="form-control">';
+        $html .= '<select id="overview_default_table_sort" name="shortcode_load_default_options[overview_default_table_sort]" class="form-control default_select">';
 
         $overview_default_table_sort = isset ( $options_default['overview_default_table_sort'] ) ? $options_default['overview_default_table_sort'] : $args['overview_default_table_sort'];
         $overview_default_table_sort_types = $args['overview_default_table_sort_types'];
@@ -629,7 +629,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
-        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control">';
+        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control default_select">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
             $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
@@ -648,7 +648,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Get all available font sizes and check which one is currently selected
         $editor_font_sizes = $args['editor_font_sizes'];
 
-        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control">';
+        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control default_select">';
         foreach ($editor_font_sizes as $editor_font_size) {
             $selected = ($editor_default_font_size == $editor_font_size) ? ' selected="selected"' : '';
             $html .= '<option value=' . $editor_font_size . $selected . '>' . $editor_font_size . '</option>';
@@ -665,7 +665,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
 
-        $html .= '<select id="editor_default_mode_type" name="shortcode_load_default_options[editor_default_mode_type]" class="form-control">';
+        $html .= '<select id="editor_default_mode_type" name="shortcode_load_default_options[editor_default_mode_type]" class="form-control default_select">';
         foreach ($editor_mode_types as $editor_mode_type_name => $editor_mode_type_slug) {
             $selected = ($editor_default_mode_type == $editor_mode_type_slug) ? ' selected="selected"' : '';
             $html .= '<option value=' . $editor_mode_type_slug . $selected . '>' . $editor_mode_type_name . '</option>';
