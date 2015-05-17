@@ -537,7 +537,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '</tbody></table></div>';
 
             $options_default = get_option( 'shortcode_load_default_options' );
-            var_dump($options_default);
+
             $overview_default_table_order_column = $options_default['overview_default_table_order_column'];
             $overview_table_order_type = $options_default['overview_table_order_type'];
 
