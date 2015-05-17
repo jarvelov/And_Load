@@ -1081,6 +1081,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } elseif($active_tab == 'tab_default') {
                     //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_default_css', 'admin-style/css/tab_default.css', false, true);
+                    $this->shortcode_load_load_file('tab_default_js', 'admin-script/css/tab_default.js', true, true);
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_default_options' );
