@@ -877,13 +877,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //TODO go over all the default option settings and figure out some way to get the default value submitted in the add_section function
         $options_default = get_option( 'shortcode_load_default_options' );
         
-        //Set checkbox states
-        $options_default['default_minify_checkbox'] = isset ( $args['default_minify_checkbox'] ) ? true : false;
-        $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? true : false;
-        $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? true : false;
-        $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? true : false;
+        //Checkboxes
+        $options_default['default_minify_checkbox'] = isset ( $args['default_minify_checkbox'] ) ? $args['default_minify_checkbox'] : false;
+        $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? $args['editor_default_print_margin'] : false;
+        $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? $args['editor_default_show_line_numbers'] : false;
+        $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? $args['editor_default_tab_size_override'] : false;
 
-        var_dump($options_default);
+        //Drop downs
+        $options_default['editor_default_theme'] = isset ( $args['editor_default_theme'] ) ? $args['editor_default_theme'] : $options_default['editor_default_theme'];
+        $options_default['editor_default_font_size'] = isset ( $args['editor_default_font_size'] ) ? $args['editor_default_font_size'] : $options_default['editor_default_font_size'];
+        $options_default['editor_default_mode_type'] = isset ( $args['editor_default_mode_type'] ) ? $args['editor_default_mode_type'] : $options_default['editor_default_mode_type'];
+
+        //Inputs
+        $options_default['editor_default_print_margin_column'] = isset ( $args['editor_default_print_margin_column'] ) ? $args['editor_default_print_margin_column'] : $options_default['editor_default_print_margin_column'];
+        $options_default['editor_default_tab_size'] = isset ( $args['editor_default_tab_size'] ) ? $args['editor_default_tab_size'] : $options_default['editor_default_tab_size'];
+
         break;
 
         return $options_default;
