@@ -970,6 +970,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default['editor_default_theme'] = isset ( $args['editor_default_theme'] ) ? $args['editor_default_theme'] : $options_default['editor_default_theme'];
         $options_default['editor_default_font_size'] = isset ( $args['editor_default_font_size'] ) ? $args['editor_default_font_size'] : $options_default['editor_default_font_size'];
         $options_default['editor_default_mode_type'] = isset ( $args['editor_default_mode_type'] ) ? $args['editor_default_mode_type'] : $options_default['editor_default_mode_type'];
+        $options_default['overview_default_table_sort'] = isset ( $args['overview_default_table_sort'] ) ? $args['overview_default_table_sort'] : $options_default['overview_default_table_sort'];
+        $options_default['overview_table_order_column'] = isset ( $args['overview_table_order_column'] ) ? $args['overview_table_order_column'] : $options_default['overview_table_order_column'];
 
         //Inputs
         $options_default['editor_default_print_margin_column'] = isset ( $args['editor_default_print_margin_column'] ) ? $args['editor_default_print_margin_column'] : $options_default['editor_default_print_margin_column'];
