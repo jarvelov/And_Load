@@ -49,7 +49,6 @@ body {
 #overview_help_text {
   font-size: 11px;
   top: 10px;
-  left: -10px;
   position: relative;
   overflow: hidden;
   display: inline;
