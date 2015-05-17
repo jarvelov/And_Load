@@ -18,7 +18,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if ( ! current_user_can('update_plugins') )
             return;
 
-        /* Overview section */
+        /* Overview tab section */
 
         add_settings_section( 
             'shortcode_load_overview',
@@ -29,7 +29,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_overview', 'shortcode_load_overview');
 
-        /* Default settings section */
+        /* Default settings tab section */
 
         add_settings_section( 
             'shortcode_load_default',
@@ -104,7 +104,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize'));
 
-        /* Edit file section */
+        /* Edit file tab section */
 
         add_settings_section( 
             'shortcode_load_edit_file',
@@ -123,7 +123,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_edit_file_callback_sanitize'));
 
-        /* Edit file section */
+        /* Help tab section */
 
         add_settings_section( 
             'shortcode_load_help',
@@ -146,10 +146,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_help_credits_callback'),
             'shortcode_load_help_section',
             'shortcode_load_help'
-        );        
+        );
+
+
+        add_settings_field(
+            'shortcode_load_help_debug',
+            'Credits',
+            array($this, 'shortcode_load_help_debug_callback'),
+            'shortcode_load_help_section',
+            'shortcode_load_help'
+        );
 
         register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
-
 
     }
 
