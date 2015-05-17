@@ -46,8 +46,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'shortcode_load_default',
             array(
                 'default_minify' => true, //set default to auto minify for all file types
-                'overview_table_order_column' => 0,
-                'overview_table_order_columns' => array(
+                'overview_default_table_order_column' => 0,
+                'overview_default_table_order_columns' => array(
                     'ID' => 0,
                     'Type' => 1,
                     'Name' => 2,
@@ -538,13 +538,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $options_default = get_option( 'shortcode_load_default_options' );
             var_dump($options_default);
-            $overview_table_order_column = $options_default['overview_table_order_column'];
+            $overview_default_table_order_column = $options_default['overview_default_table_order_column'];
             $overview_table_order_type = $options_default['overview_table_order_type'];
 
             ?>
                 <script>
                 var overviewSettings = {
-                    order_column:"<?php echo $overview_table_order_column; ?>",
+                    order_column:"<?php echo $overview_default_table_order_column; ?>",
                     order_type:"<?php echo $overview_table_order_type; ?>"
                 };
                 </script>
@@ -590,12 +590,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
         $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control default_select">';
 
-        $overview_table_order_column = isset ( $options_default['overview_table_order_column'] ) ? $options_default['overview_table_order_column'] : $args['overview_table_order_column'];
-        $overview_table_order_columns = $args['overview_table_order_columns'];
+        $overview_default_table_order_column = isset ( $options_default['overview_default_table_order_column'] ) ? $options_default['overview_default_table_order_column'] : $args['overview_default_table_order_column'];
+        $overview_default_table_order_columns = $args['overview_default_table_order_columns'];
 
-        foreach ($overview_table_order_columns as $overview_table_order_column_name => $overview_table_order_column_id) {
-            $selected = ($overview_table_order_column == $overview_table_order_column_id) ? ' selected="selected"' : '';
-            $html .= '<option value=' . $overview_table_order_column_id . $selected . '>' . $overview_table_order_column_name . '</option>';
+        foreach ($overview_default_table_order_columns as $overview_default_table_order_column_name => $overview_default_table_order_column_id) {
+            $selected = ($overview_default_table_order_column == $overview_default_table_order_column_id) ? ' selected="selected"' : '';
+            $html .= '<option value=' . $overview_default_table_order_column_id . $selected . '>' . $overview_default_table_order_column_name . '</option>';
         }
 
         $html .= '</select>'; // ./overview_default_table_order_column
@@ -971,7 +971,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default['editor_default_font_size'] = isset ( $args['editor_default_font_size'] ) ? $args['editor_default_font_size'] : $options_default['editor_default_font_size'];
         $options_default['editor_default_mode_type'] = isset ( $args['editor_default_mode_type'] ) ? $args['editor_default_mode_type'] : $options_default['editor_default_mode_type'];
         $options_default['overview_default_table_sort'] = isset ( $args['overview_default_table_sort'] ) ? $args['overview_default_table_sort'] : $options_default['overview_default_table_sort'];
-        $options_default['overview_table_order_column'] = isset ( $args['overview_table_order_column'] ) ? $args['overview_table_order_column'] : $options_default['overview_table_order_column'];
+        $options_default['overview_default_table_order_column'] = isset ( $args['overview_default_table_order_column'] ) ? $args['overview_default_table_order_column'] : $options_default['overview_default_table_order_column'];
 
         //Inputs
         $options_default['editor_default_print_margin_column'] = isset ( $args['editor_default_print_margin_column'] ) ? $args['editor_default_print_margin_column'] : $options_default['editor_default_print_margin_column'];
