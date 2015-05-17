@@ -579,6 +579,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_themes = $args['editor_themes'];
 
         $html = '<div class="default_editor_setting_container">';
+        $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse over each setting to get more info about it.</span></p>';
 
         $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
