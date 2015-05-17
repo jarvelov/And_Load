@@ -39,9 +39,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_general',
-            'General',
-            array($this, 'shortcode_load_default_general_callback'),
+            'shortcode_load_overview',
+            'Overview',
+            array($this, 'shortcode_load_default_overview_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
             array(
@@ -564,13 +564,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /* Default options tab callbacks */
 
     function shortcode_load_default_options_callback() {
-        $html = '<p>Default options to configure editor settings and minify behaviour.</p>'; 
+        $html = '<p>Default options to configure overview and editor settings.</p>'; 
         $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse cursor over each setting title to get more info about it.</span></p>';
 
         echo $html;
     }
 
-    function shortcode_load_default_general_callback($args) {
+    function shortcode_load_default_overview_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
 
         $html = '<div id="default_general_container">';
