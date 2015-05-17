@@ -45,3 +45,22 @@ body {
 .active_tab {
   background-color: #F3F3F3;
 }
+
+#overview_help_text {
+  font-size: 11px;
+  top: 10px;
+  left: -10px;
+  position: relative;
+  overflow: hidden;
+  display: inline;
+  background-color: #F8F8EF;
+  padding: 3px;
+}
+
+#help_title {
+  font-weight: bold;
+}
+
+#help_text {
+  margin-left: 2px;
+}
