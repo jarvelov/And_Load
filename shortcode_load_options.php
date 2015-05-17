@@ -874,6 +874,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_default_options_callback_sanitize($args) {
+        //TODO go over all the default option settings and figure out some way to get the default value submitted in the add_section function
         $options_default = get_option( 'shortcode_load_default_options' );
         
         //Set checkbox states
@@ -881,6 +882,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? true : false;
         $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? true : false;
         $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? true : false;
+
+        var_dump($options_default);
+        break;
 
         return $options_default;
     }
