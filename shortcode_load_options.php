@@ -879,6 +879,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default['default_minify_checkbox'] = isset ( $args['default_minify_checkbox'] ) ? true : false;
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? true : false;
         $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? true : false;
+        $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? true : false;
 
         return $options_default;
     }
