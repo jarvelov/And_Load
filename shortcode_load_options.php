@@ -717,16 +717,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html = '<div id="edit_file_input_container">';
 
-            $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
-
-            /* Shortcode displayed in an input field */
-
-            $html .= '<label class="control-label">Shortcode:</label>';
-
-            $shortcode_display = 'shortcode_load id=' . $id;
-
-            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
-
             /* Select revision dropdown */
 
             $html .= '<label class="control-label">Current revision:</label>';
@@ -739,8 +729,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '</div>'; // ./edit_file_input_container
 
+            $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
+
+            /* Shortcode displayed in an input field */
+
+            $html .= '<label class="control-label">Shortcode:</label>';
+
+            $shortcode_display = 'shortcode_load id=' . $id;
+
+            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';            
+
             echo $html;
 
+            //Load file content
             $content = $this->shortcode_load_get_file( $srcpath );
 
             if($content !== false) {
