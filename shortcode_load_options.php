@@ -93,6 +93,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'Text' => 'plain_text'),
                 'editor_default_font_size' => 12,
                 'editor_default_tab_size' => 4,
+                'editor_default_tab_size_override' => false,
                 'editor_default_mode_type' => 'plain_text',
                 'editor_default_print_margin' => true,
                 'editor_default_print_margin_column' => 80,
@@ -562,7 +563,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
-        $html .= '<label class="control-label"><strong><small>Do not minify files</strong></small></label>';
+        $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
@@ -580,7 +581,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html = '<div class="default_editor_setting_container">';
 
         $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Default theme</strong></small></label>';
+        $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
@@ -595,7 +596,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_font_size = isset( $options_default['editor_default_font_size'] ) ? $options_default['editor_default_font_size'] : $args['editor_default_font_size'];
 
         $html .= '<div id="editor_default_font_size_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Default font size</small></strong></label>';
+        $html .= '<label class="control-label" title="Default editor font size. Default: 12"><strong><small>Default font size</small></strong></label>';
 
         //Get all available font sizes and check which one is currently selected
         $editor_font_sizes = $args['editor_font_sizes'];
@@ -612,7 +613,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_mode_type = isset ( $options_default['editor_default_mode_type'] ) ? $options_default['editor_default_mode_type'] : $args['editor_default_mode_type'];
 
         $html .= '<div id="editor_default_mode_type_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Default type</small></strong></label>';
+        $html .= '<label class="control-label" title="When creating a new file, default to this file type automatically. Default: Text"><strong><small>Default type</small></strong></label>';
 
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
@@ -625,10 +626,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= "</select>";
         $html .= '</div>'; // ./editor_default_mode_type_setting
 
+        //Ace editor default tab size override
+        $editor_default_tab_size_override = isset ( $options_default['editor_default_tab_size_override'] ) ? $options_default['editor_default_tab_size_override'] : $args['editor_default_tab_size_override'];
+        $html .= '<div id="editor_default_tab_size_override_setting" class="default_options_sub_setting">';
+        $html .= '<label class="control-label" title="Default tab size is file type specific. JavaScript: 4. CSS: 2"><strong><small>Override default tab size</small></strong></label>';
+        $html .= '<input type="number" id="editor_default_tab_size_override" name="shortcode_load_default_options[editor_default_tab_size_override]" class="form-control" value="' . $editor_default_tab_size_override . '" />';
+        $html .= '</div>'; // ./editor_default_tab_size_override_setting
+
         //Ace editor default tab size
         $editor_default_tab_size = isset ( $options_default['editor_default_tab_size'] ) ? $options_default['editor_default_tab_size'] : $args['editor_default_tab_size'];
         $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Default tab size</small></strong></label>';
+        $html .= '<label class="control-label" title="Override tab size for all file types."><strong><small>Default tab size</small></strong></label>';
         $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control" value="' . $editor_default_tab_size . '" />';
         $html .= '</div>'; // ./editor_default_tab_size_setting
 
@@ -636,7 +644,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_show_line_numbers = isset ( $options_default['editor_default_show_line_numbers'] ) ? $options_default['editor_default_show_line_numbers'] : $args['editor_default_show_line_numbers'];
 
         $html .= '<div id="editor_default_show_line_numbers_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Show editor line numbers</small></strong></label>';
+        $html .= '<label class="control-label" title="Show line numbers on the left side of editor"><strong><small>Show editor line numbers</small></strong></label>';
         $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
@@ -644,7 +652,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Show print margin</strong></small></label>';
+        $html .= '<label class="control-label" title="Show print margin"><strong><small>Show print margin</strong></small></label>';
         $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="0"' . checked( $editor_default_print_margin, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_print_margin_setting
 
@@ -653,7 +661,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_print_margin_column = isset ( $options_default['editor_default_print_margin_column'] ) ? $options_default['editor_default_print_margin_column'] : $args['editor_default_print_margin_column'];
 
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label"><strong><small>Print margin column</small></strong></label>';
+        $html .= '<label class="control-label" title="Print margin column width. Default: 80."><strong><small>Print margin column</small></strong></label>';
         $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
