@@ -892,8 +892,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default['editor_default_print_margin_column'] = isset ( $args['editor_default_print_margin_column'] ) ? $args['editor_default_print_margin_column'] : $options_default['editor_default_print_margin_column'];
         $options_default['editor_default_tab_size'] = isset ( $args['editor_default_tab_size'] ) ? $args['editor_default_tab_size'] : $options_default['editor_default_tab_size'];
 
-        break;
-
         return $options_default;
     }
 
