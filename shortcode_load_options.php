@@ -633,7 +633,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_tab_size_override = isset ( $options_default['editor_default_tab_size_override'] ) ? $options_default['editor_default_tab_size_override'] : $args['editor_default_tab_size_override'];
         $html .= '<div id="editor_default_tab_size_override_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Default tab size is file type specific. JavaScript: 4. CSS: 2"><strong><small>Override default tab size</small></strong></label>';
-        $html .= '<input type="checkbox" id="editor_default_tab_size_override" name="shortcode_load_default_options[editor_default_tab_size_override]" class="form-control" value="' . $editor_default_tab_size_override . '" />';
+        $html .= '<input type="checkbox" id="editor_default_tab_size_override" name="shortcode_load_default_options[editor_default_tab_size_override]" class="form-control" value="1"' . checked( $editor_default_tab_size_override, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_tab_size_override_setting
 
         //Ace editor default tab size
