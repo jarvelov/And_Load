@@ -23,4 +23,9 @@ jQuery(document).ready(function() {
     jQuery('#edit_file_shortcode_display').on('focus', function() {
         jQuery(this).select();
     });
+
+    //When print margin is disabled/enabled fade out/in print margin column setting
+    jQuery('#editor_default_print_margin').on('change', function() {
+        jQuery('#editor_default_print_margin_column_setting').fadeToggle(400)
+    })
 });
