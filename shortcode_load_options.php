@@ -44,7 +44,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_automatically_minify_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array('do_not_minify' => false) //set default to auto minify for all file types
+            array('default_minify' => true) //set default to auto minify for all file types
         );
 
         add_settings_field(
@@ -101,7 +101,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         );
 
-        register_setting('shortcode_load_default_options', 'shortcode_load_default_options');
+        register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize'));
 
         /* Edit file section */
 
@@ -556,14 +556,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_default_automatically_minify_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
-        $default_value = $args['do_not_minify'];
+        $default_minify_value = $args['default_minify'];
 
-        $default_minify_checkbox = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_value;
+        $minify_checkbox_value = isset ( $options_default['default_minify_checkbox'] ) ? $options_default['default_minify_checkbox'] : $default_minify_value;
 
         $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
 
         $html .= '<label class="control-label"><strong><small>Do not minify files</strong></small></label>';
-        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $default_minify_checkbox, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="default_minify_checkbox" name="shortcode_load_default_options[default_minify_checkbox]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
 
@@ -859,6 +859,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_filter_string($string) {
         $string = preg_replace("/[^a-zA-Z0-9]+/", "", $string);
         return $string;
+    }
+
+    function shortcode_load_default_options_callback_sanitize($args) {
+        $options_default = get_option( 'shortcode_load_default_options' );
+        
+        //Set checkbox states
+        $options_default['default_minify_checkbox'] = isset ( $args['default_minify_checkbox'] ) ? true : false;
+        $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? true : false;
+        $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? true : false;
+
+        return $options_default;
     }
 
     function shortcode_load_edit_file_callback_sanitize($args) {
