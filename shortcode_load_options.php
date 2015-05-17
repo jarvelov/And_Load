@@ -513,7 +513,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $files = $this->shortcode_load_get_scripts_styles();
 
-        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
+        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
         $html .= '<div id="overview_container">';
 
         if(sizeof($files) > 0) {
@@ -554,7 +554,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_default_options_callback() {
         $html = '<p>Default options to configure editor settings and minify behaviour.</p>'; 
         $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse over each setting to get more info about it.</span></p>';
-        
+
         echo $html;
     }
 
