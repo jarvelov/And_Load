@@ -56,7 +56,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     'Created' => 5
                 ),
                 'overview_default_table_sort' => 'desc',
-                'overview_default_table_sort_types' => array('asc', 'desc')
+                'overview_default_table_sort_types' => array(
+                    'Ascending' => 'asc',
+                    'Descending' => 'desc'
+                )
             )
         );
 
@@ -604,9 +607,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $overview_default_table_sort = isset ( $options_default['overview_default_table_sort'] ) ? $options_default['overview_default_table_sort'] : $args['overview_default_table_sort'];
         $overview_default_table_sort_types = $args['overview_default_table_sort_types'];
 
-        foreach ($overview_default_table_sort_types as $overview_default_table_sort_type) {
-            $selected = ($overview_default_table_sort == $overview_default_table_sort_type) ? ' selected="selected"' : '';
-            $html .= '<option value=' . $overview_default_table_sort_type . $selected . '>' . $overview_default_table_sort_type . '</option>';
+        foreach ($overview_default_table_sort_types as $overview_default_table_sort_type => $overview_default_table_sort_slug) {
+            $selected = ($overview_default_table_sort == $overview_default_table_sort_slug) ? ' selected="selected"' : '';
+            $html .= '<option value=' . $overview_default_table_sort_slug . $selected . '>' . $overview_default_table_sort_type . '</option>';
         }
 
         $html .= '</select>'; // ./overview_default_table_order_column        
