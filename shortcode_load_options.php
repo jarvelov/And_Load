@@ -39,9 +39,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_automatically_minify',
-            'Auto minify',
-            array($this, 'shortcode_load_default_automatically_minify_callback'),
+            'shortcode_load_general',
+            'General',
+            array($this, 'shortcode_load_default_general_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
             array(
@@ -567,16 +567,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
-    function shortcode_load_default_automatically_minify_callback($args) {
+    function shortcode_load_default_general_callback($args) {
         $options_default = get_option( 'shortcode_load_default_options' );
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $$args['default_minify'];
 
-        $html = '<div id="default_minify_setting_container" class="default_options_sub_setting">';
+        $html = '<div id="default_general_container" class="default_options_sub_setting">';
 
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
-
-        $html .= '</div>'; // ./default_minify_setting_container
 
         //Overview tab default settings
         $html .= '<div id="default_overview_setting_container" class="default_options_sub_setting">';
@@ -610,6 +608,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</select>'; // ./overview_default_table_order_column        
 
         $html .= '</div>'; // ./default_overview_setting_container
+
+        $html .= '</div>'; // ./default_general_container
 
         echo $html;
     }
