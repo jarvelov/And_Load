@@ -79,6 +79,7 @@
   position: relative;
   height: 100%;
   border-radius: 10px;
+  resize: both;
 }
 
 /* Wordpress core styling */
