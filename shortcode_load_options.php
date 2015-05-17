@@ -640,8 +640,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // ./editor_default_show_line_numbers_setting
 
-        $html .= '</div>'; // ./default_editor_container
-
         //Ace editor default print margin
         $editor_default_print_margin = isset ( $options_default['editor_default_print_margin'] ) ? $options_default['editor_default_print_margin'] : $args['editor_default_print_margin'];
 
@@ -658,6 +656,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<label class="control-label"><strong><small>Print margin column</small></strong></label>';
         $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
+
+        $html .= '</div>'; // ./default_editor_container
 
         echo $html;
     }
