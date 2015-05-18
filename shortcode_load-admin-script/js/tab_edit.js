@@ -95,7 +95,7 @@ function setAceEnabled() {
 /* Temporary content storage functions */
 
 function setTemporaryContent(content) {
-    if( isAceDisabled ) {
+    if( ! ( isAceDisabled() ) {
         jQuery('#edit_file_temporary_textarea').val(content);
     }
 }
@@ -208,7 +208,7 @@ jQuery('#edit_file_shortcode_display').on('focus', function() {
 
 //Editor file type changed
 jQuery('#new_file_type').on('change', function() {
-    if( isAceDisabled ) { //don't trigger if ace editor is disabled
+    if( isAceDisabled() ) { //don't trigger if ace editor is disabled
         setAceFontSize('default');
         setAceType(this.value);
     }
