@@ -16,6 +16,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
                 }
             }
         } else {
+            var_dump('NBOPEE');
             throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
         }
     }
