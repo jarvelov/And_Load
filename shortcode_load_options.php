@@ -309,7 +309,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
         } catch(Exception $e) {
-
+            //var_dump($e);
         }
 
         if( isset( $file_args) ) {
@@ -387,15 +387,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_src_base = dirname($srcpath) . '/';
         $file_src = $file_src_base . $new_slug;
 
-        if($type == 'js') {
-            $file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
-        } elseif($type == 'css') {
-            $file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
-        } else {
-            $file_args = NULL;
-            $error_id = 3; //3 = invalid file type specified, column type for row with id in database is malformed
-        }
-
+        $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
+        
         if($file_args['success'] == true) {
             try {
                 $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
@@ -957,13 +950,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_datas = array();
 
         if( ! ( empty( $id ) ) ) { //file already exists, add revision
-                $file_datas[] = $this->shortcode_load_add_file_revision(
-                    array(
-                        'content' => $file_content,
-                        'id' => $id,
-                        'minify' => $minify
-                    )
-                );
+                try {
+                    $file_datas[] = $this->shortcode_load_add_file_revision(
+                        array(
+                            'content' => $file_content,
+                            'id' => $id,
+                            'minify' => $minify
+                        )
+                    );
+                } catch (Exception $e) {
+                    var_dump($e);               
+                }                    
         } elseif( ! ( empty($_FILES) ) ) { //file(s) are being uploaded
             try {
                 $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
@@ -985,14 +982,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 //var_dump($e);
             }
         } elseif( ! (empty( $file_name ) ) ) { //new file, save it
-            $file_datas[] = $this->shortcode_load_save_to_database(
-                array(
-                    'content' => $file_content,
-                    'name' => $file_name,
-                    'type' => $file_type,
-                    'minify' => $minify
-                )
-            );
+            try {
+                $file_datas[] = $this->shortcode_load_save_to_database(
+                    array(
+                        'content' => $file_content,
+                        'name' => $file_name,
+                        'type' => $file_type,
+                        'minify' => $minify
+                    )
+                );
+            } catch(Exception $e) {
+                var_dump($e);
+                break;
+            }
         }
 
         if( isset( $file_datas ) ) {
