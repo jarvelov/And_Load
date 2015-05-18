@@ -689,7 +689,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting" style="display:' . $show_editor_default_tab_size . '">';
         $html .= '<label class="control-label" title="Override tab size for all file types."><strong><small>Default tab size</small></strong></label>';
-        $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control" value="' . $editor_default_tab_size . '" />';
+        $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control edit_file_input" value="' . $editor_default_tab_size . '" />';
         $html .= '</div>'; // ./editor_default_tab_size_setting
 
         //Ace editor default show line numbers
@@ -715,7 +715,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting" style="display:' . $show_editor_default_print_margin_column. '">';
         $html .= '<label class="control-label" title="Print margin column width. Default: 80."><strong><small>Print margin column</small></strong></label>';
-        $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control" value="' . $editor_default_print_margin_column . '" />';
+        $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control edit_file_input" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // ./editor_default_print_margin_column_setting
 
         $html .= '</div>'; // ./default_editor_container
@@ -820,7 +820,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<div id="edit_file_file_upload_container">';
 
             $html .= '<div id="new_file_upload_reset_button">&#x2716;</div>';
-            $html .= '<input type="text" id="new_file_upload_file_name" class="form-control" disabled="disabled" placeholder="Select File..." />';
+            $html .= '<input type="text" id="new_file_upload_file_name" class="form-control edit_file_input" disabled="disabled" placeholder="Select File..." />';
 
             $html .= '<div id="new_file_upload_button" class="btn btn-primary"><span>Upload File</span>';
             $html .= '<input type="file" id="new_file_upload" name="shortcode_load_edit_file_options[new_file_upload]" accept="*.js|*.css|*.txt" />';
