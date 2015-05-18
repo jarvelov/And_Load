@@ -420,8 +420,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 try {
                     require(dirname(__FILE__) . '/' . ShortcodeLoad::slug.'_minify.php');
                 } catch(Exception $e) {
-                    var_dump($e);
-                    break;
+                    //var_dump($e);
+                    throw new Exception("ShortcodeLoad minify class could not be loaded", 15);
                 }
             }
         } else {
@@ -436,9 +436,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $error_id = $e->getCode();
             throw new Exception("Error Processing Request", $error_id);
         }
-
-        var_dump($minified_content);
-        break;
 
         return $minified_content;
     }
