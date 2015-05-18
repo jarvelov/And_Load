@@ -417,7 +417,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_minify_file($content, $type) {
         if ( ! class_exists('ShortcodeLoad_Minify') ) {
             if ( class_exists("ShortcodeLoad") ) {
-                require(ShortcodeLoad::SLDIR . '/' . ShortcodeLoad::slug.'_minify.php');
+                ShortcodeLoad::shortcode_load_initialize_minify_library();
             } else {
                 throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
             }
