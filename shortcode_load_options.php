@@ -186,9 +186,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $error_id = $e->getCode();
         }
 
-        var_dump($db_args);
-        break;
-
         try {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -311,8 +308,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
         } catch(Exception $e) {
-            var_dump($e);
-            break;
+            //var_dump($e);
         }
 
         if( isset( $file_args) ) {
@@ -349,6 +345,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $file_args_array['success'] = true;
             } else {
+                var_dump($minify);
+                break;
+                
                 $file_args_array['minpath'] = "";
                 $file_args_array['success'] = true;
             }
@@ -998,8 +997,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     )
                 );
             } catch(Exception $e) {
-                var_dump($e);
-                break;
+                //var_dump($e);
             }
         }
 
