@@ -183,7 +183,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
-            //var_dump($e);
+            var_dump($e);
+            break;
             $error_id = $e->getCode();
         }
 
@@ -959,7 +960,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         )
                     );
                 } catch (Exception $e) {
-                    var_dump($e);               
+                    //var_dump($e);
                 }                    
         } elseif( ! ( empty($_FILES) ) ) { //file(s) are being uploaded
             try {
