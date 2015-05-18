@@ -424,7 +424,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
-            $minified_content = ShortcodeLoad_Minify::shortcode_load_minify_minify_file($content);
+            $minified_content = ShortcodeLoad_Minify::shortcode_load_minify_minify_file($content, $type);
         } catch (Exception $e) {
             var_dump($e);
             break;
