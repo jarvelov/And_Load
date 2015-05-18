@@ -419,16 +419,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             if ( class_exists("ShortcodeLoad") ) {
                 ShortcodeLoad::shortcode_load_initialize_minify_library();
             } else {
-                var_dump('nope');
-                break;
-                //throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
+                throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
             }
         }
 
         try {
             $minified_content = ShortcodeLoad_Minify::shortcode_load_minify_minify_file($content);
         } catch (Exception $e) {
-            //var_dump($e);
+            var_dump($e);
+            break;
             $error_id = $e->getCode();
             throw new Exception("Error Processing Request", $error_id);
         }
