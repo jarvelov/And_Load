@@ -66,6 +66,10 @@
   margin-top: -5px;
 }
 
+.delete {
+  float: right;
+}
+
 /* Ace styles */
 
 .editor_container {
