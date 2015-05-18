@@ -229,7 +229,7 @@ jQuery('#new_file_upload_reset_button').on('click', function() {
 /* document ready 'init' function */
 
 jQuery(document).ready(function() {
-    jQuery('input#submit').removeClass('button'); //Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
+    //jQuery('input#submit').removeClass('button'); //Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
 
     //Initialize Ace editor
     editor = ace.edit("editor");

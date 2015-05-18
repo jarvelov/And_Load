@@ -736,10 +736,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
-            //Wordpress submit button
-            submit_button('Save file', 'btn btn-success');
+            //File save submit button
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-success" value="Save file" type="submit"></p>';
 
-            $html = '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
+            //File delete submit button
+            $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
