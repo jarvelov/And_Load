@@ -736,6 +736,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
+            //Wordpress submit button
+            submit_button('Save file', 'btn btn-success');
+
             $html = '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
@@ -1173,9 +1176,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
-
-                    //Place a save button on top of page as well
-                    submit_button('Save file', 'btn btn-success');
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_edit_file_options' );
