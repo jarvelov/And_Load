@@ -12,6 +12,12 @@ function setAceOptions(optionName, optionValue) {
 /* Ace style functions */
 
 function setAceTabSize(size) {
+    tabOverride = parseInt( editorSettings['tabOverride'] );
+
+    if(tabOverride) {
+        size = parseInt( editorSettings['tabSize'] )
+    }
+
     setAceOptions('tabSize', parseInt( size ) );
 }
 
@@ -40,15 +46,15 @@ function setAceType(modeType) {
     switch(type) {
         case 'javascript':
             setAceMode(modeType);
-            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(4);
+            setAceTabSize(4);
             break;
         case 'css':
             setAceMode(modeType);
-            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(2);
+            setAceTabSize(2);
             break;
         case 'plain_text':
             setAceMode(modeType);
-            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(4);
+            setAceTabSize(4);
             break;
         default:
             //console.log('Unknown mode type: ' + type);
