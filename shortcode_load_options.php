@@ -736,7 +736,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
-            $html = '<p class="delete"><input id="delete" class="btn btn-danger" value="Delete file" name="delete" /></p>';
+            $html = '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="Delete file" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
