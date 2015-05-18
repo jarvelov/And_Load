@@ -53,6 +53,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             try {
                 $minifier->add($content);
                 $minified_content = $minifier->minify();
+                var_dump($minified_content, $content);
                 return $minified_content;    
             } catch(Exception $e) {
                 //var_dump($e);
