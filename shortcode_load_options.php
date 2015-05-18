@@ -183,10 +183,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
-            var_dump($e);
-            break;
             $error_id = $e->getCode();
         }
+
+        var_dump($db_args);
+        break;
 
         try {
             global $wpdb;
