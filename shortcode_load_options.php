@@ -428,6 +428,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             throw new Exception("Error Processing Request", $error_id);
         }
 
+        var_dump($minified_content);
+        break;
+
         return $minified_content;
     }
 
