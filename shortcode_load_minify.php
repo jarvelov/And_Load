@@ -23,6 +23,9 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
     * Minify file content using Matthias Mullie's minify library
     */
     public function shortcode_load_minify_minify_file($content, $type) {
+        var_dump($content);
+        break;
+
         switch ($type) {
             case 'js':
                 try {
@@ -53,7 +56,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             try {
                 $minifier->add($content);
                 $minified_content = $minifier->minify();
-                var_dump($minified_content, $content);
+
                 return $minified_content;    
             } catch(Exception $e) {
                 //var_dump($e);
