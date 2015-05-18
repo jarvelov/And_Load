@@ -205,7 +205,7 @@ License:
 
     public function shortcode_load_initialize_minify_library() {
         require(SLDIR . '/' . self::slug.'_minify.php');
-    }    
+    }
     
 } // end class
 new ShortcodeLoad();
