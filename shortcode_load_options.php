@@ -737,7 +737,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html = '<p class="submit"><span class="glyphicon glyphicon-ok-sign"></span><input name="submit" id="submit" class="btn btn-success" value="Save file" type="submit"></p>';
 
             //File delete submit button
-            $html .= '<p class="delete><span class="glyphicon glyphicon-remove-sign"></span><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
+            $html .= '<p class="delete"><span class="glyphicon glyphicon-remove-sign"></span><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
