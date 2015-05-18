@@ -5,11 +5,12 @@ use MatthiasMullie\Minify;
 Class ShortcodeLoad_Minify extends ShortcodeLoad {
 
     function __construct() {
+                            var_dump('jajaja');
+                    break;
         if( class_exists( 'ShortcodeLoad' ) ) {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
-                    var_dump('jajaja');
-                    break;
+
                     require( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
                     $Minify = new Minify();
                 } catch(Exception $e) {
