@@ -94,8 +94,9 @@ License:
         add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
         
         if ( is_admin() ) {
-            if (!class_exists("ShortcodeLoad_Options"))
+            if ( ! ( class_exists("ShortcodeLoad_Options") ) ) {
                 require(SLDIR . '/' . self::slug.'_options.php');
+            }
             $this->options = new ShortcodeLoad_Options();
 
         }

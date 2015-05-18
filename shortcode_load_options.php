@@ -296,101 +296,63 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $file_src = $src_dir . $slug . '.' . $type;
 
-        if (!is_dir($src_dir)) {
-            wp_mkdir_p($src_dir);
+        if ( ! ( is_dir( $src_dir ) ) ) {
+            wp_mkdir_p( $src_dir );
         }
 
-        if($minify == true) {
-            if (!is_dir($min_dir)) {
-                wp_mkdir_p($min_dir);
+        if($minify === true) {
+            if ( ! ( is_dir( $min_dir ) ) ) {
+                wp_mkdir_p( $min_dir );
             }
         }
 
-        if($type == 'js') {
-            $file_args = $this->shortcode_load_save_file_js($file_src, $content, $minify);
-        } elseif($type == 'css') {
-            $file_args = $this->shortcode_load_save_file_css($file_src, $content, $minify);
-        } else {
-            throw new Exception("Unknown file type", 0); //0 = could not write file to local path specified. Check path and permissions.
-            
+        try {
+            $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
+        } catch(Exception $e) {
+
         }
 
-        $db_args = array('name' => $org_name, 'slug' => $slug, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
+        if( isset( $file_args) ) {
+            $db_args = array('name' => $org_name, 'slug' => $slug, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
+        } else {
+            throw new Exception("Error processing request to save file", 13);
+        }
 
         return $db_args;
     }
 
     /*
-    * Save javascript content to path,
+    * Save file content to path,
     * optionally save a minified version
     */
-    function shortcode_load_save_file_js($path, $content, $minify) {
+    function shortcode_load_save_file_to_path($path, $content, $type, $minify) {
         $file_args_array = array('success' => NULL);
 
         try {
             file_put_contents($path, $content);
             $file_args_array['srcpath'] = $path;
         } catch (Exception $e) {
-            //var_dump($e);
-            $file_args_array['success'] = false;
+            throw new Exception("Error saving file to path $path", 12);
         }
 
         try {
-            if($minify == true) {
-                $minified_content = $this->shortcode_load_minify_js($content);
-                $slug = basename($path, '.js');
-                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.js';
+            if($minify === true) {
+                $minified_content = $this->shortcode_load_minify_file($content, $type);
+                $slug = basename($path, '.' . $type);
+                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
                 $file_args_array['minpath'] = $path_min;
 
                 file_put_contents($path_min, $minified_content);
+
+                $file_args_array['success'] = true;
             } else {
                 $file_args_array['minpath'] = "";
+                $file_args_array['success'] = true;
             }
         } catch (Exception $e) {
             //var_dump($e);
-            $file_args_array['success'] = false;
-        }
-
-        if($file_args_array['success'] !== false) {
-            $file_args_array['success'] = true;
-        }
-
-        return $file_args_array;
-    }
-
-    /*
-    * Save css content to path,
-    * optionally save a minified version
-    */
-    function shortcode_load_save_file_css($path, $content, $minify) {
-        $file_args_array = array('success' => NULL);
-
-        try {
-            file_put_contents($path, $content);
-            $file_args_array['srcpath'] = $path;
-        } catch (Exception $e) {
-            //var_dump($e);
-            $file_args_array['success'] = false;
-        }
-
-        try {
-            if($minify == true) {
-                $minified_content = $this->shortcode_load_minify_js($content);
-                $slug = basename($path, '.css');
-                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.css';
-                $file_args_array['minpath'] = $path_min;
-
-                file_put_contents($path_min, $minified_content);
-            } else {
-                $file_args_array['minpath'] = "";
-            }
-        } catch (Exception $e) {
-            //var_dump($e);
-            $file_args_array['success'] = false;
-        }
-
-        if($file_args_array['success'] !== false) {
-            $file_args_array['success'] = true;
+            $error_id = $e->getCode();
+            throw new Exception("Error saving minified file to path $path_min.", $error_id);
         }
 
         return $file_args_array;
@@ -440,7 +402,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $type = ($type == 'js') ? 'Script' : 'Style';
                 $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
             } catch(Exception $e) {
-                $e->getCode();
+                $error_id = $e->getCode();
                 $return_args = array('success' => false, 'error_id' => $error_id);
             }
         } else {
@@ -451,23 +413,30 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     /*
-    * Minify javascript code
+    * Minify javascript and css code
     */
-    function shortcode_load_minify_js($content) {
-        $minified_content = $content;
+    function shortcode_load_minify_file($content, $type) {
+        if ( ! class_exists('ShortcodeLoad_Minify') ) {
+            if ( class_exists("ShortcodeLoad") ) {
+                require(ShortcodeLoad::SLDIR . '/' . ShortcodeLoad::slug.'_minify.php');
+            } else {
+                throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
+            }
+        }
+
+        try {
+            $minified_content = ShortcodeLoad_Minify::shortcode_load_minify_minify_file($content);
+        } catch (Exception $e) {
+            //var_dump($e);
+            $error_id = $e->getCode();
+            throw new Exception("Error Processing Request", $error_id);
+        }
+
         return $minified_content;
     }
 
     /*
-    * Minify css code
-    */
-    function shortcode_load_minify_css($content) {
-        $minified_content = $content;
-        return $minified_content;
-    }
-
-    /*
-    * Return all saved entries regardless of type in database
+    * Return all saved file entries in database
     */
     function shortcode_load_get_scripts_styles() {
         global $wpdb;
@@ -482,7 +451,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /*
     * Returns a file's content.
     * If the file isn't found bool(false) is returned.
-    * @path     Path to file
+    * @path - Path to file
     */
 
     function shortcode_load_get_file($path) {
@@ -490,7 +459,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             try {
                 $content = file_get_contents($path);
             } catch (Exception $e) {
-                $content = "Error reading file. Verify file integrity and permissions. Local path: ".$path;
+                $content = "Error reading file. Verify file integrity and permissions for file with local path: ".$path;
             }
         } else {
             $content = false;
@@ -894,16 +863,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Minify libs credits
         $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_minify">';
         $html .= '<label class="control-label">Minify</label>';
-        $html .= '<p>Project URL: <a href="http://code.google.com/p/minify" target="_blank">Minify (Google Code)</a></p>';
-        $html .= '<p>License: <a href="http://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD License</a></p>';
+        $html .= '<p>Project URL: <a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></p>';
+        $html .= '<p>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></p>';
         $html .= '</div>'; // ./shortcode_load_help_credits_minify
-
-        //JShrink credits
-        $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_jshrink">';
-        $html .= '<label class="control-label">JShrink</label>';
-        $html .= '<p>Project URL: <a href="http://github.com/tedious/JShrink" target="_blank">JShrink (GitHub)</a></p>';
-        $html .= '<p>License: <a href="http://github.com/tedious/JShrink/blob/master/LICENSE" target="_blank">BSD License</a></p>';
-        $html .= '</div>'; // ./shortcode_load_help_credits_jshrink
 
         //Bootstrap credits
         $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_bootstrap">';
