@@ -86,6 +86,7 @@
 
 p.submit {
   margin: 0;
+  display: inline;
 }
 
 .form-table {
