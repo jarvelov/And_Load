@@ -8,6 +8,8 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
         if( class_exists( 'ShortcodeLoad' ) ) {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
+                    var_dump('jajaja');
+                    break;
                     require( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
                     $Minify = new Minify();
                 } catch(Exception $e) {
@@ -16,7 +18,6 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
                 }
             }
         } else {
-            var_dump('NBOPEE');
             throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
         }
     }
