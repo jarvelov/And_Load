@@ -106,7 +106,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     'Xcode' => 'xcode'
                 ),
                 'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
-                'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'Text' => 'plain_text'),
+                'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'None' => 'plain_text'),
                 'editor_default_font_size' => 12,
                 'editor_default_tab_size' => 4,
                 'editor_default_tab_size_override' => false,
@@ -663,7 +663,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_mode_type = isset ( $options_default['editor_default_mode_type'] ) ? $options_default['editor_default_mode_type'] : $args['editor_default_mode_type'];
 
         $html .= '<div id="editor_default_mode_type_setting" class="default_options_sub_setting">';
-        $html .= '<label class="control-label" title="When creating a new file, default to this file type automatically. Default: Text"><strong><small>Default type</small></strong></label>';
+        $html .= '<label class="control-label" title="When creating a new file, default to this file type automatically. Default: None"><strong><small>Default type</small></strong></label>';
 
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
