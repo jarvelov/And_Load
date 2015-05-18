@@ -299,7 +299,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             wp_mkdir_p( $src_dir );
         }
 
-        if($minify === true) {
+        if($minify == true) {
             if ( ! ( is_dir( $min_dir ) ) ) {
                 wp_mkdir_p( $min_dir );
             }
@@ -335,7 +335,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
-            if($minify === true) {
+            if($minify == true) {
                 $minified_content = $this->shortcode_load_minify_file($content, $type);
                 $slug = basename($path, '.' . $type);
                 $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
@@ -347,7 +347,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             } else {
                 var_dump($minify);
                 break;
-                
+
                 $file_args_array['minpath'] = "";
                 $file_args_array['success'] = true;
             }
