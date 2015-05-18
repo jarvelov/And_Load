@@ -40,15 +40,15 @@ function setAceType(modeType) {
     switch(type) {
         case 'javascript':
             setAceMode(modeType);
-            setAceTabSize(4);
+            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(4);
             break;
         case 'css':
             setAceMode(modeType);
-            setAceTabSize(2);
+            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(2);
             break;
         case 'plain_text':
             setAceMode(modeType);
-            setAceTabSize(4);
+            ( editorSettings['tabOverride'] ) ? editorSettings['tabOverride'] : setAceTabSize(4);
             break;
         default:
             //console.log('Unknown mode type: ' + type);

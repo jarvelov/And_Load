@@ -1119,6 +1119,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 var editorSettings = {
                     mode:"<?php echo $editor_mode_type; ?>",
                     fontSize:"<?php echo $editor_default_font_size; ?>",
+                    tabOverride:"<?php echo $editor_default_tab_size_override; ?>",
                     tabSize:"<?php echo $editor_default_tab_size; ?>",
                     theme:"<?php echo $editor_default_theme; ?>",
                     showPrintMargin:"<?php echo $editor_default_print_margin; ?>",
