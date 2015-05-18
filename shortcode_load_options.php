@@ -432,8 +432,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $ShortcodeLoad_Minify = new ShortcodeLoad_Minify();
             $minified_content = $ShortcodeLoad_Minify->shortcode_load_minify_minify_file($content, $type);
         } catch (Exception $e) {
-            var_dump($e);
-            break;
+            //var_dump($e);
             $error_id = $e->getCode();
             throw new Exception("Error Processing Request", $error_id);
         }
