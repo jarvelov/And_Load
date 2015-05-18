@@ -9,6 +9,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
                     require(dirname(__FILE__) . '/lib/minify/src/Minify.php');
+                    $Minify = new Minify();
                 } catch(Exception $e) {
                     //var_dump($e);
                     throw new Exception("Error in loading minify library files", 6);
