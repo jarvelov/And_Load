@@ -27,7 +27,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
         switch ($type) {
             case 'js':
                 try {
-                    //require ( dirname(__FILE__) . '/lib/minify/src/JS.php' );
+                    require ( dirname(__FILE__) . '/lib/minify/src/JS.php' );
                     $minifier = new Minify\JS();
                 } catch(Exception $e) {
                     //var_dump($e);
@@ -37,7 +37,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             
             case 'css':
                 try {
-                    //require ( dirname(__FILE__) . '/lib/minify/src/CSS.php' );
+                    require ( dirname(__FILE__) . '/lib/minify/src/CSS.php' );
                     $minifier = new Minify\JS();
                 } catch(Exception $e) {
                     //var_dump($e);
