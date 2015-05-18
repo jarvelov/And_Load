@@ -70,7 +70,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'shortcode_load_default_options',
             'shortcode_load_default',
             array(
-                'editor_default_theme' => 'monokai',
                 'editor_themes' => array(
                     'Ambiance' => 'ambiance',
                     'Chaos' => 'chaos',
@@ -107,13 +106,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 ),
                 'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
                 'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'None' => 'plain_text'),
+                'editor_default_theme' => 'monokai',
+                'editor_default_mode_type' => 'plain_text',
+                'editor_default_tab_size_override' => false,
+                'editor_default_print_margin' => true,
+                'editor_default_show_line_numbers' => true,
                 'editor_default_font_size' => 12,
                 'editor_default_tab_size' => 4,
-                'editor_default_tab_size_override' => false,
-                'editor_default_mode_type' => 'plain_text',
-                'editor_default_print_margin' => true,
-                'editor_default_print_margin_column' => 80,
-                'editor_default_show_line_numbers' => true
+                'editor_default_print_margin_column' => 80                
             )
 
         );
