@@ -812,9 +812,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_edit_file_source_options_callback() {
         $options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-        $edit_file_temporary_textarea = isset( $options_edit_file[ 'edit_file_temporary_textarea' ]  ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : '';
+        $current_id = isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false;
 
-        $current_id = isset($_GET['id']) ? ( intval ( $_GET['id'] ) ) : false;
+        $edit_file_temporary_textarea = isset( $options_edit_file[ 'edit_file_temporary_textarea' ]  ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : '';
 
         /*Create a textarea to temporarily hold the raw data from Ace editor
         this data will then be processed when the page is reloaded again (Save Changes button is pressed)

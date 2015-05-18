@@ -8,7 +8,7 @@
 }
 
 #edit_file_input_container {
-  margin-bottom: 15px;
+  margin: 15px 0 15px 0;
   border: 3px double #FEFEFE;
   padding: 15px 0 15px 0;
 }
