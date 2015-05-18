@@ -8,6 +8,10 @@
   max-width: 200px;
 }
 
+.default_input {
+  max-width: 200px;
+}
+
 .default_options_sub_setting {
   padding: 10px;
   margin-bottom: 5px !important;
