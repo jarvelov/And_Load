@@ -736,7 +736,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
-            $html = '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete file" /></p>';
+            $html = '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
@@ -1175,13 +1175,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
 
                     //Place a save button on top of page as well
-                    submit_button('Save file', 'btn btn-lg btn-success');
+                    submit_button('Save file', 'btn btn-success');
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_edit_file_options' );
                     do_settings_sections( 'shortcode_load_edit_file_options' );
 
-                    submit_button('Save file', 'btn btn-lg btn-success');
                 } elseif($active_tab == 'tab_help') {
                     //Tab styles and scripts
                     $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
