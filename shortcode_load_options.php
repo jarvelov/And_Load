@@ -349,9 +349,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $file_args_array['success'] = true;
             } else {
-                var_dump($minify);
-                break;
-
                 $file_args_array['minpath'] = "";
                 $file_args_array['success'] = true;
             }
