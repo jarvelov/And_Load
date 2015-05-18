@@ -311,7 +311,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
         } catch(Exception $e) {
-            //var_dump($e);
+            var_dump($e);
+            break;
         }
 
         if( isset( $file_args) ) {
