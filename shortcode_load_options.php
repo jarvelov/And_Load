@@ -419,7 +419,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             if ( class_exists("ShortcodeLoad") ) {
                 ShortcodeLoad::shortcode_load_initialize_minify_library();
             } else {
-                throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
+                var_dump('nope');
+                break;
+                //throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
             }
         }
 
@@ -1035,7 +1037,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_setting_slug = 'file_update';
                 $message_type = 'error';
 
-                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab_help#error_id_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
+                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="?page=shortcode_load&tab=tab_help#error_id_'. $file_data['error_id'] . '" target="_blank">Click here for more info.</a>';
             }
         }
 
