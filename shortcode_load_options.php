@@ -907,9 +907,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</li>';
 
         $html .= '<li>minify_override';
-        $html .= '<ul id="shortcode_load_parameters_minify">';
-        $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles. Accepted values: "true" or "false". True loads the original unminified file, false loads the minified version.</li>';
+        $html .= '<ul id="shortcode_load_parameters_minify_override">';
+        $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles. Accepted values: "true" or "false". "true" loads the original unminified file, false loads the minified version.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" minify_override="true"]</span>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_minify
+        $html .= '</li>';
+
+        $html .= '<li>jquery_override';
+        $html .= '<ul id="shortcode_load_parameters_jquery_override">';
+        $html .= '<li>Override global "Load jQuery with script files" setting. Accepted values: "true" or "false". If set to "true" and global setting is disabled jQuery is added as a script dependency and vice versa.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" jquery_override="true"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_minify
         $html .= '</li>';
 
