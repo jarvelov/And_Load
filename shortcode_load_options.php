@@ -564,12 +564,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '</div>'; // ./default_minify_setting_container
 
+        var_dump($options_default['default_jquery']);
         $jquery_checkbox_value = isset ( $options_default['default_jquery'] ) ? $options_default['default_jquery'] : $args['default_jquery'];
         $html .= '<div id="default_jquery_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically add jQuery as a dependency to script files"><strong><small>Load jQuery with script files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_jquery" name="shortcode_load_default_options[default_jquery]" value="1"' . checked( $jquery_checkbox_value, 1, false ) . '/>';
 
-        $html .= '</div>'; // ./default_minify_setting_container
+        $html .= '</div>'; // ./default_jquery_setting_container
 
         $html .= '</div>'; // ./default_general_container
 
@@ -1038,8 +1039,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         
         //Checkboxes
-        var_dump($args['default_minify']);
-        break;
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
         $options_default['default_jquery'] = isset ( $args['default_jquery'] ) ? $args['default_jquery'] : false;
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? $args['editor_default_print_margin'] : false;
