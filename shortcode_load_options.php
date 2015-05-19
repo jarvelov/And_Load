@@ -747,8 +747,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '<label class="control-label">Shortcode:</label>';
 
-            $shortcode_display = 'shortcode_load id=' . $id;
-            $shortcode_display = ($current_revision < $revision) ? "&rev=$current_revision" : '';
+            $shortcode_display = ($current_revision < $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . '&rev=' . $current_revision;
 
             $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
