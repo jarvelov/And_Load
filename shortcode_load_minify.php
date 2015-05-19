@@ -37,7 +37,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             case 'css':
                 try {
                     require ( dirname(__FILE__) . '/lib/minify/src/CSS.php' );
-                    $minifier = new Minify\JS();
+                    $minifier = new Minify\CSS();
                 } catch(Exception $e) {
                     //var_dump($e);
                     throw new Exception("Error initializing minify library for JavaScript file", 8);
