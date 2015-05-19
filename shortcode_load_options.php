@@ -1038,6 +1038,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         
         //Checkboxes
+        var_dump($args['default_minify']);
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
         $options_default['default_jquery'] = isset ( $args['default_jquery'] ) ? $args['default_jquery'] : false;
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? $args['editor_default_print_margin'] : false;
