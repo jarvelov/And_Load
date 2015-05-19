@@ -205,18 +205,9 @@ License:
 
 
     function shortcode_load_get_path_external($path, $revision, $type, $minify) {
-
-        if($minify == true) {
-            $path = $minpath;
-            $suffix = 'min.' . $type;
-        } else {
-            $path = $srcpath;
-            $suffix = $type;
-        }
-
-        var_dump($path, $revision, $type, $minify);
-
+        $suffix = ( $minify ) ? $ 'min.' . $type : $type;
         $srcname = basename($path, $suffix);
+
         $path_src_base = dirname($path) . '/';
         $path = $path_src_base . $srcname . $revision . "." . $suffix;        
         $site_url = get_site_url();
