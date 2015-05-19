@@ -1248,7 +1248,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $path = ShortcodeLoad::slug . '-' . $path;
             }
 
-            ShortcodeLoad::load_file($name, $path, $is_script );
+            $dependencies = ( $is_script ) ? 'jquery' : false;
+            ShortcodeLoad::load_file($name, $path, $is_script, $dependencies );
         }
     }
 
