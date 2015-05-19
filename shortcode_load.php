@@ -128,20 +128,22 @@ License:
             $sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
+            $path = ( $minify ) ? $minpath : $srcpath;
+
             if(sizeof($result) > 0 )  {
                 extract($result);
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision_override, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
                     } else {
-                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
                     }
                 } else {
                     if($revision > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
                     } else {
-                        $path_external = $this->shortcode_load_get_path_external($srcpath, false, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
                     }
                 }
 
@@ -204,8 +206,6 @@ License:
 
     function shortcode_load_get_path_external($path, $revision, $type, $minify) {
 
-        var_dump($path);
-
         if($minify == true) {
             $path = $minpath;
             $suffix = 'min.' . $type;
@@ -214,7 +214,7 @@ License:
             $suffix = $type;
         }
 
-        //var_dump($path, $revision, $type, $minify);
+        var_dump($path, $revision, $type, $minify);
 
         $srcname = basename($path, $suffix);
         $path_src_base = dirname($path) . '/';
