@@ -145,7 +145,7 @@ License:
                     }
                 }
 
-                var_dump($path_external);
+                //var_dump($path_external);
 
                 $is_script = ($type == 'js') ? true : false;
                 $this->load_file( $name, $path_external, $is_script );
@@ -204,6 +204,8 @@ License:
 
     function shortcode_load_get_path_external($path, $revision, $type, $minify) {
 
+        var_dump($srcpath);
+
         if($minify == true) {
             $path = $minpath;
             $suffix = 'min.' . $type;
@@ -212,7 +214,7 @@ License:
             $suffix = $type;
         }
 
-        var_dump($path, $revision, $type, $minify);
+        //var_dump($path, $revision, $type, $minify);
 
         $srcname = basename($path, $suffix);
         $path_src_base = dirname($path) . '/';
