@@ -215,7 +215,7 @@ License:
 
         if( file_exists( $file ) ) {
             if( $is_script ) {
-                wp_register_script( $name, $url, array($dependencies) );
+                wp_register_script( $name, $url, $dependencies );
                 wp_enqueue_script( $name );
             } else {
                 wp_register_style( $name, $url );
@@ -224,7 +224,7 @@ License:
         } else { //variable is not a local file path, possibly hosted remotely or an URL to the local server was given for a file not located within the plugin directory
             if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
                 if( $is_script ) {
-                    wp_register_script( $name, $file_path, array($dependencies) );
+                    wp_register_script( $name, $file_path, $dependencies );
                     wp_enqueue_script( $name ); 
                 } else {
                     wp_register_style( $name, $file_path );
