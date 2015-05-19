@@ -227,7 +227,7 @@ License:
             $path = $path_src_base . $srcname . $suffix;
         }
 
-        var_dump($path);
+        var_dump($srcname, $suffix);
         
         $site_url = get_site_url();
 
