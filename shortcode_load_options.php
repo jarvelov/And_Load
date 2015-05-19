@@ -893,7 +893,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li>args';
         $html .= '<ul id="shortcode_load_parameters_args">';
-        $html .= '<li>Extra arguments to send to file. <strong>NOTE:</strong> Script files only!. Parameter is discarded if included with a style file.</li>';
+        $html .= '<li>Extra arguments to send to file. <strong>NOTE:</strong> Script files only! Parameter is discarded if included with a style file.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" args="myVariable:14,mySecondVariable:true,myThirdVariable:somevalue123"]</span></li>';
         $html .= '</ul>'; // ./shortcode_load_parameters_args
         $html .= '</li>';
