@@ -703,6 +703,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         $editor_default_mode_type = $options_default['editor_default_mode_type'];
 
+        //File save submit button
+        $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
+
         if($id) { //check if file id is supplied and load the content
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -734,9 +737,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $current_revision = 0;
                 }
             }
-
-            //File save submit button
-            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
 
             //File delete submit button
             $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
