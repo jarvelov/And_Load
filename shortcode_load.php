@@ -137,8 +137,8 @@ License:
                 $default_minify = $options_default['default_minify'];
                 $default_jquery = $options_default['default_jquery'];
 
-                $minify_override = ( $minify_override == 'true' ) ? false : true;
-                $path = ( $minify_override ) ? $srcpath : ( ( $default_minify AND !$minify_override ) ? $minpath : $srcpath );
+                $minify = ( $minify_override == 'true' ) ? false : true;
+                $path = ( $minify ) ? $srcpath : ( ( $default_minify AND !$minify ) ? $minpath : $srcpath );
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
