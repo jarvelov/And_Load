@@ -51,7 +51,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array(
                 'default_minify' => true, //set default to auto minify for all file types
                 'default_jquery' => true //set default to add jquery as dependency for script files                
-            );
+            )
         );
 
         add_settings_field(
