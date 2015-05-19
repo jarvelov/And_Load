@@ -206,7 +206,7 @@ License:
                 wp_register_style( $name, $url );
                 wp_enqueue_style( $name );
             } // end if
-        } else { //variable is not a local file, possibly hosted remotely
+        } else { //variable is not a local file, possibly hosted remotely or an URL to the local server was given
             if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
                 if( $is_script ) {
                     wp_register_script( $name, $file_path, array($dependencies) );
