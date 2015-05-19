@@ -128,10 +128,10 @@ License:
             $sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-            $path = ( $minify ) ? $minpath : $srcpath;
-
             if(sizeof($result) > 0 )  {
                 extract($result);
+
+                $path = ( $minify ) ? $minpath : $srcpath;
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
