@@ -208,7 +208,7 @@ License:
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
      */
-    public function load_file( $name, $file_path, $is_script = false, $dependencies = false) {
+    public function load_file( $name, $file_path, $is_script = false, $dependencies = '') {
 
         $url = plugins_url($file_path, __FILE__);
         $file = plugin_dir_path(__FILE__) . $file_path;
