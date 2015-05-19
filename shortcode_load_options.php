@@ -761,7 +761,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
             for ($i = $revision; $i >= 0; $i--) {
                 $selected = ($current_revision == $i) ? ' selected="selected"' : '';
-                $revision_name = ( $current_revision == $revision AND $i == $current_revision) ? 'Latest' : ($i == 0) ? 'Source' : $i;
+                $revision_name = ( $i == $revision) ? 'Latest' : ($i == 0) ? 'Source' : $i;
+                if($i == $revision) {
+                    var_dump($i, $revision);
+                }
                 $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
             }
             $html .= '</select>';
