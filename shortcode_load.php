@@ -117,6 +117,7 @@ License:
             'id' => '',
             'revision_override' => false,
             'minify_override' => false,
+            'jquery_override' => false,
             'in_header' => false,
             'args' => ''
             ), $atts));
@@ -137,9 +138,10 @@ License:
                 $default_minify = $options_default['default_minify'];
                 $default_jquery = $options_default['default_jquery'];
 
-                $minify_override = ( $minify_override == 'true' ) ? false : true;
+                $minify_override = ( $minify_override == 'true' ) ? true : false;
+                $jquery_override = ( $jquery_override == 'true' ) ? true : false;
 
-                if($minify_override AND $default_minify) {
+                if(!$minify_override AND $default_minify) {
                     $minify = true;
                     $path = $minpath;
                 } else {
@@ -166,7 +168,18 @@ License:
                 }
 
                 $is_script = ($type == 'js') ? true : false;
-                $dependencies = $is_script ? ( $default_jquery ? 'jquery' : false ) : false;
+                $dependencies = false;
+
+                if($is_script) {
+                    if($default_jquery AND !$jquery_override) {
+                        $dependencies = 'jquery';
+                    } elseif($default_jquery AND $jquery_override) {
+                        $dependencies = false;
+                    } elseif(!$default_jquery AND $jquery_override) {
+                        $dependencies = 'jquery';
+                    }
+                }
+
                 $this->load_file( $name, $path_external, $is_script, $dependencies );
             }
         }
