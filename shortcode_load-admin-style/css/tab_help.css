@@ -3,3 +3,17 @@
 .shortcode_load_help_credits_section {
   margin-top: 10px;
 }
+
+
+.shortcode_load_help_shortcode_section {
+  border: 3px double rgb(254, 254, 254);
+  padding: 20px;
+}
+
+#shortcode_load_parameters_list ul > li {
+  margin-top: 10px;
+}
+
+#shortcode_load_parameters_list ul > li > ul {
+  margin-left: 20px;
+}
