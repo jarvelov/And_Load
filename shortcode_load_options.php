@@ -877,8 +877,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li>minify_override';
         $html .= '<ul id="shortcode_load_parameters_minify">';
-        $html .= '<li>Override global minify setting. Useful when debugging scripts and styles. Accepted values: "true" or "false".</li>';
-        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" minify_override="false"]</span>';
+        $html .= '<li>Override global minify setting. Useful when debugging scripts and styles. Accepted values: "true" or "false". True loads the original unminified file, false loads the minified version.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" minify_override="true"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_minify
         $html .= '</li>';
 

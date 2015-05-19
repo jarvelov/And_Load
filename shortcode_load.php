@@ -132,9 +132,8 @@ License:
             if(sizeof($result) > 0 )  {
                 extract($result);
 
-                var_dump($minify_override);
-                $path = ( $minify_override !== false ) ? $minpath : ( $minify ? $minpath : $srcpath );
-                //$revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
+                $minify = ( $minify_override !== false ) ? false : true;
+                $path = ( $minify ) ? $minpath : $srcpath;
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
