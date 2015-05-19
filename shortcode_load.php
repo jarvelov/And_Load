@@ -219,7 +219,7 @@ License:
         $suffix = ( $minify ) ? 'min.' . $type : $type;
         $srcname = basename($path, $suffix);
 
-        var_dump($path, $srcname, $suffix);
+        var_dump($path, $srcname, $suffix, $minify);
 
         $path_src_base = dirname($path) . '/';
 
