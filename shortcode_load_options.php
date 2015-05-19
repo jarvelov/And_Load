@@ -703,9 +703,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $options_default = get_option( 'shortcode_load_default_options' );
         $editor_default_mode_type = $options_default['editor_default_mode_type'];
 
-        //File save submit button
-        $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
-
         if($id) { //check if file id is supplied and load the content
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -738,6 +735,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
+            //File save submit button
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
+
             //File delete submit button
             $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
@@ -754,7 +754,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
             /* Select revision dropdown */
-
 
             $html .= '<label class="control-label">Current revision:</label>';
             $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
@@ -789,7 +788,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } else {
             //No file is selected, this is a new file
 
-            $html = '<div id="edit_file_input_container">';
+            //File save submit button
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
+
+            $html .= '<div id="edit_file_input_container">';
 
             //File name input
             $html .= '<label class="control-label">File name</label>';
