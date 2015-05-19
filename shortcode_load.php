@@ -194,7 +194,6 @@ License:
 
         if( file_exists( $file ) ) {
             if( $is_script ) {
-
                 wp_register_script( $name, $url, array($dependencies) );
                 wp_enqueue_script( $name );
             } else {
