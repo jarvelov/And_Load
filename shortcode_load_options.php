@@ -549,7 +549,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Auto minify files
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $$args['default_minify'];
         $html .= '<div id="default_minify_setting_container" class="default_options_sub_setting">';
-        $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file."><strong><small>Minify files</strong></small></label>';
+        $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file. If unchecked all files will load the unminified version of the file unless minify_override is used."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
