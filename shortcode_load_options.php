@@ -967,6 +967,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>'; // ./shortcode_load_help_credits_minify
         $html .= '</li>';
 
+        $html .= '<li>Path Converter';
+        $html .= '<ul id="shortcode_load_help_credits_path_converter">';
+        $html .= '<li>Project URL: <a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
+        $html .= '<li>License: <a href="https://github.com/matthiasmullie/path-converter/blob/master/LICENSE" target="_blank">MIT License</a></li>';
+        $html .= '</ul>'; // ./shortcode_load_help_credits_minify
+        $html .= '</li>';
+
         $html .= '<li>Bootstrap';
         $html .= '<ul id="shortcode_load_help_credits_bootstrap">';
         $html .= '<li>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
