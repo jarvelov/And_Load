@@ -136,6 +136,7 @@ License:
                 var_dump($revision_override);
 
                 if($revision_override !== false) {
+                    var_dump('hoppa');
                     if($revision_override <= $revision AND $revision_override > 0) {
                         $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
                     } else {
