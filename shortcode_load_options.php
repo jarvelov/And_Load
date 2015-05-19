@@ -764,8 +764,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $revision_name = ( $i == $revision) ? 'Latest' : ($i == 0) ? 'Source' : $i;
 
                 if($i == $revision) {
+                    var_dump($revision_name);
                     $revision_name = 'Latest';
-                    var_dump($current_revision);
                 } elseif($i == 0) {
                     $revision_name = 'Source';
                 } else {
