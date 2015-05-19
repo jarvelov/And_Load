@@ -144,7 +144,7 @@ License:
                     $path = $minpath;
                 } else {
                     $minify = false;
-                    $path = $srcpath
+                    $path = $srcpath;
                 }
 
                 if($revision_override !== false) {
