@@ -853,7 +853,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<h4>Documentation</h4>';
 
         //Shortcode parameters
-        $html .= '<div class="shortcode_load_help_shortcode_section" id="shortcode_load_help_shortcode_parameters">';
+        $html .= '<div class="shortcode_load_help_shortcode_section shortcode_load_help_section" id="shortcode_load_help_shortcode_parameters">';
         $html .= '<label class="control-label">Shortcode parameters</label>';
         $html .= '<p>ShortcodeLoad accepts the following parameters:';
 
@@ -900,7 +900,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_help_credits_callback() {
-        $html = '<div id="shortcode_load_help_credits">';
+        $html = '<div id="shortcode_load_help_credits" class="shortcode_load_help_section">';
         $html .= '<p>This plugin would not have been possible without the following projects.</p>';
         $html .= '<p>Much kudos to everyone in the world contributing to the open source software community!</p>';
 
@@ -938,7 +938,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_help_debug_callback() {
-        $html = '<div id="shortcode_load_help_debug">';
+        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
 
         $html .= '<div id="error_id_0" class="shortcode_load_help_debug_section">';
         $html .= '<p>Error #0</p><span>Could not save file to Wordpress\' "uploads" folder.</span>';
