@@ -167,7 +167,6 @@ License:
 
                 $is_script = ($type == 'js') ? true : false;
                 $dependencies = $is_script ? ( $default_jquery ? 'jquery' : false ) : false;
-                var_dump($dependencies);
                 $this->load_file( $name, $path_external, $is_script, $dependencies );
             }
         }
