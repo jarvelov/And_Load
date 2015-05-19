@@ -188,17 +188,12 @@ License:
     }
     
     /**
-     * Registers and enqueues stylesheets for the administration panel and the
-     * public facing site.
+     * Registers and enqueues stylesheets for the administration panel
      */
     private function register_scripts_and_styles() {
         if ( is_admin() ) {
-            $this->load_file( self::slug . '-admin-script', self::slug . '-admin-script/js/admin.js', true );
             $this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
-        } else {
-            $this->load_file( self::slug . '-script', self::slug . '-script/js/widget.js', true );
-            $this->load_file( self::slug . '-style', self::slug . '-style/css/widget.css' );
-        } // end if/else
+        } // end if
     } // end register_scripts_and_styles
     
     /**
@@ -207,6 +202,8 @@ License:
      * @name            The ID to register with WordPress
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
+     * @dependencies    Optional argument to specifiy file dependencies
+     * @in_footer       Optional argument for JavaScript files to change enqueue method to include in header 
      */
     public function load_file( $name, $file_path, $is_script = false, $dependencies = false, $in_footer = false ) {
 
