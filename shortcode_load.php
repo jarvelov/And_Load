@@ -216,7 +216,7 @@ License:
         if( file_exists( $file ) ) {
             if( $is_script ) {
                 wp_register_script( $name, $url, $dependencies, false, $in_footer );
-                wp_enqueue_script( $name );
+                wp_enqueue_script( $name, $url, $dependencies, false, $in_footer );
             } else {
                 wp_register_style( $name, $url );
                 wp_enqueue_style( $name );
@@ -225,7 +225,7 @@ License:
             if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
                 if( $is_script ) {
                     wp_register_script( $name, $file_path, $dependencies, false, $in_footer );
-                    wp_enqueue_script( $name ); 
+                    wp_enqueue_script( $name, $file_path, $dependencies, false, $in_footer ); 
                 } else {
                     wp_register_style( $name, $file_path );
                     wp_enqueue_style( $name );
