@@ -226,6 +226,8 @@ License:
         } else {
             $path = $path_src_base . $srcname . $suffix;
         }
+
+        var_dump($path);
         
         $site_url = get_site_url();
 
