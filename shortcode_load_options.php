@@ -553,10 +553,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_default_general_settings_callback($args) {
-        //Auto save/load minified files
+        $options_default = get_option( 'shortcode_load_default_options' );
 
         $html = '<div id="default_general_container">';
 
+        //Auto save/load minified files
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $args['default_minify'];
         $html .= '<div id="default_minify_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file. If unchecked all files will load the unminified version of the file unless minify_override is used."><strong><small>Minify files</strong></small></label>';
@@ -564,7 +565,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '</div>'; // ./default_minify_setting_container
 
-        var_dump($options_default['default_jquery']);
+        //Add jquery dependency to script file
         $jquery_checkbox_value = isset ( $options_default['default_jquery'] ) ? $options_default['default_jquery'] : $args['default_jquery'];
         $html .= '<div id="default_jquery_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically add jQuery as a dependency to script files"><strong><small>Load jQuery with script files</strong></small></label>';
