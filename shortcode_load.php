@@ -212,6 +212,8 @@ License:
             $suffix = $type;
         }
 
+        var_dump($path, $revision, $type, $minify);
+
         $srcname = basename($path, $suffix);
         $path_src_base = dirname($path) . '/';
         $path = $path_src_base . $srcname . $revision . "." . $suffix;        
