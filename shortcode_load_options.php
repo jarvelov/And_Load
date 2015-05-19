@@ -736,7 +736,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             //File save submit button
-            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-success" value="&#x2714; Save file" type="submit"></p>';
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
 
             //File delete submit button
             $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
@@ -749,7 +749,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '<label class="control-label">Shortcode:</label>';
 
-            $shortcode_display = ($current_revision == $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . ' revision=' . $current_revision;
+            $shortcode_display = ($current_revision == $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . ' revision_override=' . $current_revision;
 
             $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
@@ -851,6 +851,49 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_help_documentation_callback() {
         $html = '<div id="shortcode_load_help_documentation">';
         $html .= '<h4>Documentation</h4>';
+
+        //Shortcode parameters
+        $html .= '<div class="shortcode_load_help_shortcode_section" id="shortcode_load_help_shortcode_parameters">';
+        $html .= '<label class="control-label">Shortcode parameters</label>';
+        $html .= '<p>ShortcodeLoad accepts the following parameters:';
+
+        $html .= '<ul id="shortcode_load_parameters_list">';
+
+        $html .= '<li>id <strong>*</strong>';
+        $html .= '<ul id="shortcode_load_parameters_id">';
+        $html .= '<li>Which file to load. Accepted argument is a file ID.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2"]</span></li>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_id
+        $html .= '</li>';
+
+        $html .= '<li>revision_override';
+        $html .= '<ul id="shortcode_load_parameters_revision_override">';
+        $html .= '<li>Load a specific revision of the file. Must be a number representing an existing revision. If omitted or malformed the latest revision is loaded.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" revision_override="14"]</span>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_revision_override
+        $html .= '</li>';
+
+        $html .= '<li>in_header';
+        $html .= '<ul id="shortcode_load_parameters_in_header">';
+        $html .= '<li>Optionally override when Wordpress will load the file. Style files are by default loaded in the header and script files in the footer.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" in_header="true"]</span></li>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_in_header
+        $html .= '</li>';
+
+        $html .= '<li>args';
+        $html .= '<ul id="shortcode_load_parameters_args">';
+        $html .= '<li>Extra arguments to send to file. <strong>NOTE:</strong> Script files only!. Parameter is discarded if included with a style file.</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" args="myVariable:14,mySecondVariable:true,myThirdVariable:somevalue123"]</span></li>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_args
+        $html .= '</li>';
+
+        $html .= '</ul>'; // ./shortcode_load_parameters_list
+
+        $html .= '<p><small><strong>*</strong> = required</small></p>';
+        $html .= '</p>';
+
+        $html .= '</div>'; // ./shortcode_load_help_shortcode_parameters
+
         $html .= '</div>'; // ./shortcode_load_help_documentation
 
         echo $html;
@@ -934,7 +977,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_default_options_callback_sanitize($args) {
-        //TODO go over all the default option settings and figure out some way to get the default value submitted in the add_section function
         $options_default = get_option( 'shortcode_load_default_options' );
         
         //Checkboxes
@@ -982,8 +1024,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     );
                 } catch (Exception $e) {
                     //var_dump($e);
+                    $operation = 'update';
+                    $error_id = $e->getCode();
                 }                    
-        } elseif( ! ( empty($_FILES) ) ) { //file(s) are being uploaded
+        } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
             try {
                 $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
 
@@ -1002,6 +1046,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             } catch (Exception $e) {
                 //var_dump($e);
+                $operation = 'uploaded';
+                $error_id = $e->getCode();
             }
         } elseif( ! (empty( $file_name ) ) ) { //new file, save it
             try {
@@ -1015,13 +1061,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 );
             } catch(Exception $e) {
                 //var_dump($e);
+                $operation = 'saved';
+                $error_id = $e->getCode();
             }
         }
 
         if( isset( $file_datas ) ) {
-            $this->shortcode_load_add_settings_error($file_datas);
+            $this->shortcode_load_add_settings_message($file_datas);
         } else {
-            //TODO handle error
+            $this->shortcode_load_add_settings_message(array(
+                'success' => false,
+                'error_id' => $error_id,
+                'operation' => $operation
+            ));
         }
     }
 
@@ -1030,7 +1082,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * $args = array( 'success' => bool, ['id' => id, 'name' => name] )
     */
 
-    function shortcode_load_add_settings_error($array) {
+    function shortcode_load_add_settings_message($array) {
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
                 $message_setting = 'file_update';
