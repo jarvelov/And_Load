@@ -172,11 +172,11 @@ License:
 
                 if($is_script) {
                     if($default_jquery AND !$jquery_override) {
-                        $dependencies = 'jquery';
+                        $dependencies = array('jquery');
                     } elseif($default_jquery AND $jquery_override) {
                         $dependencies = false;
                     } elseif(!$default_jquery AND $jquery_override) {
-                        $dependencies = 'jquery';
+                        $dependencies = array('jquery');
                     }
                 }
 
