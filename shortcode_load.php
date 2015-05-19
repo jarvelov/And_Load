@@ -213,6 +213,8 @@ License:
         $url = plugins_url($file_path, __FILE__);
         $file = plugin_dir_path(__FILE__) . $file_path;
 
+        var_dump($file_path);
+
         if( file_exists( $file ) ) {
             if( $is_script ) {
                 wp_register_script( $name, $url, $dependencies, false, $in_footer );
