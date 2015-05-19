@@ -859,28 +859,28 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<ul id="shortcode_load_parameters_list">';
 
-        $html .= '<li>id <strong>*</strong>';
+        $html .= '<li>ID <strong>*</strong>';
         $html .= '<ul id="shortcode_load_parameters_id">';
         $html .= '<li>Which file to load. Accepted argument is a file ID.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2"]</span></li>';
         $html .= '</ul>'; // ./shortcode_load_parameters_id
         $html .= '</li>';
 
-        $html .= '<li>revision_override';
+        $html .= '<li>REVISION_OVERRIDE';
         $html .= '<ul id="shortcode_load_parameters_revision_override">';
         $html .= '<li>Load a specific revision of the file. Must be a number representing an existing revision. If omitted or malformed the latest revision is loaded.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" revision_override="14"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_revision_override
         $html .= '</li>';
 
-        $html .= '<li>in_header';
+        $html .= '<li>IN_HEADER';
         $html .= '<ul id="shortcode_load_parameters_in_header">';
         $html .= '<li>Optionally override when Wordpress will load the file. Style files are by default loaded in the header and script files in the footer.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" in_header="true"]</span></li>';
         $html .= '</ul>'; // ./shortcode_load_parameters_in_header
         $html .= '</li>';
 
-        $html .= '<li>args';
+        $html .= '<li>ARGS';
         $html .= '<ul id="shortcode_load_parameters_args">';
         $html .= '<li>Extra arguments to send to file. <strong>NOTE:</strong> Script files only!. Parameter is discarded if included with a style file.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" args="myVariable:14,mySecondVariable:true,myThirdVariable:somevalue123"]</span></li>';
