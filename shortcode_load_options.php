@@ -760,7 +760,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             for ($i = $revision; $i >= 0; $i--) {
                 $selected = ($current_revision == $i) ? ' selected="selected"' : '';
 
-                $revision_name = ( $i == $revision) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
+                $revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
 
                 $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
             }
