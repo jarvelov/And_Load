@@ -720,6 +720,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $srcname = basename($srcpath, $type);
                     $srcpath_base = dirname($srcpath) . '/';
                     $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
+                } else {
+                     $current_revision = 0;
                 }
             } else {
                 if($revision > 0) {
@@ -729,15 +731,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $srcpath_base = dirname($srcpath) . '/';
                     $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
                 } else {
-                    $current_revision = "Source";
+                    $current_revision = 0;
                 }
             }
 
             //File save submit button
-            $html = '<p class="submit"><span class="glyphicon glyphicon-ok-sign"></span><input name="submit" id="submit" class="btn btn-success" value="Save file" type="submit"></p>';
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-success" value="Save file" type="submit"></p>';
 
             //File delete submit button
-            $html .= '<p class="delete"><span class="glyphicon glyphicon-remove-sign"></span><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
+            $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
@@ -756,7 +758,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<label class="control-label">Current revision:</label>';
             $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
             for ($i = $revision; $i >= 0; $i--) {
-                $selected = ($current_revision==$i) ? ' selected="selected"' : '';
+                $selected = ($current_revision == $i) ? ' selected="selected"' : '';
                 $revision_name = ($i == $revision) ? 'Latest (' . $i . ')' : ($i == 0) ? 'Source' : $i;
                 $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
             }
