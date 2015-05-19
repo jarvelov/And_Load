@@ -899,6 +899,46 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
+    function shortcode_load_help_debug_callback() {
+        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
+
+        $html .= '<ul id="shortcode_load_error_list">';
+
+        $html .= '<li id="error_id_0">Error #0';
+        $html .= '<ul>';
+        $html .= '<li>Could not save file to Wordpress\' "uploads" folder.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_0
+
+        $html .= '<li id="error_id_1">Error #1';
+        $html .= '<ul>';
+        $html .= '<li>Could not create a new entry in the database when saving file.</li>';
+        $html .= '<li>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_1
+
+        $html .= '<li id="error_id_2">Error #2';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
+        $html .= '<li>Solution: Verify that a row with ID exists in the shortcode_load table. If you followed a link from the overview table delete the file and save it again.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_2
+
+        $html .= '<li id="error_id_3">Error #3';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</li>';
+        $html .= '<li>Solution: Delete the file and save it again.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_3
+
+        $html .= '</ul>'; // ./shortcode_load_error_list
+
+        $html .= '</div>'; // ./shortcode_load_help_debug
+
+        echo $html;
+    }
+
     function shortcode_load_help_credits_callback() {
         $html = '<div id="shortcode_load_help_credits" class="shortcode_load_help_section">';
         $html .= '<p>This plugin would not have been possible without the following projects.</p>';
@@ -933,35 +973,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</div>'; // ./shortcode_load_help_credits_bootstrap
 
         $html .= '</div>'; // ./shortcode_load_help_credits
-
-        echo $html;
-    }
-
-    function shortcode_load_help_debug_callback() {
-        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
-
-        $html .= '<div id="error_id_0" class="shortcode_load_help_debug_section">';
-        $html .= '<p>Error #0</p><span>Could not save file to Wordpress\' "uploads" folder.</span>';
-        $html .= '<p>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</p>';
-        $html .= '</div>'; // ./error_id_0
-        //could not write file to local path specified. Check path and permissions.
-
-        $html .= '<div id="error_id_1" class="shortcode_load_help_debug_section">';
-        $html .= '<p>Error #1</p><span>Could not create a new entry in the database when saving file.</span>';
-        $html .= '<p>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</p>';
-        $html .= '</div>'; // ./error_id_1
-
-        $html .= '<div id="error_id_2" class="shortcode_load_help_debug_section">';
-        $html .= '<p>Error #2</p><span>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</span>';
-        $html .= '<p>Solution: Delete the file and save it again.</p>';
-        $html .= '</div>'; // ./error_id_2
-
-        $html .= '<div id="error_id_3" class="shortcode_load_help_debug_section">';
-        $html .= '<p>Error #3</p><span>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</span>';
-        $html .= '<p>Solution: Delete the file and save it again.</p>';
-        $html .= '</div>'; // ./error_id_3                        
-
-        $html .= '</div>'; // ./shortcode_load_help_debug
 
         echo $html;
     }
