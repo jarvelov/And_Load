@@ -182,7 +182,7 @@ License:
 
                 var_dump($dependencies);
 
-                $this->load_file( $name, $path_external, $is_script, $dependencies );
+                $this->load_file( $name, $path_external, $is_script, '' );
             }
         }
     }
