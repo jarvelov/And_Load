@@ -215,7 +215,7 @@ License:
 
         if( file_exists( $file ) ) {
             if( $is_script ) {
-                wp_register_script( $name, $url, $dependencies );
+                wp_register_script( $name, $url, $dependencies, false, $in_footer );
                 wp_enqueue_script( $name );
             } else {
                 wp_register_style( $name, $url );
