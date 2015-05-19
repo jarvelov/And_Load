@@ -764,6 +764,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 
                 $revision_name = ( $i == $revision) ? 'Latest' : ($i == 0) ? 'Source' : $i;
 
+                if($i == $revision) {
+                    var_dump($i, $revision_name);
+                }
+
                 $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
             }
             $html .= '</select>';
