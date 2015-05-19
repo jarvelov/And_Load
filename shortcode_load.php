@@ -116,6 +116,7 @@ License:
         extract(shortcode_atts(array(
             'id' => '',
             'revision_override' => false,
+            'minify_override' => false,
             'in_header' => false,
             'args' => ''
             ), $atts));
@@ -131,7 +132,8 @@ License:
             if(sizeof($result) > 0 )  {
                 extract($result);
 
-                $path = ( $minify ) ? $minpath : $srcpath;
+                $path = ( $minify_override ) ? $minpath : ( $minify ? $minpath : $srcpath );
+                //$revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
