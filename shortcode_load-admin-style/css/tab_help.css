@@ -25,4 +25,5 @@ ul > li > ul {
 ul > li > ul > li {
   margin-left: 10px;
   font-weight: normal;
+  padding: 5px;
 }
