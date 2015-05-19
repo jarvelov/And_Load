@@ -126,14 +126,19 @@ License:
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
+            $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
             if(sizeof($result) > 0 )  {
                 extract($result);
 
+                //Get default options
+                $options_default = get_option( 'shortcode_load_default_options' );
+                $default_minify = $options_default['default_minify'];
+                $default_jquery = $options_default['default_jquery'];
+
                 $minify = ( $minify_override == 'true' ) ? false : true;
-                $path = ( $minify ) ? $minpath : $srcpath;
+                $path = ( $default_minify ) ? $minpath : $srcpath;
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
@@ -180,14 +185,15 @@ License:
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
      */
-    public function load_file( $name, $file_path, $is_script = false ) {
+    public function load_file( $name, $file_path, $is_script = false, $dependencies = '') {
 
         $url = plugins_url($file_path, __FILE__);
         $file = plugin_dir_path(__FILE__) . $file_path;
 
         if( file_exists( $file ) ) {
             if( $is_script ) {
-                wp_register_script( $name, $url, array('jquery') ); //depends on jquery
+
+                wp_register_script( $name, $url, array($dependencies) );
                 wp_enqueue_script( $name );
             } else {
                 wp_register_style( $name, $url );
@@ -196,7 +202,7 @@ License:
         } else { //variable is not of a local file, possibly hosted remotely
             if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
                 if( $is_script ) {
-                    wp_register_script( $name, $file_path, array('jquery') ); //depends on jquery
+                    wp_register_script( $name, $file_path, array($dependencies) );
                     wp_enqueue_script( $name ); 
                 } else {
                     wp_register_style( $name, $file_path );

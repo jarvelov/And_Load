@@ -43,13 +43,24 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
+            'shortcode_load_general',
+            'General',
+            array($this, 'shortcode_load_default_general_settings_callback'),
+            'shortcode_load_default_options',
+            'shortcode_load_default',
+            array(
+                'default_minify' => true, //set default to auto minify for all file types
+                'default_jquery' => true //set default to add jquery as dependency for script files                
+            );
+        );
+
+        add_settings_field(
             'shortcode_load_overview',
             'Overview',
             array($this, 'shortcode_load_default_overview_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
             array(
-                'default_minify' => true, //set default to auto minify for all file types
                 'overview_default_table_order_column' => 0,
                 'overview_default_table_order_columns' => array(
                     'ID' => 0,
@@ -541,18 +552,29 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
-    function shortcode_load_default_overview_callback($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
-
-        $html = '<div id="default_general_container">';
-
-        //Auto minify files
+    function shortcode_load_default_general_settings_callback($args) {
+        //Auto save/load minified files
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $$args['default_minify'];
         $html .= '<div id="default_minify_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file. If unchecked all files will load the unminified version of the file unless minify_override is used."><strong><small>Minify files</strong></small></label>';
         $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // ./default_minify_setting_container
+
+        $jquery_checkbox_value = isset ( $options_default['default_jquery'] ) ? $options_default['default_jquery'] : $$args['default_jquery'];
+        $html .= '<div id="default_jquery_setting_container" class="default_options_sub_setting">';
+        $html .= '<label class="control-label" title="Automatically add jQuery as a dependency to script files"><strong><small>Load jQuery with script files</strong></small></label>';
+        $html .= '<input type="checkbox" id="default_jquery" name="shortcode_load_default_options[default_jquery]" value="1"' . checked( $jquery_checkbox_value, 1, false ) . '/>';
+
+        $html .= '</div>'; // ./default_minify_setting_container
+
+        echo $html;
+    }
+
+    function shortcode_load_default_overview_callback($args) {
+        $options_default = get_option( 'shortcode_load_default_options' );
+
+        $html = '<div id="default_overview_container">';
 
         //Overview tab default settings
         $html .= '<div id="default_overview_setting_container" class="default_options_sub_setting">';
@@ -587,7 +609,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '</div>'; // ./default_overview_setting_container
 
-        $html .= '</div>'; // ./default_general_container
+        $html .= '</div>'; // ./default_overview_container
 
         echo $html;
     }
@@ -1012,6 +1034,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         
         //Checkboxes
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
+        $options_default['default_jquery'] = isset ( $args['default_jquery'] ) ? $args['default_jquery'] : false;
         $options_default['editor_default_print_margin'] = isset ( $args['editor_default_print_margin'] ) ? $args['editor_default_print_margin'] : false;
         $options_default['editor_default_show_line_numbers'] = isset ( $args['editor_default_show_line_numbers'] ) ? $args['editor_default_show_line_numbers'] : false;
         $options_default['editor_default_tab_size_override'] = isset ( $args['editor_default_tab_size_override'] ) ? $args['editor_default_tab_size_override'] : false;
