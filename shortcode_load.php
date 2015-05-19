@@ -133,10 +133,7 @@ License:
 
                 $path = ( $minify ) ? $minpath : $srcpath;
 
-                var_dump($revision_override);
-
                 if($revision_override !== false) {
-                    var_dump('hoppa');
                     if($revision_override <= $revision AND $revision_override > 0) {
                         $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
                     } else {
@@ -153,8 +150,6 @@ License:
                         $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
                     }
                 }
-
-                //var_dump($path_external);
 
                 $is_script = ($type == 'js') ? true : false;
                 $this->load_file( $name, $path_external, $is_script );
