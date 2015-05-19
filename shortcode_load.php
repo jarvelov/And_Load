@@ -133,15 +133,15 @@ License:
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision_override, $type, $minify);
                     } else {
-                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision, $type, $minify);
                     }
                 } else {
                     if($revision > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($srcpath, $revision, $type, $minify);
                     } else {
-                        $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
+                        $path_external = $this->shortcode_load_get_path_external($srcpath, false, $type, $minify);
                     }
                 }
 
