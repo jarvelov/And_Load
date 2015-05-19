@@ -112,9 +112,10 @@ License:
     }
 
     function render_shortcode($atts) {
-        // Extract the attributes
+        // Extract the attributes submitted with the shortcode
         extract(shortcode_atts(array(
             'id' => '',
+            'revision_override' => false,
             'in_header' => false,
             'args' => ''
             ), $atts));
@@ -124,32 +125,27 @@ License:
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+            $sql = "SELECT name,srcpath,minpath,minify,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
             if(sizeof($result) > 0 )  {
                 extract($result);
 
-                $is_script = ($type == 'js') ? true : false;
-
-                if($minify) {
-                    $path = $minpath;
-                    $suffix = 'min.' . $type;
+                if($revision_override !== false) {
+                    if($revision_override <= $revision AND $revision_override > 0) {
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
+                    } else {
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                    }
                 } else {
-                    $path = $srcpath;
-                    $suffix = $type;
+                    if($revision > 0) {
+                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                    } else {
+                        $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
+                    }
                 }
 
-                $site_url = get_site_url();
-
-                if($revision > 0) {
-                    $srcname = basename($path, $suffix);
-                    $path_src_base = dirname($path) . '/';
-                    $path = $path_src_base . $srcname . $revision . "." . $suffix;
-                }
-
-                $path_external = str_replace(ABSPATH, $site_url . '/', $path);
-
+                $is_script = ($type == 'js') ? true : false;
                 $this->load_file( $name, $path_external, $is_script );
             }
         }
@@ -202,6 +198,27 @@ License:
         }
 
     } // end load_file
+
+
+    function shortcode_load_get_path_external($path, $revision, $type, $minify) {
+
+        if($minify == true) {
+            $path = $minpath;
+            $suffix = 'min.' . $type;
+        } else {
+            $path = $srcpath;
+            $suffix = $type;
+        }
+
+        $srcname = basename($path, $suffix);
+        $path_src_base = dirname($path) . '/';
+        $path = $path_src_base . $srcname . $revision . "." . $suffix;        
+        $site_url = get_site_url();
+
+        $path_external = str_replace(ABSPATH, $site_url . '/', $path);
+
+        return $path_external;
+    }
 
 } // end class
 new ShortcodeLoad();
