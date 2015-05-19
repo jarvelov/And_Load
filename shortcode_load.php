@@ -219,6 +219,8 @@ License:
         $suffix = ( $minify ) ? 'min.' . $type : $type;
         $srcname = basename($path, $suffix);
 
+        var_dump($path, $srcname, $suffix);
+
         $path_src_base = dirname($path) . '/';
 
         if($revision) {
@@ -226,8 +228,6 @@ License:
         } else {
             $path = $path_src_base . $srcname . $suffix;
         }
-
-        var_dump($srcname, $suffix);
         
         $site_url = get_site_url();
 
