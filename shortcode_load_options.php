@@ -950,7 +950,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li id="error_id_0">Error #0';
         $html .= '<ul>';
-        $html .= '<li>Could not save file to Wordpress\' "uploads" folder.</li>';
+        $html .= '<li>Could not save file to Wordpress\' <em>uploads</em> folder.</li>';
         $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_0
