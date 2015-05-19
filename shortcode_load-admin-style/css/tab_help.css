@@ -7,13 +7,15 @@
 
 .shortcode_load_help_shortcode_section {
   border: 3px double rgb(254, 254, 254);
-  padding: 20px;
+  padding: 10px;
 }
 
-#shortcode_load_parameters_list ul > li {
+#shortcode_load_parameters_list, ul > li {
   margin-top: 10px;
+  font-weight: bold;
 }
 
-#shortcode_load_parameters_list ul > li > ul {
-  margin-left: 20px;
+#shortcode_load_parameters_list, ul > li > ul > li {
+  margin-left: 10px;
+  font-weight: normal;
 }
