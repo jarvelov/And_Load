@@ -171,7 +171,9 @@ License:
                 $dependencies = false;
 
                 if($is_script) {
-                    if($default_jquery AND !$jquery_override) {
+                    if($in_header) {
+                        $dependencies = false; //
+                    } elseif($default_jquery AND !$jquery_override) {
                         $dependencies = array('jquery');
                     } elseif($default_jquery AND $jquery_override) {
                         $dependencies = false;
@@ -206,7 +208,7 @@ License:
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
      */
-    public function load_file( $name, $file_path, $is_script = false, $dependencies = array() ) {
+    public function load_file( $name, $file_path, $is_script = false, $dependencies = array(), $in_footer = true ) {
 
         $url = plugins_url($file_path, __FILE__);
         $file = plugin_dir_path(__FILE__) . $file_path;
@@ -222,7 +224,7 @@ License:
         } else { //variable is not a local file path, possibly hosted remotely or an URL to the local server was given for a file not located within the plugin directory
             if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
                 if( $is_script ) {
-                    wp_register_script( $name, $file_path, $dependencies );
+                    wp_register_script( $name, $file_path, $dependencies, false, $in_footer );
                     wp_enqueue_script( $name ); 
                 } else {
                     wp_register_style( $name, $file_path );
