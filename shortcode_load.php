@@ -213,7 +213,7 @@ License:
         if($revision) {
             $path = $path_src_base . $srcname . $revision . "." . $suffix;
         } else {
-            $path = $path_src_base . $srcname . "." . $suffix;
+            $path = $path_src_base . $srcname . $suffix;
         }
         
         $site_url = get_site_url();
