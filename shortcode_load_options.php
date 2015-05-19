@@ -1042,43 +1042,48 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $operation = 'update';
                     $error_id = $e->getCode();
                 }                    
-        } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
-            var_dump($_FILES);
-            try {
-                $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
+        } else {
+            //Check if a file has been selected for upload
+            $tmp_file_path = $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'];
+            $file_tmp = ( $tmp_file_path ) ? $tmp_file_path : false;
 
-                $file_datas[] = $this->shortcode_load_save_to_database(
-                    array(
-                        'content' => $file_content,
-                        'name' => $file_name,
-                        'type' => $file_type,
-                        'minify' => $minify
-                    )
-                );
+            if($file_tmp) { //file is being uploaded
+                try {
+                    $file_content = file_get_contents( $file_tmp  ); //get the raw content from the uploaded file
 
-                //Go over every file that was uploaded and set operation to 'uploaded'
-                for ($i=0; $i < sizeof($file_datas); $i++) { 
-                    $file_datas[$i]['operation'] = 'uploaded';
+                    $file_datas[] = $this->shortcode_load_save_to_database(
+                        array(
+                            'content' => $file_content,
+                            'name' => $file_name,
+                            'type' => $file_type,
+                            'minify' => $minify
+                        )
+                    );
+
+                    //Go over every file that was uploaded and set operation to 'uploaded'
+                    for ($i=0; $i < sizeof($file_datas); $i++) { 
+                        $file_datas[$i]['operation'] = 'uploaded';
+                    }
+                } catch (Exception $e) {
+                    //var_dump($e);
+                    $operation = 'uploaded';
+                    $error_id = $e->getCode();
                 }
-            } catch (Exception $e) {
-                //var_dump($e);
-                $operation = 'uploaded';
-                $error_id = $e->getCode();
-            }
-        } elseif( ! (empty( $file_name ) ) ) { //new file, save it
-            try {
-                $file_datas[] = $this->shortcode_load_save_to_database(
-                    array(
-                        'content' => $file_content,
-                        'name' => $file_name,
-                        'type' => $file_type,
-                        'minify' => $minify
-                    )
-                );
-            } catch(Exception $e) {
-                //var_dump($e);
-                $operation = 'saved';
-                $error_id = $e->getCode();
+            } elseif( ! (empty( $file_name ) ) ) { //new file, save it
+                try {
+                    $file_datas[] = $this->shortcode_load_save_to_database(
+                        array(
+                            'content' => $file_content,
+                            'name' => $file_name,
+                            'type' => $file_type,
+                            'minify' => $minify
+                        )
+                    );
+                } catch(Exception $e) {
+                    //var_dump($e);
+                    $operation = 'saved';
+                    $error_id = $e->getCode();
+                }
             }
         }
 
