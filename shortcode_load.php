@@ -145,6 +145,8 @@ License:
                     }
                 }
 
+                var_dump($path_external);
+
                 $is_script = ($type == 'js') ? true : false;
                 $this->load_file( $name, $path_external, $is_script );
             }
