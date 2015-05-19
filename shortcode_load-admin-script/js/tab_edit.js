@@ -245,6 +245,8 @@ jQuery(document).ready(function() {
     setAcePrintMargin( editorSettings['showPrintMargin'] );
     setAcePrintMarginColumn( editorSettings['printMarginColumn'] );
 
+    //Load content in ace into temporary area should the user save without changing any content.
+    setTemporaryContent( getAceContent() );
 
     //Register a listener to trigger an event on any changes made within the Ace editor
     editor.getSession().on('change', function() {
