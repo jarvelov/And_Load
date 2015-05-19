@@ -941,8 +941,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_help_credits_callback() {
         $html = '<div id="shortcode_load_help_credits" class="shortcode_load_help_section">';
-        $html .= '<p>This plugin would not have been possible without the following projects.</p>';
-        $html .= '<p>Much kudos to everyone in the world contributing to the open source software community!</p>';
+        $html .= '<p><span>This plugin would not have been possible without the following projects.</span>';
+        $html .= '<span>Much kudos to everyone in the world contributing to the open source software community!</p>';
 
         $html .= '<ul id="shortcode_load_credits_list">';
 
