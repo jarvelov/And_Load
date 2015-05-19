@@ -132,7 +132,7 @@ License:
             if(sizeof($result) > 0 )  {
                 extract($result);
 
-                $minify = ( $minify_override !== false ) ? false : true;
+                $minify = ( $minify_override != false ) ? false : true;
                 $path = ( $minify ) ? $minpath : $srcpath;
 
                 if($revision_override !== false) {
