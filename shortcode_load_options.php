@@ -1043,6 +1043,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $error_id = $e->getCode();
                 }                    
         } elseif( ! ( empty($_FILES) ) ) { //file is being uploaded
+            var_dump($_FILES);
             try {
                 $file_content = file_get_contents( $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'] ); //get the raw content from the uploaded file
 
