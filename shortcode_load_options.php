@@ -875,6 +875,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>'; // ./shortcode_load_parameters_revision_override
         $html .= '</li>';
 
+        $html .= '<li>minify';
+        $html .= '<ul id="shortcode_load_parameters_minify">';
+        $html .= '<li>Override global minify setting. Useful when debugging scripts and styles. Accepted values: "true" or "false".</li>';
+        $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" minify="false"]</span>';
+        $html .= '</ul>'; // ./shortcode_load_parameters_minify
+        $html .= '</li>';
+
         $html .= '<li>in_header';
         $html .= '<ul id="shortcode_load_parameters_in_header">';
         $html .= '<li>Optionally override when Wordpress will load the file. Style files are by default loaded in the header and script files in the footer.</li>';
