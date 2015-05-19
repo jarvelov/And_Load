@@ -944,33 +944,38 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<p>This plugin would not have been possible without the following projects.</p>';
         $html .= '<p>Much kudos to everyone in the world contributing to the open source software community!</p>';
 
+        $html .= '<ul id="shortcode_load_credits_list">';
+
         //Ace credits
-        $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_ace">';
-        $html .= '<label class="control-label">Ace</label>';
-        $html .= '<p>Project URL: <a href="http://ace.c9.io/" target="_blank">Ace</a></p>';
-        $html .= '<p>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></p>';
-        $html .= '</div>'; // ./shortcode_load_help_credits_ace
+        $html .= '<li>Ace';
+        $html .= '<ul id="shortcode_load_help_credits_ace">';
+        $html .= '<li>Project URL: <a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
+        $html .= '<li>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></li>';
+        $html .= '</ul>'; // ./shortcode_load_help_credits_ace
+        $html .= '</li>'; 
 
-        //Datatables credits
-        $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_datatables">';
-        $html .= '<label class="control-label">DataTables</label>';
-        $html .= '<p>Project URL: <a href="http://www.datatables.net" target="_blank">DataTables</a></p>';
-        $html .= '<p>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></p>';
-        $html .= '</div>'; // ./shortcode_load_help_credits_datatables
+        $html .= '<li>Datatables';
+        $html .= '<ul id="shortcode_load_help_credits_datatables">';
+        $html .= '<li>Project URL: <a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
+        $html .= '<li>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></li>';
+        $html .= '</ul>'; // ./shortcode_load_help_credits_datatables
+        $html .= '</li>';
 
-        //Minify libs credits
-        $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_minify">';
-        $html .= '<label class="control-label">Minify</label>';
-        $html .= '<p>Project URL: <a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></p>';
-        $html .= '<p>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></p>';
-        $html .= '</div>'; // ./shortcode_load_help_credits_minify
+        $html .= '<li>Minify';
+        $html .= '<ul id="shortcode_load_help_credits_minify">';
+        $html .= '<li>Project URL: <a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
+        $html .= '<li>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></li>';
+        $html .= '</ul>'; // ./shortcode_load_help_credits_minify
+        $html .= '</li>';
 
-        //Bootstrap credits
-        $html .= '<div class="shortcode_load_help_credits_section" id="shortcode_load_help_credits_bootstrap">';
-        $html .= '<label class="control-label">Bootstrap</label>';
-        $html .= '<p>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></p>';
-        $html .= '<p>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></p>';
-        $html .= '</div>'; // ./shortcode_load_help_credits_bootstrap
+        $html .= '<li>Bootstrap';
+        $html .= '<ul id="shortcode_load_help_credits_bootstrap">';
+        $html .= '<li>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
+        $html .= '<li>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></li>';
+        $html .= '</ul>'; // ./shortcode_load_help_credits_bootstrap
+        $html .= '</li>';
+
+        $html .= '</ul>'; // ./shortcode_load_credits_list
 
         $html .= '</div>'; // ./shortcode_load_help_credits
 
