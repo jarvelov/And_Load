@@ -19,8 +19,10 @@ ul > li {
 
 ul > li > ul {
   margin-top: 10px;
-  border: 2px solid #FEFEFE;
-  border-bottom: 5px solid #F3F3F3;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 5px solid #FEFEFE;
+  border-top: 5px solid #FEFEFE;
 }
 
 ul > li > ul > li {
