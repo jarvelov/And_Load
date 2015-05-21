@@ -20,7 +20,7 @@ ul > li {
 ul > li > ul {
   margin-top: 10px;
   border: 2px solid #FEFEFE;
-  border-bottom: 2px solid #F3F3F3;
+  border-bottom: 5px solid #F3F3F3;
 }
 
 ul > li > ul > li {
