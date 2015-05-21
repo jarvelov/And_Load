@@ -1443,6 +1443,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 } elseif($active_tab == 'tab_help') {
                     //Tab styles and scripts
+                    $this->shortcode_load_load_file('tab_help_js', 'admin-script/js/tab_help.js', true, true);
                     $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
 
                     //Tab sections and fields 
