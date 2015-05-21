@@ -1045,7 +1045,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
 
-        $html .= '<div class="show_error_list btn btn-block btn-default"><h4><span class="glyphicon glyphicon-chevron-down"></span>Show list of error codes and messages</h4></div>';
+        $html .= '<div class="show_error_list btn btn-block btn-default"><h4><span class="glyphicon glyphicon-chevron-down" style="top:3px;"></span>Show list of error codes and messages</h4></div>';
 
         $html .= '<ul id="shortcode_load_error_list">';
 
