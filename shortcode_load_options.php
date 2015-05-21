@@ -886,13 +886,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Shortcode parameters
         $html .= '<div class="shortcode_load_help_shortcode_section shortcode_load_help_section" id="shortcode_load_help_shortcode_parameters">';
         $html .= '<label class="control-label">Shortcode parameters</label>';
-        $html .= '<p>ShortcodeLoad accepts the following parameters:';
-        $html .= '<p><small><strong>*</strong> = required</small></p>';
-        $html .= '</p>';
+        $html .= '<p>ShortcodeLoad accepts the following parameters:</p>';
 
         $html .= '<ul id="shortcode_load_parameters_list">';
 
-        $html .= '<li>id <strong>*</strong>';
+        $html .= '<li>id <strong>* <small>required</small></strong>';
         $html .= '<ul id="shortcode_load_parameters_id">';
         $html .= '<li>Which file to load. Accepted argument is a file ID.</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2"]</span></li>';
