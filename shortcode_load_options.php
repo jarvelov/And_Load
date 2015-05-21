@@ -145,7 +145,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_edit_file',
+            'shortcode_load_edit_file_source',
             '',
             array($this, 'shortcode_load_edit_file_source_options_callback'),
             'shortcode_load_edit_file_options',
@@ -199,6 +199,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $db_args = $this->shortcode_load_save_file($args);
         } catch (Exception $e) {
             $error_id = $e->getCode();
+            $return_args = array('success' => false, 'error_id' => $error_id);
+
+            return $return_args;
         }
 
         try {
@@ -310,20 +313,31 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $file_src = $src_dir . $slug . '.' . $type;
 
-        if ( ! ( is_dir( $src_dir ) ) ) {
-            wp_mkdir_p( $src_dir );
+        try {
+            if ( ! ( is_dir( $src_dir ) ) ) {
+                wp_mkdir_p( $src_dir );
+            }
+        } catch(Exception $e) {
+            $error_id = 16;
+            throw new Exception("Error creating directory for files.", $error_id);
         }
 
-        if($minify == true) {
-            if ( ! ( is_dir( $min_dir ) ) ) {
-                wp_mkdir_p( $min_dir );
+        try {
+            if($minify == true) {
+                if ( ! ( is_dir( $min_dir ) ) ) {
+                    wp_mkdir_p( $min_dir );
+                }
             }
+        } catch(Exception $e) {
+            $error_id = 17;
+            throw new Exception("Error creating directory for minified files.", $error_id);
         }
 
         try {
             $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
         } catch(Exception $e) {
             //var_dump($e);
+            $error_id = $e->getCode();
         }
 
         if( isset( $file_args) ) {
@@ -349,24 +363,25 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             throw new Exception("Error saving file to path $path", 12);
         }
 
-        try {
-            if($minify == true) {
+        if($minify == true) {
+            try {
                 $minified_content = $this->shortcode_load_minify_file($content, $type);
-                $slug = basename($path, '.' . $type);
-                $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
-                $file_args_array['minpath'] = $path_min;
-
-                file_put_contents($path_min, $minified_content);
-
-                $file_args_array['success'] = true;
-            } else {
-                $file_args_array['minpath'] = "";
-                $file_args_array['success'] = true;
+            } catch (Exception $e) {
+                //var_dump($e);
+                $error_id = $e->getCode();
+                throw new Exception("Error saving minified file to path $path_min.", $error_id);
             }
-        } catch (Exception $e) {
-            //var_dump($e);
-            $error_id = $e->getCode();
-            throw new Exception("Error saving minified file to path $path_min.", $error_id);
+
+            $slug = basename($path, '.' . $type);
+            $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
+            $file_args_array['minpath'] = $path_min;
+
+            file_put_contents($path_min, $minified_content);
+
+            $file_args_array['success'] = true;
+        } else {
+            $file_args_array['minpath'] = "";
+            $file_args_array['success'] = true;
         }
 
         return $file_args_array;
@@ -387,7 +402,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = 2; //2 = database lookup error, does entry with $id exist?
+            $error_id = 2; //2 = database lookup error, does the table exist?
         }
 
         extract($result); //extract array to named variables, see $sql SELECT query above for variable names
@@ -429,11 +444,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     require(dirname(__FILE__) . '/' . ShortcodeLoad::slug.'_minify.php');
                 } catch(Exception $e) {
                     //var_dump($e);
-                    throw new Exception("ShortcodeLoad minify class could not be loaded", 15);
+                    throw new Exception("ShortcodeLoad minify class could not be loaded", 14);
                 }
             }
         } else {
-            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
+            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 15);
         }
 
         try {
@@ -857,7 +872,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $edit_file_temporary_textarea = isset( $options_edit_file[ 'edit_file_temporary_textarea' ]  ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : '';
 
         /*Create a textarea to temporarily hold the raw data from Ace editor
-        this data will then be processed when the page is reloaded again (Save Changes button is pressed)
+        this data will then be processed when the page is reloaded again (Save Changes button is clicked)
         The textarea will be continously updated with javascript
         */
         echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $edit_file_temporary_textarea .  '</textarea>';
@@ -1023,6 +1038,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_help_debug_callback() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'shortcode_load';
+
         $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
 
         $html .= '<ul id="shortcode_load_error_list">';
@@ -1037,14 +1055,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li id="error_id_1"><h4>Error #1</h4>';
         $html .= '<ul>';
         $html .= '<li>Could not create a new entry in the database when saving file.</li>';
-        $html .= '<li>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
+        $html .= '<li>Solution: Verify that the <em>' . $table_name . '</em> table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_1
 
         $html .= '<li id="error_id_2"><h4>Error #2</h4>';
         $html .= '<ul>';
         $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
-        $html .= '<li>Solution: Verify that a row with ID exists in the shortcode_load table. If you followed a link from the overview table delete the file and save it again.</li>';
+        $html .= '<li>Solution: Verify that a row with ID exists in the <em>' . $table_name . '</em> table. If you followed a link from the overview table delete the file and save it again.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_2
 
@@ -1054,6 +1072,27 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>Solution: Delete the file and save it again.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_3
+
+        $html .= '<li id="error_id_4"><h4>Error #4</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Could not update database record when updating file.</li>';
+        $html .= '<li>Solution: Verify that Wordpress user has access to the <em>' . $table_name . '</em> database table.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_4
+
+        $html .= '<li id="error_id_16"><h4>Error #16</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error creating directory for files.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_16
+
+        $html .= '<li id="error_id_17"><h4>Error #17</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error creating directory for minified files.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_17
 
         $html .= '</ul>'; // ./shortcode_load_error_list
 
