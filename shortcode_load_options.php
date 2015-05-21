@@ -509,7 +509,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $files = $this->shortcode_load_get_scripts_styles();
 
-        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=shortcode_load&amp;tab=tab_edit">New File &raquo;</a>';
+        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=shortcode_load&amp;tab=tab_edit"><span class="glyphicon glyphicon-plus"></span> New File</a>';
         $html .= '<div id="overview_container">';
 
         if(sizeof($files) > 0) {
@@ -551,7 +551,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         } else {
             $html .= '<h2>No scripts or styles created yet!</h2>';
-            $html .= '<p>To begin click the <em>"New file &raquo;"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
+            $html .= '<p>To begin click the <em>"New file"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
         }
 
