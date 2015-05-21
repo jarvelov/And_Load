@@ -23,7 +23,6 @@ ul > li > h4 {
 }
 
 ul > li > ul {
-  margin-top: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
   border-bottom: 5px solid #FEFEFE;
