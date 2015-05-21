@@ -343,7 +343,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( isset( $file_args) ) {
             $db_args = array('name' => $org_name, 'slug' => $slug, 'type' => $type, 'srcpath' => $file_args['srcpath'], 'minify' => $minify, 'minpath' => $file_args['minpath']);
         } else {
-            throw new Exception("Error processing request to save file", 13);
+            if( ! ( isset( $error_id ) ) ) {
+                $error_id = 13; //General error
+            }
+
+            throw new Exception("Error saving file.", $error_id);
         }
 
         return $db_args;
@@ -447,8 +451,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     throw new Exception("ShortcodeLoad minify class could not be loaded", 14);
                 }
             }
-        } else {
-            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 15);
         }
 
         try {
@@ -1062,7 +1064,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li id="error_id_2"><h4>Error #2</h4>';
         $html .= '<ul>';
         $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
-        $html .= '<li>Solution: Verify that a row with ID exists in the <em>' . $table_name . '</em> table. If you followed a link from the overview table delete the file and save it again.</li>';
+        $html .= '<li>Solution: Verify that a row with ID exists in the <em>' . $table_name . '</em> table. If you followed a link from the overview table then delete the file and save it again.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_2
 
@@ -1079,6 +1081,62 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>Solution: Verify that Wordpress user has access to the <em>' . $table_name . '</em> database table.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // ./error_id_4
+
+        $html .= '<li id="error_id_6"><h4>Error #6</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Error in loading minify library files.</li>';
+        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_6
+
+        $html .= '<li id="error_id_7"><h4>Error #7</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Error initializing minify library for JavaScript files.</li>';
+        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_7
+
+        $html .= '<li id="error_id_8"><h4>Error #8</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Error initializing minify library for JavaScript files.</li>';
+        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_8
+
+        $html .= '<li id="error_id_9"><h4>Error #9</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. File type could not be determined when initializing minify library.</li>';
+        $html .= '<li>Solution: File type may be malformed in database. Delete the file and save a new copy.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_9
+
+        $html .= '<li id="error_id_10"><h4>Error #10</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error minifying file content</li>';
+        $html .= '<li>Solution: The file might have a syntax error preventing it from being minified. Check the syntax and try saving the file again.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_10
+
+        $html .= '<li id="error_id_11"><h4>Error #11</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Minify library is not initialized when trying to minify file.</li>';
+        $html .= '<li>Solution: The File\'s type may be malformed in database. Delete the file and save a new copy.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_11
+
+        $html .= '<li id="error_id_12"><h4>Error #12</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error saving file to path.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_12
+
+        $html .= '<li id="error_id_13"><h4>Error #13</h4>';
+        $html .= '<ul>';
+        $html .= '<li>General error saving file.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory. Reinstall plugin if problem persists for new files.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_13
 
         $html .= '<li id="error_id_16"><h4>Error #16</h4>';
         $html .= '<ul>';
