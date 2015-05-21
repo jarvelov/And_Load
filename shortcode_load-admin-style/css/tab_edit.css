@@ -14,7 +14,7 @@
 }
 
 .edit_file_select {
-  width: auto;
+  max-width: 120px;
   display: inline-block;
   height: 34px;
   border-radius: 7px;
@@ -22,7 +22,7 @@
 }
 
 .edit_file_input {
-  width: auto;
+  max-width: 200px;
   display: inline-block;
   border-radius: 7px;
 }
@@ -53,7 +53,7 @@
 
 #new_file_upload_file_name {
   display: inline-block;
-  width: auto;
+  max-width: 120px;
   height: 34px;
 }
 
