@@ -890,8 +890,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<ul id="shortcode_load_parameters_list">';
 
-        $html .= '<li><h2>id</h3>';
-        $2tml .= '<ul id="shortcode_load_parameters_id">';
+        $html .= '<li><h2>id</h2>';
+        $html .= '<ul id="shortcode_load_parameters_id">';
         $html .= '<li><strong>Required.</strong> Which file to load.</li>';
         $html .= '<li>Accepted values:';
         $html .= '<ul>';
