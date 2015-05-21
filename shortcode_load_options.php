@@ -594,9 +594,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $overview_default_table_order_columns = $args['overview_default_table_order_columns'];
 
         foreach ($overview_default_table_order_columns as $overview_default_table_order_column_name => $overview_default_table_order_column_id) {
-            $selected2 = selected( $overview_default_table_order_column, $overview_default_table_order_column_id, false );
-            var_dump($selected2);
-            $selected = ($overview_default_table_order_column == $overview_default_table_order_column_id) ? ' selected="selected"' : '';
+            $selected = selected( $overview_default_table_order_column, $overview_default_table_order_column_id, false );
             $html .= '<option value=' . $overview_default_table_order_column_id . $selected . '>' . $overview_default_table_order_column_name . '</option>';
         }
 
@@ -610,7 +608,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $overview_default_table_sort_types = $args['overview_default_table_sort_types'];
 
         foreach ($overview_default_table_sort_types as $overview_default_table_sort_type => $overview_default_table_sort_slug) {
-            $selected = ($overview_default_table_sort == $overview_default_table_sort_slug) ? ' selected="selected"' : '';
+            $selected = selected( $overview_default_table_sort, $overview_default_table_sort_slug, false );
             $html .= '<option value=' . $overview_default_table_sort_slug . $selected . '>' . $overview_default_table_sort_type . '</option>';
         }
 
@@ -637,7 +635,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control default_select">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
-            $selected = ($editor_default_theme == $editor_theme_slug) ? ' selected="selected"' : '';
+            $selected = selected( $editor_default_theme, $editor_theme_slug, false );
             $html .= '<option value=' . $editor_theme_slug . $selected . '>' . $editor_theme_name . '</option>';
         }
 
@@ -655,7 +653,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control default_select">';
         foreach ($editor_font_sizes as $editor_font_size) {
-            $selected = ($editor_default_font_size == $editor_font_size) ? ' selected="selected"' : '';
+            $selected = selected( $editor_default_font_size, $editor_font_size, false );
             $html .= '<option value=' . $editor_font_size . $selected . '>' . $editor_font_size . '</option>';
         }
         $html .= "</select>";
@@ -672,7 +670,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<select id="editor_default_mode_type" name="shortcode_load_default_options[editor_default_mode_type]" class="form-control default_select">';
         foreach ($editor_mode_types as $editor_mode_type_name => $editor_mode_type_slug) {
-            $selected = ($editor_default_mode_type == $editor_mode_type_slug) ? ' selected="selected"' : '';
+            $selected = selected( $editor_default_mode_type, $editor_mode_type_slug, false );
             $html .= '<option value=' . $editor_mode_type_slug . $selected . '>' . $editor_mode_type_name . '</option>';
         }
         $html .= "</select>";
@@ -789,7 +787,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<label class="control-label">Current revision:</label>';
             $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
             for ($i = $revision; $i >= 0; $i--) {
-                $selected = ($current_revision == $i) ? ' selected="selected"' : '';
+                $selected = selected( $current_revision, $i, false );
 
                 $revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
 
