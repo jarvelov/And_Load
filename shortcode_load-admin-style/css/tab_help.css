@@ -27,3 +27,8 @@ ul > li > ul > li {
   margin-left: 10px;
   font-weight: normal;
 }
+
+ul > li > ul > li > ul {
+  margin-left: 10px;
+  border: 0;
+}
