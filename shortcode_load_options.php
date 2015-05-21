@@ -1043,13 +1043,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         global $wpdb;
         $table_name = $wpdb->prefix . 'shortcode_load';
 
-        $show_shortcode_load_error_list = ( isset( $_GET['error_id'] ) ) ? 'block' : 'none'; //show shortcode_load_error_list section if GET parameter error_id is set
-
         $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
 
         $html .= '<div id="show_error_list" class="btn btn-block btn-default"><span class="glyphicon glyphicon-chevron-down" style="top:3px;"></span>Show list of error codes and messages</div>';
 
-        $html .= '<ul id="shortcode_load_error_list" style="display:' . $show_shortcode_load_error_list . '">';
+        $html .= '<ul id="shortcode_load_error_list" style="display:none">';
 
         $html .= '<li id="error_id_0"><h4>Error #0</h4>';
         $html .= '<ul>';
