@@ -19,18 +19,18 @@ function scrollErrorIntoView(error_id) {
 }
 
 function toggleErrorList() {
-    if ( jQuery('#show_error_list > span').hasClass('glyphicon-chevron-down') ) {
-        jQuery('#show_error_list > span').removeClass('glyphicon-chevron-down');
-        jQuery('#show_error_list > span').addClass('glyphicon-chevron-up');
+    if ( jQuery('#show_hide_error_list > span').hasClass('glyphicon-chevron-down') ) {
+        jQuery('#show_hide_error_list > span').removeClass('glyphicon-chevron-down');
+        jQuery('#show_hide_error_list > span').addClass('glyphicon-chevron-up');
         jQuery('#shortcode_load_error_list').show();
     } else {
-        jQuery('#show_error_list > span').removeClass('glyphicon-chevron-up');
-        jQuery('#show_error_list > span').addClass('glyphicon-chevron-down');
+        jQuery('#show_hide_error_list > span').removeClass('glyphicon-chevron-up');
+        jQuery('#show_hide_error_list > span').addClass('glyphicon-chevron-down');
         jQuery('#shortcode_load_error_list').hide();
     }
 }
 
-jQuery('#show_error_list').on('click', function() {
+jQuery('#show_hide_error_list').on('click', function() {
     toggleErrorList();
 });
 

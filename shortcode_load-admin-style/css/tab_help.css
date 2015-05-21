@@ -39,3 +39,8 @@ ul > li > ul > li > ul {
   margin-left: 10px;
   border: 0;
 }
+
+#show_hide_error_list {
+  font-size: 1.2em;
+  padding: 10px;
+}
