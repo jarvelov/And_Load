@@ -933,7 +933,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
         $html .= '<li>"true" - If global setting is <em>disabled</em> jQuery is <em>added</em> as a script dependency.</li>';
-        $html .= '<li>"false" - If global setting is <strong>enabled</strong> jQuery is removed as a script dependency</li>';
+        $html .= '<li>"false" - If global setting is <strong>enabled</strong> jQuery is <strong>removed</strong> as a script dependency</li>';
         $html .= '</ul>';
         $html .= '</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> <code>[shortcode_load id="2" jquery_override="true"]</code></span>';
