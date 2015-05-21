@@ -40,5 +40,6 @@ jQuery(document).ready(function() {
     if(error_id) {
         toggleErrorList();
         scrollErrorIntoView(error_id);
+        jQuery('#' + error_id).addClass('bg-danger');
     }
 });
