@@ -17,6 +17,12 @@ ul > li {
   margin-left: 15px
 }
 
+ul > li > h3 {
+    margin: 20px;
+    border-bottom: 3px double black;
+    display: inline;
+}
+
 ul > li > ul {
   margin-top: 10px;
   padding-top: 15px;

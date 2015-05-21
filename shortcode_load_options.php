@@ -890,9 +890,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<ul id="shortcode_load_parameters_list">';
 
-        $html .= '<li><h3>id <strong>*</strong></h3>';
+        $html .= '<li><h3>id</h3>';
         $html .= '<ul id="shortcode_load_parameters_id">';
-        $html .= '<li><strong>Required.</strong> Which file to load. Accepted argument is a file ID.</li>';
+        $html .= '<li><strong>Required.</strong> Which file to load.</li>';
+        $html .= '<li>Accepted values:';
+        $html .= '<ul>';
+        $html .= '<li>Any ID of a registered file.</li>';
+        $html .= '</ul>';
+        $html .= '</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2"]</span></li>';
         $html .= '</ul>'; // ./shortcode_load_parameters_id
         $html .= '</li>';
@@ -900,20 +905,37 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li><h3>revision_override</h3>';
         $html .= '<ul id="shortcode_load_parameters_revision_override">';
         $html .= '<li>Load a specific revision of the file. Must be a number representing an existing revision. If omitted or malformed the latest revision is loaded.</li>';
+        $html .=' <li>Accepted values:';
+        $html .= '<ul>';
+        $html .= '<li>Any valid revision number for selected file.</li>';
+        $html .= '</ul>';
+        $html .= '</li>';        
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" revision_override="14"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_revision_override
         $html .= '</li>';
 
         $html .= '<li><h3>minify_override</h3>';
         $html .= '<ul id="shortcode_load_parameters_minify_override">';
-        $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles. Accepted values: "true" or "false". "true"  will load the original unminified file. "false" loads the minified version, if one exists, else the unminified file is loaded.</li>';
+        $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles.</li>';
+        $html .=' <li>Accepted values:';
+        $html .= '<ul>';
+        $html .= '<li>"true" - Load the original unminified file.</li>';
+        $html .= '<li>"false" - Loads the minified version, if one exists, else the unminified file is loaded as a fallback.</li>';
+        $html .= '</ul>';
+        $html .= '</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" minify_override="true"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_minify_override
         $html .= '</li>';
 
         $html .= '<li><h3>jquery_override</h3>';
         $html .= '<ul id="shortcode_load_parameters_jquery_override">';
-        $html .= '<li>Override global "Load jQuery with script files" setting. Accepted values: "true" or "false". If set to "true" and global setting is disabled jQuery is added as a script dependency and vice versa.</li>';
+        $html .= '<li>Override global "Load jQuery with script files" setting.';
+        $html .=' <li>Accepted values:';
+        $html .= '<ul>';
+        $html .= '<li>"true" - If global setting is <em>disabled</em> jQuery is <em>added</em> as a script dependency.</li>';
+        $html .= '<li>"false" - If global setting is <strong>enabled</strong> jQuery is removed as a script dependency</li>';
+        $html .= '</ul>';
+        $html .= '</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" jquery_override="true"]</span>';
         $html .= '</ul>'; // ./shortcode_load_parameters_jquery_override
         $html .= '</li>';
@@ -927,8 +949,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li><h3>data_wrap</h3>';
         $html .= '<ul id="shortcode_load_parameters_data_wrap">';
-        $html .= '<li>Used with <em>data</em> parameter to wrap the parameter\'s value inside of.';
-        $html .=' <ul>Accepted values';
+        $html .= '<li>Used with <em>data</em> parameter to wrap the parameter\'s value inside of.</li>';
+        $html .=' <li>Accepted values:';
+        $html .= '<ul>';
         $html .= '<li>raw - Default action. Do not wrap data, output it raw.</li>';
         $html .= '<li>script - Wraps content within script tags.</li>';
         $html .= '<li>style - Wraps content within style tags.</li>';
