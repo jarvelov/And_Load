@@ -1393,10 +1393,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
         <div class="wrap">
             <div class="nav_tab_wrapper">
-                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-list-alt"></span>Overview</a>
-                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-cog"></span>Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-edit"></span>Edit file</a>
-                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-question-sign"></span>Help</a>
+                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-list-alt"></span> Overview</a>
+                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-cog"></span> Default Options</a>
+                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-edit"></span> Edit file</a>
+                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
             </div>
 
             <form action='options.php' method='post' enctype='multipart/form-data'>
