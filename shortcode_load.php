@@ -118,11 +118,9 @@ License:
             'revision_override' => false,
             'minify_override' => false,
             'jquery_override' => false,
-            'in_header' => false,
             'args' => ''
             ), $atts));
 
-        //TODO handle in_header arg
         if($id) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -171,9 +169,7 @@ License:
                 $dependencies = false;
 
                 if($is_script) {
-                    if($in_header) {
-                        $dependencies = false; //
-                    } elseif($default_jquery AND !$jquery_override) {
+                    if($default_jquery AND !$jquery_override) {
                         $dependencies = array('jquery');
                     } elseif($default_jquery AND $jquery_override) {
                         $dependencies = false;
