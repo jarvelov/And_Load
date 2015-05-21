@@ -4,7 +4,6 @@
   margin-top: 10px;
 }
 
-
 .shortcode_load_help_section {
   border: 5px solid rgb(254, 254, 254);
   border-radius: 15px;
@@ -14,7 +13,8 @@
 ul > li {
   margin-top: 10px;
   font-weight: bold;
-  margin-left: 15px
+  margin-left: 15px;
+  padding: 20px;
 }
 
 ul > li > h3 {
