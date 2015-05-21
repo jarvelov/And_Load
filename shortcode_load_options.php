@@ -172,17 +172,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         add_settings_field(
-            'shortcode_load_help_debug',
-            'Debug',
-            array($this, 'shortcode_load_help_debug_callback'),
+            'shortcode_load_help_credits',
+            'Credits',
+            array($this, 'shortcode_load_help_credits_callback'),
             'shortcode_load_help_section',
             'shortcode_load_help'
         );
 
         add_settings_field(
-            'shortcode_load_help_credits',
-            'Credits',
-            array($this, 'shortcode_load_help_credits_callback'),
+            'shortcode_load_help_debug',
+            'Debug',
+            array($this, 'shortcode_load_help_debug_callback'),
             'shortcode_load_help_section',
             'shortcode_load_help'
         );
@@ -972,46 +972,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
-    function shortcode_load_help_debug_callback() {
-        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
-
-        $html .= '<ul id="shortcode_load_error_list">';
-
-        $html .= '<li id="error_id_0">Error #0';
-        $html .= '<ul>';
-        $html .= '<li>Could not save file to Wordpress\' <em>uploads</em> folder.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // ./error_id_0
-
-        $html .= '<li id="error_id_1">Error #1';
-        $html .= '<ul>';
-        $html .= '<li>Could not create a new entry in the database when saving file.</li>';
-        $html .= '<li>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // ./error_id_1
-
-        $html .= '<li id="error_id_2">Error #2';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
-        $html .= '<li>Solution: Verify that a row with ID exists in the shortcode_load table. If you followed a link from the overview table delete the file and save it again.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // ./error_id_2
-
-        $html .= '<li id="error_id_3">Error #3';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</li>';
-        $html .= '<li>Solution: Delete the file and save it again.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // ./error_id_3
-
-        $html .= '</ul>'; // ./shortcode_load_error_list
-
-        $html .= '</div>'; // ./shortcode_load_help_debug
-
-        echo $html;
-    }
-
     function shortcode_load_help_credits_callback() {
         $html = '<div id="shortcode_load_help_credits" class="shortcode_load_help_section">';
         $html .= '<p><span>This plugin would not have been possible without the following projects. </span>';
@@ -1061,6 +1021,47 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         echo $html;
     }
+
+    function shortcode_load_help_debug_callback() {
+        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
+
+        $html .= '<ul id="shortcode_load_error_list">';
+
+        $html .= '<li id="error_id_0"><h4>Error #0</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Could not save file to Wordpress\' <em>uploads</em> folder.</li>';
+        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_0
+
+        $html .= '<li id="error_id_1"><h4>Error #1</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Could not create a new entry in the database when saving file.</li>';
+        $html .= '<li>Solution: Verify that the shortcode_load table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_1
+
+        $html .= '<li id="error_id_2"><h4>Error #2</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
+        $html .= '<li>Solution: Verify that a row with ID exists in the shortcode_load table. If you followed a link from the overview table delete the file and save it again.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_2
+
+        $html .= '<li id="error_id_3"><h4>Error #3</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</li>';
+        $html .= '<li>Solution: Delete the file and save it again.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // ./error_id_3
+
+        $html .= '</ul>'; // ./shortcode_load_error_list
+
+        $html .= '</div>'; // ./shortcode_load_help_debug
+
+        echo $html;
+    }
+
 
     /*
     * Sanitization functions
