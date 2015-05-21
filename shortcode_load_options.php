@@ -980,35 +980,35 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<ul id="shortcode_load_credits_list">';
 
         //Ace credits
-        $html .= '<li>Ace';
+        $html .= '<li><h4>Ace</h4>';
         $html .= '<ul id="shortcode_load_help_credits_ace">';
         $html .= '<li>Project URL: <a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
         $html .= '<li>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></li>';
         $html .= '</ul>'; // ./shortcode_load_help_credits_ace
         $html .= '</li>'; 
 
-        $html .= '<li>Datatables';
+        $html .= '<li><h4>Datatables</h4>';
         $html .= '<ul id="shortcode_load_help_credits_datatables">';
         $html .= '<li>Project URL: <a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
         $html .= '<li>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // ./shortcode_load_help_credits_datatables
         $html .= '</li>';
 
-        $html .= '<li>Minify';
+        $html .= '<li><h4>Minify</h4>';
         $html .= '<ul id="shortcode_load_help_credits_minify">';
         $html .= '<li>Project URL: <a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
         $html .= '<li>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // ./shortcode_load_help_credits_minify
         $html .= '</li>';
 
-        $html .= '<li>Path Converter';
+        $html .= '<li><h4>Path Converter</h4>';
         $html .= '<ul id="shortcode_load_help_credits_path_converter">';
         $html .= '<li>Project URL: <a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
         $html .= '<li>License: <a href="https://github.com/matthiasmullie/path-converter/blob/master/LICENSE" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // ./shortcode_load_help_credits_minify
         $html .= '</li>';
 
-        $html .= '<li>Bootstrap';
+        $html .= '<li><h4>Bootstrap</h4>';
         $html .= '<ul id="shortcode_load_help_credits_bootstrap">';
         $html .= '<li>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
         $html .= '<li>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></li>';
