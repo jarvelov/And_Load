@@ -14,13 +14,12 @@ ul > li {
   margin-top: 10px;
   font-weight: bold;
   margin-left: 15px;
-  padding: 20px;
 }
 
-ul > li > h3 {
-    margin: 20px;
-    border-bottom: 3px double black;
-    display: inline;
+ul > li > h4 {
+    margin: 15px 0 15px 0;
+    border-bottom: 3px double #333333;
+    display: inline-block;
 }
 
 ul > li > ul {
