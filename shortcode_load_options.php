@@ -934,7 +934,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>scriptCDATA - Wraps content within script and then CDATA tags.</li>';
         $html .= '<li>styleCDATA - Wraps content within style and then CDATA tags.</li>';
         $html .= '</ul>';
-        $html .=> '</li>';
+        $html .= '</li>';
         $html .= '<li><span class="help_example"><strong>Example:</strong> [shortcode_load id="2" data="var myVariable=\'14\',mySecondVariable=\'true\';myFunction(myVariable, mySecondVariable);" data_wrap="script"]</span></li>';
         $html .= '</ul>'; // ./shortcode_load_parameters_data_wrap
         $html .= '</li>';
