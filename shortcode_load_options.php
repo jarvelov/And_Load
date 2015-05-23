@@ -1258,9 +1258,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $minify = $options_default['default_minify'];
 
         //Get the file name, content and type
-        $file_name = ( $args[ 'new_file_name' ] ) ? $args[ 'new_file_name' ] : NULL;
-        $file_content = ( $args[ 'edit_file_temporary_textarea' ] ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
-        $file_type = ( $args[ 'new_file_type' ] ) ? $args[ 'new_file_type' ] : NULL;
+        $file_name = ( isset( $args[ 'new_file_name' ] ) ) ? $args[ 'new_file_name' ] : NULL;
+        $file_content = ( isset ( $args[ 'edit_file_temporary_textarea' ] ) ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
+        $file_type = ( isset ( $args[ 'new_file_type' ] ) ) ? $args[ 'new_file_type' ] : NULL;
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
         $request = ( isset( $args['submit']) ) ? 'save' : ( ( isset( $args['delete'] ) ) ? 'delete' : NULL );
