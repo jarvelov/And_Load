@@ -489,8 +489,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     # code...
                 }
             }
-        }
 */
+        }
+
         break;
     }
 
