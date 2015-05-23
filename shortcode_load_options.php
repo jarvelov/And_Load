@@ -1228,7 +1228,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li id="error_id_8"><h4>Error #8</h4>';
         $html .= '<ul>';
-        $html .= '<li>Internal error. Error initializing minify library for JavaScript files.</li>';
+        $html .= '<li>Internal error. Error initializing minify library for CSS files.</li>';
         $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // end error_id_8
