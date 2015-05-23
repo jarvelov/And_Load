@@ -879,6 +879,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
+            //TODO check result before extracting, display error message if $result = null or 0;
+
+            var_dump($result);
+
+            /*
+
             extract($result); //turn array into named variables, see $sql SELECT query above for variable names
 
             //Check for revision override
@@ -914,7 +920,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
 
-            /* Shortcode displayed in an input field */
+            // Shortcode displayed in an input field
 
             $html .= '<label class="control-label">Shortcode:</label>';
 
@@ -922,7 +928,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
-            /* Select revision dropdown */
+            // Select revision dropdown
 
             $html .= '<label class="control-label">Current revision:</label>';
             $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
@@ -1446,7 +1452,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
 
-                if($file_data['operation'] != 'updated') {
+                if($file_data['operation'] == 'saved' || $file_data['operation'] == 'uploaded') {
                     $message .= '<a href="?page=shortcode_load&tab=tab_edit&id='.$file_data['id'].'"> Click here to view/edit.</a>';
                 }
                 
