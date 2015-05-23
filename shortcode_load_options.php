@@ -1263,7 +1263,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_type = ( isset ( $args[ 'new_file_type' ] ) ) ? $args[ 'new_file_type' ] : NULL;
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
-        $request = ( isset( $args['submit']) ) ? 'save' : ( ( isset( $args['delete'] ) ) ? 'delete' : NULL );
+        $request = ( isset( $_POST['submit']) ) ? 'save' : ( ( isset( $_POST['delete'] ) ) ? 'delete' : NULL );
 
         var_dump($request, $args);
         break;
