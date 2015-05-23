@@ -468,7 +468,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 for ($i=0; $i <= $revision; $i++) {
                     $file_name = basename($srcpath, $type);
                     $file_path_base = dirname($minpath) . '/';
-                    $file = ($i == 0)  ? ( $file_path_base . $file_name . ".min." . $type ) :  ( $file_path_base . $file_name . $i . ".min." . $type );
+                    $file = ($i == 0)  ? ( $file_path_base . $file_name . "min." . $type ) :  ( $file_path_base . $file_name . $i . "min." . $type );
 
                     var_dump($file);
 
