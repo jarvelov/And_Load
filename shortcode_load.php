@@ -216,7 +216,7 @@ License:
             $this->shortcode_load_register_and_enqueue($name, $file_url, $is_script, $dependencies);
         } elseif( file_exists( $file_path ) ) { //variable is not a path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
             $file_url = get_site_url() . substr($file_path, strpos($file_path, ABSPATH));
-            var_dump($file_url, 2);
+            var_dump(strpos($file_path, ABSPATH));
             $this->shortcode_load_register_and_enqueue($name, $file_url, $is_script, $dependencies);
         } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
             //$file_path is an URL
