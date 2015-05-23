@@ -908,7 +908,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
                     } else {
                         $current_revision = 0;
-                    }
+                    } // end if
                 } //end if
 
                 //File save submit button
@@ -945,7 +945,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 /* TODO Add option to temporary override font size while in editor 
                 $html .= '<label class="control-label">Font size:</label>';
                 $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
-
                 */
 
                 $html .= '</div>'; // end edit_file_input_container
@@ -961,7 +960,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } else {
                     $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
-            } // end if
+            } else {
+                $this->shortcode_load_editor_init( 'Error. No file with ID ' . $id . ' found!', $editor_default_mode_type );
+            }// end if
         } else {
             //No file is selected, this is a new file
 
