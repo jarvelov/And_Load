@@ -877,89 +877,91 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
             $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
-            $result = $wpdb->get_results($sql, ARRAY_A)[0];
+            $result = $wpdb->get_results($sql, ARRAY_A);
 
             //TODO check result before extracting, display error message if $result = null or 0;
 
             var_dump($result);
 
-            /*
+            if($result) {
+                $result = $result[0];
 
-            extract($result); //turn array into named variables, see $sql SELECT query above for variable names
+                extract($result); //turn array into named variables, see $sql SELECT query above for variable names
 
-            //Check for revision override
-            if($revision_override !== false) {
-                if($revision_override <= $revision AND $revision_override > 0) {
-                    $current_revision = $revision_override;
-    
-                    $srcname = basename($srcpath, $type);
-                    $srcpath_base = dirname($srcpath) . '/';
-                    $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
+                //Check for revision override
+                if($revision_override !== false) {
+                    if($revision_override <= $revision AND $revision_override > 0) {
+                        $current_revision = $revision_override;
+        
+                        $srcname = basename($srcpath, $type);
+                        $srcpath_base = dirname($srcpath) . '/';
+                        $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
+                    } else {
+                         $current_revision = 0;
+                    }
                 } else {
-                     $current_revision = 0;
-                }
-            } else {
-                if($revision > 0) {
-                    $current_revision = $revision;
+                    if($revision > 0) {
+                        $current_revision = $revision;
 
-                    $srcname = basename($srcpath, $type);
-                    $srcpath_base = dirname($srcpath) . '/';
-                    $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
+                        $srcname = basename($srcpath, $type);
+                        $srcpath_base = dirname($srcpath) . '/';
+                        $srcpath = $srcpath_base . $srcname . $current_revision . "." . $type;
+                    } else {
+                        $current_revision = 0;
+                    }
+                } //end if
+
+                //File save submit button
+                $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
+
+                //File delete submit button
+                $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
+
+                $html .= '<div id="edit_file_input_container">';
+
+                $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
+
+                // Shortcode displayed in an input field
+
+                $html .= '<label class="control-label">Shortcode:</label>';
+
+                $shortcode_display = ($current_revision == $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . ' revision_override=' . $current_revision;
+
+                $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
+
+                // Select revision dropdown
+
+                $html .= '<label class="control-label">Current revision:</label>';
+                $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
+                for ($i = $revision; $i >= 0; $i--) {
+                    $selected = selected( $current_revision, $i, false );
+
+                    $revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
+
+                    $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
+                }
+                $html .= '</select>';
+
+                /* TODO Add option to temporary override font size while in editor 
+                $html .= '<label class="control-label">Font size:</label>';
+                $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
+
+                */
+
+                $html .= '</div>'; // end edit_file_input_container
+
+                echo $html;
+
+                //Load file content
+                $content = $this->shortcode_load_get_file( $srcpath );
+
+                if($content !== false) {
+                    //init editor with content
+                    $this->shortcode_load_editor_init( $content, $type );
                 } else {
-                    $current_revision = 0;
-                }
-            }
-
-            //File save submit button
-            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
-
-            //File delete submit button
-            $html .= '<p class="delete"><input id="delete" class="btn btn-danger" name="delete" type="submit" value="&#x2716; Delete" /></p>';
-
-            $html .= '<div id="edit_file_input_container">';
-
-            $html .= '<label class="control-label">File: <em>' . $name . '</em></label>';
-
-            // Shortcode displayed in an input field
-
-            $html .= '<label class="control-label">Shortcode:</label>';
-
-            $shortcode_display = ($current_revision == $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . ' revision_override=' . $current_revision;
-
-            $html .='<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
-
-            // Select revision dropdown
-
-            $html .= '<label class="control-label">Current revision:</label>';
-            $html .= '<select id="edit_file_revisions_select" class="form-control edit_file_select" name="edit_file_revisions_select">';
-            for ($i = $revision; $i >= 0; $i--) {
-                $selected = selected( $current_revision, $i, false );
-
-                $revision_name = ( $i > 0 AND $i == $revision ) ? 'Latest' : ( ($i == 0) ? 'Source' : $i );
-
-                $html .= '<option value='.$i.$selected.'>' . $revision_name .'</option>';
-            }
-            $html .= '</select>';
-
-            /* TODO Add option to temporary override font size while in editor 
-            $html .= '<label class="control-label">Font size:</label>';
-            $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
-
-            */
-
-            $html .= '</div>'; // end edit_file_input_container
-
-            echo $html;
-
-            //Load file content
-            $content = $this->shortcode_load_get_file( $srcpath );
-
-            if($content !== false) {
-                //init editor with content
-                $this->shortcode_load_editor_init( $content, $type );
-            } else {
-                $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
-            }
+                    $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
+                } // end if
+            } // end if
         } else {
             //No file is selected, this is a new file
 
@@ -993,7 +995,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             echo $html;
 
             $this->shortcode_load_editor_init( false, $editor_default_mode_type );
-        }
+        } // end if
     }
 
     function shortcode_load_edit_file_source_options_callback() {
