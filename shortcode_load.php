@@ -226,7 +226,7 @@ License:
         } // end if
     } // end shortcode_load_enqueue_file
 
-    function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false) 
+    function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false)  {
     var_dump($path);
         try {
             if( $is_script ) {
