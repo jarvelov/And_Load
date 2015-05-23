@@ -470,18 +470,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $file_path_base = dirname($minpath) . '/';
                     $file = ($i == 0)  ? ( $file_path_base . $file_name . "min." . $type ) :  ( $file_path_base . $file_name . $i . ".min." . $type );
 
-                    var_dump($file);
-
                     if( file_exists( $file ) ) {
                         # code...
                     }
                 }
             }
-/*
+
             for ($i=0; $i <= $revision; $i++) {
                 $file_name = basename($srcpath, $type);
                 $file_path_base = dirname($srcpath) . '/';
-                $file = $file_path_base . $file_name . $i . "." . $type;
+                $file = ($i == 0)  ? ( $file_path_base . $file_name . $type ) :  ( $file_path_base . $file_name . $i . "." . $type );
 
                 var_dump($file);
 
@@ -489,7 +487,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     # code...
                 }
             }
-*/
         }
 
         break;
