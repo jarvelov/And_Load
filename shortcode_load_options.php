@@ -196,9 +196,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     */
     function shortcode_load_save_to_database($args) {
         try {
-            $db_args = $this->shortcode_load_save_file($args);
+            $db_args = $this->shortcode_load_save_file( $args );
         } catch (Exception $e) {
-            $error_id = $e->getCode();
+            $error_id = isset($error_id) ? $error_id : $e->getCode();
             $return_args = array('success' => false, 'error_id' => $error_id);
 
             return $return_args;
@@ -237,7 +237,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $id = $wpdb->insert_id;
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = 1; //error writing to database
+            $error_id = isset($error_id) ? $error_id : 1;; //error writing to database
         }
 
         if( ( ! isset($error_id) ) ) {
@@ -290,6 +290,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         return $return_args;
     }
 
+    function shortcode_load_delete_database_record($id) {
+        try {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'shortcode_load';
+
+            $wpdb->delete( $table_name,
+                array( 'ID' => intval($id) ),
+                array( '%d' )
+            );
+        } catch (Exception $e) {
+            $error_id = isset($error_id) ? $error_id : 19;
+            throw new Exception("Error deleting file with id: $id", $error_id);
+        }
+    }
+
     /*
     * Save a new script or style to a file in wordpress' uploads folder
     */
@@ -306,10 +321,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $src_dir = $uploads_dir . $type . '/src/';
         $min_dir = $uploads_dir . $type . '/min/';
         
-        $random5 = substr(md5(microtime()),rand(0,26),5); //generate 5 random characters to ensure filename is unique
+        $random5 = substr( md5( microtime() ),rand( 0,26 ), 5); //generate 5 random characters to ensure filename is unique
         $slug = $org_name . '.' . $random5;
 
-        $slug = $this->shortcode_load_filter_string($slug); //filter out any characters we don't want in path
+        $slug = $this->shortcode_load_filter_string( $slug ); //filter out any characters we don't want in path
 
         $file_src = $src_dir . $slug . '.' . $type;
 
@@ -318,7 +333,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 wp_mkdir_p( $src_dir );
             }
         } catch(Exception $e) {
-            $error_id = 16;
+            $error_id = isset($error_id) ? $error_id : 16;
             throw new Exception("Error creating directory for files.", $error_id);
         }
 
@@ -329,15 +344,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
         } catch(Exception $e) {
-            $error_id = 17;
+            $error_id = isset($error_id) ? $error_id : 17;
             throw new Exception("Error creating directory for minified files.", $error_id);
         }
 
         try {
-            $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
+            $file_args = $this->shortcode_load_save_file_to_path( $file_src, $content, $type, $minify );
         } catch(Exception $e) {
             //var_dump($e);
-            $error_id = $e->getCode();
+            $error_id = isset($error_id) ? $error_id : $e->getCode();
         }
 
         if( isset( $file_args) ) {
@@ -367,10 +382,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if($minify == true) {
             try {
-                $minified_content = $this->shortcode_load_minify_file($content, $type);
+                $minified_content = $this->shortcode_load_minify_file( $content, $type );
             } catch (Exception $e) {
                 //var_dump($e);
-                $error_id = $e->getCode();
+                $error_id = isset($error_id) ? $error_id : $e->getCode();
                 throw new Exception("Error saving minified file to path $path_min.", $error_id);
             }
 
@@ -400,11 +415,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,slug,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+            $sql = "SELECT name,slug,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".intval($id)." LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = 2; //2 = database lookup error
+            $error_id = isset($error_id) ? $error_id : 2; //2 = database lookup error
         }
 
         if( isset( $result ) ) {
@@ -420,20 +435,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $file_src = $file_src_base . $new_slug;
 
             try {
-                $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
+                $file_args = $this->shortcode_load_save_file_to_path( $file_src, $content, $type, $minify );
             } catch(Exception $e) {
-                $error_id = $e->getCode();
+                $error_id = isset($error_id) ? $error_id : $e->getCode();
             }
         }
 
-        if( isset($file_args) ) {
+        if( isset( $file_args ) ) {
             if($file_args['success'] == true) {
                 try {
-                    $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
+                    $result = $this->shortcode_load_update_database_record( array('id' => intval($id),'revision' => $new_revision) );
                     $type = ($type == 'js') ? 'Script' : 'Style';
                     $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
                 } catch(Exception $e) {
-                    $error_id = $e->getCode();
+                    $error_id = isset($error_id) ? $error_id : $e->getCode();
                     $return_args = array('success' => false, 'error_id' => $error_id);
                 }
             }
@@ -454,11 +469,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT type,revision,srcpath,minify,minpath FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+            $sql = "SELECT name,type,revision,srcpath,minify,minpath FROM ".$table_name." WHERE id = ".intval($id)." LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = 2; //2 = database lookup error
+            $error_id = isset($error_id) ? $error_id : 2; //2 = database lookup error
         }
 
         if( isset( $result ) ) {
@@ -470,8 +485,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $file_path_base = dirname($minpath) . '/';
                     $file = ($i == 0)  ? ( $file_path_base . $file_name . "min." . $type ) :  ( $file_path_base . $file_name . $i . ".min." . $type );
 
-                    if( file_exists( $file ) ) {
-                        # code...
+                    try {
+                        $this->shortcode_load_delete_file_from_path( $file );
+                    } catch(Exception $e) {
+                        $error_id = isset($error_id) ? $error_id : $e->getCode();
                     }
                 }
             }
@@ -481,15 +498,26 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $file_path_base = dirname($srcpath) . '/';
                 $file = ($i == 0)  ? ( $file_path_base . $file_name . $type ) :  ( $file_path_base . $file_name . $i . "." . $type );
 
-                var_dump($file);
-
-                if( file_exists( $file ) ) {
-                    # code...
+                try {
+                    $this->shortcode_load_delete_file_from_path( $file );
+                } catch(Exception $e) {
+                    $error_id = isset($error_id) ? $error_id : $e->getCode();
                 }
             }
         }
 
-        break;
+        try {
+            $result = $this->shortcode_load_delete_database_record( $id );
+            $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'deleted');
+        } catch(Exception $e) {
+            $error_id = isset($error_id) ? $error_id : $e->getCode();
+        }
+
+        if(isset($error_id)) {
+            $return_args = array('success' => false, 'error_id' => $error_id);
+        }
+
+        return $return_args;
     }
 
     /*
@@ -512,7 +540,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $minified_content = $ShortcodeLoad_Minify->shortcode_load_minify_minify_file($content, $type);
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = $e->getCode();
+            $error_id = isset($error_id) ? $error_id : $e->getCode();
             throw new Exception("Error Processing Request", $error_id);
         }
 
@@ -550,6 +578,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $content;
+    }
+
+    function shortcode_load_delete_file_from_path($path) {
+        if( file_exists( $path ) ) {
+            if( ! ( unlink( $path ) ) ) {
+                throw new Exception("Error deleting file with path: $path", 18);
+            }
+        }
     }
 
     /*
@@ -881,9 +917,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             if($content !== false) {
                 //init editor with content
-                $this->shortcode_load_editor_init($content, $type);
+                $this->shortcode_load_editor_init( $content, $type );
             } else {
-                $this->shortcode_load_editor_init('File content was not found! Please report this error to the developer!', $editor_default_mode_type);
+                $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
             }
         } else {
             //No file is selected, this is a new file
@@ -917,7 +953,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             echo $html;
 
-            $this->shortcode_load_editor_init(false, $editor_default_mode_type);
+            $this->shortcode_load_editor_init( false, $editor_default_mode_type );
         }
     }
 
@@ -1270,11 +1306,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             if( ! ( empty( $id ) ) ) {
                 if($request == 'delete') {
                     try {
-                        $file_datas[] = $this->shortcode_load_delete_file($id);
+                        $file_datas[] = $this->shortcode_load_delete_file( $id );
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'delete';
-                        $error_id = $e->getCode();
+                        $error_id = isset($error_id) ? $error_id : $e->getCode();
                     }
                 } else {
                     try {
@@ -1288,7 +1324,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'update';
-                        $error_id = $e->getCode();
+                        $error_id = isset($error_id) ? $error_id : $e->getCode();
                     }
                 }
             } else {
@@ -1316,7 +1352,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'uploaded';
-                        $error_id = $e->getCode();
+                        $error_id = isset($error_id) ? $error_id : $e->getCode();
                     }
                 } elseif( ! (empty( $file_name ) ) ) { //new file, save it
                     try {
@@ -1331,13 +1367,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     } catch(Exception $e) {
                         //var_dump($e);
                         $operation = 'saved';
-                        $error_id = $e->getCode();
+                        $error_id = isset($error_id) ? $error_id : $e->getCode();
                     }
                 }
             }
 
             if( isset( $file_datas ) ) {
-                $this->shortcode_load_add_settings_message($file_datas);
+                $this->shortcode_load_add_settings_message( $file_datas );
             } else {
                 $this->shortcode_load_add_settings_message(array(
                     'success' => false,
@@ -1475,13 +1511,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 if($active_tab == 'tab_overview') {
                     //Libraries
-                    $this->shortcode_load_load_file('datatables-style-bootstrap', 'admin-style/css/dataTables.bootstrap.css', false, true);
-                    $this->shortcode_load_load_file('datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false);
-                    $this->shortcode_load_load_file('datatables-script-bootstrap', 'admin-script/js/dataTables.bootstrap.js', true, true);
+                    $this->shortcode_load_load_file( 'datatables-style-bootstrap', 'admin-style/css/dataTables.bootstrap.css', false, true );
+                    $this->shortcode_load_load_file( 'datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true, false );
+                    $this->shortcode_load_load_file( 'datatables-script-bootstrap', 'admin-script/js/dataTables.bootstrap.js', true, true );
 
                     //Tab styles and scripts
-                    $this->shortcode_load_load_file('tab_overview_js', 'admin-script/js/tab_overview.js', true, true);
-                    $this->shortcode_load_load_file('tab_overview_css', 'admin-style/css/tab_overview.css', false, true);
+                    $this->shortcode_load_load_file( 'tab_overview_js', 'admin-script/js/tab_overview.js', true, true );
+                    $this->shortcode_load_load_file( 'tab_overview_css', 'admin-style/css/tab_overview.css', false, true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_overview' );
@@ -1489,8 +1525,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 } elseif($active_tab == 'tab_default') {
                     //Tab styles and scripts
-                    $this->shortcode_load_load_file('tab_default_css', 'admin-style/css/tab_default.css', false, true);
-                    $this->shortcode_load_load_file('tab_default_js', 'admin-script/js/tab_default.js', true, true);
+                    $this->shortcode_load_load_file( 'tab_default_css', 'admin-style/css/tab_default.css', false, true );
+                    $this->shortcode_load_load_file( 'tab_default_js', 'admin-script/js/tab_default.js', true, true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_default_options' );
@@ -1499,11 +1535,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {
                     //Libraries
-                    $this->shortcode_load_load_file('ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false);
+                    $this->shortcode_load_load_file( 'ace-js', 'lib/ace/src-min-noconflict/ace.js', true, false );
 
                     //Tab styles and scripts
-                    $this->shortcode_load_load_file('tab_edit_js', 'admin-script/js/tab_edit.js', true, true);
-                    $this->shortcode_load_load_file('tab_edit_css', 'admin-style/css/tab_edit.css', false, true);
+                    $this->shortcode_load_load_file( 'tab_edit_js', 'admin-script/js/tab_edit.js', true, true );
+                    $this->shortcode_load_load_file( 'tab_edit_css', 'admin-style/css/tab_edit.css', false, true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_edit_file_options' );
@@ -1511,8 +1547,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 } elseif($active_tab == 'tab_help') {
                     //Tab styles and scripts
-                    $this->shortcode_load_load_file('tab_help_js', 'admin-script/js/tab_help.js', true, true);
-                    $this->shortcode_load_load_file('tab_help_css', 'admin-style/css/tab_help.css', false, true);
+                    $this->shortcode_load_load_file( 'tab_help_js', 'admin-script/js/tab_help.js', true, true );
+                    $this->shortcode_load_load_file( 'tab_help_css', 'admin-style/css/tab_help.css', false, true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_help_section' );

@@ -101,14 +101,14 @@ License:
 
         }
 
-        add_action( 'register_scripts_and_styles', array( &$this, 'action_callback_register_scripts_and_styles' ) );
+        add_action( 'shortcode_load_load_styles', array( &$this, 'action_callback_shortcode_load_load_styles' ) );
 
-        do_action( 'register_scripts_and_styles' );
+        do_action( 'shortcode_load_load_styles' );
 
     }
 
-    function action_callback_register_scripts_and_styles() {
-        $this->register_scripts_and_styles();
+    function action_callback_shortcode_load_load_styles() {
+        $this->shortcode_load_load_styles();
     }
 
     function render_shortcode($atts) {
@@ -118,7 +118,8 @@ License:
             'revision_override' => false,
             'minify_override' => false,
             'jquery_override' => false,
-            'args' => ''
+            'data' => false,
+            'data_wrap' => 'raw'
             ), $atts));
 
         if($id) {
@@ -149,19 +150,19 @@ License:
 
                 if($revision_override !== false) {
                     if($revision_override <= $revision AND $revision_override > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($path, $revision_override, $type, $minify);
+                        $file_path = $this->shortcode_load_get_file_path($path, $revision_override, $type, $minify);
                     } else {
                         if($revision_override >= 0) {
-                            $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
+                            $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
                         } else {
-                            $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                            $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
                         }
                     }
                 } else {
                     if($revision > 0) {
-                        $path_external = $this->shortcode_load_get_path_external($path, $revision, $type, $minify);
+                        $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
                     } else {
-                        $path_external = $this->shortcode_load_get_path_external($path, false, $type, $minify);
+                        $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
                     }
                 }
 
@@ -178,7 +179,7 @@ License:
                     }
                 }
 
-                $this->load_file( $name, $path_external, $is_script, $dependencies);
+                $this->load_file( $name, $file_path, $is_script, $dependencies);
             }
         }
     }
@@ -186,11 +187,12 @@ License:
     /**
      * Registers and enqueues stylesheets for the administration panel
      */
-    private function register_scripts_and_styles() {
+    private function shortcode_load_load_styles() {
         if ( is_admin() ) {
+            $this->load_file( self::slug . '-bootstrap-css', self::slug . '-admin-style/css/bootstrap.min.css' );
             $this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
         } // end if
-    } // end register_scripts_and_styles
+    } // end shortcode_load_load_styles
     
     /**
      * Helper function for registering and enqueueing scripts and styles.
@@ -198,8 +200,8 @@ License:
      * @name            The ID to register with WordPress
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
-     * @dependencies    Optional argument to specifiy file dependencies
-     * @in_footer       Optional argument for JavaScript files to change enqueue method to include in header 
+     * @dependencies    Optional argument to specifiy file dependencies such as jQuery, underscore etc.
+     * @in_footer       Optional argument for JavaScript files to change to enqueue file in footer instead of header
      */
     public function load_file( $name, $file_path, $is_script = false, $dependencies = false, $in_footer = false ) {
 
@@ -214,22 +216,22 @@ License:
                 wp_register_style( $name, $url );
                 wp_enqueue_style( $name );
             } // end if
-        } else { //variable is not a local file path, possibly hosted remotely or an URL to the local server was given for a file not located within the plugin directory
-            if( ! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) { //validate url before registering
-                if( $is_script ) {
-                    wp_register_script( $name, $file_path, $dependencies, false, $in_footer );
-                    wp_enqueue_script( $name, $file_path, $dependencies, false, $in_footer ); 
-                } else {
-                    wp_register_style( $name, $file_path );
-                    wp_enqueue_style( $name );
-                }
+        } elseif( file_exists( $file_path ) ) { //variable is not a local file path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
+
+        } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
+            //$file_path is an URL
+            if( $is_script ) {
+                wp_register_script( $name, $file_path, $dependencies, false, $in_footer );
+                wp_enqueue_script( $name, $file_path, $dependencies, false, $in_footer ); 
+            } else {
+                wp_register_style( $name, $file_path );
+                wp_enqueue_style( $name );
             }
         }
-
     } // end load_file
 
 
-    function shortcode_load_get_path_external($path, $revision, $type, $minify) {
+    function shortcode_load_get_file_path($path, $revision, $type, $minify) {
         $suffix = ( $minify ) ? 'min.' . $type : $type;
         $srcname = basename($path, $suffix);
 
@@ -240,13 +242,9 @@ License:
         } else {
             $path = $path_src_base . $srcname . $suffix;
         }
-        
-        $site_url = get_site_url();
 
-        $path_external = str_replace(ABSPATH, $site_url . '/', $path);
-
-        return $path_external;
-    }
+        return $path;
+    } // end shortcode_load_get_file_path
 
 } // end class
 new ShortcodeLoad();
