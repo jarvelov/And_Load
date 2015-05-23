@@ -208,7 +208,6 @@ License:
      * @dependencies    Optional argument to specifiy file dependencies such as jQuery, underscore etc.
      */
     public function shortcode_load_enqueue_file( $name, $file_path, $is_script = false, $dependencies = false) {
-
         $local_file_path = plugin_dir_path(__FILE__) . $file_path;
 
         if( file_exists( $local_file_path ) ) {
@@ -216,7 +215,7 @@ License:
             $this->shortcode_load_register_and_enqueue($name, $file_url, $is_script, $dependencies);
         } elseif( file_exists( $file_path ) ) { //variable is not a path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
             $file_url = get_site_url() . substr($file_path, strpos($file_path, ABSPATH));
-            var_dump(strpos($file_path, ABSPATH));
+            var_dump(strlen(ABSPATH));
             $this->shortcode_load_register_and_enqueue($name, $file_url, $is_script, $dependencies);
         } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
             //$file_path is an URL
@@ -225,7 +224,6 @@ License:
     } // end shortcode_load_enqueue_file
 
     function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false)  {
-    var_dump($path);
         try {
             if( $is_script ) {
                 wp_register_script( $name, $path, $dependencies );
