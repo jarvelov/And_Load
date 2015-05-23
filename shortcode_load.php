@@ -101,17 +101,17 @@ License:
 
         }
 
-        add_action( 'shortcode_load_load_styles', array( &$this, 'action_callback_shortcode_load_load_styles' ) );
+        add_action( 'shortcode_load_enqueue_styles', array( &$this, 'action_callback_shortcode_load_enqueue_styles' ) );
 
-        do_action( 'shortcode_load_load_styles' );
+        do_action( 'shortcode_load_enqueue_styles' );
 
     }
 
-    function action_callback_shortcode_load_load_styles() {
-        $this->shortcode_load_load_styles();
+    function action_callback_shortcode_load_enqueue_styles() {
+        $this->shortcode_load_enqueue_styles();
     }
 
-    function render_shortcode($atts) {
+    function render_shortcode($args) {
         // Extract the attributes submitted with the shortcode
         extract(shortcode_atts(array(
             'id' => '',
@@ -120,7 +120,7 @@ License:
             'jquery_override' => false,
             'data' => false,
             'data_wrap' => 'raw'
-            ), $atts));
+            ), $args));
 
         if($id) {
             global $wpdb;
@@ -179,7 +179,12 @@ License:
                     }
                 }
 
-                $this->load_file( $name, $file_path, $is_script, $dependencies);
+                $this->shortcode_load_enqueue_file( $name, $file_path, $is_script, $dependencies);
+
+                //Dump data to page if argument was given
+                if($data) {
+                    $this->shortcode_load_dump_shortcode_data($data, $data_wrap);
+                }
             }
         }
     }
@@ -187,12 +192,12 @@ License:
     /**
      * Registers and enqueues stylesheets for the administration panel
      */
-    private function shortcode_load_load_styles() {
+    private function shortcode_load_enqueue_styles() {
         if ( is_admin() ) {
-            $this->load_file( self::slug . '-bootstrap-css', self::slug . '-admin-style/css/bootstrap.min.css' );
-            $this->load_file( self::slug . '-admin-style', self::slug . '-admin-style/css/admin.css' );
+            $this->shortcode_load_enqueue_file( self::slug . '-bootstrap-css', 'css/bootstrap.min.css' );
+            $this->shortcode_load_enqueue_file( self::slug . '-admin-style', 'css/admin.css' );
         } // end if
-    } // end shortcode_load_load_styles
+    } // end shortcode_load_enqueue_styles
     
     /**
      * Helper function for registering and enqueueing scripts and styles.
@@ -201,35 +206,31 @@ License:
      * @file_path       The path to the actual file, can be an URL
      * @is_script       Optional argument for if the incoming file_path is a JavaScript source file.
      * @dependencies    Optional argument to specifiy file dependencies such as jQuery, underscore etc.
-     * @in_footer       Optional argument for JavaScript files to change to enqueue file in footer instead of header
      */
-    public function load_file( $name, $file_path, $is_script = false, $dependencies = false, $in_footer = false ) {
+    public function shortcode_load_enqueue_file( $name, $file_path, $is_script = false, $dependencies = false) {
 
         $url = plugins_url($file_path, __FILE__);
-        $file = plugin_dir_path(__FILE__) . $file_path;
+        $local_file_path = plugin_dir_path(__FILE__) . $file_path;
 
-        if( file_exists( $file ) ) {
-            if( $is_script ) {
-                wp_register_script( $name, $url, $dependencies, false, $in_footer );
-                wp_enqueue_script( $name, $url, $dependencies, false, $in_footer );
-            } else {
-                wp_register_style( $name, $url );
-                wp_enqueue_style( $name );
-            } // end if
+        if( file_exists( $local_file_path ) ) {
+            shortcode_load_register_and_enqueue($name, $local_file_path, $dependencies, $is_script);
         } elseif( file_exists( $file_path ) ) { //variable is not a local file path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
-
+            shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
         } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
             //$file_path is an URL
-            if( $is_script ) {
-                wp_register_script( $name, $file_path, $dependencies, false, $in_footer );
-                wp_enqueue_script( $name, $file_path, $dependencies, false, $in_footer ); 
-            } else {
-                wp_register_style( $name, $file_path );
-                wp_enqueue_style( $name );
-            }
-        }
-    } // end load_file
+            shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
+        } // end if
+    } // end shortcode_load_enqueue_file
 
+    function shortcode_load_register_and_enqueue($name, $path, $dependencies, $is_script = false) {
+        if( $is_script ) {
+            wp_register_script( $name, $path, $dependencies );
+            wp_enqueue_script( $name, $path, $dependencies );
+        } else {
+            wp_register_style( $name, $path );
+            wp_enqueue_style( $name );
+        } // end if
+    }
 
     function shortcode_load_get_file_path($path, $revision, $type, $minify) {
         $suffix = ( $minify ) ? 'min.' . $type : $type;
