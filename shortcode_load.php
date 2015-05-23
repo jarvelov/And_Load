@@ -213,12 +213,12 @@ License:
         $local_file_path = plugin_dir_path(__FILE__) . $file_path;
 
         if( file_exists( $local_file_path ) ) {
-            shortcode_load_register_and_enqueue($name, $local_file_path, $dependencies, $is_script);
+            $this->shortcode_load_register_and_enqueue($name, $local_file_path, $dependencies, $is_script);
         } elseif( file_exists( $file_path ) ) { //variable is not a local file path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
-            shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
+            $this->shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
         } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
             //$file_path is an URL
-            shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
+            $this->shortcode_load_register_and_enqueue($name, $file_path, $dependencies, $is_script);
         } // end if
     } // end shortcode_load_enqueue_file
 
