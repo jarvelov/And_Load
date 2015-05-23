@@ -223,17 +223,16 @@ License:
     } // end shortcode_load_enqueue_file
 
     function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false) {
-        var_dump($path);
         try {
             if( $is_script ) {
                 wp_register_script( $name, $path, $dependencies );
-                wp_enqueue_script( $name, $path, $dependencies );
+                wp_enqueue_script( $name );
             } else {
                 wp_register_style( $name, $path );
                 wp_enqueue_style( $name );
             } // end if
         } catch(Exception $e) {
-            var_dump($e);
+            //var_dump($e);
         }
     }
 
