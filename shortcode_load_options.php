@@ -470,7 +470,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $file_path_base = dirname($minpath) . '/';
                     $file = $file_path_base . $file_name . $i . "." . $type;
 
-                    var_dump($revision);
+                    var_dump($file);
 
                     if( file_exists( $file ) ) {
                         # code...
