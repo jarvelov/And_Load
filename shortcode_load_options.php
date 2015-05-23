@@ -1522,7 +1522,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         <?php
     }
 
-    function shortcode_load_enqueue_file($name, $file_path, $is_script = false, $dependencies = false) {
+    function shortcode_load_enqueue_file_options($name, $file_path, $is_script = false) {
         if( class_exists('ShortcodeLoad') ) {
             $dependencies = ( $is_script ) ? 'jquery' : false;
             ShortcodeLoad::shortcode_load_enqueue_file($name, $file_path, $is_script, $dependencies );
@@ -1554,13 +1554,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 if($active_tab == 'tab_overview') {
                     //Libraries
-                    $this->shortcode_load_enqueue_file( 'datatables-style-bootstrap', 'css/dataTables.bootstrap.css', false );
-                    $this->shortcode_load_enqueue_file( 'datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true );
-                    $this->shortcode_load_enqueue_file( 'datatables-script-bootstrap', 'js/dataTables.bootstrap.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'css/dataTables.bootstrap.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'js/dataTables.bootstrap.js', true );
 
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file( 'tab_overview_js', 'js/tab_overview.js', true );
-                    $this->shortcode_load_enqueue_file( 'tab_overview_css', 'css/tab_overview.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'tab_overview_js', 'js/tab_overview.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'tab_overview_css', 'css/tab_overview.css', false );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_overview' );
@@ -1568,8 +1568,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 } elseif($active_tab == 'tab_default') {
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file( 'tab_default_css', 'css/tab_default.css', false );
-                    $this->shortcode_load_enqueue_file( 'tab_default_js', 'js/tab_default.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'tab_default_css', 'css/tab_default.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'tab_default_js', 'js/tab_default.js', true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_default_options' );
@@ -1578,11 +1578,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {
                     //Libraries
-                    $this->shortcode_load_enqueue_file( 'ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
 
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file( 'tab_edit_js', 'js/tab_edit.js', true );
-                    $this->shortcode_load_enqueue_file( 'tab_edit_css', 'css/tab_edit.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'tab_edit_css', 'css/tab_edit.css', false );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_edit_file_options' );
@@ -1590,8 +1590,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 } elseif($active_tab == 'tab_help') {
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file( 'tab_help_css', 'css/tab_help.css', false );
-                    $this->shortcode_load_enqueue_file( 'tab_help_js', 'js/tab_help.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'tab_help_css', 'css/tab_help.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'tab_help_js', 'js/tab_help.js', true );
 
                     //Tab sections and fields 
                     settings_fields( 'shortcode_load_help_section' );
