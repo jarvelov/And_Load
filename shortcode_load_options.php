@@ -466,9 +466,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             if( $minify ) {
                 for ($i=0; $i <= $revision; $i++) {
-                    $file_name = basename($minpath, $type);
+                    $file_name = basename($srcpath, $type);
                     $file_path_base = dirname($minpath) . '/';
-                    $file = $file_path_base . $file_name . $i . "." . $type;
+                    $file = ($i == 0)  ? ( $file_path_base . $file_name . ".min." . $type ) :  ( $file_path_base . $file_name . $i . ".min." . $type );
 
                     var_dump($file);
 
@@ -477,7 +477,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     }
                 }
             }
-
+/*
             for ($i=0; $i <= $revision; $i++) {
                 $file_name = basename($srcpath, $type);
                 $file_path_base = dirname($srcpath) . '/';
@@ -490,7 +490,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
         }
-
+*/
         break;
     }
 
