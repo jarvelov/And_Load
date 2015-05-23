@@ -214,7 +214,7 @@ License:
 
         if( file_exists( $local_file_path ) ) {
             $this->shortcode_load_register_and_enqueue($name, $local_file_path, $is_script, $dependencies);
-        } elseif( file_exists( $file_path ) ) { //variable is not a local file path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
+        } elseif( file_exists( $file_path ) ) { //variable is not a path within the plugin directory but may be somewhere else on the server, such as the wp-uploads directory
             $this->shortcode_load_register_and_enqueue($name, $file_path, $is_script, $dependencies);
         } elseif(! (filter_var($file_path, FILTER_VALIDATE_URL) === false) ) {
             //$file_path is an URL
