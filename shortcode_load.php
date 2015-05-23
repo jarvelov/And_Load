@@ -224,13 +224,17 @@ License:
 
     function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false) {
         var_dump($path);
-        if( $is_script ) {
-            wp_register_script( $name, $path, $dependencies );
-            wp_enqueue_script( $name, $path, $dependencies );
-        } else {
-            wp_register_style( $name, $path );
-            wp_enqueue_style( $name );
-        } // end if
+        try {
+            if( $is_script ) {
+                wp_register_script( $name, $path, $dependencies );
+                wp_enqueue_script( $name, $path, $dependencies );
+            } else {
+                wp_register_style( $name, $path );
+                wp_enqueue_style( $name );
+            } // end if
+        } catch(Exception $e) {
+            var_dump($e);
+        }
     }
 
     function shortcode_load_get_file_path($path, $revision, $type, $minify) {
