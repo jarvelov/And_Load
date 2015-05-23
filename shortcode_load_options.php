@@ -1522,10 +1522,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         <?php
     }
 
-    function shortcode_load_enqueue_file($name, $path, $is_script = false) {
+    function shortcode_load_enqueue_file($name, $file_path, $is_script = false, $dependencies = false) {
         if( class_exists('ShortcodeLoad') ) {
             $dependencies = ( $is_script ) ? 'jquery' : false;
-            ShortcodeLoad::load_file($name, $path, $is_script, $dependencies );
+            ShortcodeLoad::load_file($name, $file_path, $is_script, $dependencies );
         } // end if
     }
 
