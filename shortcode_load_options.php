@@ -1262,11 +1262,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_content = ( isset ( $args[ 'edit_file_temporary_textarea' ] ) ) ? $args[ 'edit_file_temporary_textarea' ] : NULL;
         $file_type = ( isset ( $args[ 'new_file_type' ] ) ) ? $args[ 'new_file_type' ] : NULL;
 
-        $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
+        $id = ( isset ( $args['edit_file_current_id'] ) ) ? $args['edit_file_current_id'] : NULL;
         $request = ( isset( $_POST['submit']) ) ? 'save' : ( ( isset( $_POST['delete'] ) ) ? 'delete' : NULL );
-
-        var_dump($request, $args);
-        break;
        
         $file_datas = array();
 
