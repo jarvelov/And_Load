@@ -404,36 +404,93 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
         } catch (Exception $e) {
             //var_dump($e);
-            $error_id = 2; //2 = database lookup error, does the table exist?
+            $error_id = 2; //2 = database lookup error
         }
 
-        extract($result); //extract array to named variables, see $sql SELECT query above for variable names
+        if( isset( $result ) ) {
+            extract($result); //extract array to named variables, see $sql SELECT query above for variable names
 
-        $new_revision = ( intval($revision) + 1);
+            $new_revision = ( intval($revision) + 1);
 
-        $srcname = basename($srcpath, $type);
-        $unique_suffix = str_replace($slug, "", $srcname);
-        $new_slug = $slug . $unique_suffix . $new_revision . "." . $type;
+            $srcname = basename($srcpath, $type);
+            $unique_suffix = str_replace($slug, "", $srcname);
+            $new_slug = $slug . $unique_suffix . $new_revision . "." . $type;
 
-        $file_src_base = dirname($srcpath) . '/';
-        $file_src = $file_src_base . $new_slug;
+            $file_src_base = dirname($srcpath) . '/';
+            $file_src = $file_src_base . $new_slug;
 
-        $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
-        
-        if($file_args['success'] == true) {
             try {
-                $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
-                $type = ($type == 'js') ? 'Script' : 'Style';
-                $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
+                $file_args = $this->shortcode_load_save_file_to_path($file_src, $content, $type, $minify);
             } catch(Exception $e) {
                 $error_id = $e->getCode();
-                $return_args = array('success' => false, 'error_id' => $error_id);
+            }
+        }
+
+        if( isset($file_args) ) {
+            if($file_args['success'] == true) {
+                try {
+                    $result = $this->shortcode_load_update_database_record( array('id' => (int)$id,'revision' => $new_revision));
+                    $type = ($type == 'js') ? 'Script' : 'Style';
+                    $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
+                } catch(Exception $e) {
+                    $error_id = $e->getCode();
+                    $return_args = array('success' => false, 'error_id' => $error_id);
+                }
             }
         } else {
             $return_args = array('success' => false, 'error_id' => $error_id);
         }
 
         return $return_args;
+    }
+
+    /*
+    * Delete a file and all revisions of it
+    * @id - ID of file to delete
+    */
+
+    function shortcode_load_delete_file($id) {
+        try {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'shortcode_load'; 
+
+            $sql = "SELECT type,revision,srcpath,minify,minpath FROM ".$table_name." WHERE id = ".(int)$id." LIMIT 1";
+            $result = $wpdb->get_results($sql, ARRAY_A)[0];
+        } catch (Exception $e) {
+            //var_dump($e);
+            $error_id = 2; //2 = database lookup error
+        }
+
+        if( isset( $result ) ) {
+            extract( $result ); //extract array to named variables, see $sql SELECT query above for variable names
+
+            if( $minify ) {
+                for ($i=0; $i <= $revision; $i++) {
+                    $file_name = basename($minpath, $type);
+                    $file_path_base = dirname($minpath) . '/';
+                    $file = $file_path_base . $file_name . $i . "." . $type;
+
+                    var_dump($file);
+
+                    if( file_exists( $file ) ) {
+                        # code...
+                    }
+                }
+            }
+
+            for ($i=0; $i <= $revision; $i++) {
+                $file_name = basename($srcpath, $type);
+                $file_path_base = dirname($srcpath) . '/';
+                $file = $file_path_base . $file_name . $i . "." . $type;
+
+                var_dump($file);
+
+                if( file_exists( $file ) ) {
+                    # code...
+                }
+            }
+        }
+        break;
     }
 
     /*
@@ -1196,9 +1253,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_edit_file_callback_sanitize($args) {
 
-        var_dump($_POST);
-        break;
-
         //Get the default options
         $options_default = get_option( 'shortcode_load_default_options' );
         $minify = $options_default['default_minify'];
@@ -1209,76 +1263,89 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $file_type = ( $args[ 'new_file_type' ] ) ? $args[ 'new_file_type' ] : NULL;
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
+        $request = ( isset( $args['submit']) ) ? 'save' : ( ( isset( $args['delete'] ) ) ? 'delete' : NULL );
        
         $file_datas = array();
 
-        if( ! ( empty( $id ) ) ) { //file already exists, add revision
-                try {
-                    $file_datas[] = $this->shortcode_load_add_file_revision(
-                        array(
-                            'content' => $file_content,
-                            'id' => $id,
-                            'minify' => $minify
-                        )
-                    );
-                } catch (Exception $e) {
-                    //var_dump($e);
-                    $operation = 'update';
-                    $error_id = $e->getCode();
-                }                    
-        } else {
-            //Check if a file has been selected for upload
-            $tmp_file_path = $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'];
-            $file_tmp = ( $tmp_file_path ) ? $tmp_file_path : false;
-
-            if($file_tmp) { //file is being uploaded
-                try {
-                    $file_content = file_get_contents( $file_tmp  ); //get the raw content from the uploaded file
-
-                    $file_datas[] = $this->shortcode_load_save_to_database(
-                        array(
-                            'content' => $file_content,
-                            'name' => $file_name,
-                            'type' => $file_type,
-                            'minify' => $minify
-                        )
-                    );
-
-                    //Go over every file that was uploaded and set operation to 'uploaded'
-                    for ($i=0; $i < sizeof($file_datas); $i++) { 
-                        $file_datas[$i]['operation'] = 'uploaded';
+        if( ! ( is_null($request) ) ) {
+            if( ! ( empty( $id ) ) ) {
+                if($request == 'delete') {
+                    try {
+                        $file_datas[] = $this->shortcode_load_delete_file($id);
+                    } catch (Exception $e) {
+                        //var_dump($e);
+                        $operation = 'delete';
+                        $error_id = $e->getCode();
                     }
-                } catch (Exception $e) {
-                    //var_dump($e);
-                    $operation = 'uploaded';
-                    $error_id = $e->getCode();
+                } else {
+                    try {
+                        $file_datas[] = $this->shortcode_load_add_file_revision(
+                            array(
+                                'content' => $file_content,
+                                'id' => $id,
+                                'minify' => $minify
+                            )
+                        );
+                    } catch (Exception $e) {
+                        //var_dump($e);
+                        $operation = 'update';
+                        $error_id = $e->getCode();
+                    }
                 }
-            } elseif( ! (empty( $file_name ) ) ) { //new file, save it
-                try {
-                    $file_datas[] = $this->shortcode_load_save_to_database(
-                        array(
-                            'content' => $file_content,
-                            'name' => $file_name,
-                            'type' => $file_type,
-                            'minify' => $minify
-                        )
-                    );
-                } catch(Exception $e) {
-                    //var_dump($e);
-                    $operation = 'saved';
-                    $error_id = $e->getCode();
+            } else {
+                //Check if a file has been selected for upload
+                $tmp_file_path = $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'];
+                $file_tmp = ( $tmp_file_path ) ? $tmp_file_path : false;
+
+                if($file_tmp) { //file is being uploaded
+                    try {
+                        $file_content = file_get_contents( $file_tmp  ); //get the raw content from the uploaded file
+
+                        $file_datas[] = $this->shortcode_load_save_to_database(
+                            array(
+                                'content' => $file_content,
+                                'name' => $file_name,
+                                'type' => $file_type,
+                                'minify' => $minify
+                            )
+                        );
+
+                        //Go over every file that was uploaded and set operation to 'uploaded'
+                        for ($i=0; $i < sizeof($file_datas); $i++) { 
+                            $file_datas[$i]['operation'] = 'uploaded';
+                        }
+                    } catch (Exception $e) {
+                        //var_dump($e);
+                        $operation = 'uploaded';
+                        $error_id = $e->getCode();
+                    }
+                } elseif( ! (empty( $file_name ) ) ) { //new file, save it
+                    try {
+                        $file_datas[] = $this->shortcode_load_save_to_database(
+                            array(
+                                'content' => $file_content,
+                                'name' => $file_name,
+                                'type' => $file_type,
+                                'minify' => $minify
+                            )
+                        );
+                    } catch(Exception $e) {
+                        //var_dump($e);
+                        $operation = 'saved';
+                        $error_id = $e->getCode();
+                    }
                 }
             }
-        }
 
-        if( isset( $file_datas ) ) {
-            $this->shortcode_load_add_settings_message($file_datas);
-        } else {
-            $this->shortcode_load_add_settings_message(array(
-                'success' => false,
-                'error_id' => $error_id,
-                'operation' => $operation
-            ));
+            if( isset( $file_datas ) ) {
+                $this->shortcode_load_add_settings_message($file_datas);
+            } else {
+                $this->shortcode_load_add_settings_message(array(
+                    'success' => false,
+                    'error_id' => $error_id,
+                    'operation' => $operation
+                ));
+            }
         }
     }
 
