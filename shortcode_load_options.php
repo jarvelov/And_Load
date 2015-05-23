@@ -1264,6 +1264,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $id = ( $args['edit_file_current_id'] ) ? $args['edit_file_current_id'] : NULL;
         $request = ( isset( $args['submit']) ) ? 'save' : ( ( isset( $args['delete'] ) ) ? 'delete' : NULL );
+
+        var_dump($request);
+        break;
        
         $file_datas = array();
 
