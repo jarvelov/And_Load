@@ -295,16 +295,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @id - (int)
     * @revision - (int)
     * @minify - (bool)
-    * @minpath - (string) : Default (bool) false
     */
-    function shortcode_load_update_database_record($id, $revision, $minify, $minpath = false) {
-        if($minify AND $minpath) {
-            var_dump($minpath);
-            break;
-            $org_min_path = strpos($minpath, '.min.');
-
-        }
-
+    function shortcode_load_update_database_record($id, $revision, $minify) {
         try {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load';
@@ -425,9 +417,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * Save file content to path,
     * optionally save a minified version
     *
-    * @path - local path to write @content to
+    * @path - (string) local path to write @content to
     * @content - (string)
-    * @type - 'js' | 'css'
+    * @type - (string) 'js' | 'css'
     * @minify - (bool)
     */
     function shortcode_load_save_file_to_path($path, $content, $type, $minify) {
@@ -441,6 +433,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             throw new Exception("Error saving file to path", 12);
         }
 
+        $slug = basename($path, '.' . $type);
+        $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
+        $file_args_array['minpath'] = $path_min;
+
         if($minify == true) {
             try {
                 $minified_content = $this->shortcode_load_minify_file( $content, $type );
@@ -449,10 +445,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $error_id = isset( $error_id ) ? $error_id : $e->getCode();
                 throw new Exception("Error minifying file.", $error_id);
             }
-
-            $slug = basename($path, '.' . $type);
-            $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
-            $file_args_array['minpath'] = $path_min;
 
             try {
                 file_put_contents($path_min, $minified_content);
@@ -463,8 +455,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             $file_args_array['success'] = true;
-        } else {
-            $file_args_array['minpath'] = "";
         }
 
         return $file_args_array;
@@ -513,7 +503,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( isset( $file_args ) ) {
             if($file_args['success'] == true) {
                 try {
-                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify, $file_args['minpath']);
+                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify);
                     $type = ($type == 'js') ? 'Script' : 'Style';
                     $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
                 } catch(Exception $e) {
