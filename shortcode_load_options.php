@@ -122,6 +122,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
+
+        //Register default options
+        $this->shortcode_load_register_default_options();
     } // end shortcode_load_settings_init
 
     /***************************
@@ -709,6 +712,39 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</div>'; // end overview_container
 
         echo $html;        
+    }
+
+    function shortcode_load_register_default_options() {
+        if( ! get_option('shortcode_load_default_options') ) {
+            $options_default = array();
+
+            //Get general default options
+            $general_options = $this->shortcode_load_get_options_default_general();
+
+            //Add general options to $options_default
+            foreach ($general_options as $key => $value) {
+               $options_default[$key] = $value;
+            }
+
+            //Get overview default options
+            $overview_options = $this->shortcode_load_get_options_default_overview();
+
+            //Add overview options to $options_default
+            foreach ($overview_options as $key => $value) {
+               $options_default[$key] = $value;
+            }
+
+            //Get editor default options
+            $editor_options = $this->shortcode_load_get_options_default_editor();
+
+            //Add editor options to $options_default
+            foreach ($editor_options as $key => $value) {
+               $options_default[$key] = $value;
+            }
+
+            //Register default options
+            update_option( 'shortcode_load_default_options', $options_default );
+        }
     }
 
     /* Default options tab callbacks */
