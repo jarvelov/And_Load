@@ -857,9 +857,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Ace editor default tab size
         $editor_default_tab_size = isset ( $options_default['editor_default_tab_size'] ) ? $options_default['editor_default_tab_size'] : $args['editor_default_tab_size'];
-        $show_editor_default_tab_size = ( $editor_default_tab_size_override ) ? 'inline-block' : 'none'; //show setting section if default tab override is set to true
+        $show_editor_default_tab_size = ( $editor_default_tab_size_override ) ? '' : 'hide-setting'; //show setting section if default tab override is set to true
 
-        $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting" style="display:' . $show_editor_default_tab_size . '">';
+        $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting ' . $show_editor_default_tab_size . '">';
         $html .= '<label class="control-label" title="Override tab size for all file types."><strong><small>Default tab size</small></strong></label>';
         $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control default_input" value="' . $editor_default_tab_size . '" />';
         $html .= '</div>'; // end editor_default_tab_size_setting
@@ -975,12 +975,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '</div>'; // end edit_file_input_container
 
-                //Editor settings
+                //Allow user to override editor settings temporarily for this editing session
                 $editor_default_options = $this->shortcode_load_get_options_default_editor();
-                $editor_font_sizes = $editor_default_options['editor_font_sizes'];
+
                 $editor_default_font_size = $options_default['editor_default_font_size'];
+                $editor_default_theme = $options_default['editor_default_theme'];
+
+                $editor_font_sizes = $editor_default_options['editor_font_sizes'];
+                $editor_themes = $editor_default_options['editor_themes'];
 
                 $html .= '<div id="edit_file_editor_settings_container">';
+
                 $html .= '<label class="control-label">Font size:</label>';
                 $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select">';
 
@@ -990,6 +995,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
 
                 $html .= '</select>'; //end edit_file_font_size_select
+
+                $html .= '<div id="edit_file_theme_select">';
+                $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
+                $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control default_select">';
+
+                foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
+                    $selected = selected( $editor_default_theme, $editor_theme_slug, false );
+                    $html .= '<option value=' . $editor_theme_slug . $selected . '>' . $editor_theme_name . '</option>';
+                }
+
+                $html .= "</select>"; //end edit_file_theme_select
+
                 $html .= '</div>'; //end edit_file_editor_settings_container
 
                 echo $html;
