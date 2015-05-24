@@ -429,6 +429,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_save_file_to_path($path, $content, $type, $minify) {
         $file_args_array = array();
 
+        var_dump($content);
+        break;
+
         try {
             file_put_contents($path, $content);
             $file_args_array['srcpath'] = $path;
