@@ -432,6 +432,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             file_put_contents($path, $content);
             $file_args_array['srcpath'] = $path;
+            $file_args_array['success'] = true;
         } catch (Exception $e) {
             throw new Exception("Error saving file to path $path", 12);
         }
@@ -454,7 +455,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $file_args_array['success'] = true;
         } else {
             $file_args_array['minpath'] = "";
-            $file_args_array['success'] = true;
         }
 
         return $file_args_array;
