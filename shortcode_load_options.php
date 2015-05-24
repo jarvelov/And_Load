@@ -976,7 +976,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '</div>'; // end edit_file_input_container
 
                 //Editor settings
-                $editor_default_options = shortcode_load_get_options_default_editor();
+                $editor_default_options = $this->shortcode_load_get_options_default_editor();
                 $editor_font_sizes = $editor_default_options['editor_font_sizes'];
                 $editor_default_font_size = $options_default['editor_default_font_size'];
 
