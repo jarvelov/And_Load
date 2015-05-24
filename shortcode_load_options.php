@@ -973,7 +973,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
                 $html .= '</select>';
 
-                $html .= '<div id="edit_file_more_settings_button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-collapse-down"></span><span id="edit_file_more_text">More</span></div>';
+                $html .= '<div id="edit_file_more_settings_button" class="btn btn-sm btn-default"><span id="edit_file_more_icon" class="glyphicon glyphicon-collapse-down"></span><span id="edit_file_more_text">More</span></div>';
 
                 $html .= '</div>'; // end edit_file_input_container
 
