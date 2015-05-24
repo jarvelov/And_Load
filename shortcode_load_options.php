@@ -450,14 +450,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
             $file_args_array['minpath'] = $path_min;
 
-            var_dump($path_min, $minified_content);
-            break;
-
             try {
                 file_put_contents($path_min, $minified_content);
             } catch(Exception $e) {
                 //var_dump($e);
-                $error_id = isset( $error_id ) ? $error_id : 13;
+                $error_id = isset( $error_id ) ? $error_id : 12;
                 throw new Exception("Error saving minified file content to path.", $error_id);
             }
 
