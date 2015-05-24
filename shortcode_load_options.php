@@ -302,6 +302,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'shortcode_load';
             $result = $wpdb->update( 
                 $table_name, 
                 array( 
