@@ -1056,7 +1056,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $this->shortcode_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
             } else { //A file with the corresponding ID could not be found in the database
-                $html = '<div id="edit_file_invalid_file_id_container">';
+                $html = '<div id="edit_file_invalid_file_id_container" class="bg-danger">';
 
                 $html .= '<h4>Error!</h4>';
                 $html .= '<p class="invalid_file_id">No file with ID <strong>' . $id . '</strong> was found in the database.</p>';

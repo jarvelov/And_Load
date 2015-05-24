@@ -81,6 +81,12 @@
   margin: 0 0 5px 10px;
 }
 
+#edit_file_invalid_file_id_container {
+  border: 3px double #FEFEFE;
+  border-radius: 10px;
+  text-align: center;
+}
+
 /* Ace styles */
 
 .editor_container {
