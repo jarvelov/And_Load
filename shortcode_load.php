@@ -208,6 +208,8 @@ License:
     public function shortcode_load_enqueue_file( $name, $file_path, $is_script = false, $dependencies = false) {
         $local_file_path = plugin_dir_path(__FILE__) . $file_path;
 
+        var_dump($file_path);
+
         if( file_exists( $local_file_path ) ) {
             $file_url = plugins_url($file_path, __FILE__);
             $this->shortcode_load_register_and_enqueue($name, $file_url, $is_script, $dependencies);
@@ -220,7 +222,6 @@ License:
     } // end shortcode_load_enqueue_file
 
     function shortcode_load_register_and_enqueue($name, $path, $is_script = false, $dependencies = false)  {
-        var_dump($path);
         try {
             if( $is_script ) {
                 wp_register_script( $name, $path, $dependencies );
