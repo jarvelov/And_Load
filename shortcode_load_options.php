@@ -295,11 +295,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @id - (int)
     * @revision - (int)
     * @minify - (bool)
+    * @minpath - (string) : Default (bool) false
     */
     function shortcode_load_update_database_record($id, $revision, $minify, $minpath = false) {
-        if($minpath) {
+        if($minify AND $minpath) {
             var_dump($minpath);
             break;
+            $org_min_path = strpos($minpath, '.min.');
+
         }
 
         try {
