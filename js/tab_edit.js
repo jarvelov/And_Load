@@ -249,12 +249,12 @@ jQuery('#edit_file_more_settings_button').on('click', function() {
 //Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
 function toggleSettingsDisplay() {
     if ( jQuery('#edit_file_more_icon').hasClass('glyphicon-collapse-down') ) {
-        jQuery('#edit_file_more_text').val('Less');
+        jQuery('#edit_file_more_text').text('Less');
         jQuery('#edit_file_more_icon').removeClass('glyphicon-collapse-down');
         jQuery('#edit_file_more_icon').addClass('glyphicon-collapse-up');
         jQuery('#edit_file_editor_settings_container').show();
     } else {
-        jQuery('#edit_file_more_text').val('More');
+        jQuery('#edit_file_more_text').text('More');
         jQuery('#edit_file_more_icon').removeClass('glyphicon-collapse-up');
         jQuery('#edit_file_more_icon').addClass('glyphicon-collapse-down');
         jQuery('#edit_file_editor_settings_container').hide();
