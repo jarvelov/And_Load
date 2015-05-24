@@ -115,7 +115,7 @@ and (max-device-width : 480px) {
   }
 
   #edit_file_input_container > p {
-    margin-left: 15px;
+    margin: 15px;
   }
 
 } 
