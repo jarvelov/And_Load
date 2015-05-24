@@ -942,14 +942,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $table_name = $wpdb->prefix . 'shortcode_load'; 
 
                 $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
-                $result = $wpdb->get_results($sql, ARRAY_A)[0];
+                $result = $wpdb->get_results($sql, ARRAY_A);
             } catch(Exception $e) {
                 $error_id = isset( $error_id ) ? $error_id : 15; //could not find file with id
                 $result = NULL;
             }
 
             if($result) {
-                extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
+                extract( $result[0] ); //turn array into named variables, see $sql SELECT query above for variable names
 
                 //Check for revision override
                 if($revision_override !== false) {
