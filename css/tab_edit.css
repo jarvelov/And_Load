@@ -103,7 +103,7 @@ p.submit {
 /* Smartphones (portrait and landscape) */
 @media only screen
 and (min-device-width : 320px) 
-and (max-device-width : 480px) { 
+and (max-device-width : 1024px) { 
 /* Styles */
   .control-label {
     display: block;
@@ -120,10 +120,18 @@ and (max-device-width : 480px) {
 
 } 
  
-/* Smartphones (landscape) */
+/* iPads (portrait and landscape) 
 @media only screen
-and (min-width : 768px) { 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) { 
+/* Styles 
+  .control-label {
+    display: block;
+  }
+
   #edit_file_input_container > p {
     display: inline;
   }
 }
+
+*/
