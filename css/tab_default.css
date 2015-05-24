@@ -19,3 +19,24 @@
   margin: 5px;
   border-bottom: 1px solid #000;
 }
+
+
+/* Mobile device styles */
+
+/* Smartphones (portrait and landscape) */
+@media only screen
+and (max-device-width : 768px) { 
+	.default_options_sub_setting {
+		display: block;
+	}
+
+	.default_select, .default_input {
+		max-width: 90%;
+	}
+} 
+ 
+/* Tablets (portrait and landscape) and desktop */
+@media only screen
+and (min-device-width : 768px) {
+
+}
