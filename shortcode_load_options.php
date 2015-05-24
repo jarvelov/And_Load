@@ -946,11 +946,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '</div>'; // end edit_file_input_container
 
-
                 //Editor settings
+                $html .= '<div id="edit_file_editor_settings_container">';
                 $html .= '<label class="control-label">Font size:</label>';
                 $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
-                */
+                $html .= '</div>'; //end edit_file_editor_settings_container
 
                 echo $html;
 
@@ -961,7 +961,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //init editor with content
                     $this->shortcode_load_editor_init( $content, $type );
                 } else {
-                    $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
+                    $this->shortcode_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
             } else { //A file with the corresponding ID could not be found in the database
                 $html = '<div id="edit_file_invalid_file_id_container">';
@@ -969,7 +969,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '<h4>Error!</h4>';
                 $html .= '<p class="invalid_file_id">No file with ID <strong>' . $id . '</strong> was found in the database.</p>';
 
-                $html .= '</div>';
+                $html .= '</div>'; // end edit_file_invalid_file_id_container
 
                 echo $html;
             }// end if
