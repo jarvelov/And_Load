@@ -451,6 +451,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $file_args_array['minpath'] = $path_min;
 
             var_dump($path_min, $minified_content);
+            break;
 
             try {
                 file_put_contents($path_min, $minified_content);
