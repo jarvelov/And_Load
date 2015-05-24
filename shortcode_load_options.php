@@ -500,6 +500,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if( isset( $result ) ) {
             extract($result); //extract array to named variables, see $sql SELECT query above for variable names
+            $options_default = get_option( 'shortcode_load_default_options' );
+            $minify = ( $options_default['minify'] ) ? $options_default['minify'] : $minify; //TODO reverse this logic when adding an option to disable minify per file
 
             $new_revision = ( intval($revision) + 1);
 
@@ -556,6 +558,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if( isset( $result ) ) {
             extract( $result ); //extract array to named variables, see $sql SELECT query above for variable names
+            $minify = ( $options_default['minify'] ) ? $options_default['minify'] : $minify; //TODO reverse this logic when adding an option to disable minify per file
 
             if( $minify ) {
                 for ($i=0; $i <= $revision; $i++) {
