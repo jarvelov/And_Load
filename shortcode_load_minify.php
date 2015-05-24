@@ -12,11 +12,11 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
                     require( dirname(__FILE__) . '/lib/path-converter/src/Converter.php' );
                 } catch(Exception $e) {
                     //var_dump($e);
-                    throw new Exception("Error in loading minify library files", 6);
+                    throw new Exception("Error in loading minify library files", 5);
                 }
             }
         } else {
-            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 5);
+            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 6);
         }
     }
 
