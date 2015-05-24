@@ -104,21 +104,15 @@ License:
             //Enqueue styles for administration panel
             $this->shortcode_load_enqueue_styles();
         }
-        /*
-        add_action( 'shortcode_load_enqueue_styles', array( &$this, 'action_callback_shortcode_load_enqueue_styles' ) );
-
-        do_action( 'shortcode_load_enqueue_styles' );
-        */
     }
 
-    function action_callback_shortcode_load_enqueue_styles() {
-        $this->shortcode_load_enqueue_styles();
-    }
-
+    /** shortcode_load_render_shortcode
+    *
+    */
     function shortcode_load_render_shortcode($args) {
         // Extract the attributes submitted with the shortcode
         extract(shortcode_atts(array(
-            'id' => '',
+            'id' => false,
             'revision_override' => false,
             'minify_override' => false,
             'jquery_override' => false,
@@ -126,15 +120,15 @@ License:
             'data_wrap' => 'raw'
             ), $args));
 
-        if($id) {
+        if( $id ) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
             $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-            if(sizeof($result) > 0 )  {
-                extract($result);
+            if( sizeof($result) > 0 )  {
+                extract( $result );
 
                 //Get default options
                 $options_default = get_option( 'shortcode_load_default_options' );
@@ -193,7 +187,7 @@ License:
         }
     }
     
-    /**
+    /** shortcode_load_enqueue_styles
      * Registers and enqueues stylesheets for the administration panel
      */
     private function shortcode_load_enqueue_styles() {
@@ -203,7 +197,7 @@ License:
         } // end if
     } // end shortcode_load_enqueue_styles
     
-    /**
+    /** shortcode_load_enqueue_file
      * Helper function for registering and enqueueing scripts and styles.
      *
      * @name            The ID to register with WordPress
