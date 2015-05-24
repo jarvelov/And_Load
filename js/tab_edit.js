@@ -214,6 +214,20 @@ jQuery('#new_file_type').on('change', function() {
     }
 })
 
+//Editor font size changed
+jQuery('#edit_file_font_size_select').on('change', function() {
+    if( ! ( isAceDisabled() ) ) { //don't trigger if ace editor is disabled
+        setAceFontSize(this.value);
+    }
+})
+
+//Editor theme changed
+jQuery('#edit_file_theme_select').on('change', function() {
+    if( ! ( isAceDisabled() ) ) { //don't trigger if ace editor is disabled
+        setAceTheme( this.value );
+    }
+})
+
 //File has been selected for upload
 jQuery('#new_file_upload').on('change', function() {
     fileName = jQuery(this).val();
@@ -225,6 +239,27 @@ jQuery('#new_file_upload_reset_button').on('click', function() {
     handleUploadCanceled();
     jQuery(this).hide(); //hide reset button
 });
+
+//User requested to see more settings, toggle #edit_file_editor_settings_container
+jQuery('#edit_file_more_settings_button').on('click', function() {
+    toggleSettingsDisplay();
+});
+
+
+//Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
+function toggleSettingsDisplay() {
+    if ( jQuery('#edit_file_more_settings_button > span').hasClass('glyphicon-collapse-down') ) {
+        jQuery('#edit_file_more_settings_button').val('Less');
+        jQuery('#edit_file_more_settings_button > span').removeClass('glyphicon-collapse-down');
+        jQuery('#edit_file_more_settings_button > span').addClass('glyphicon-collapse-up');
+        jQuery('#edit_file_editor_settings_container').show();
+    } else {
+        jQuery('#edit_file_more_settings_button').val('More');
+        jQuery('#edit_file_more_settings_button > span').removeClass('glyphicon-collapse-up');
+        jQuery('#edit_file_more_settings_button > span').addClass('glyphicon-collapse-down');
+        jQuery('#edit_file_editor_settings_container').hide();
+    }
+}
 
 /* document ready 'init' function */
 

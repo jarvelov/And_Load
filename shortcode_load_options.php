@@ -973,6 +973,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
                 $html .= '</select>';
 
+                $html .= '<div id="edit_file_more_settings_button" class="btn btn-block btn-default"><span class="glyphicon glyphicon-collapse-down"></span>More</div>';
+
                 $html .= '</div>'; // end edit_file_input_container
 
                 //Allow user to override editor settings temporarily for this editing session
