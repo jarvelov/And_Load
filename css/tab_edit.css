@@ -109,7 +109,7 @@ and (max-device-width : 480px) {
     display: block;
   }
 
-  .edit_file_input {
+  .edit_file_input, .edit_file_select {
     max-width: 90%;
     margin: 15px;
   }
