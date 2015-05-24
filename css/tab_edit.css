@@ -10,7 +10,13 @@
 #edit_file_input_container {
   margin: 15px 0 15px 0;
   border: 3px double #FEFEFE;
-  padding: 15px 0 15px 0;
+  padding: 5px 0 5px 0;
+}
+
+#edit_file_editor_settings_container {
+  margin: 15px 0 15px 0;
+  border: 3px double #FEFEFE;
+  padding: 5px 0 5px 0;
 }
 
 .edit_file_select {
@@ -108,7 +114,7 @@ and (max-device-width : 768px) {
   }
 
   .edit_file_input, .edit_file_select {
-    max-width: 90%;
+    max-width: none;
     margin: 15px;
   }
 
@@ -118,7 +124,7 @@ and (max-device-width : 768px) {
 
 } 
  
-/* Tablets (portrait and landscape) */
+/* Tablets (portrait and landscape) and desktop */
 @media only screen
 and (min-device-width : 768px) {
   #edit_file_input_container > p {
