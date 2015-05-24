@@ -122,15 +122,8 @@ and (max-device-width : 480px) {
  
 /* Smartphones (landscape) */
 @media only screen
-and (min-width : 321px) { 
-/* Styles */
- 
-} 
- 
-/* Smartphones (portrait) */
-@media only screen
-and (max-width : 320px) { 
-/* Styles */
- 
-} 
-
+and (min-width : 480px) { 
+  #edit_file_input_container > p {
+    display: inline;
+  }
+}
