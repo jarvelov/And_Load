@@ -76,6 +76,10 @@
   float: right;
 }
 
+#edit_file_more_settings_button {
+  margin-bottom: 5px;
+}
+
 /* Ace styles */
 
 .editor_container {
@@ -113,7 +117,7 @@ and (max-device-width : 768px) {
     display: block;
   }
 
-  .edit_file_input, .edit_file_select {
+  .edit_file_input, .edit_file_select, #edit_file_more_settings_button {
     max-width: 90%;
     margin: 15px;
   }
@@ -121,7 +125,6 @@ and (max-device-width : 768px) {
   #edit_file_input_container > p {
     margin: 15px;
   }
-
 } 
  
 /* Tablets (portrait and landscape) and desktop */
