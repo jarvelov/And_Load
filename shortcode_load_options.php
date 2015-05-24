@@ -46,10 +46,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_general_settings_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array(
-                'default_minify' => true, //set default to auto minify for all file types
-                'default_jquery' => true //set default to add jquery as dependency for script files                
-            )
+            $this->shortcode_load_get_options_default_general
         );
 
         add_settings_field(
@@ -58,22 +55,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_overview_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array(
-                'overview_default_table_order_column' => 0,
-                'overview_default_table_order_columns' => array(
-                    'ID' => 0,
-                    'Type' => 1,
-                    'Name' => 2,
-                    'Revisions' => 3,
-                    'Last Updated' => 4,
-                    'Created' => 5
-                ),
-                'overview_default_table_sort' => 'desc',
-                'overview_default_table_sort_types' => array(
-                    'Ascending' => 'asc',
-                    'Descending' => 'desc'
-                )
-            )
+            $this->shortcode_load_get_options_default_overview()
         );
 
         add_settings_field(
@@ -82,7 +64,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_editor_settings_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            $this->shortcode_load_get_default_editor_options()
+            $this->shortcode_load_get_options_default_editor()
         );
 
         register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize'));
@@ -142,10 +124,52 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
     } // end shortcode_load_settings_init
 
-    /** shortcode_load_get_default_editor_options
-    * Returns an array with the default options for the editor
-    **/
-    function shortcode_load_get_default_editor_options() {
+    /***************************
+    * Default option arguments *
+    ***************************/
+
+    /** shortcode_load_get_options_default_general
+    * Returns an array with the default general options
+    */
+
+    function shortcode_load_get_options_default_general() {
+        $options = array(
+            'default_minify' => true, //set default to auto minify for all file types
+            'default_jquery' => true //set default to add jquery as dependency for script files                
+        );
+
+        return $options;
+    } //end shortcode_load_get_options_default_general
+
+    /** shortcode_load_get_options_default_overview
+    * Returns an array with the default options for overview tab
+    */
+
+    function shortcode_load_get_options_default_overview() {
+        $options = array(
+            'overview_default_table_order_column' => 0,
+            'overview_default_table_order_columns' => array(
+                'id' => 0,
+                'Type' => 1,
+                'Name' => 2,
+                'Revisions' => 3,
+                'Last Updated' => 4,
+                'Created' => 5
+            ),
+            'overview_default_table_sort' => 'desc',
+            'overview_default_table_sort_types' => array(
+                'Ascending' => 'asc',
+                'Descending' => 'desc'
+            )
+        );
+
+        return $options;
+    } // end shortcode_load_get_options_default_overview
+
+    /** shortcode_load_get_options_default_editor
+    * Returns an array with the default options for the tab_edit editor
+    */
+    function shortcode_load_get_options_default_editor() {
         $options = array(
             'editor_themes' => array(
                 'Ambiance' => 'ambiance',
@@ -289,7 +313,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     'updated_timestamp' => current_time('mysql', 1),
                 ), 
                 array( 
-                    'ID' => $id
+                    'id' => $id
                 ), 
                 array(
                     '%d', //revision
@@ -316,7 +340,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $table_name = $wpdb->prefix . 'shortcode_load';
 
             $wpdb->delete( $table_name,
-                array( 'ID' => intval($id) ),
+                array( 'id' => intval($id) ),
                 array( '%d' )
             );
         } catch (Exception $e) {
@@ -881,14 +905,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_mode_type = $options_default['editor_default_mode_type'];
 
         if($id) { //check if file id is supplied and load the content
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load'; 
+            try {
+                global $wpdb;
+                $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
-            $result = $wpdb->get_results($sql, ARRAY_A);
+                $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
+                $result = $wpdb->get_results($sql, ARRAY_A)[0];
+            } catch(Exception $e) {
+                $error_id = isset( $error_id ) ? $error_id : 15; //could not find file with id
+                $result = NULL;
+            }
 
             if($result) {
-                extract($result[0]); //turn array into named variables, see $sql SELECT query above for variable names
+                extract($result); //turn array into named variables, see $sql SELECT query above for variable names
 
                 //Check for revision override
                 if($revision_override !== false) {
@@ -947,9 +976,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '</div>'; // end edit_file_input_container
 
                 //Editor settings
+                $editor_default_options = shortcode_load_get_options_default_editor();
+                $editor_font_sizes = $editor_default_options['editor_font_sizes'];
+                $editor_default_font_size = $options_default['editor_default_font_size'];
+
                 $html .= '<div id="edit_file_editor_settings_container">';
                 $html .= '<label class="control-label">Font size:</label>';
-                $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
+                $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select">';
+
+                foreach ($editor_font_sizes as $editor_font_size) {
+                    $selected = selected( $editor_default_font_size, $editor_font_size, false );
+                    $html .= '<option value=' . $editor_font_size . $selected . '>' . $editor_font_size . '</option>';
+                }
+
+                $html .= '</select>'; //end edit_file_font_size_select
                 $html .= '</div>'; //end edit_file_editor_settings_container
 
                 echo $html;
@@ -1288,6 +1328,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
         $html .= '</ul>';
         $html .= '</li>'; // end error_id_14
+
+        $html .= '<li id="error_id_15"><h4>Error #15</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error loading file with specified ID.</li>';
+        $html .= '<li>Solution: The file might be deleted or no file with that ID has ever been created.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // end error_id_15
 
         $html .= '<li id="error_id_16"><h4>Error #16</h4>';
         $html .= '<ul>';
