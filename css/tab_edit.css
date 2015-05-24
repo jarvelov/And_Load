@@ -121,8 +121,7 @@ and (max-device-width : 768px) {
  
 /* Tablets (portrait and landscape) */
 @media only screen
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
+and (min-device-width : 768px) {
   #edit_file_input_container > p {
     display: inline;
   }
