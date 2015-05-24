@@ -130,7 +130,7 @@ License:
             if( sizeof( $result ) > 0 )  {
                 extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
 
-                var_dump($srcpath);
+                var_dump($minify, $minpath);
 
                 //Get default options
                 $options_default = get_option( 'shortcode_load_default_options' );
