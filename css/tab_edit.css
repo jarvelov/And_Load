@@ -114,6 +114,10 @@ and (max-device-width : 480px) {
     margin: 15px;
   }
 
+  #edit_file_input_container > p {
+    margin-left: 15px;
+  }
+
 } 
  
 /* Smartphones (landscape) */
