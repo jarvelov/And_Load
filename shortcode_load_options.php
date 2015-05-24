@@ -427,14 +427,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @minify - (bool)
     */
     function shortcode_load_save_file_to_path($path, $content, $type, $minify) {
-        $file_args_array = array('success' => NULL);
+        $file_args_array = array();
 
         try {
             file_put_contents($path, $content);
             $file_args_array['srcpath'] = $path;
             $file_args_array['success'] = true;
         } catch (Exception $e) {
-            throw new Exception("Error saving file to path $path", 12);
+            throw new Exception("Error saving file to path", 12);
         }
 
         if($minify == true) {
@@ -443,14 +443,22 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             } catch (Exception $e) {
                 //var_dump($e);
                 $error_id = isset( $error_id ) ? $error_id : $e->getCode();
-                throw new Exception("Error saving minified file to path $path_min.", $error_id);
+                throw new Exception("Error minifying file.", $error_id);
             }
 
             $slug = basename($path, '.' . $type);
             $path_min = dirname(dirname($path)) . '/min/' . $slug . '.min.' . $type;
             $file_args_array['minpath'] = $path_min;
 
-            file_put_contents($path_min, $minified_content);
+            var_dump($path_min, $minified_content);
+
+            try {
+                file_put_contents($path_min, $minified_content);
+            } catch(Exception $e) {
+                //var_dump($e);
+                $error_id = isset( $error_id ) ? $error_id : 13;
+                throw new Exception("Error saving minified file content to path.", $error_id);
+            }
 
             $file_args_array['success'] = true;
         } else {
