@@ -704,9 +704,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             <?php
 
         } else {
+            $html .= '<div class="bg-warning">';
             $html .= '<h2>No scripts or styles created yet!</h2>';
             $html .= '<p>To begin click the <em>"New file"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
             $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
+            $html .= '</div>'; //end bg-warning
         }
 
         $html .= '</div>'; // end overview_container
