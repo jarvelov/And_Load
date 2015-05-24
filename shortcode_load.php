@@ -127,8 +127,10 @@ License:
             $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
 
-            if( sizeof($result) > 0 )  {
-                extract( $result );
+            if( sizeof( $result ) > 0 )  {
+                extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
+
+                var_dump($srcpath);
 
                 //Get default options
                 $options_default = get_option( 'shortcode_load_default_options' );

@@ -917,7 +917,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             if($result) {
-                extract($result); //turn array into named variables, see $sql SELECT query above for variable names
+                extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
 
                 //Check for revision override
                 if($revision_override !== false) {
