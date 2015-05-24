@@ -296,11 +296,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @revision - (int)
     * @minify - (bool)
     */
-    function shortcode_load_update_database_record($id, $revision, $minify) {
-        try {
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load';
+    function shortcode_load_update_database_record($id, $revision, $minify, $minpath = false) {
+        if($minpath) {
+            var_dump($minpath);
+        }
 
+        try {
             $result = $wpdb->update( 
                 $table_name, 
                 array( 
@@ -506,7 +507,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( isset( $file_args ) ) {
             if($file_args['success'] == true) {
                 try {
-                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify) );
+                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify, $minpath) );
                     $type = ($type == 'js') ? 'Script' : 'Style';
                     $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
                 } catch(Exception $e) {
