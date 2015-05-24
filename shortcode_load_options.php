@@ -950,7 +950,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '<div id="edit_file_input_container">';
 
-                $html .= '<label class="control-label">File: </label><span>' . $name . '</span>';
+                $html .= '<label class="control-label">File: </label><p>' . $name . '</p>';
 
                 // Shortcode displayed in an input field
 
