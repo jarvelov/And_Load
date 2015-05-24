@@ -46,7 +46,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_general_settings_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            $this->shortcode_load_get_options_default_general
+            $this->shortcode_load_get_options_default_general()
         );
 
         add_settings_field(
