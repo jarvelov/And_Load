@@ -1060,7 +1060,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '<h4>Error!</h4>';
                 $html .= '<p class="invalid_file_id">No file with ID <strong>' . $id . '</strong> was found in the database.</p>';
-                $html .= '<a href="?page=shortcode_load&tab=tab_overview" class="btn btn-lg btn-default">Click here to return to the overview</a>';
+                $html .= '<a id="invalid_file_return_link" class="btn btn-lg btn-default" href="?page=shortcode_load&tab=tab_overview">Click here to return to the overview</a>';
 
                 $html .= '</div>'; // end edit_file_invalid_file_id_container
 

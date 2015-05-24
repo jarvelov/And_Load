@@ -87,6 +87,10 @@
   text-align: center;
 }
 
+#invalid_file_return_link {
+  margin: 15px;
+}
+
 /* Ace styles */
 
 .editor_container {
