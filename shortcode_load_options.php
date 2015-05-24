@@ -992,6 +992,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '</select>'; //end edit_file_font_size_select
                 $html .= '</div>'; //end edit_file_editor_settings_container
 
+                var_dump('hello ' . $editor_default_font_size);
+
                 echo $html;
 
                 //Load file content
