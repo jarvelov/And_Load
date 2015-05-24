@@ -1340,7 +1340,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     }
 
     function shortcode_load_edit_file_callback_sanitize($args) {
-
         //Get the default options
         $options_default = get_option( 'shortcode_load_default_options' );
         $minify = $options_default['default_minify'];

@@ -91,7 +91,9 @@ License:
         // Load JavaScript and stylesheets
 
         // Register the shortcode: [shortcode_load]
-        add_shortcode( 'shortcode_load', array( &$this, 'render_shortcode' ) );
+        if ( ! ( shortcode_exists( 'shortcode_load' ) ) ) {
+            add_shortcode( 'shortcode_load', array( &$this, 'shortcode_load_render_shortcode' ) );
+        }
         
         if ( is_admin() ) {
             if ( ! ( class_exists("ShortcodeLoad_Options") ) ) {
@@ -99,19 +101,21 @@ License:
             }
             $this->options = new ShortcodeLoad_Options();
 
+            //Enqueue styles for administration panel
+            $this->shortcode_load_enqueue_styles();
         }
-
+        /*
         add_action( 'shortcode_load_enqueue_styles', array( &$this, 'action_callback_shortcode_load_enqueue_styles' ) );
 
         do_action( 'shortcode_load_enqueue_styles' );
-
+        */
     }
 
     function action_callback_shortcode_load_enqueue_styles() {
         $this->shortcode_load_enqueue_styles();
     }
 
-    function render_shortcode($args) {
+    function shortcode_load_render_shortcode($args) {
         // Extract the attributes submitted with the shortcode
         extract(shortcode_atts(array(
             'id' => '',
