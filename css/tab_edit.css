@@ -17,6 +17,7 @@
   margin: 15px 0 15px 0;
   border: 3px double #FEFEFE;
   padding: 5px 0 5px 0;
+  display: none;
 }
 
 .edit_file_select {
