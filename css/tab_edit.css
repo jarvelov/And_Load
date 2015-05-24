@@ -125,6 +125,10 @@ and (max-device-width : 768px) {
   #edit_file_input_container > p {
     margin: 15px;
   }
+
+  #edit_file_more_settings_button {
+    width: 100%;
+  }
 } 
  
 /* Tablets (portrait and landscape) and desktop */
