@@ -21,7 +21,7 @@
 }
 
 .hide-setting {
-	display: none;
+  display: none;
 }
 
 
@@ -30,13 +30,9 @@
 /* Smartphones (portrait and landscape) */
 @media only screen
 and (max-device-width : 768px) { 
-	.default_options_sub_setting {
-		display: block;
-	}
-
-	.default_select, .default_input {
-		max-width: none;
-	}
+  .default_select, .default_input {
+      max-width: none;
+  }
 } 
  
 /* Tablets (portrait and landscape) and desktop */
