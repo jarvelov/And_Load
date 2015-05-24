@@ -292,16 +292,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /* shortcode_load_update_database_record
     * Updates a record in the database
     *
-    * @args - named array
-    *
-    * $args = array(
-            'id' => (int),
-            'revision' => (int),
-        )
+    * @id - (int)
+    * @revision - (int)
+    * @minify - (bool)
     */
-    function shortcode_load_update_database_record($args) {
-        extract($args);
-
+    function shortcode_load_update_database_record($id, $revision, $minify) {
         try {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load';
@@ -311,13 +306,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 array( 
                     'revision' => $revision,    // int
                     'updated_timestamp' => current_time('mysql', 1),
+                    'minify' => $minify
                 ), 
                 array( 
                     'id' => $id
                 ), 
                 array(
                     '%d', //revision
-                    '%s' //updated_timestamp
+                    '%s', //updated_timestamp
+                    '%d' //minify
                 ),
                 array('%d') //id
             );
@@ -469,18 +466,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     /** shortcode_load_add_file_revision
     * Add a new revision of a file
     *
-    * @args - named array
-    *
-    * $args = array(
-            'content' => $file_content,
-            'id' => $id,
-            'minify' => $minify
-        )
-    *
+    * @id- (int)
+    * @content- (string)
+    * @minify - (bool)
     **/
-    function shortcode_load_add_file_revision($args) {
-        extract($args); //turn $args array into named variables
-
+    function shortcode_load_add_file_revision($id, $content, $minify) {
         try {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -516,7 +506,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( isset( $file_args ) ) {
             if($file_args['success'] == true) {
                 try {
-                    $result = $this->shortcode_load_update_database_record( array('id' => intval($id),'revision' => $new_revision) );
+                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify) );
                     $type = ($type == 'js') ? 'Script' : 'Style';
                     $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
                 } catch(Exception $e) {
@@ -1456,13 +1446,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     }
                 } else {
                     try {
-                        $file_datas[] = $this->shortcode_load_add_file_revision(
-                            array(
-                                'content' => $file_content,
-                                'id' => $id,
-                                'minify' => $minify
-                            )
-                        );
+                        $file_datas[] = $this->shortcode_load_add_file_revision($id, $file_content, $minify);
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'update';

@@ -177,7 +177,7 @@ License:
                     }
                 }
 
-                var_dump($result);
+                var_dump($minify);
 
                 $this->shortcode_load_enqueue_file( $name, $file_path, $is_script, $dependencies);
 
