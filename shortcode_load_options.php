@@ -299,6 +299,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_update_database_record($id, $revision, $minify, $minpath = false) {
         if($minpath) {
             var_dump($minpath);
+            break;
         }
 
         try {
