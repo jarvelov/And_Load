@@ -35,7 +35,7 @@ and (max-device-width : 768px) {
 	}
 
 	.default_select, .default_input {
-		max-width: 90%;
+		max-width: none;
 	}
 } 
  

@@ -114,7 +114,7 @@ and (max-device-width : 768px) {
   }
 
   .edit_file_input, .edit_file_select {
-    max-width: none;
+    max-width: 90%;
     margin: 15px;
   }
 
