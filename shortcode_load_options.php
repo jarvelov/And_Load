@@ -986,6 +986,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '<div id="edit_file_editor_settings_container">';
 
+                //Override font size
                 $html .= '<label class="control-label">Font size:</label>';
                 $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select">';
 
@@ -996,9 +997,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '</select>'; //end edit_file_font_size_select
 
-                $html .= '<div id="edit_file_theme_select">';
-                $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
-                $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control default_select">';
+                //Overide editor theme
+                $html .= '<label class="control-label"><strong><small>Theme</strong></small></label>';
+                $html .= '<select id="edit_file_theme_select" name="edit_file_theme_select" class="form-control edit_file_select">';
 
                 foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
                     $selected = selected( $editor_default_theme, $editor_theme_slug, false );
