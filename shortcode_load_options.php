@@ -82,53 +82,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             array($this, 'shortcode_load_default_editor_settings_callback'),
             'shortcode_load_default_options',
             'shortcode_load_default',
-            array(
-                'editor_themes' => array(
-                    'Ambiance' => 'ambiance',
-                    'Chaos' => 'chaos',
-                    'Chrome' => 'chrome',
-                    'Clouds' => 'clouds',
-                    'Clouds Midnight' => 'clouds_midnight',
-                    'Cobalt' => 'cobalt',
-                    'Crimson Editor' => 'crimson_editor',
-                    'Dawn' => 'dawn',
-                    'Dreamweaver' => 'dreamweaver',
-                    'Eclipse' => 'eclipse',
-                    'GitHub' => 'github',
-                    'Idle Fingers' => 'idle_fingers',
-                    'Katzenmilch' => 'katzenmilch',
-                    'Kr Theme' => 'kr_theme',
-                    'Kuroir' => 'kuroir',
-                    'Merbivore' => 'merbivore',
-                    'Merbivore Soft' => 'merbivore_soft',
-                    'Monokai (default)' => 'monokai',
-                    'Mono Industrial' => 'mono_industrial',
-                    'Pastel on Dark' => 'pastel_on_dark',
-                    'Solarized Dark' => 'solarized_dark',
-                    'Solarized Light' => 'solarized_light',
-                    'Terminal' => 'terminal',
-                    'Textmate' => 'textmate',
-                    'Tomorrow' => 'tomorrow',
-                    'Tomorrow Night' => 'tomorrow_night',
-                    'Tomorrow Night Blue' => 'tomorrow_night_blue',
-                    'Tomorrow Night Bright' => 'tomorrow_night_bright',
-                    'Tomorrow Night Eighties' => 'tomorrow_night_eighties',
-                    'Twilight' => 'twilight',
-                    'Vibrant Ink' => 'vibrant_ink',
-                    'Xcode' => 'xcode'
-                ),
-                'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
-                'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'None' => 'plain_text'),
-                'editor_default_theme' => 'monokai',
-                'editor_default_mode_type' => 'plain_text',
-                'editor_default_tab_size_override' => false,
-                'editor_default_print_margin' => true,
-                'editor_default_show_line_numbers' => true,
-                'editor_default_font_size' => 12,
-                'editor_default_tab_size' => 4,
-                'editor_default_print_margin_column' => 80                
-            )
-
+            $this->shortcode_load_get_default_editor_options()
         );
 
         register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize'));
@@ -187,6 +141,60 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
     } // end shortcode_load_settings_init
+
+    /** shortcode_load_get_default_editor_options
+    * Returns an array with the default options for the editor
+    **/
+    function shortcode_load_get_default_editor_options() {
+        $options = array(
+            'editor_themes' => array(
+                'Ambiance' => 'ambiance',
+                'Chaos' => 'chaos',
+                'Chrome' => 'chrome',
+                'Clouds' => 'clouds',
+                'Clouds Midnight' => 'clouds_midnight',
+                'Cobalt' => 'cobalt',
+                'Crimson Editor' => 'crimson_editor',
+                'Dawn' => 'dawn',
+                'Dreamweaver' => 'dreamweaver',
+                'Eclipse' => 'eclipse',
+                'GitHub' => 'github',
+                'Idle Fingers' => 'idle_fingers',
+                'Katzenmilch' => 'katzenmilch',
+                'Kr Theme' => 'kr_theme',
+                'Kuroir' => 'kuroir',
+                'Merbivore' => 'merbivore',
+                'Merbivore Soft' => 'merbivore_soft',
+                'Monokai (default)' => 'monokai',
+                'Mono Industrial' => 'mono_industrial',
+                'Pastel on Dark' => 'pastel_on_dark',
+                'Solarized Dark' => 'solarized_dark',
+                'Solarized Light' => 'solarized_light',
+                'Terminal' => 'terminal',
+                'Textmate' => 'textmate',
+                'Tomorrow' => 'tomorrow',
+                'Tomorrow Night' => 'tomorrow_night',
+                'Tomorrow Night Blue' => 'tomorrow_night_blue',
+                'Tomorrow Night Bright' => 'tomorrow_night_bright',
+                'Tomorrow Night Eighties' => 'tomorrow_night_eighties',
+                'Twilight' => 'twilight',
+                'Vibrant Ink' => 'vibrant_ink',
+                'Xcode' => 'xcode'
+            ),
+            'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
+            'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'None' => 'plain_text'),
+            'editor_default_theme' => 'monokai',
+            'editor_default_mode_type' => 'plain_text',
+            'editor_default_tab_size_override' => false,
+            'editor_default_print_margin' => true,
+            'editor_default_show_line_numbers' => true,
+            'editor_default_font_size' => 12,
+            'editor_default_tab_size' => 4,
+            'editor_default_print_margin_column' => 80                
+        );
+
+        return $options;
+    }
 
     /** shortcode_load_save_to_database
     * Save a new script or style to the database
@@ -879,8 +887,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A);
 
-            //TODO check result before extracting, display error message if $result = null or 0;
-
             if($result) {
                 extract($result[0]); //turn array into named variables, see $sql SELECT query above for variable names
 
@@ -938,12 +944,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
                 $html .= '</select>';
 
-                /* TODO Add option to temporary override font size while in editor 
+                $html .= '</div>'; // end edit_file_input_container
+
+
+                //Editor settings
                 $html .= '<label class="control-label">Font size:</label>';
                 $html .= '<select name="edit_file_font_size_select" id="edit_file_font_size_select" class="form-control edit_file_select"><option value="12">12</option></select>';
                 */
-
-                $html .= '</div>'; // end edit_file_input_container
 
                 echo $html;
 
@@ -956,8 +963,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } else {
                     $this->shortcode_load_editor_init( 'File content was not found! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
-            } else {
-                $this->shortcode_load_editor_init( 'Error. No file with ID ' . $id . ' found!', $editor_default_mode_type );
+            } else { //A file with the corresponding ID could not be found in the database
+                $html = '<div id="edit_file_invalid_file_id_container">';
+
+                $html .= '<h4>Error!</h4>';
+                $html .= '<p class="invalid_file_id">No file with ID <strong>' . $id . '</strong> was found in the database.</p>';
+
+                $html .= '</div>';
+
+                echo $html;
             }// end if
         } else {
             //No file is selected, this is a new file
