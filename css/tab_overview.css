@@ -3,6 +3,7 @@
 #overview_container {
     border: 5px double #F3F3F3;
     padding: 0 20px 20px 20px;
+    border-radius: 10px;
 }
 
 #new_file_button {
