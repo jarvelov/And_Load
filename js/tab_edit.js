@@ -245,6 +245,19 @@ jQuery('#edit_file_more_settings_button').on('click', function() {
     toggleSettingsDisplay();
 });
 
+//User submitted the form, check if the delete button initiated the submit and prompt for action
+jQuery(document).on("click", ":submit", function(event){
+    if(this.id == 'delete') {
+        event.preventDefault();
+        bootbox.confirm("Are you sure you want to delete this file?", function(result) {
+          if(result == true) {
+            console.log('true');
+          } else {
+            console.log('false');
+          }
+        });
+    }
+});
 
 //Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
 function toggleSettingsDisplay() {

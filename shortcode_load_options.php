@@ -1694,6 +1694,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } elseif($active_tab == 'tab_edit') {
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/bootstrap.min.js', true );
                     $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/bootbox.min.js', true );
 
                     //Tab styles and scripts
