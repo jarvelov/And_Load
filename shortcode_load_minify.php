@@ -8,8 +8,8 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
         if( class_exists( 'ShortcodeLoad' ) ) {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
-                    include_once( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
-                    include_once( dirname(__FILE__) . '/lib/path-converter/src/Converter.php' );
+                    require_once( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
+                    require_once( dirname(__FILE__) . '/lib/path-converter/src/Converter.php' );
                 } catch(Exception $e) {
                     //var_dump($e);
                     throw new Exception("Error in loading minify library files", 5);
