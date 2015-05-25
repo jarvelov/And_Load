@@ -1575,6 +1575,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         try {
             wp_redirect( $location );
             add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
+            exit;
         } catch (Exception $e) {
             //var_dump($e);
         }
