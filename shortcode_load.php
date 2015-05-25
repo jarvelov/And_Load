@@ -194,7 +194,7 @@ License:
      */
     private function shortcode_load_enqueue_styles() {
         if ( is_admin() ) {
-            $this->shortcode_load_enqueue_file( self::slug . '-bootstrap-css', 'css/bootstrap.min.css' );
+            $this->shortcode_load_enqueue_file( self::slug . '-bootstrap-css', 'lib/bootstrap/bootstrap.min.css' );
             $this->shortcode_load_enqueue_file( self::slug . '-admin-style', 'css/admin.css' );
         } // end if
     } // end shortcode_load_enqueue_styles

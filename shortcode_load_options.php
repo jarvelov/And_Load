@@ -1669,7 +1669,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 if($active_tab == 'tab_overview') {
                     //Libraries
-                    $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'css/dataTables.bootstrap.css', false );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'lib/datatables-bootstrap/dataTables.bootstrap.css', false );
                     $this->shortcode_load_enqueue_file_options( 'datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true );
                     $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'js/dataTables.bootstrap.js', true );
 
@@ -1694,6 +1694,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 } elseif($active_tab == 'tab_edit') {
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace/src-min-noconflict/ace.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/bootbox.min.js', true );
 
                     //Tab styles and scripts
                     $this->shortcode_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
