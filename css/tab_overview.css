@@ -16,6 +16,10 @@
   color: #4CB2E7;
 }
 
+#overview_get_started {
+	padding: 20px;
+}
+
 /* Datatables CSS */
 
 .shortcode_load_table_container {
