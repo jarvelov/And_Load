@@ -1671,7 +1671,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'lib/datatables-bootstrap/dataTables.bootstrap.css', false );
                     $this->shortcode_load_enqueue_file_options( 'datatables-script', 'lib/datatables/media/js/jquery.dataTables.min.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'js/dataTables.bootstrap.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'lib/datatables-bootstrap/dataTables.bootstrap.js', true );
 
                     //Tab styles and scripts
                     $this->shortcode_load_enqueue_file_options( 'tab_overview_js', 'js/tab_overview.js', true );
