@@ -573,6 +573,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         try {
             $result = $this->shortcode_load_delete_database_record( $id );
+            $type = ($type == 'js') ? 'Script' : 'Style';
             $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'deleted');
         } catch(Exception $e) {
             $error_id = isset( $error_id ) ? $error_id : $e->getCode();
