@@ -1558,7 +1558,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'updated';
-                $location = admin_url('options-general?page=shortcode_load&tab=tab_edit&id='.$file_data['id'] );
+                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_edit&id='.$file_data['id'] );
 
                 $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
                 
@@ -1566,7 +1566,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'error';
-                $location = admin_url('options-general?page=shortcode_load&tab=tab_help&error_id=error_id_'. $file_data['error_id'] );
+                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_help&error_id=error_id_'. $file_data['error_id'] );
 
                 $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="' . $location . '" target="_blank">Click here for more info.</a>';
             }
