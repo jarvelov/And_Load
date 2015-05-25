@@ -251,9 +251,7 @@ jQuery(document).on("click", ":submit", function(event){
         event.preventDefault();
         bootbox.confirm("Are you sure you want to delete this file?", function(result) {
           if(result == true) {
-            console.log('true');
-          } else {
-            console.log('false');
+            jQuery('#shortcode_load_form').submit();
           }
         });
     }
