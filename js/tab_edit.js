@@ -252,8 +252,8 @@ jQuery(document).on("click", ":submit", function(event){
             event.preventDefault();
             bootbox.confirm("Are you sure you want to delete this file?", function(result) {
               if(result == true) {
-                jQuery(this).addClass('confirmed');
-                //jQuery(this).click();
+                jQuery('#delete').addClass('confirmed');
+                jQuery('#delete').click();
               }
             });
         }
