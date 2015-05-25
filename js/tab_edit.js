@@ -248,12 +248,12 @@ jQuery('#edit_file_more_settings_button').on('click', function() {
 //User submitted the form, check if the delete button initiated the submit and prompt for action
 jQuery(document).on("click", ":submit", function(event){
     if(this.id == 'delete') {
-        if( ! ( jQuery(this).hasClass('confirmed') ) {
+        if( ! ( jQuery(this).hasClass('confirmed') ) ) {
             event.preventDefault();
             bootbox.confirm("Are you sure you want to delete this file?", function(result) {
               if(result == true) {
                 jQuery(this).addClass('confirmed');
-                jQuery(this).click();
+                //jQuery(this).click();
               }
             });
         }
