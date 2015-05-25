@@ -281,24 +281,26 @@ jQuery(document).ready(function() {
     //jQuery('input#submit').removeClass('button'); //Style wordpress submit button to remove the 'button' class interfering with bootstrap styling
 
     //Initialize Ace editor
-    editor = ace.edit("editor");
-    editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
+    if( jQuery('#editor').length > 0 ) {
+        editor = ace.edit("editor");
+        editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
 
-    //Set Ace default settings
-    setAceTheme( editorSettings['theme'] );
-    setAceType( editorSettings['mode'] );
-    setAceTabSize( editorSettings['tabSize'] );
-    setAceFontSize( editorSettings['fontSize'] );
+        //Set Ace default settings
+        setAceTheme( editorSettings['theme'] );
+        setAceType( editorSettings['mode'] );
+        setAceTabSize( editorSettings['tabSize'] );
+        setAceFontSize( editorSettings['fontSize'] );
 
-    setAceLineNumbers( editorSettings['showLineNumbers'] );
-    setAcePrintMargin( editorSettings['showPrintMargin'] );
-    setAcePrintMarginColumn( editorSettings['printMarginColumn'] );
+        setAceLineNumbers( editorSettings['showLineNumbers'] );
+        setAcePrintMargin( editorSettings['showPrintMargin'] );
+        setAcePrintMarginColumn( editorSettings['printMarginColumn'] );
 
-    //Load content in ace into temporary area should the user save without changing any content.
-    setTemporaryContent( getAceContent() );
+        //Load content in ace into temporary area should the user save without changing any content.
+        setTemporaryContent( getAceContent() );
 
-    //Register a listener to trigger an event on any changes made within the Ace editor
-    editor.getSession().on('change', function() {
-        setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
-    });
+        //Register a listener to trigger an event on any changes made within the Ace editor
+        editor.getSession().on('change', function() {
+            setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
+        });
+    }
 });
