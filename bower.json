@@ -32,7 +32,8 @@
       "ttf": "{key}/fonts",
       "woff": "{key}/fonts",
       "woff2": "{key}/fonts",
-      "php" : "{key}/"
+      "php" : "{key}/src/",
+      "txt" : "{key}/data/js/"
     },
     "sources": {
       "ace-builds": [
@@ -57,7 +58,12 @@
         "bower_components/minify/src/CSS.php",
         "bower_components/minify/src/Exception.php",
         "bower_components/minify/src/JS.php",
-        "bower_components/minify/src/Minify.php"
+        "bower_components/minify/src/Minify.php",
+        "bower_components/minify/data/js/keywords_after.txt",
+        "bower_components/minify/data/js/keywords_reserved.txt",
+        "bower_components/minify/data/js/operators_before.txt",
+        "bower_components/minify/data/js/keywords_before.txt",
+        "bower_components/minify/data/js/operators_after.txt"        
       ],
       "path-converter" : "bower_components/path-converter/src/Converter.php"
     },

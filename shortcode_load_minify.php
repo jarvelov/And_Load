@@ -8,8 +8,8 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
         if( class_exists( 'ShortcodeLoad' ) ) {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
-                    require_once( dirname(__FILE__) . '/lib/minify/Minify.php' );
-                    require_once( dirname(__FILE__) . '/lib/path-converter/Converter.php' );
+                    require_once( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
+                    require_once( dirname(__FILE__) . '/lib/path-converter/src/Converter.php' );
                 } catch(Exception $e) {
                     //var_dump($e);
                     throw new Exception("Error in loading minify library files", 5);
@@ -27,7 +27,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
         switch ($type) {
             case 'js':
                 try {
-                    require ( dirname(__FILE__) . '/lib/minify/JS.php' );
+                    require ( dirname(__FILE__) . '/lib/minify/src/JS.php' );
                     $minifier = new Minify\JS();
                 } catch(Exception $e) {
                     //var_dump($e);
@@ -37,7 +37,7 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
             
             case 'css':
                 try {
-                    require ( dirname(__FILE__) . '/lib/minify/CSS.php' );
+                    require ( dirname(__FILE__) . '/lib/minify/src/CSS.php' );
                     $minifier = new Minify\CSS();
                 } catch(Exception $e) {
                     //var_dump($e);
