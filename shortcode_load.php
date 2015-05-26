@@ -226,7 +226,7 @@ License:
             if( isset($result) ) {
                 for ($i=0; $i < sizeof( $result ); $i++) { 
                     $current_file = $result[$i];
-                    $this->shortcode_load_shortcode_file_enqueue_operation($result);
+                    $this->shortcode_load_shortcode_file_enqueue_operation($current_file);
                 }
 
                 //Dump data to page if argument was given
