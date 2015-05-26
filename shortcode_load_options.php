@@ -1567,6 +1567,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     }
                 } else {
                     $error_id = isset( $error_id ) ? $error_id : 22;
+                    $operation = 'saved';
                 }
             }
 
