@@ -252,7 +252,7 @@ jQuery(document).on("click", ":submit", function(event){
             event.preventDefault();
             bootbox.dialog({
                 title:"Permanently delete file?",
-                message:"Are you sure you want to delete this file and all revisions of it? This action is <strong>permanent</strong> and can NOT be reversed!",
+                message:"Are you sure you want to delete this file and <em>all revisions</em> of it? This action is <strong>permanent</strong> and can NOT be reversed!",
                 buttons:{
                     cancel:{
                         label:"No, I changed my mind.",
