@@ -1656,6 +1656,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace default editor settings
         extract( $options_default);
 
+        var_dump($mode_type);
+
         if($content) { //if an existing file is loaded, set the file's type as specified
             switch ($mode_type) {
                 case 'js':
