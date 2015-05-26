@@ -1619,7 +1619,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 wp_redirect( $location );
                 exit;
 
-                /* TODO, figure out if there's a way to do a redirect and do an add_settings_error
+                /* TODO, figure out if there's a way to do a redirect and then do an add_settings_error
 
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
@@ -1644,10 +1644,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
     }
 
-    /*
-    * Loads Ace editor settings with appropriate environment and content
+    /** shortcode_load_editor_init
+    * Configures Ace editor with content and sets up environment according to default options
     *
-    * shortcode_load_editor_init( string , 'js|css|plain_text')
+    * @content - (string) or (bool)
+    * @mode_type - (string) 'js|css|plain_text'
     */
 
     function shortcode_load_editor_init($content, $mode_type) {
@@ -1656,9 +1657,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Ace default editor settings
         extract( $options_default);
 
-        var_dump($mode_type);
-
-        if($content) { //if an existing file is loaded, set the file's type as specified
+        if($content !== false) { //if an existing file is loaded, set the file's type as specified
             switch ($mode_type) {
                 case 'js':
                     $editor_mode_type = 'javascript';
@@ -1700,14 +1699,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 };
             </script>
         <?php
-    }
+    } //end shortcode_load_editor_init
 
     function shortcode_load_enqueue_file_options($name, $file_path, $is_script = false) {
         if( class_exists('ShortcodeLoad') ) {
             $dependencies = ( $is_script ) ? 'jquery' : false;
             ShortcodeLoad::shortcode_load_enqueue_file($name, $file_path, $is_script, $dependencies );
         } // end if
-    }
+    } // end shortcode_load_enqueue_file_options
 
     function shortcode_load_options_page(  ) {
 
