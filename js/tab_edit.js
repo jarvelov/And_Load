@@ -306,13 +306,14 @@ jQuery(document).ready(function() {
         setAcePrintMargin( editorSettings['showPrintMargin'] );
         setAcePrintMarginColumn( editorSettings['printMarginColumn'] );
 
-        //Load content in ace into temporary area should the user save without changing any content.
-        setTemporaryContent( getAceContent() );
-
+        //Load content in temporary into ace
+        setAceContent( getTemporaryContent() );
+/*
         //Register a listener to trigger an event on any changes made within the Ace editor
         editor.getSession().on('change', function() {
             setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
         });
+*/
     }
 
     //If this browser supports mutationObservers automatically resize ace editor on resize
