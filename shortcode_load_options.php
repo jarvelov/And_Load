@@ -1753,10 +1753,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Tab styles and scripts
                     $this->shortcode_load_enqueue_file_options( 'tab_edit_css', 'css/tab_edit.css', false );
                     $this->shortcode_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
-/*
+
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace-builds/js/ace.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
+/*                    $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
                     $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.js', true );
 */
                     //Tab sections and fields 
