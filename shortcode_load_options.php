@@ -1289,6 +1289,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>'; // end shortcode_load_help_credits_bootstrap
         $html .= '</li>';
 
+        $html .= '<li><h4>Bootbox.js</h4>';
+        $html .= '<ul id="shortcode_load_help_credits_bootbox">';
+        $html .= '<li>Project URL: <a href="http://bootboxjs.com/" target="_blank">Bootbox.js</a></li>';
+        $html .= '<li>License: <a href="http://github.com/makeusabrew/bootbox/blob/master/LICENSE.md" target="_blank">MIT License</a></li>';
+        $html .= '</ul>'; // end shortcode_load_help_credits_bootbox
+        $html .= '</li>';
+
         $html .= '</ul>'; // end shortcode_load_credits_list
 
         $html .= '</div>'; // end shortcode_load_help_credits
