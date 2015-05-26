@@ -1073,7 +1073,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             //No file is selected, this is a new file
 
             //File save submit button
-            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-lg btn-success" value="&#x2714; Save file" type="submit"></p>';
+            $html = '<p class="submit"><input name="submit" id="submit" class="btn btn-success" value="&#x2714; Save file" type="submit"></p>';
+
+            $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Start by entering a filename and a file type, then enter the content into the editing area. Alternatively, select a file for upload.</span></p>';
 
             $html .= '<div id="edit_file_input_container">';
 
