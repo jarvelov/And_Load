@@ -1,0 +1,59 @@
+{
+  "name": "Shortcode_Load",
+  "version": "1.0",
+  "homepage": "https://tobias.jarvelov.se/portfolio/shortcode_load",
+  "authors": [
+    "Tobias Järvelöv <tobias@jarvelov.se>"
+  ],
+  "license": "GPLv3+",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "datatables": "~1.10.7",
+    "ace-builds": "~1.1.9",
+    "bootbox": "~4.4.0",
+    "datatables-plugins": "https://github.com/DataTables/Plugins.git#~1.10.7",
+    "minify": "https://github.com/matthiasmullie/minify.git#~1.3.26",
+    "path-converter": "https://github.com/matthiasmullie/path-converter.git#~1.0.4"
+  },
+  "install": {
+    "base" : "lib_test",
+    "path" : {
+      "js" : "{key}/js",
+      "css": "{name}/css",
+      "eot": "{name}/fonts",
+      "svg": "{name}/fonts",
+      "ttf": "{name}/fonts",
+      "woff": "{name}/fonts"
+    },
+    "sources": {
+      "ace-builds": [
+        "bower_components/ace-builds/src-min-noconflict/ace.js",
+        "bower_components/ace-builds/src-min-noconflict/mode-css.js",
+        "bower_components/ace-builds/src-min-noconflict/mode-javascript.js",
+        "bower_components/ace-builds/src-min-noconflict/theme-*.js"
+      ],
+      "bootstrap" : [
+        "bower_components/bootstrap/dist/css/bootstrap.min.css",
+        "bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "bower_components/bootstrap/dist/fonts/**"
+      ],
+      "bootbox" : "bower_components/bootbox/bootbox.js",
+      "datatables" : [
+        "bower_components/datatables/media/css/jquery.dataTables.min.css",
+        "bower_components/datatables/media/js/jquery.dataTables.min.js",
+        "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css",
+        "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"
+      ],
+      "minify" : "bower_components/minify/src/**",
+      "path-converter" : "bower_components/path-converter/src/Converter.php"
+    },
+    "ignore": ["jquery", "datatables-plugins"]
+  }
+}
