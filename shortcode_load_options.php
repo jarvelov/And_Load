@@ -363,6 +363,10 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $content = $args['content'];
         $org_name = $args['name'];
 
+        if( ! $org_name) {
+            throw new Exception("Error invalid file name", 21);
+        }
+
         switch ( strtolower( $args['type'] ) ) {
             case 'javascript':
                 $type = 'js';
