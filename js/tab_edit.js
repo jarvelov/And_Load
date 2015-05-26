@@ -272,6 +272,18 @@ jQuery(document).on("click", ":submit", function(event){
     }
 });
 
+//If this browser supports mutationObservers automatically resize ace editor on resize
+if (typeof MutationObserver == 'function') { 
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutationRecord) {
+            editor.resize();
+        });
+    });
+
+    var target = document.getElementById('editor');
+    observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+}
+
 //Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
 function toggleSettingsDisplay() {
     if ( jQuery('#edit_file_more_icon').hasClass('glyphicon-collapse-down') ) {
