@@ -1428,6 +1428,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>';
         $html .= '</li>'; // end error_id_18
 
+        $html .= '<li id="error_id_19"><h4>Error #19</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error deleting row with specified ID.</li>';
+        $html .= '<li>Solution: The ID refers to a file that is not referenced in the database table, this could mean that it has already been deleted. No additional action is necessary.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // end error_id_19
+
+        $html .= '<li id="error_id_20"><h4>Error #20</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error saving file. Invalid file type.</li>';
+        $html .= '<li>Solution: The file type was invalid. Make sure to select a file type in the drop down list before saving or uploading a file.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // end error_id_18
+
         $html .= '</ul>'; // end shortcode_load_error_list
 
         $html .= '</div>'; // end shortcode_load_help_debug
