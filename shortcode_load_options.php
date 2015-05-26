@@ -1453,6 +1453,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>';
         $html .= '</li>'; // end error_id_20
 
+        $html .= '<li id="error_id_21"><h4>Error #21</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error saving file. Invalid file name.</li>';
+        $html .= '<li>Solution: The file name is invalid, use another name. The name must be at least one character.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // end error_id_20
+
+        $html .= '<li id="error_id_22"><h4>Error #22</h4>';
+        $html .= '<ul>';
+        $html .= '<li>Error saving file. File name can not be blank.</li>';
+        $html .= '<li>Solution: The file must be at least one character.</li>';
+        $html .= '</ul>';
+        $html .= '</li>'; // end error_id_22
+
         $html .= '</ul>'; // end shortcode_load_error_list
 
         $html .= '</div>'; // end shortcode_load_help_debug
