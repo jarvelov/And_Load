@@ -1693,7 +1693,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {
                     //Libraries
-                    $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace/js/ace.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace-builds/js/ace.js', true );
                     $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
                     $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.min.js', true );
 
