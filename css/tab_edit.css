@@ -20,6 +20,10 @@
   display: none;
 }
 
+#edit_file_temporary_textarea, #edit_file_current_id {
+  display: none;
+}
+
 .edit_file_select {
   max-width: 120px;
   display: inline-block;
@@ -109,13 +113,9 @@
 
 /* Wordpress core styling */
 
-p.submit {
+.submit {
   margin: 0;
   display: inline;
-}
-
-.form-table {
-  display: none;
 }
 
 
