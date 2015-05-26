@@ -240,48 +240,45 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $db_args = $this->shortcode_load_save_file( $args );
         } catch (Exception $e) {
             $error_id = isset( $error_id ) ? $error_id : $e->getCode();
-            $return_args = array('success' => false, 'error_id' => $error_id);
-
-            return $return_args;
-        }
-
-        try {
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load'; 
-
-            $wpdb->insert( 
-                $table_name, 
-                array( 
-                    'name' => $db_args['name'],
-                    'slug' => $db_args['slug'],
-                    'type' => $db_args['type'],
-                    'srcpath' =>  $db_args['srcpath'],
-                    'minify' => $db_args['minify'],
-                    'minpath' => $db_args['minpath'],
-                    'revision' => 0,
-                    'created_timestamp' => current_time('mysql', 1),
-                    'updated_timestamp' => current_time('mysql', 1),
-                ), 
-                array( 
-                    '%s', //name
-                    '%s', //slug
-                    '%s', //type
-                    '%s', //srcpath
-                    '%d', //minify
-                    '%s', //minpath
-                    '%d', //revision
-                    '%s', //created_timestamp
-                    '%s' //updated_timestamp
-                ) 
-            );
-
-            $id = $wpdb->insert_id;
-        } catch (Exception $e) {
-            //var_dump($e);
-            $error_id = isset( $error_id ) ? $error_id : 1;; //error writing to database
         }
 
         if( ( ! isset( $error_id ) ) ) {
+            try {
+                global $wpdb;
+                $table_name = $wpdb->prefix . 'shortcode_load'; 
+
+                $wpdb->insert( 
+                    $table_name, 
+                    array( 
+                        'name' => $db_args['name'],
+                        'slug' => $db_args['slug'],
+                        'type' => $db_args['type'],
+                        'srcpath' =>  $db_args['srcpath'],
+                        'minify' => $db_args['minify'],
+                        'minpath' => $db_args['minpath'],
+                        'revision' => 0,
+                        'created_timestamp' => current_time('mysql', 1),
+                        'updated_timestamp' => current_time('mysql', 1),
+                    ), 
+                    array( 
+                        '%s', //name
+                        '%s', //slug
+                        '%s', //type
+                        '%s', //srcpath
+                        '%d', //minify
+                        '%s', //minpath
+                        '%d', //revision
+                        '%s', //created_timestamp
+                        '%s' //updated_timestamp
+                    ) 
+                );
+
+                $id = $wpdb->insert_id;
+            } catch (Exception $e) {
+                //var_dump($e);
+                $error_id = isset( $error_id ) ? $error_id : 1;; //error writing to database
+            }
+
             $name = $db_args['name'] . '.' . $db_args['type'];
             $type = ($db_args['type'] == 'js') ? 'Script' : 'Style';
             $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'saved');
