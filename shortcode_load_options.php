@@ -1670,8 +1670,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 if($active_tab == 'tab_overview') {
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'lib/datatables/css/dataTables.bootstrap.css', false );
-                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'lib/datatables/js/dataTables.bootstrap.min.js', true );
                     $this->shortcode_load_enqueue_file_options( 'datatables-script', 'lib/datatables/js/jquery.dataTables.min.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'lib/datatables/js/dataTables.bootstrap.min.js', true );
 
                     //Tab styles and scripts
                     $this->shortcode_load_enqueue_file_options( 'tab_overview_js', 'js/tab_overview.js', true );
