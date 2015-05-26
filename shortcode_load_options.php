@@ -1589,6 +1589,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     */
 
     function shortcode_load_add_settings_message($array) {
+        var_dump($array);
+        break;
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
                 
