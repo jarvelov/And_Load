@@ -366,7 +366,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $content = $args['content'];
         $org_name = $args['name'];
 
-        switch ( strtolower( $type ) ) {
+        switch ( strtolower( $args['type'] ) ) {
             case 'javascript':
                 $type = 'js';
                 break;
