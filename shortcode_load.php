@@ -217,14 +217,14 @@ License:
 
             $sql .= " LIMIT 50";
 
-            var_dump($sql);
-/*
             try {
                 $result = $wpdb->get_results($sql, ARRAY_A);    
             } catch(Exception $e) {
                 var_dump($e);
             }
 
+            var_dump($result);
+/*
             if( sizeof( $result ) > 0 )  {
                 $this->shortcode_load_shortcode_file_enqueue_operation($result);
 
