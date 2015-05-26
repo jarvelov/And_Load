@@ -286,7 +286,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $type = ($db_args['type'] == 'js') ? 'Script' : 'Style';
             $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'saved');
         } else {
-            $return_args = array('success' => false, 'error_id' => $error_id);
+            $return_args = array('success' => false, 'error_id' => $error_id, 'operation' => 'saved');
         }
 
         return $return_args;
