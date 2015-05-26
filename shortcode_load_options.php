@@ -1568,6 +1568,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
+            var_dump($file_datas);
+            break;
+
             if( isset( $file_datas ) ) {
                 $this->shortcode_load_add_settings_message( $file_datas );
             } else {
