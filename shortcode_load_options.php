@@ -1568,7 +1568,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             }
 
-            var_dump($file_datas);
+            var_dump($error_id);
             break;
 
             if( isset( $file_datas ) ) {
