@@ -366,7 +366,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $content = $args['content'];
         $org_name = $args['name'];
 
-        $type = ( $args['type'] == 'javascript' ) ? 'js' : $args['type'];
+        switch ($type) {
+            case 'javascript':
+                $type = 'js';
+                break;
+
+            case 'css':
+                $type = 'css';
+                break;
+
+            default:
+                throw new Exception("Error invalid file type", 20);
+                break;
+        }
 
         $src_dir = $uploads_dir . $type . '/src/';
         $min_dir = $uploads_dir . $type . '/min/';
