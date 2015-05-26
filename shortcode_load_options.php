@@ -1617,7 +1617,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 wp_redirect( $location );
                 exit;
 
-                /*
+                /* TODO, figure out if there's a way to do a redirect and do an add_settings_error
+
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'updated';
