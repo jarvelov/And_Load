@@ -1673,7 +1673,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Build Ace editor
         $container = '<div class="editor_container">';
-        $editor = '<div id="editor"><![CDATA['.$content.']]></div>';
+        $editor = '<div id="editor"><!--//--><![CDATA[//><!--'.$content.'//--><!]]></div>';
         $container .= $editor . '</div>';
 
         echo $container;
