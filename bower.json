@@ -20,20 +20,20 @@
     "bootbox": "~4.4.0",
     "datatables-plugins": "https://github.com/DataTables/Plugins.git#~1.10.7",
     "minify": "https://github.com/matthiasmullie/minify.git#~1.3.26",
-    "path-converter": "https://github.com/matthiasmullie/path-converter.git#~1.0.4"
+    "path-converter": "https://github.com/matthiasmullie/path-converter.git#~1.0.4",
   },
   "install": {
-    "base" : "lib",
-    "path" : {
-      "js" : "{key}/js",
+    "base": "lib",
+    "path": {
+      "js": "{key}/js",
       "css": "{key}/css",
       "eot": "{key}/fonts",
       "svg": "{key}/fonts",
       "ttf": "{key}/fonts",
       "woff": "{key}/fonts",
       "woff2": "{key}/fonts",
-      "php" : "{key}/src/",
-      "txt" : "{key}/data/js/"
+      "php": "{key}/src/",
+      "txt": "{key}/data/js/"
     },
     "sources": {
       "ace-builds": [
@@ -44,19 +44,19 @@
         "bower_components/ace-builds/src-min-noconflict/worker-javascript.js",
         "bower_components/ace-builds/src-min-noconflict/theme-*.js"
       ],
-      "bootstrap" : [
+      "bootstrap": [
         "bower_components/bootstrap/dist/css/bootstrap.min.css",
         "bower_components/bootstrap/dist/js/bootstrap.min.js",
         "bower_components/bootstrap/dist/fonts/**"
       ],
-      "bootbox" : "bower_components/bootbox/bootbox.js",
-      "datatables" : [
+      "bootbox": "bower_components/bootbox/bootbox.js",
+      "datatables": [
         "bower_components/datatables/media/css/jquery.dataTables.min.css",
         "bower_components/datatables/media/js/jquery.dataTables.min.js",
         "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css",
         "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"
       ],
-      "minify" : [
+      "minify": [
         "bower_components/minify/src/CSS.php",
         "bower_components/minify/src/Exception.php",
         "bower_components/minify/src/JS.php",
@@ -65,10 +65,13 @@
         "bower_components/minify/data/js/keywords_reserved.txt",
         "bower_components/minify/data/js/operators_before.txt",
         "bower_components/minify/data/js/keywords_before.txt",
-        "bower_components/minify/data/js/operators_after.txt"        
+        "bower_components/minify/data/js/operators_after.txt"
       ],
-      "path-converter" : "bower_components/path-converter/src/Converter.php"
+      "path-converter": "bower_components/path-converter/src/Converter.php"
     },
-    "ignore": ["jquery", "datatables-plugins"]
+    "ignore": [
+      "jquery",
+      "datatables-plugins"
+    ]
   }
 }
