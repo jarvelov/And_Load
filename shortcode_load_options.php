@@ -366,8 +366,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $content = $args['content'];
         $org_name = $args['name'];
 
-        switch ($type) {
+        switch ( strtolower( $type ) ) {
             case 'javascript':
+                $type = 'js';
+                break;
+
+            case 'js':
                 $type = 'js';
                 break;
 
@@ -383,7 +387,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $src_dir = $uploads_dir . $type . '/src/';
         $min_dir = $uploads_dir . $type . '/min/';
         
-        $random5 = substr( md5( microtime() ),rand( 0,26 ), 5); //generate 5 random characters to ensure filename is unique
+        $random5 = substr( md5( microtime() ), rand( 0,26 ), 5); //generate 5 random characters to ensure filename is unique
         $slug = $org_name . '.' . $random5;
 
         $slug = $this->shortcode_load_filter_string( $slug ); //filter out any characters we don't want in path
