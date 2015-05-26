@@ -668,7 +668,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<div id="overview_container">';
 
         if(sizeof($files) > 0) {
-            $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
+            $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
             $html .= '<div class="shortcode_load_table_container">';
             $html .= '<table id="overview_table" class="table table-hover table-striped table-bordered display">';
             $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
@@ -754,7 +754,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function shortcode_load_default_options_callback() {
         $html = '<p>Default options to configure overview and editor settings.</p>'; 
-        $html .= '<p id="overview_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse cursor over each setting title to get more info about it.</span></p>';
+        $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse cursor over each setting title to get more info about it.</span></p>';
 
         echo $html;
     }

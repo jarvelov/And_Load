@@ -45,7 +45,7 @@ body {
   background-color: #F3F3F3;
 }
 
-#overview_help_text {
+#container_help_text {
   font-size: 11px;
   top: 10px;
   position: relative;
@@ -53,6 +53,7 @@ body {
   display: inline;
   background-color: #F8F8EF;
   padding: 3px;
+  margin-left: 20px;
 }
 
 #help_title {
