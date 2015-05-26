@@ -1575,7 +1575,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_type = 'error';
                 $location = admin_url('options-general.php?page=shortcode_load&tab=tab_help&error_id=error_id_'. $file_data['error_id'] );
 
-                $message = $file_data['type'] . ' file could not be ' . $file_data['operation'] . '! <a href="' . $location . '" target="_blank">Click here for more info.</a>';
+                $message = 'File could not be ' . $file_data['operation'] . '! <a href="' . $location . '" target="_blank">Click here for more info.</a>';
             }
         }
 
