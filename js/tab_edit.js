@@ -294,7 +294,6 @@ jQuery(document).ready(function() {
 
     //Initialize Ace editor
     if( jQuery('#editor').length > 0 ) {
-/*
         editor = ace.edit("editor");
         editor.$blockScrolling = Infinity; //this is needed to prevent the Ace editor from spamming the console (version: 1.1.8)
 
@@ -314,7 +313,6 @@ jQuery(document).ready(function() {
         editor.getSession().on('change', function() {
             setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
         });
-*/
     }
 
     //If this browser supports mutationObservers automatically resize ace editor on resize

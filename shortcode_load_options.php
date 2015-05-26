@@ -74,14 +74,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'shortcode_load_edit_file_options'
         );
 
-        add_settings_field(
-            'shortcode_load_edit_file_source',
-            '',
-            array($this, 'shortcode_load_edit_file_source_options_callback'),
-            'shortcode_load_edit_file_options',
-            'shortcode_load_edit_file'
-        );
-
         register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_edit_file_callback_sanitize'));
 
         /* Help tab section */
@@ -1067,7 +1059,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 if($content !== false) {
                     //init editor with content
-                    $this->shortcode_load_editor_init( $content, $type );
+                    $current_id = isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false;
+
+                    /*Create a textarea to temporarily hold the raw data from Ace editor
+                    this data will then be processed when the page is reloaded again (Save Changes button is clicked)
+                    The textarea will be continously updated with javascript
+                    */
+                    echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
+
+                    //We also need the id to refer to later, save this to a simple input field as well
+                    echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+
+                    $this->shortcode_load_editor_init( true, $type );
                 } else {
                     $this->shortcode_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
@@ -1118,23 +1121,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $this->shortcode_load_editor_init( false, $editor_default_mode_type );
         } // end if
-    }
-
-    function shortcode_load_edit_file_source_options_callback() {
-        $options_edit_file = get_option( 'shortcode_load_edit_file_options' );
-        $current_id = isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false;
-
-        $edit_file_temporary_textarea = isset( $options_edit_file[ 'edit_file_temporary_textarea' ]  ) ? $options_edit_file[ 'edit_file_temporary_textarea' ] : '';
-
-        /*Create a textarea to temporarily hold the raw data from Ace editor
-        this data will then be processed when the page is reloaded again (Save Changes button is clicked)
-        The textarea will be continously updated with javascript
-        */
-        echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $edit_file_temporary_textarea .  '</textarea>';
-
-        //We also need the id to refer to later, save this to a simple input field as well
-        echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
-        
     }
 
     /* Help tab callbacks */
@@ -1673,7 +1659,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Build Ace editor
         $container = '<div class="editor_container">';
-        $editor = '<div id="editor"><!--//--><![CDATA[//><!--'.$content.'//--><!]]></div>';
+        $editor = '<div id="editor">'.$content.'</div>';
         $container .= $editor . '</div>';
 
         echo $container;
