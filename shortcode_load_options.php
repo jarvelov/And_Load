@@ -1557,13 +1557,18 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     function shortcode_load_add_settings_message($array) {
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
+                
+                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_edit&id='.$file_data['id'] );
+                wp_redirect( $location );
+                exit;
+
+                /*
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'updated';
-                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_edit&id='.$file_data['id'] );
-
-                $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
                 
+                $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
+                */
             } elseif($file_data['success'] == false) {
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
@@ -1575,7 +1580,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
-            wp_redirect( $location );
             add_settings_error($message_setting, $message_setting_slug, $message, $message_type);
             exit;
         } catch (Exception $e) {
