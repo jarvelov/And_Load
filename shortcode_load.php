@@ -127,6 +127,63 @@ License:
         }
     } //end shortcode_load_dump_shortcode_data
 
+    /** shortcode_load_shortcode_file_enqueue_operation
+    *
+    */
+    function shortcode_load_shortcode_file_enqueue_operation($result) {
+        extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
+
+        //Get default options
+        $options_default = get_option( 'shortcode_load_default_options' );
+        $default_minify = $options_default['default_minify'];
+        $default_jquery = $options_default['default_jquery'];
+
+        $minify_override = ( $minify_override == 'true' ) ? true : false;
+        $jquery_override = ( $jquery_override == 'true' ) ? true : false;
+
+        if(!$minify_override AND $default_minify) {
+            $minify = true;
+            $path = $minpath;
+        } else {
+            $minify = false;
+            $path = $srcpath;
+        }
+
+        if($revision_override !== false) {
+            if($revision_override <= $revision AND $revision_override > 0) {
+                $file_path = $this->shortcode_load_get_file_path($path, $revision_override, $type, $minify);
+            } else {
+                if($revision_override >= 0) {
+                    $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
+                } else {
+                    $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
+                }
+            }
+        } else {
+            if($revision > 0) {
+                $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
+            } else {
+                $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
+            }
+        }
+
+        $is_script = ($type == 'js') ? true : false;
+        $dependencies = false;
+
+        if($is_script) {
+            if($default_jquery AND !$jquery_override) {
+                $dependencies = array('jquery');
+            } elseif($default_jquery AND $jquery_override) {
+                $dependencies = false;
+            } elseif(!$default_jquery AND $jquery_override) {
+                $dependencies = array('jquery');
+            }
+        }
+
+        $this->shortcode_load_enqueue_file( $name, $file_path, $is_script, $dependencies);
+
+    } // end shortcode_load_shortcode_file_enqueue_operation
+
     /** shortcode_load_render_shortcode
     *
     */
@@ -145,66 +202,38 @@ License:
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-            $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE id = '" . intval( $id ) . "' LIMIT 1";
-            $result = $wpdb->get_results($sql, ARRAY_A)[0];
+
+            $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE  ";
+
+            $ids = explode(",", $id);
+            for ($i=0; $i < sizeof($ids); $i++) { 
+                $current_id = $ids[$i];
+                if($i == 0) {
+                    $sql .= 'id = ' . intval( $current_id );
+                } else {
+                    $sql .= ' OR id = ' . intval( $current_id );
+                }
+            }
+
+            $sql .= " LIMIT 50";
+
+            var_dump($sql);
+/*
+            try {
+                $result = $wpdb->get_results($sql, ARRAY_A);    
+            } catch(Exception $e) {
+                var_dump($e);
+            }
 
             if( sizeof( $result ) > 0 )  {
-                extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
-
-                //Get default options
-                $options_default = get_option( 'shortcode_load_default_options' );
-                $default_minify = $options_default['default_minify'];
-                $default_jquery = $options_default['default_jquery'];
-
-                $minify_override = ( $minify_override == 'true' ) ? true : false;
-                $jquery_override = ( $jquery_override == 'true' ) ? true : false;
-
-                if(!$minify_override AND $default_minify) {
-                    $minify = true;
-                    $path = $minpath;
-                } else {
-                    $minify = false;
-                    $path = $srcpath;
-                }
-
-                if($revision_override !== false) {
-                    if($revision_override <= $revision AND $revision_override > 0) {
-                        $file_path = $this->shortcode_load_get_file_path($path, $revision_override, $type, $minify);
-                    } else {
-                        if($revision_override >= 0) {
-                            $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
-                        } else {
-                            $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
-                        }
-                    }
-                } else {
-                    if($revision > 0) {
-                        $file_path = $this->shortcode_load_get_file_path($path, $revision, $type, $minify);
-                    } else {
-                        $file_path = $this->shortcode_load_get_file_path($path, false, $type, $minify);
-                    }
-                }
-
-                $is_script = ($type == 'js') ? true : false;
-                $dependencies = false;
-
-                if($is_script) {
-                    if($default_jquery AND !$jquery_override) {
-                        $dependencies = array('jquery');
-                    } elseif($default_jquery AND $jquery_override) {
-                        $dependencies = false;
-                    } elseif(!$default_jquery AND $jquery_override) {
-                        $dependencies = array('jquery');
-                    }
-                }
-
-                $this->shortcode_load_enqueue_file( $name, $file_path, $is_script, $dependencies);
+                $this->shortcode_load_shortcode_file_enqueue_operation($result);
 
                 //Dump data to page if argument was given
                 if($data) {
                     $this->shortcode_load_dump_shortcode_data($data, $data_wrap);
                 }
             }
+            */
         }
     }
     
