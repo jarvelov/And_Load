@@ -148,7 +148,7 @@ and (max-device-width : 768px) {
   }
 
   #new_file_upload_file_name {
-    max-width: 75%;
+    max-width: 50%;
   }
 } 
  
