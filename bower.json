@@ -23,14 +23,16 @@
     "path-converter": "https://github.com/matthiasmullie/path-converter.git#~1.0.4"
   },
   "install": {
-    "base" : "lib_test",
+    "base" : "lib",
     "path" : {
       "js" : "{key}/js",
-      "css": "{name}/css",
-      "eot": "{name}/fonts",
-      "svg": "{name}/fonts",
-      "ttf": "{name}/fonts",
-      "woff": "{name}/fonts"
+      "css": "{key}/css",
+      "eot": "{key}/fonts",
+      "svg": "{key}/fonts",
+      "ttf": "{key}/fonts",
+      "woff": "{key}/fonts",
+      "woff2": "{key}/fonts",
+      "php" : "{key}/"
     },
     "sources": {
       "ace-builds": [
@@ -51,7 +53,12 @@
         "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css",
         "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"
       ],
-      "minify" : "bower_components/minify/src/**",
+      "minify" : [
+        "bower_components/minify/src/CSS.php",
+        "bower_components/minify/src/Exception.php",
+        "bower_components/minify/src/JS.php",
+        "bower_components/minify/src/Minify.php"
+      ],
       "path-converter" : "bower_components/path-converter/src/Converter.php"
     },
     "ignore": ["jquery", "datatables-plugins"]
