@@ -4,7 +4,7 @@ function setAceOptions(optionName, optionValue) {
     options = {};
     options[optionName] = optionValue;
 
-    console.log('setting option: ' + optionName + ' to value: ' + optionValue );
+    //console.log('setting option: ' + optionName + ' to value: ' + optionValue );
 
     editor.setOptions(options);
 }
