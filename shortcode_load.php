@@ -223,17 +223,17 @@ License:
                 var_dump($e);
             }
 
-            var_dump($result);
-/*
-            if( sizeof( $result ) > 0 )  {
-                $this->shortcode_load_shortcode_file_enqueue_operation($result);
+            if( isset($result) ) {
+                for ($i=0; $i < sizeof( $result ); $i++) { 
+                    $current_file = $result[$i];
+                    $this->shortcode_load_shortcode_file_enqueue_operation($result);
+                }
 
                 //Dump data to page if argument was given
                 if($data) {
                     $this->shortcode_load_dump_shortcode_data($data, $data_wrap);
                 }
             }
-            */
         }
     }
     
