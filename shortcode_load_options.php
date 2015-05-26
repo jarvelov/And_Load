@@ -1586,6 +1586,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message = $file_data['type'] . ' file <em>'.$file_data['name'].'</em> has been ' . $file_data['operation'] . ' successfully!';
                 */
             } elseif($file_data['success'] == false) {
+                var_dump($file_data);
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'error';
