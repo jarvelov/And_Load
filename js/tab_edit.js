@@ -4,7 +4,7 @@ function setAceOptions(optionName, optionValue) {
     options = {};
     options[optionName] = optionValue;
 
-    //console.log('setting option: ' + optionName + ' to value: ' + optionValue );
+    console.log('setting option: ' + optionName + ' to value: ' + optionValue );
 
     editor.setOptions(options);
 }
@@ -272,18 +272,6 @@ jQuery(document).on("click", ":submit", function(event){
     }
 });
 
-//If this browser supports mutationObservers automatically resize ace editor on resize
-if (typeof MutationObserver == 'function') { 
-    var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutationRecord) {
-            editor.resize();
-        });
-    });
-
-    var target = document.getElementById('editor');
-    observer.observe(target, { attributes : true, attributeFilter : ['style'] });
-}
-
 //Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
 function toggleSettingsDisplay() {
     if ( jQuery('#edit_file_more_icon').hasClass('glyphicon-collapse-down') ) {
@@ -312,7 +300,6 @@ jQuery(document).ready(function() {
         //Set Ace default settings
         setAceTheme( editorSettings['theme'] );
         setAceType( editorSettings['mode'] );
-        setAceTabSize( editorSettings['tabSize'] );
         setAceFontSize( editorSettings['fontSize'] );
 
         setAceLineNumbers( editorSettings['showLineNumbers'] );
@@ -326,5 +313,17 @@ jQuery(document).ready(function() {
         editor.getSession().on('change', function() {
             setTemporaryContent( getAceContent() );//Get the new data and save it to the temporary textarea
         });
+    }
+
+    //If this browser supports mutationObservers automatically resize ace editor on resize
+    if (typeof MutationObserver == 'function') { 
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                editor.resize();
+            });
+        });
+
+        var target = document.getElementById('editor');
+        observer.observe(target, { attributes : true, attributeFilter : ['style'] });
     }
 });
