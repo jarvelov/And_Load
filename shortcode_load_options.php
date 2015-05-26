@@ -1565,13 +1565,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                         $operation = 'saved';
                         $error_id = isset( $error_id ) ? $error_id : $e->getCode();
                     }
+                } else {
+                    $error_id = isset( $error_id ) ? $error_id : 22;
                 }
             }
 
-            var_dump($error_id);
-            break;
-
-            if( isset( $file_datas ) ) {
+            if( ! ( isset( $error_id ) ) ) {
                 $this->shortcode_load_add_settings_message( $file_datas );
             } else {
                 $this->shortcode_load_add_settings_message(array(
