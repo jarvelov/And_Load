@@ -208,7 +208,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 'Vibrant Ink' => 'vibrant_ink',
                 'Xcode' => 'xcode'
             ),
-            'editor_font_sizes' => array(8, 10, 12, 14, 16, 18, 20, 22, 24),
+            'editor_font_sizes' => array(8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 24),
             'editor_mode_types' => array('JavaScript' => 'javascript', 'CSS' => 'css', 'None' => 'plain_text'),
             'editor_default_theme' => 'monokai',
             'editor_default_mode_type' => 'plain_text',
