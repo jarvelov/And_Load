@@ -256,6 +256,24 @@ jQuery(document).on("click", ":submit", function(event){
                 jQuery('#delete').click();
               }
             });
+            bootbox.dialog({
+                title:"Permanently delete file?",
+                message:"Are you sure you want to delete this file and all revisions of it? This action is permanent and can not be reversed!",
+                buttons:{
+                    confirm:{
+                        label:"Yes",
+                        className:"btn-danger",
+                        callback:function() {
+                            jQuery('#delete').addClass('confirmed');
+                            jQuery('#delete').click();
+                        }
+                    },
+                    cancel:{
+                        label:"No, I changed my mind.",
+                        className:"btn-default",
+                    }
+                }
+            })
         }
     }
 });
