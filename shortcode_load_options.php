@@ -1070,7 +1070,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //We also need the id to refer to later, save this to a simple input field as well
                     echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
 
-                    $this->shortcode_load_editor_init( true, $type );
+                    $this->shortcode_load_editor_init( '', $type );
                 } else {
                     $this->shortcode_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
