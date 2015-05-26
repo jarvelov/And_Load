@@ -1596,10 +1596,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $this->shortcode_load_add_settings_message( $file_datas );
             } else {
                 $this->shortcode_load_add_settings_message(array(
-                    'success' => false,
-                    'error_id' => $error_id,
-                    'operation' => $operation
-                ));
+                    array(
+                        'success' => false,
+                        'error_id' => $error_id,
+                        'operation' => $operation
+                    ))
+                );
             }
         }
     }
