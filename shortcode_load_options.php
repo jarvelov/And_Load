@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
-
 Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     function __construct() {
@@ -1229,8 +1225,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>raw - Default action. Do not wrap data, output it raw.</li>';
         $html .= '<li>script - Wraps content within script tags.</li>';
         $html .= '<li>style - Wraps content within style tags.</li>';
-        $html .= '<li>scriptCDATA - Wraps content within script and then CDATA tags.</li>';
-        $html .= '<li>styleCDATA - Wraps content within style and then CDATA tags.</li>';
         $html .= '</ul>';
         $html .= '</li>';
         $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" data="var myVariable=\'Check mate, mate!\',mySecondVariable=true;myFunction(myVariable, mySecondVariable);" data_wrap="script"]</code></p></li>';

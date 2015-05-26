@@ -4,7 +4,7 @@
 Plugin Name: Shortcode Load
 Plugin URI: http://jarvelov.se/portfolio/shortcode_load
 Description: Load style or script files using a shortcode.
-Version: 0.9a
+Version: 0.9.1a
 Author: Tobias Järvelöv
 Author Email: tobias@jarvelov.se
 License:
@@ -105,6 +105,27 @@ License:
             $this->shortcode_load_enqueue_styles();
         }
     }
+    /** shortcode_load_dump_shortcode_data
+    * @data - (string) to be dumped to page
+    * @wrap - (string) 'script' | 'style'- Wrap @data within these tags
+    */
+    function shortcode_load_dump_shortcode_data($data, $wrap) {
+        switch ($wrap) {
+            case 'script':
+                $content = '<script type="text/javascript">' . $data . '</script>';
+                break;
+            
+            case 'style':
+                $content = '<style type="text/css">' . $data . '</style';
+                break;
+            default:
+                break;
+        }
+
+        if( isset($content) ) {
+            echo $content;
+        }
+    } //end shortcode_load_dump_shortcode_data
 
     /** shortcode_load_render_shortcode
     *
