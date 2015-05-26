@@ -1,4 +1,4 @@
-/*jQuery(document).ready(function() {
+jQuery(document).ready(function() {
     //Initialize overview-table as a DataTable
 
     if(typeof(overviewSettings) != 'undefined' ) {
@@ -11,4 +11,3 @@
         jQuery(order_column_thead).addClass('sorting_' + overviewSettings['order_type'] );
     }
 });
-*/
