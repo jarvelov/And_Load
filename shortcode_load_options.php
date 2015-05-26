@@ -1695,7 +1695,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     //Libraries
                     $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace-builds/js/ace.js', true );
                     $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.min.js', true );
+                    $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.js', true );
 
                     //Tab styles and scripts
                     $this->shortcode_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
