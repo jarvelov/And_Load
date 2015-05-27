@@ -1155,7 +1155,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>';
         $html .= '</li>';
         $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2"]</code></p></li>';
-        $html .= '<p class="help_example"><code>[shortcode_load id="2,3,4,18"]</code></p>';
+        $html .= '<li><p class="help_example"><code>[shortcode_load id="2,3,4,18"]</code></p></li>';
         $html .= '</ul>'; // end shortcode_load_parameters_id
         $html .= '</li>';
 
