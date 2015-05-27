@@ -1145,7 +1145,7 @@ Class AndLoad_Options extends AndLoad {
         $html .= '<h4>Help and how-to</h4>';
         $html .= '<div id="and_load_donation_container">';
 
-        $html .= '<span>If you like this plugin then consider donating to support it\'s development. It would mean a lot!</span>';
+        $html .= '<p>If you like this plugin then consider donating to support it\'s development. It would mean a lot!</p>';
         $html .= '<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tobias%2ejarvelov%40live%2ese&lc=US&item_name=And%20Load&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" /></a>';
         $html .= '</div>'; //end and_load_donation_container
 
