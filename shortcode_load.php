@@ -224,6 +224,8 @@ License:
                 var_dump($e);
             }
 
+            var_dump($result);
+
             //TODO: Something prevents the most current revision to be loaded with JS files
             if( isset($result) ) {
                 for ($i=0; $i < sizeof( $result ); $i++) { 
