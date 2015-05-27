@@ -5,7 +5,7 @@ And load is a Wordpress plugin to easily load styles and scripts by using a shor
 
 And load has support to not only load script and style files but it can also output additional data onto the page directly with its `data` parameter. The data can optionally be wrapped inside `<script>` or `<style>` tags for additional customization.
 
-CSS and JavaScript files are automatically compressed (minified) when loaded unless overriden by the `minify_override` parameter or the global option "Minify files" is disabled.
+CSS and JavaScript files are automatically compressed (minified) when loaded and saves every update you make to a new revision of the file so you can easily revert back to a working copy of a file. The plugin includes the [Ace editor](http://ace.c9.io/) with over 20 themes to choose from, syntax highlighting and much more, all to make editing files more fun.
 
 ##Install
 
