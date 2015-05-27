@@ -199,16 +199,14 @@ License:
             'data_wrap' => 'raw'
             ), $atts));
 
-        var_dump($args);
-
-        if( $id ) {
+        if( $args['id'] ) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
             $sql_limit = 10;
             $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
 
-            $ids = explode(",", $id);
+            $ids = explode(",", $args['id']);
             for ($i=0; $i < sizeof($ids) OR $i < $sql_limit; $i++) { 
                 $current_id = $ids[$i];
                 if($i == 0) {
