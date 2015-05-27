@@ -1148,13 +1148,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<li><h4>id</h4>';
         $html .= '<ul id="shortcode_load_parameters_id">';
-        $html .= '<li><strong>Required.</strong> Which file to load.</li>';
+        $html .= '<li><strong>Required.</strong> Which file to load. You can specify multiple ids by comma separating them.</li>';
         $html .= '<li>Accepted values:';
         $html .= '<ul>';
-        $html .= '<li>Any ID of a registered file.</li>';
+        $html .= '<li>Any ID of a registered file (max 10 per shortcode).</li>';
         $html .= '</ul>';
         $html .= '</li>';
         $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2"]</code></p></li>';
+        $html .= '<p class="help_example"><code>[shortcode_load id="2,3,4,18"]</code></p>';
         $html .= '</ul>'; // end shortcode_load_parameters_id
         $html .= '</li>';
 
