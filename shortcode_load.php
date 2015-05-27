@@ -189,7 +189,6 @@ License:
     *
     */
     function shortcode_load_render_shortcode($atts) {
-        $time_pre = microtime(true);
         // Extract the attributes submitted with the shortcode
         $args = (shortcode_atts(array(
             'id' => false,
@@ -207,13 +206,14 @@ License:
             $sql_limit = 10;
             $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
 
+            //Go over all ids and build SQL query
             $ids = explode(",", $args['id']);
             for ($i=0; $i < sizeof($ids) OR $i < $sql_limit; $i++) { 
                 $current_id = $ids[$i];
                 if($i == 0) {
                     $sql .= 'id = ' . intval( $current_id );
                 } else {
-                    //$sql .= ' OR id = ' . intval( $current_id );
+                    $sql .= ' OR id = ' . intval( $current_id );
                 }
             }
 
@@ -222,7 +222,7 @@ License:
             try {
                 $result = $wpdb->get_results($sql, ARRAY_A);    
             } catch(Exception $e) {
-                var_dump($e);
+                //var_dump($e);
             }
 
             //TODO: Something prevents the most current revision to be loaded with JS files
@@ -238,9 +238,6 @@ License:
                 }
             }
         }
-        $time_post = microtime(true);
-        $exec_time = $time_post - $time_pre;
-        echo $exec_time;
     }
     
     /** shortcode_load_enqueue_styles
