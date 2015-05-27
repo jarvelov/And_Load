@@ -14,6 +14,7 @@ Download directory from the Wordpress plugins repository.
 or
 
 Clone the repository with Git into the wp-content/plugins/ directory:
+
 `git clone https://github.com/jarvelov/And_Load.git and_load`
 
 ##Usage
