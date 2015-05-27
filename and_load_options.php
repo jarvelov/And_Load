@@ -1143,15 +1143,17 @@ Class AndLoad_Options extends AndLoad {
     function and_load_help_callback() {
         $html = '<div id="and_load_help">';
         $html .= '<h4>Help and how-to</h4>';
-        $html .= '<div id="and_load_help_getting_started">';
-
-        $html .= '<span>Hello there! Cool that you\'re using <strong>And Load!</strong>. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</span>';
-        $html .= '<span>If you need support with the plugin check out the plugin\'s <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://wordpress.org/plugins/and_load"><strong>support page</strong></a>. If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</span>';
-
         $html .= '<div id="and_load_donation_container">';
+
         $html .= '<span>If you like this plugin then consider donating to support it\'s development. It would mean a lot and keep me motivated to keep it updated with neat stuff!</span>';
         $html .= '<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tobias%2ejarvelov%40live%2ese&lc=US&item_name=And%20Load&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" /></a>';
         $html .= '</div>'; //end and_load_donation_container
+
+        $html .= '<div id="and_load_help_getting_started">';
+        
+        $html .= '<span>Hello there! Cool that you\'re using <strong>And Load!</strong>. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</span>';
+        $html .= '<span>If you need support with the plugin check out the plugin\'s <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://wordpress.org/plugins/and_load"><strong>support page</strong></a>. If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</span>';
+
         $html .= '</div>'; // end and_load_help_getting_started
         $html .= '</div>'; // end and_load_help
 
