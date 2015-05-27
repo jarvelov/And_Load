@@ -1,17 +1,17 @@
 <?php
 
-Class ShortcodeLoad_Options extends ShortcodeLoad {
+Class AndLoad_Options extends AndLoad {
 
     function __construct() {
-        add_action( 'admin_menu', array($this, 'shortcode_load_add_admin_menu') );
-        add_action( 'admin_init', array($this, 'shortcode_load_settings_init') );
+        add_action( 'admin_menu', array($this, 'and_load_add_admin_menu') );
+        add_action( 'admin_init', array($this, 'and_load_settings_init') );
     } //end __construct
 
-    function shortcode_load_add_admin_menu(  ) { 
-        add_options_page( 'Shortcode Load', 'Shortcode Load', 'manage_options', 'shortcode_load', array($this, 'shortcode_load_options_page') );
-    } // end shortcode_load_add_admin_menu
+    function and_load_add_admin_menu(  ) { 
+        add_options_page( 'And Load', 'And Load', 'manage_options', 'and_load', array($this, 'and_load_options_page') );
+    } // end and_load_add_admin_menu
 
-    function shortcode_load_settings_init()  {
+    function and_load_settings_init()  {
 
         if ( ! current_user_can('update_plugins') )
             return;
@@ -19,124 +19,124 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         /* Overview tab section */
 
         add_settings_section( 
-            'shortcode_load_overview',
+            'and_load_overview',
             'Registered scripts and styles',
-            array($this, 'shortcode_load_overview_callback'),
-            'shortcode_load_overview'
+            array($this, 'and_load_overview_callback'),
+            'and_load_overview'
         );    
 
-        register_setting('shortcode_load_overview', 'shortcode_load_overview');
+        register_setting('and_load_overview', 'and_load_overview');
 
         /* Default settings tab section */
 
         add_settings_section( 
-            'shortcode_load_default',
+            'and_load_default',
             'Default Settings',
-            array($this, 'shortcode_load_default_options_callback'),
-            'shortcode_load_default_options'
+            array($this, 'and_load_default_options_callback'),
+            'and_load_default_options'
         );
 
         add_settings_field(
-            'shortcode_load_general',
+            'and_load_general',
             'General',
-            array($this, 'shortcode_load_default_general_settings_callback'),
-            'shortcode_load_default_options',
-            'shortcode_load_default',
-            $this->shortcode_load_get_options_default_general()
+            array($this, 'and_load_default_general_settings_callback'),
+            'and_load_default_options',
+            'and_load_default',
+            $this->and_load_get_options_default_general()
         );
 
         add_settings_field(
-            'shortcode_load_overview',
+            'and_load_overview',
             'Overview',
-            array($this, 'shortcode_load_default_overview_callback'),
-            'shortcode_load_default_options',
-            'shortcode_load_default',
-            $this->shortcode_load_get_options_default_overview()
+            array($this, 'and_load_default_overview_callback'),
+            'and_load_default_options',
+            'and_load_default',
+            $this->and_load_get_options_default_overview()
         );
 
         add_settings_field(
-            'shortcode_load_default_editor_settings',
+            'and_load_default_editor_settings',
             'Editor settings',
-            array($this, 'shortcode_load_default_editor_settings_callback'),
-            'shortcode_load_default_options',
-            'shortcode_load_default',
-            $this->shortcode_load_get_options_default_editor()
+            array($this, 'and_load_default_editor_settings_callback'),
+            'and_load_default_options',
+            'and_load_default',
+            $this->and_load_get_options_default_editor()
         );
 
-        register_setting('shortcode_load_default_options', 'shortcode_load_default_options', array($this, 'shortcode_load_default_options_callback_sanitize'));
+        register_setting('and_load_default_options', 'and_load_default_options', array($this, 'and_load_default_options_callback_sanitize'));
 
         /* Edit file tab section */
 
         add_settings_section( 
-            'shortcode_load_edit_file',
+            'and_load_edit_file',
             '',
-            array($this, 'shortcode_load_edit_file_options_callback'),
-            'shortcode_load_edit_file_options'
+            array($this, 'and_load_edit_file_options_callback'),
+            'and_load_edit_file_options'
         );
 
-        register_setting('shortcode_load_edit_file_options', 'shortcode_load_edit_file_options', array($this, 'shortcode_load_edit_file_callback_sanitize'));
+        register_setting('and_load_edit_file_options', 'and_load_edit_file_options', array($this, 'and_load_edit_file_callback_sanitize'));
 
         /* Help tab section */
 
         add_settings_section( 
-            'shortcode_load_help',
+            'and_load_help',
             'Help',
-            array($this, 'shortcode_load_help_callback'),
-            'shortcode_load_help_section'
+            array($this, 'and_load_help_callback'),
+            'and_load_help_section'
         );
 
         add_settings_field(
-            'shortcode_load_help_documentation',
+            'and_load_help_documentation',
             'Documentation',
-            array($this, 'shortcode_load_help_documentation_callback'),
-            'shortcode_load_help_section',
-            'shortcode_load_help'
+            array($this, 'and_load_help_documentation_callback'),
+            'and_load_help_section',
+            'and_load_help'
         );
 
         add_settings_field(
-            'shortcode_load_help_credits',
+            'and_load_help_credits',
             'Credits',
-            array($this, 'shortcode_load_help_credits_callback'),
-            'shortcode_load_help_section',
-            'shortcode_load_help'
+            array($this, 'and_load_help_credits_callback'),
+            'and_load_help_section',
+            'and_load_help'
         );
 
         add_settings_field(
-            'shortcode_load_help_debug',
+            'and_load_help_debug',
             'Debug',
-            array($this, 'shortcode_load_help_debug_callback'),
-            'shortcode_load_help_section',
-            'shortcode_load_help'
+            array($this, 'and_load_help_debug_callback'),
+            'and_load_help_section',
+            'and_load_help'
         );
 
-        register_setting('shortcode_load_help_section', 'shortcode_load_help_section');
+        register_setting('and_load_help_section', 'and_load_help_section');
 
         //Register default options
-        $this->shortcode_load_register_default_options();
-    } // end shortcode_load_settings_init
+        $this->and_load_register_default_options();
+    } // end and_load_settings_init
 
     /***************************
     * Default option arguments *
     ***************************/
 
-    /** shortcode_load_get_options_default_general
+    /** and_load_get_options_default_general
     * Returns an array with the default general options
     */
 
-    function shortcode_load_get_options_default_general() {
+    function and_load_get_options_default_general() {
         $options = array(
             'default_minify' => true, //set default to auto minify for all file types
             'default_jquery' => true //set default to add jquery as dependency for script files                
         );
 
         return $options;
-    } //end shortcode_load_get_options_default_general
+    } //end and_load_get_options_default_general
 
-    /** shortcode_load_get_options_default_overview
+    /** and_load_get_options_default_overview
     * Returns an array with the default options for overview tab
     */
 
-    function shortcode_load_get_options_default_overview() {
+    function and_load_get_options_default_overview() {
         $options = array(
             'overview_default_table_order_column' => 0,
             'overview_default_table_order_columns' => array(
@@ -155,12 +155,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         );
 
         return $options;
-    } // end shortcode_load_get_options_default_overview
+    } // end and_load_get_options_default_overview
 
-    /** shortcode_load_get_options_default_editor
+    /** and_load_get_options_default_editor
     * Returns an array with the default options for the tab_edit editor
     */
-    function shortcode_load_get_options_default_editor() {
+    function and_load_get_options_default_editor() {
         $options = array(
             'editor_themes' => array(
                 'Ambiance' => 'ambiance',
@@ -211,7 +211,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         return $options;
     }
 
-    /** shortcode_load_save_to_database
+    /** and_load_save_to_database
     * Save a new script or style to the database
     *
     * @args - named array
@@ -223,9 +223,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'minify' => (bool)
         )
     */
-    function shortcode_load_save_to_database($args) {
+    function and_load_save_to_database($args) {
         try {
-            $db_args = $this->shortcode_load_save_file( $args );
+            $db_args = $this->and_load_save_file( $args );
         } catch (Exception $e) {
             $error_id = isset( $error_id ) ? $error_id : $e->getCode();
         }
@@ -233,7 +233,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( ( ! isset( $error_id ) ) ) {
             try {
                 global $wpdb;
-                $table_name = $wpdb->prefix . 'shortcode_load'; 
+                $table_name = $wpdb->prefix . 'and_load'; 
 
                 $wpdb->insert( 
                     $table_name, 
@@ -275,19 +275,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $return_args;
-    } // end shortcode_load_save_to_database
+    } // end and_load_save_to_database
 
-    /* shortcode_load_update_database_record
+    /* and_load_update_database_record
     * Updates a record in the database
     *
     * @id - (int)
     * @revision - (int)
     * @minify - (bool)
     */
-    function shortcode_load_update_database_record($id, $revision, $minify) {
+    function and_load_update_database_record($id, $revision, $minify) {
         try {
             global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load';
+            $table_name = $wpdb->prefix . 'and_load';
             $result = $wpdb->update( 
                 $table_name, 
                 array( 
@@ -316,12 +316,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             throw new Exception("Could not update database record", 4);
         }
         return $return_args;
-    } // end shortcode_load_update_database_record
+    } // end and_load_update_database_record
 
-    function shortcode_load_delete_database_record($id) {
+    function and_load_delete_database_record($id) {
         try {
             global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load';
+            $table_name = $wpdb->prefix . 'and_load';
 
             $wpdb->delete( $table_name,
                 array( 'id' => intval($id) ),
@@ -331,9 +331,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $error_id = isset( $error_id ) ? $error_id : 19;
             throw new Exception("Error deleting file with id: $id", $error_id);
         }
-    } // end shortcode_load_delete_database_record
+    } // end and_load_delete_database_record
 
-    /* shortcode_load_save_file
+    /* and_load_save_file
     * Save a new script or style to a file in wordpress' uploads folder
     * @args - named array
     * $args = array(
@@ -343,9 +343,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             'minify' => (bool)
         )
     */
-    function shortcode_load_save_file($args) {
+    function and_load_save_file($args) {
         $wp_uploads_path = wp_upload_dir();
-        $uploads_dir = $wp_uploads_path['basedir'] . '/shortcode_load/';
+        $uploads_dir = $wp_uploads_path['basedir'] . '/and_load/';
 
         $minify = $args['minify'];
         $content = $args['content'];
@@ -379,7 +379,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $random5 = substr( md5( microtime() ), rand( 0,26 ), 5); //generate 5 random characters to ensure filename is unique
         $slug = $org_name . '.' . $random5;
 
-        $slug = $this->shortcode_load_filter_string( $slug ); //filter out any characters we don't want in path
+        $slug = $this->and_load_filter_string( $slug ); //filter out any characters we don't want in path
 
         $file_src = $src_dir . $slug . '.' . $type;
 
@@ -404,7 +404,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
-            $file_args = $this->shortcode_load_save_file_to_path( $file_src, $content, $type, $minify );
+            $file_args = $this->and_load_save_file_to_path( $file_src, $content, $type, $minify );
         } catch(Exception $e) {
             //var_dump($e);
             $error_id = isset( $error_id ) ? $error_id : $e->getCode();
@@ -419,9 +419,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             throw new Exception("Error saving file.", $error_id);
         }
-    } // end shortcode_load_save_file
+    } // end and_load_save_file
 
-    /* shortcode_load_save_file_to_path
+    /* and_load_save_file_to_path
     * Save file content to path,
     * optionally save a minified version
     *
@@ -430,7 +430,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @type - (string) 'js' | 'css'
     * @minify - (bool)
     */
-    function shortcode_load_save_file_to_path($path, $content, $type, $minify) {
+    function and_load_save_file_to_path($path, $content, $type, $minify) {
         $file_args_array = array();
 
         try {
@@ -447,7 +447,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if($minify == true) {
             try {
-                $minified_content = $this->shortcode_load_minify_file( $content, $type );
+                $minified_content = $this->and_load_minify_file( $content, $type );
             } catch (Exception $e) {
                 //var_dump($e);
                 $error_id = isset( $error_id ) ? $error_id : $e->getCode();
@@ -466,19 +466,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $file_args_array;
-    } // end shortcode_load_save_file_to_path
+    } // end and_load_save_file_to_path
 
-    /** shortcode_load_add_file_revision
+    /** and_load_add_file_revision
     * Add a new revision of a file
     *
     * @id- (int)
     * @content- (string)
     * @minify - (bool)
     **/
-    function shortcode_load_add_file_revision($id, $content, $minify) {
+    function and_load_add_file_revision($id, $content, $minify) {
         try {
             global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load'; 
+            $table_name = $wpdb->prefix . 'and_load'; 
 
             $sql = "SELECT name,slug,type,revision,srcpath,minify FROM ".$table_name." WHERE id = ".intval($id)." LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
@@ -489,7 +489,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         if( isset( $result ) ) {
             extract($result); //extract array to named variables, see $sql SELECT query above for variable names
-            $options_default = get_option( 'shortcode_load_default_options' );
+            $options_default = get_option( 'and_load_default_options' );
             $minify = ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $minify; //TODO reverse this logic when adding an option to disable minify per file
 
             $new_revision = ( intval($revision) + 1);
@@ -502,7 +502,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $file_src = $file_src_base . $new_slug;
 
             try {
-                $file_args = $this->shortcode_load_save_file_to_path( $file_src, $content, $type, $minify );
+                $file_args = $this->and_load_save_file_to_path( $file_src, $content, $type, $minify );
             } catch(Exception $e) {
                 $error_id = isset( $error_id ) ? $error_id : $e->getCode();
             }
@@ -511,7 +511,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         if( isset( $file_args ) ) {
             if($file_args['success'] == true) {
                 try {
-                    $result = $this->shortcode_load_update_database_record( intval($id), $new_revision, $minify);
+                    $result = $this->and_load_update_database_record( intval($id), $new_revision, $minify);
                     $type = ($type == 'js') ? 'Script' : 'Style';
                     $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'updated');
                 } catch(Exception $e) {
@@ -524,19 +524,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $return_args;
-    } // end shortcode_load_add_file_revision
+    } // end and_load_add_file_revision
 
-    /** shortcode_load_delete_file
+    /** and_load_delete_file
     * Delete a file and all revisions of it
     *
     * @id - ID of file to delete
     *
     **/
 
-    function shortcode_load_delete_file($id) {
+    function and_load_delete_file($id) {
         try {
             global $wpdb;
-            $table_name = $wpdb->prefix . 'shortcode_load'; 
+            $table_name = $wpdb->prefix . 'and_load'; 
 
             $sql = "SELECT name,type,revision,srcpath,minify,minpath FROM ".$table_name." WHERE id = ".intval($id)." LIMIT 1";
             $result = $wpdb->get_results($sql, ARRAY_A)[0];
@@ -556,7 +556,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     $file = ($i == 0)  ? ( $file_path_base . $file_name . "min." . $type ) :  ( $file_path_base . $file_name . $i . ".min." . $type );
 
                     try {
-                        $this->shortcode_load_delete_file_from_path( $file );
+                        $this->and_load_delete_file_from_path( $file );
                     } catch(Exception $e) {
                         $error_id = isset( $error_id ) ? $error_id : $e->getCode();
                     }
@@ -569,7 +569,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $file = ($i == 0)  ? ( $file_path_base . $file_name . $type ) :  ( $file_path_base . $file_name . $i . "." . $type );
 
                 try {
-                    $this->shortcode_load_delete_file_from_path( $file );
+                    $this->and_load_delete_file_from_path( $file );
                 } catch(Exception $e) {
                     $error_id = isset( $error_id ) ? $error_id : $e->getCode();
                 }
@@ -577,7 +577,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         try {
-            $result = $this->shortcode_load_delete_database_record( $id );
+            $result = $this->and_load_delete_database_record( $id );
             $type = ($type == 'js') ? 'Script' : 'Style';
             $return_args = array('success' => true, 'id' => $id, 'name' => $name, 'type' => $type, 'operation' => 'deleted');
         } catch(Exception $e) {
@@ -589,26 +589,26 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $return_args;
-    } // end shortcode_load_delete_file
+    } // end and_load_delete_file
 
     /*
     * Minify javascript and css code
     */
-    function shortcode_load_minify_file($content, $type) {
-        if ( class_exists("ShortcodeLoad") ) {
-            if ( ! class_exists('ShortcodeLoad_Minify') ) {
+    function and_load_minify_file($content, $type) {
+        if ( class_exists("AndLoad") ) {
+            if ( ! class_exists('AndLoad_Minify') ) {
                 try {
-                    require(dirname(__FILE__) . '/' . ShortcodeLoad::slug.'_minify.php');
+                    require(dirname(__FILE__) . '/' . AndLoad::slug.'_minify.php');
                 } catch(Exception $e) {
                     //var_dump($e);
-                    throw new Exception("ShortcodeLoad minify class could not be loaded", 14);
+                    throw new Exception("AndLoad minify class could not be loaded", 14);
                 }
             }
         }
 
         try {
-            $ShortcodeLoad_Minify = new ShortcodeLoad_Minify();
-            $minified_content = $ShortcodeLoad_Minify->shortcode_load_minify_minify_file($content, $type);
+            $AndLoad_Minify = new AndLoad_Minify();
+            $minified_content = $AndLoad_Minify->and_load_minify_minify_file($content, $type);
         } catch (Exception $e) {
             //var_dump($e);
             $error_id = isset( $error_id ) ? $error_id : $e->getCode();
@@ -616,20 +616,20 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
 
         return $minified_content;
-    } // end shortcode_load_minify_file
+    } // end and_load_minify_file
 
     /*
     * Return all saved file entries in database
     */
-    function shortcode_load_get_scripts_styles() {
+    function and_load_get_scripts_styles() {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'shortcode_load'; 
+        $table_name = $wpdb->prefix . 'and_load'; 
 
         $sql = "SELECT id,name,slug,type,revision,updated_timestamp,created_timestamp FROM ".$table_name." ORDER BY created_timestamp DESC";
         $result = $wpdb->get_results($sql, ARRAY_A);
 
         return $result;
-    } // end shortcode_load_get_scripts_styles
+    } // end and_load_get_scripts_styles
 
     /*
     * Returns a file's content.
@@ -637,7 +637,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * @path - Path to file
     */
 
-    function shortcode_load_get_file($path) {
+    function and_load_get_file($path) {
         if( file_exists( $path ) ) {
             try {
                 $content = file_get_contents($path);
@@ -648,15 +648,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $content = false;
         }
         return $content;
-    } // end shortcode_load_get_file
+    } // end and_load_get_file
 
-    function shortcode_load_delete_file_from_path($path) {
+    function and_load_delete_file_from_path($path) {
         if( file_exists( $path ) ) {
             if( ! ( unlink( $path ) ) ) {
                 throw new Exception("Error deleting file with path: $path", 18);
             }
         }
-    } // end shortcode_load_delete_file_from_path
+    } // end and_load_delete_file_from_path
 
     /************
     * Callbacks *
@@ -664,17 +664,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     /* Overview tab callbacks */
 
-    function shortcode_load_overview_callback() {
+    function and_load_overview_callback() {
         echo '<p>Overview of the currently registered scripts and styles</p>'; 
 
-        $files = $this->shortcode_load_get_scripts_styles();
+        $files = $this->and_load_get_scripts_styles();
 
-        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=shortcode_load&amp;tab=tab_edit"><span class="glyphicon glyphicon-plus"></span> New File</a>';
+        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=and_load&amp;tab=tab_edit"><span class="glyphicon glyphicon-plus"></span> New File</a>';
         $html .= '<div id="overview_container">';
 
         if(sizeof($files) > 0) {
             $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
-            $html .= '<div class="shortcode_load_table_container">';
+            $html .= '<div class="and_load_table_container">';
             $html .= '<table id="overview_table" class="table table-hover table-striped table-bordered display">';
             $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
             $html .= '<tbody>';
@@ -685,7 +685,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '<tr>';
                 $html .= '<td>' . $id . '</td>';
                 $html .= '<td>' . strtoupper($type) . '</td>';
-                $html .= '<td ><a href="?page=shortcode_load&amp;tab=tab_edit&amp;id=' . $id . '" title="">' . $name . '</a></td>';
+                $html .= '<td ><a href="?page=and_load&amp;tab=tab_edit&amp;id=' . $id . '" title="">' . $name . '</a></td>';
                 $html .= '<td>' . $revision . '</td>';
                 $html .= '<td>' . $updated_timestamp . '</td>';
                 $html .= '<td>' . $created_timestamp . '</td>';
@@ -695,7 +695,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             $html .= '</tbody></table></div>';
 
-            $options_default = get_option( 'shortcode_load_default_options' );
+            $options_default = get_option( 'and_load_default_options' );
 
             $overview_default_table_order_column = $options_default['overview_default_table_order_column'];
             $overview_table_order_type = $options_default['overview_default_table_sort'];
@@ -712,8 +712,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         } else {
             $html .= '<div id="overview_get_started">';
             $html .= '<h2>No scripts or styles created yet!</h2>';
-            $html .= '<p>To begin click the <em>"New file"</em> button or the <strong><a href="?page=shortcode_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
-            $html .= '<p>For more info and help check out the <strong><a href="?page=shortcode_load&amp;tab=tab_help">Help</a></strong> tab</p>';
+            $html .= '<p>To begin click the <em>"New file"</em> button or the <strong><a href="?page=and_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
+            $html .= '<p>For more info and help check out the <strong><a href="?page=and_load&amp;tab=tab_help">Help</a></strong> tab</p>';
             $html .= '</div>'; //end bg-warning
         }
 
@@ -722,12 +722,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;        
     }
 
-    function shortcode_load_register_default_options() {
-        if( ! get_option('shortcode_load_default_options') ) {
+    function and_load_register_default_options() {
+        if( ! get_option('and_load_default_options') ) {
             $options_default = array();
 
             //Get general default options
-            $general_options = $this->shortcode_load_get_options_default_general();
+            $general_options = $this->and_load_get_options_default_general();
 
             //Add general options to $options_default
             foreach ($general_options as $key => $value) {
@@ -735,7 +735,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             //Get overview default options
-            $overview_options = $this->shortcode_load_get_options_default_overview();
+            $overview_options = $this->and_load_get_options_default_overview();
 
             //Add overview options to $options_default
             foreach ($overview_options as $key => $value) {
@@ -743,7 +743,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             //Get editor default options
-            $editor_options = $this->shortcode_load_get_options_default_editor();
+            $editor_options = $this->and_load_get_options_default_editor();
 
             //Add editor options to $options_default
             foreach ($editor_options as $key => $value) {
@@ -751,21 +751,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             //Register default options
-            update_option( 'shortcode_load_default_options', $options_default );
+            update_option( 'and_load_default_options', $options_default );
         }
     }
 
     /* Default options tab callbacks */
 
-    function shortcode_load_default_options_callback() {
+    function and_load_default_options_callback() {
         $html = '<p>Default options to configure overview and editor settings.</p>'; 
         $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Hover mouse cursor over each setting title to get more info about it.</span></p>';
 
         echo $html;
     }
 
-    function shortcode_load_default_general_settings_callback($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
+    function and_load_default_general_settings_callback($args) {
+        $options_default = get_option( 'and_load_default_options' );
 
         $html = '<div id="default_general_container">';
 
@@ -773,7 +773,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $minify_checkbox_value = isset ( $options_default['default_minify'] ) ? $options_default['default_minify'] : $args['default_minify'];
         $html .= '<div id="default_minify_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically save a minified copy when saving/updating a file. If unchecked all files will load the unminified version of the file unless minify_override is used."><strong><small>Minify files</strong></small></label>';
-        $html .= '<input type="checkbox" id="default_minify" name="shortcode_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="default_minify" name="and_load_default_options[default_minify]" value="1"' . checked( $minify_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // end default_minify_setting_container
 
@@ -781,7 +781,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $jquery_checkbox_value = isset ( $options_default['default_jquery'] ) ? $options_default['default_jquery'] : $args['default_jquery'];
         $html .= '<div id="default_jquery_setting_container" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Automatically add jQuery as a dependency to script files"><strong><small>Load jQuery with script files</strong></small></label>';
-        $html .= '<input type="checkbox" id="default_jquery" name="shortcode_load_default_options[default_jquery]" value="1"' . checked( $jquery_checkbox_value, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="default_jquery" name="and_load_default_options[default_jquery]" value="1"' . checked( $jquery_checkbox_value, 1, false ) . '/>';
 
         $html .= '</div>'; // end default_jquery_setting_container
 
@@ -790,8 +790,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
-    function shortcode_load_default_overview_callback($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
+    function and_load_default_overview_callback($args) {
+        $options_default = get_option( 'and_load_default_options' );
 
         $html = '<div id="default_overview_container">';
 
@@ -800,7 +800,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Overview table default column to sort by
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
-        $html .= '<select id="overview_default_table_order_column" name="shortcode_load_default_options[overview_default_table_order_column]" class="form-control default_select">';
+        $html .= '<select id="overview_default_table_order_column" name="and_load_default_options[overview_default_table_order_column]" class="form-control default_select">';
 
         $overview_default_table_order_column = isset ( $options_default['overview_default_table_order_column'] ) ? $options_default['overview_default_table_order_column'] : $args['overview_default_table_order_column'];
         $overview_default_table_order_columns = $args['overview_default_table_order_columns'];
@@ -814,7 +814,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         //Overview table default sort order
         $html .= '<label class="control-label" title="Default column in overview table to sort by."><strong><small>Default sort column</strong></small></label>';
-        $html .= '<select id="overview_default_table_sort" name="shortcode_load_default_options[overview_default_table_sort]" class="form-control default_select">';
+        $html .= '<select id="overview_default_table_sort" name="and_load_default_options[overview_default_table_sort]" class="form-control default_select">';
 
         $overview_default_table_sort = isset ( $options_default['overview_default_table_sort'] ) ? $options_default['overview_default_table_sort'] : $args['overview_default_table_sort'];
         $overview_default_table_sort_types = $args['overview_default_table_sort_types'];
@@ -833,8 +833,8 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         echo $html;
     }
 
-    function shortcode_load_default_editor_settings_callback($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
+    function and_load_default_editor_settings_callback($args) {
+        $options_default = get_option( 'and_load_default_options' );
 
         //Ace editor theme selection
         $editor_default_theme = isset( $options_default['editor_default_theme'] ) ? $options_default['editor_default_theme'] : $args['editor_default_theme'];;
@@ -844,7 +844,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_theme_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Default editor theme."><strong><small>Default theme</strong></small></label>';
-        $html .= '<select id="editor_default_theme" name="shortcode_load_default_options[editor_default_theme]" class="form-control default_select">';
+        $html .= '<select id="editor_default_theme" name="and_load_default_options[editor_default_theme]" class="form-control default_select">';
 
         foreach ($editor_themes as $editor_theme_name => $editor_theme_slug) {
             $selected = selected( $editor_default_theme, $editor_theme_slug, false );
@@ -863,7 +863,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Get all available font sizes and check which one is currently selected
         $editor_font_sizes = $args['editor_font_sizes'];
 
-        $html .= '<select id="editor_default_font_size" name="shortcode_load_default_options[editor_default_font_size]" class="form-control default_select">';
+        $html .= '<select id="editor_default_font_size" name="and_load_default_options[editor_default_font_size]" class="form-control default_select">';
         foreach ($editor_font_sizes as $editor_font_size) {
             $selected = selected( $editor_default_font_size, $editor_font_size, false );
             $html .= '<option value=' . $editor_font_size . $selected . '>' . $editor_font_size . '</option>';
@@ -880,7 +880,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         //Get all available font sizes and check which one is currently selected
         $editor_mode_types = $args['editor_mode_types'];
 
-        $html .= '<select id="editor_default_mode_type" name="shortcode_load_default_options[editor_default_mode_type]" class="form-control default_select">';
+        $html .= '<select id="editor_default_mode_type" name="and_load_default_options[editor_default_mode_type]" class="form-control default_select">';
         foreach ($editor_mode_types as $editor_mode_type_name => $editor_mode_type_slug) {
             $selected = selected( $editor_default_mode_type, $editor_mode_type_slug, false );
             $html .= '<option value=' . $editor_mode_type_slug . $selected . '>' . $editor_mode_type_name . '</option>';
@@ -892,7 +892,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $editor_default_tab_size_override = isset ( $options_default['editor_default_tab_size_override'] ) ? $options_default['editor_default_tab_size_override'] : $args['editor_default_tab_size_override'];
         $html .= '<div id="editor_default_tab_size_override_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Default tab size is file type specific. JavaScript: 4. CSS: 2"><strong><small>Override default tab size</small></strong></label>';
-        $html .= '<input type="checkbox" id="editor_default_tab_size_override" name="shortcode_load_default_options[editor_default_tab_size_override]" class="form-control" value="1"' . checked( $editor_default_tab_size_override, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_tab_size_override" name="and_load_default_options[editor_default_tab_size_override]" class="form-control" value="1"' . checked( $editor_default_tab_size_override, 1, false ) . '/>';
         $html .= '</div>'; // end editor_default_tab_size_override_setting
 
         //Ace editor default tab size
@@ -901,7 +901,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_tab_size_setting" class="default_options_sub_setting ' . $show_editor_default_tab_size . '">';
         $html .= '<label class="control-label" title="Override tab size for all file types."><strong><small>Default tab size</small></strong></label>';
-        $html .= '<input type="number" id="editor_default_tab_size" name="shortcode_load_default_options[editor_default_tab_size]" class="form-control default_input" value="' . $editor_default_tab_size . '" />';
+        $html .= '<input type="number" id="editor_default_tab_size" name="and_load_default_options[editor_default_tab_size]" class="form-control default_input" value="' . $editor_default_tab_size . '" />';
         $html .= '</div>'; // end editor_default_tab_size_setting
 
         //Ace editor default show line numbers
@@ -909,7 +909,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_line_numbers_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Show line numbers on the left side of editor"><strong><small>Show editor line numbers</small></strong></label>';
-        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="shortcode_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_show_line_numbers" name="and_load_default_options[editor_default_show_line_numbers]" value="1"' . checked( $editor_default_show_line_numbers, 1, false ) . '/>';
         $html .= '</div>'; // end editor_default_show_line_numbers_setting
 
         //Ace editor default print margin
@@ -917,7 +917,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_show_print_margin_setting" class="default_options_sub_setting">';
         $html .= '<label class="control-label" title="Show print margin"><strong><small>Show print margin</strong></small></label>';
-        $html .= '<input type="checkbox" id="editor_default_print_margin" name="shortcode_load_default_options[editor_default_print_margin]" value="1"' . checked( $editor_default_print_margin, 1, false ) . '/>';
+        $html .= '<input type="checkbox" id="editor_default_print_margin" name="and_load_default_options[editor_default_print_margin]" value="1"' . checked( $editor_default_print_margin, 1, false ) . '/>';
         $html .= '</div>'; // end editor_default_show_print_margin_setting
 
         /*Ace editor default print margin column
@@ -927,7 +927,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
         $html .= '<div id="editor_default_print_margin_column_setting" class="default_options_sub_setting ' . $show_editor_default_print_margin_column. '">';
         $html .= '<label class="control-label" title="Print margin column width. Default: 80."><strong><small>Print margin column</small></strong></label>';
-        $html .= '<input type="number" id="editor_default_print_margin_column" name="shortcode_load_default_options[editor_default_print_margin_column]" class="form-control default_input" value="' . $editor_default_print_margin_column . '" />';
+        $html .= '<input type="number" id="editor_default_print_margin_column" name="and_load_default_options[editor_default_print_margin_column]" class="form-control default_input" value="' . $editor_default_print_margin_column . '" />';
         $html .= '</div>'; // end editor_default_print_margin_column_setting
 
         $html .= '</div>'; // end default_editor_container
@@ -937,17 +937,17 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
     /* Edit file tab callbacks */
 
-    function shortcode_load_edit_file_options_callback() {
+    function and_load_edit_file_options_callback() {
         $id = ( isset( $_GET['id'] ) ) ? intval( $_GET['id'] ) : false;
         $revision_override = ( isset( $_GET['revision'] ) ) ? intval( $_GET['revision'] ) : false;
 
-        $options_default = get_option( 'shortcode_load_default_options' );
+        $options_default = get_option( 'and_load_default_options' );
         $editor_default_mode_type = $options_default['editor_default_mode_type'];
 
         if($id) { //check if file id is supplied and load the content
             try {
                 global $wpdb;
-                $table_name = $wpdb->prefix . 'shortcode_load'; 
+                $table_name = $wpdb->prefix . 'and_load'; 
 
                 $sql = "SELECT name,slug,type,revision,srcpath,minpath FROM ".$table_name." WHERE id = '".$id."' LIMIT 1";
                 $result = $wpdb->get_results($sql, ARRAY_A);
@@ -996,9 +996,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
                 $html .= '<label class="control-label">Shortcode:</label>';
 
-                $shortcode_display = ($current_revision == $revision) ? 'shortcode_load id=' . $id : 'shortcode_load id=' . $id . ' revision_override=' . $current_revision;
+                $shortcode_display = ($current_revision == $revision) ? 'and_load id=' . $id : 'and_load id=' . $id . ' revision_override=' . $current_revision;
 
-                $html .= '<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="shortcode_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
+                $html .= '<input type="text" id="edit_file_shortcode_display" class="form-control edit_file_input" name="and_load_edit_file_options[edit_file_shortcode_display]" readonly=readonly value="['.$shortcode_display.']"/>';
 
                 // Select revision dropdown
 
@@ -1018,7 +1018,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $html .= '</div>'; // end edit_file_input_container
 
                 //Allow user to override editor settings temporarily for this editing session
-                $editor_default_options = $this->shortcode_load_get_options_default_editor();
+                $editor_default_options = $this->and_load_get_options_default_editor();
 
                 $editor_default_font_size = $options_default['editor_default_font_size'];
                 $editor_default_theme = $options_default['editor_default_theme'];
@@ -1055,7 +1055,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 echo $html;
 
                 //Load file content
-                $content = $this->shortcode_load_get_file( $srcpath );
+                $content = $this->and_load_get_file( $srcpath );
 
                 if($content !== false) {
                     //init editor with content
@@ -1065,21 +1065,21 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     this data will then be processed when the page is reloaded again (Save Changes button is clicked)
                     The textarea will be continously updated with javascript
                     */
-                    echo '<textarea id="edit_file_temporary_textarea" name="shortcode_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
+                    echo '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
 
                     //We also need the id to refer to later, save this to a simple input field as well
-                    echo '<input type="text" id="edit_file_current_id" name="shortcode_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+                    echo '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
 
-                    $this->shortcode_load_editor_init( '', $type );
+                    $this->and_load_editor_init( '', $type );
                 } else {
-                    $this->shortcode_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
+                    $this->and_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
             } else { //A file with the corresponding ID could not be found in the database
                 $html = '<div id="edit_file_invalid_file_id_container" class="bg-danger">';
 
                 $html .= '<h4>Error!</h4>';
                 $html .= '<p class="invalid_file_id">No file with ID <strong>' . $id . '</strong> was found in the database.</p>';
-                $html .= '<a id="invalid_file_return_link" class="btn btn-lg btn-default" href="?page=shortcode_load&tab=tab_overview">Click here to return to the overview</a>';
+                $html .= '<a id="invalid_file_return_link" class="btn btn-lg btn-default" href="?page=and_load&tab=tab_overview">Click here to return to the overview</a>';
 
                 $html .= '</div>'; // end edit_file_invalid_file_id_container
 
@@ -1097,11 +1097,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             //File name input
             $html .= '<label class="control-label">File name</label>';
-            $html .= '<input type="text" id="new_file_name" class="form-control edit_file_input" name="shortcode_load_edit_file_options[new_file_name]" placeholder="Enter a file name" />';
+            $html .= '<input type="text" id="new_file_name" class="form-control edit_file_input" name="and_load_edit_file_options[new_file_name]" placeholder="Enter a file name" />';
 
             //File type select
             $html .= '<label class="control-label">File type</label>';
-            $html .= '<select id="new_file_type" class="form-control edit_file_select" name="shortcode_load_edit_file_options[new_file_type]"><option selected=selected value="plain_text">File type</option><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
+            $html .= '<select id="new_file_type" class="form-control edit_file_select" name="and_load_edit_file_options[new_file_type]"><option selected=selected value="plain_text">File type</option><option value="javascript">JavaScript</option><option value="css">CSS</option></select>';
 
             //File upload
             $html .= '<div id="edit_file_file_upload_container">';
@@ -1110,7 +1110,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             $html .= '<input type="text" id="new_file_upload_file_name" class="form-control edit_file_input" disabled="disabled" placeholder="Select File..." />';
 
             $html .= '<div id="new_file_upload_button" class="btn btn-primary"><span>Upload File</span>';
-            $html .= '<input type="file" id="new_file_upload" name="shortcode_load_edit_file_options[new_file_upload]" accept=".js,.css,.txt" />';
+            $html .= '<input type="file" id="new_file_upload" name="and_load_edit_file_options[new_file_upload]" accept=".js,.css,.txt" />';
             $html .= '</div>'; // end new_file_upload_button
 
             $html .= '</div>'; // end edit_file_file_upload_container
@@ -1119,60 +1119,60 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
 
             echo $html;
 
-            $this->shortcode_load_editor_init( false, $editor_default_mode_type );
+            $this->and_load_editor_init( false, $editor_default_mode_type );
         } // end if
     }
 
     /* Help tab callbacks */
 
-    function shortcode_load_help_callback() {
-        $html = '<div id="shortcode_load_help">';
+    function and_load_help_callback() {
+        $html = '<div id="and_load_help">';
         $html .= '<h4>Help and how-to</h4>';
-        $html .= '<div id="shortcode_load_help_getting_started">';
-        $html .= '</div>'; // end shortcode_load_help_getting_started
-        $html .= '</div>'; // end shortcode_load_help
+        $html .= '<div id="and_load_help_getting_started">';
+        $html .= '</div>'; // end and_load_help_getting_started
+        $html .= '</div>'; // end and_load_help
 
         echo $html;
     }
 
-    function shortcode_load_help_documentation_callback() {
-        $html = '<div id="shortcode_load_help_documentation">';
+    function and_load_help_documentation_callback() {
+        $html = '<div id="and_load_help_documentation">';
         $html .= '<h4>Documentation</h4>';
 
         //Shortcode parameters
-        $html .= '<div class="shortcode_load_help_shortcode_section shortcode_load_help_section" id="shortcode_load_help_shortcode_parameters">';
+        $html .= '<div class="and_load_help_shortcode_section and_load_help_section" id="and_load_help_shortcode_parameters">';
         $html .= '<label class="control-label">Shortcode parameters</label>';
-        $html .= '<p>ShortcodeLoad accepts the following parameters:</p>';
+        $html .= '<p>AndLoad accepts the following parameters:</p>';
 
-        $html .= '<ul id="shortcode_load_parameters_list">';
+        $html .= '<ul id="and_load_parameters_list">';
 
         $html .= '<li><h4>id</h4>';
-        $html .= '<ul id="shortcode_load_parameters_id">';
+        $html .= '<ul id="and_load_parameters_id">';
         $html .= '<li><strong>Required.</strong> Which file to load. You can specify multiple ids by comma separating them.</li>';
         $html .= '<li>Accepted values:';
         $html .= '<ul>';
         $html .= '<li>Any ID of a registered file (max 10 per shortcode).</li>';
         $html .= '</ul>';
         $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2"]</code></p></li>';
-        $html .= '<li><p class="help_example"><code>[shortcode_load id="2,3,4,18"]</code></p></li>';
-        $html .= '</ul>'; // end shortcode_load_parameters_id
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2"]</code></p></li>';
+        $html .= '<li><p class="help_example"><code>[and_load id="2,3,4,18"]</code></p></li>';
+        $html .= '</ul>'; // end and_load_parameters_id
         $html .= '</li>';
 
         $html .= '<li><h4>revision_override</h4>';
-        $html .= '<ul id="shortcode_load_parameters_revision_override">';
+        $html .= '<ul id="and_load_parameters_revision_override">';
         $html .= '<li>Load a specific revision of the file. Must be a number representing an existing revision. If omitted or malformed the latest revision is loaded.</li>';
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
         $html .= '<li>Any valid revision number for selected file.</li>';
         $html .= '</ul>';
         $html .= '</li>';        
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" revision_override="14"]</code></p>';
-        $html .= '</ul>'; // end shortcode_load_parameters_revision_override
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" revision_override="14"]</code></p>';
+        $html .= '</ul>'; // end and_load_parameters_revision_override
         $html .= '</li>';
 
         $html .= '<li><h4>minify_override</h4>';
-        $html .= '<ul id="shortcode_load_parameters_minify_override">';
+        $html .= '<ul id="and_load_parameters_minify_override">';
         $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles.</li>';
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
@@ -1180,12 +1180,12 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>"false" - Loads the minified version, if one exists, else the unminified file is loaded as a fallback.</li>';
         $html .= '</ul>';
         $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" minify_override="true"]</code></p>';
-        $html .= '</ul>'; // end shortcode_load_parameters_minify_override
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" minify_override="true"]</code></p>';
+        $html .= '</ul>'; // end and_load_parameters_minify_override
         $html .= '</li>';
 
         $html .= '<li><h4>jquery_override</h4>';
-        $html .= '<ul id="shortcode_load_parameters_jquery_override">';
+        $html .= '<ul id="and_load_parameters_jquery_override">';
         $html .= '<li>Override global "Load jQuery with script files" setting.';
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
@@ -1193,19 +1193,19 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>"false" - If global setting is <strong>enabled</strong> jQuery is <strong>removed</strong> as a script dependency</li>';
         $html .= '</ul>';
         $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" jquery_override="true"]</code></p>';
-        $html .= '</ul>'; // end shortcode_load_parameters_jquery_override
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" jquery_override="true"]</code></p>';
+        $html .= '</ul>'; // end and_load_parameters_jquery_override
         $html .= '</li>';
 
         $html .= '<li><h4>data</h4>';
-        $html .= '<ul id="shortcode_load_parameters_data">';
+        $html .= '<ul id="and_load_parameters_data">';
         $html .= '<li>This parameter is useful when you need to output extra data from your page, such as javascript variables, dynamic content generated by another plugin or data output from another shortcode. Depending on how other plugins output data from their shortcode it might not work as expected. The content will be dumped to the page <em>before the file is loaded.</em></li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" data="&lt;div class="myDiv"&gt;Content within a div called myDiv&lt;/div&gt;"]</code></p></li>';
-        $html .= '</ul>'; // end shortcode_load_parameters_data
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" data="&lt;div class="myDiv"&gt;Content within a div called myDiv&lt;/div&gt;"]</code></p></li>';
+        $html .= '</ul>'; // end and_load_parameters_data
         $html .= '</li>';
 
         $html .= '<li><h4>data_wrap</h4>';
-        $html .= '<ul id="shortcode_load_parameters_data_wrap">';
+        $html .= '<ul id="and_load_parameters_data_wrap">';
         $html .= '<li>Used with <em>data</em> parameter to wrap the parameter\'s value inside of.</li>';
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
@@ -1213,85 +1213,85 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>style - Wraps content within style tags.</li>';
         $html .= '</ul>';
         $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[shortcode_load id="2" data="var myVariable=\'Check mate, mate!\',mySecondVariable=true;myFunction(myVariable, mySecondVariable);" data_wrap="script"]</code></p></li>';
-        $html .= '</ul>'; // end shortcode_load_parameters_data_wrap
+        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" data="var myVariable=\'Check mate, mate!\',mySecondVariable=true;myFunction(myVariable, mySecondVariable);" data_wrap="script"]</code></p></li>';
+        $html .= '</ul>'; // end and_load_parameters_data_wrap
         $html .= '</li>';
 
-        $html .= '</ul>'; // end shortcode_load_parameters_list
+        $html .= '</ul>'; // end and_load_parameters_list
 
-        $html .= '</div>'; // end shortcode_load_help_shortcode_parameters
+        $html .= '</div>'; // end and_load_help_shortcode_parameters
 
-        $html .= '</div>'; // end shortcode_load_help_documentation
+        $html .= '</div>'; // end and_load_help_documentation
 
         echo $html;
     }
 
-    function shortcode_load_help_credits_callback() {
-        $html = '<div id="shortcode_load_help_credits" class="shortcode_load_help_section">';
+    function and_load_help_credits_callback() {
+        $html = '<div id="and_load_help_credits" class="and_load_help_section">';
         $html .= '<p><span>This plugin would not have been possible without the following projects. </span>';
         $html .= '<span>Much kudos to everyone in the world contributing to the open source software community!</p>';
 
-        $html .= '<ul id="shortcode_load_credits_list">';
+        $html .= '<ul id="and_load_credits_list">';
 
         //Ace credits
         $html .= '<li><h4>Ace</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_ace">';
+        $html .= '<ul id="and_load_help_credits_ace">';
         $html .= '<li>Project URL: <a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
         $html .= '<li>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_ace
+        $html .= '</ul>'; // end and_load_help_credits_ace
         $html .= '</li>';
 
         $html .= '<li><h4>Datatables</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_datatables">';
+        $html .= '<ul id="and_load_help_credits_datatables">';
         $html .= '<li>Project URL: <a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
         $html .= '<li>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_datatables
+        $html .= '</ul>'; // end and_load_help_credits_datatables
         $html .= '</li>';
 
         $html .= '<li><h4>Minify</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_minify">';
+        $html .= '<ul id="and_load_help_credits_minify">';
         $html .= '<li>Project URL: <a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
         $html .= '<li>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_minify
+        $html .= '</ul>'; // end and_load_help_credits_minify
         $html .= '</li>';
 
         $html .= '<li><h4>Path Converter</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_path_converter">';
+        $html .= '<ul id="and_load_help_credits_path_converter">';
         $html .= '<li>Project URL: <a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
         $html .= '<li>License: <a href="https://github.com/matthiasmullie/path-converter/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_minify
+        $html .= '</ul>'; // end and_load_help_credits_minify
         $html .= '</li>';
 
         $html .= '<li><h4>Bootstrap</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_bootstrap">';
+        $html .= '<ul id="and_load_help_credits_bootstrap">';
         $html .= '<li>Project URL: <a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
         $html .= '<li>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_bootstrap
+        $html .= '</ul>'; // end and_load_help_credits_bootstrap
         $html .= '</li>';
 
         $html .= '<li><h4>Bootbox.js</h4>';
-        $html .= '<ul id="shortcode_load_help_credits_bootbox">';
+        $html .= '<ul id="and_load_help_credits_bootbox">';
         $html .= '<li>Project URL: <a href="http://bootboxjs.com/" target="_blank">Bootbox.js</a></li>';
         $html .= '<li>License: <a href="http://github.com/makeusabrew/bootbox/blob/master/LICENSE.md" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end shortcode_load_help_credits_bootbox
+        $html .= '</ul>'; // end and_load_help_credits_bootbox
         $html .= '</li>';
 
-        $html .= '</ul>'; // end shortcode_load_credits_list
+        $html .= '</ul>'; // end and_load_credits_list
 
-        $html .= '</div>'; // end shortcode_load_help_credits
+        $html .= '</div>'; // end and_load_help_credits
 
         echo $html;
     }
 
-    function shortcode_load_help_debug_callback() {
+    function and_load_help_debug_callback() {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'shortcode_load';
+        $table_name = $wpdb->prefix . 'and_load';
 
-        $html = '<div id="shortcode_load_help_debug" class="shortcode_load_help_section">';
+        $html = '<div id="and_load_help_debug" class="and_load_help_section">';
 
         $html .= '<div id="show_hide_error_list" class="btn btn-block btn-default"><span class="glyphicon glyphicon-collapse-down"></span>   Error codes and messages</div>';
 
-        $html .= '<ul id="shortcode_load_error_list" style="display:none">';
+        $html .= '<ul id="and_load_error_list" style="display:none">';
 
         $html .= '<li id="error_id_0"><h4>Error #0</h4>';
         $html .= '<ul>';
@@ -1447,9 +1447,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '</ul>';
         $html .= '</li>'; // end error_id_22
 
-        $html .= '</ul>'; // end shortcode_load_error_list
+        $html .= '</ul>'; // end and_load_error_list
 
-        $html .= '</div>'; // end shortcode_load_help_debug
+        $html .= '</div>'; // end and_load_help_debug
 
         echo $html;
     }
@@ -1461,13 +1461,13 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * and plugin usage        *
     **************************/
 
-    function shortcode_load_filter_string($string) {
+    function and_load_filter_string($string) {
         $string = preg_replace("/[^a-zA-Z0-9]+/", "", $string);
         return $string;
     }
 
-    function shortcode_load_default_options_callback_sanitize($args) {
-        $options_default = get_option( 'shortcode_load_default_options' );
+    function and_load_default_options_callback_sanitize($args) {
+        $options_default = get_option( 'and_load_default_options' );
         
         //Checkboxes
         $options_default['default_minify'] = isset ( $args['default_minify'] ) ? $args['default_minify'] : false;
@@ -1490,9 +1490,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         return $options_default;
     }
 
-    function shortcode_load_edit_file_callback_sanitize($args) {
+    function and_load_edit_file_callback_sanitize($args) {
         //Get the default options
-        $options_default = get_option( 'shortcode_load_default_options' );
+        $options_default = get_option( 'and_load_default_options' );
         $minify = $options_default['default_minify'];
 
         //Get the file name, content and type
@@ -1509,7 +1509,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             if( ! ( empty( $id ) ) ) {
                 if($request == 'delete') {
                     try {
-                        $file_datas[] = $this->shortcode_load_delete_file( $id );
+                        $file_datas[] = $this->and_load_delete_file( $id );
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'delete';
@@ -1517,7 +1517,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     }
                 } else {
                     try {
-                        $file_datas[] = $this->shortcode_load_add_file_revision($id, $file_content, $minify);
+                        $file_datas[] = $this->and_load_add_file_revision($id, $file_content, $minify);
                     } catch (Exception $e) {
                         //var_dump($e);
                         $operation = 'update';
@@ -1526,14 +1526,14 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 }
             } else {
                 //Check if a file has been selected for upload
-                $tmp_file_path = $_FILES['shortcode_load_edit_file_options']['tmp_name']['new_file_upload'];
+                $tmp_file_path = $_FILES['and_load_edit_file_options']['tmp_name']['new_file_upload'];
                 $file_tmp = ( $tmp_file_path ) ? $tmp_file_path : false;
 
                 if($file_tmp) { //file is being uploaded
                     try {
                         $file_content = file_get_contents( $file_tmp  ); //get the raw content from the uploaded file
 
-                        $file_datas[] = $this->shortcode_load_save_to_database(
+                        $file_datas[] = $this->and_load_save_to_database(
                             array(
                                 'content' => $file_content,
                                 'name' => $file_name,
@@ -1553,7 +1553,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                     }
                 } elseif( ! (empty( $file_name ) ) ) { //new file, save it
                     try {
-                        $file_datas[] = $this->shortcode_load_save_to_database(
+                        $file_datas[] = $this->and_load_save_to_database(
                             array(
                                 'content' => $file_content,
                                 'name' => $file_name,
@@ -1573,9 +1573,9 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
             }
 
             if( ! ( isset( $error_id ) ) ) {
-                $this->shortcode_load_add_settings_message( $file_datas );
+                $this->and_load_add_settings_message( $file_datas );
             } else {
-                $this->shortcode_load_add_settings_message(array(
+                $this->and_load_add_settings_message(array(
                     array(
                         'success' => false,
                         'error_id' => $error_id,
@@ -1591,11 +1591,11 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
     * $args = array( 'success' => bool, ['id' => id, 'name' => name] )
     */
 
-    function shortcode_load_add_settings_message($array) {
+    function and_load_add_settings_message($array) {
         foreach ($array as $file_data) {
             if($file_data['success'] == true){
                 
-                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_edit&id='.$file_data['id'] );
+                $location = admin_url('options-general.php?page=and_load&tab=tab_edit&id='.$file_data['id'] );
                 wp_redirect( $location );
                 exit;
 
@@ -1611,7 +1611,7 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 $message_setting = 'file_update';
                 $message_setting_slug = 'file_update';
                 $message_type = 'error';
-                $location = admin_url('options-general.php?page=shortcode_load&tab=tab_help&error_id=error_id_'. $file_data['error_id'] );
+                $location = admin_url('options-general.php?page=and_load&tab=tab_help&error_id=error_id_'. $file_data['error_id'] );
 
                 $message = 'File could not be ' . $file_data['operation'] . '! <a href="' . $location . '" target="_blank">Click here for more info.</a>';
             }
@@ -1624,15 +1624,15 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         }
     }
 
-    /** shortcode_load_editor_init
+    /** and_load_editor_init
     * Configures Ace editor with content and sets up environment according to default options
     *
     * @content - (string) or (bool)
     * @mode_type - (string) 'js|css|plain_text'
     */
 
-    function shortcode_load_editor_init($content, $mode_type) {
-        $options_default = get_option( 'shortcode_load_default_options' );
+    function and_load_editor_init($content, $mode_type) {
+        $options_default = get_option( 'and_load_default_options' );
 
         //Ace default editor settings
         extract( $options_default);
@@ -1679,16 +1679,16 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
                 };
             </script>
         <?php
-    } //end shortcode_load_editor_init
+    } //end and_load_editor_init
 
-    function shortcode_load_enqueue_file_options($name, $file_path, $is_script = false) {
-        if( class_exists('ShortcodeLoad') ) {
+    function and_load_enqueue_file_options($name, $file_path, $is_script = false) {
+        if( class_exists('AndLoad') ) {
             $dependencies = ( $is_script ) ? 'jquery' : false;
-            ShortcodeLoad::shortcode_load_enqueue_file($name, $file_path, $is_script, $dependencies );
+            AndLoad::and_load_enqueue_file($name, $file_path, $is_script, $dependencies );
         } // end if
-    } // end shortcode_load_enqueue_file_options
+    } // end and_load_enqueue_file_options
 
-    function shortcode_load_options_page(  ) {
+    function and_load_options_page(  ) {
 
         if( isset( $_GET[ 'tab' ] ) ) {  
             $active_tab = $_GET[ 'tab' ];  
@@ -1699,64 +1699,64 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         ?>
         <div class="wrap">
             <div class="nav_tab_wrapper">
-                <a href="?page=shortcode_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-list-alt"></span> Overview</a>
-                <a href="?page=shortcode_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-cog"></span> Default Options</a>
-                <a href="?page=shortcode_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-edit"></span> Edit file</a>
-                <a href="?page=shortcode_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+                <a href="?page=and_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-list-alt"></span> Overview</a>
+                <a href="?page=and_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-cog"></span> Default Options</a>
+                <a href="?page=and_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-edit"></span> Edit file</a>
+                <a href="?page=and_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
             </div>
 
-            <form id="shortcode_load_form" action='options.php' method='post' enctype='multipart/form-data'>
+            <form id="and_load_form" action='options.php' method='post' enctype='multipart/form-data'>
                 
-                <h2>Shortcode Load</h2>
+                <h2>And Load</h2>
                 
                 <?php
 
                 if($active_tab == 'tab_overview') {
                     //Libraries
-                    $this->shortcode_load_enqueue_file_options( 'datatables-style-bootstrap', 'lib/datatables/css/dataTables.bootstrap.css', false );
-                    $this->shortcode_load_enqueue_file_options( 'datatables-script', 'lib/datatables/js/jquery.dataTables.min.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'datatables-script-bootstrap', 'lib/datatables/js/dataTables.bootstrap.min.js', true );
+                    $this->and_load_enqueue_file_options( 'datatables-style-bootstrap', 'lib/datatables/css/dataTables.bootstrap.css', false );
+                    $this->and_load_enqueue_file_options( 'datatables-script', 'lib/datatables/js/jquery.dataTables.min.js', true );
+                    $this->and_load_enqueue_file_options( 'datatables-script-bootstrap', 'lib/datatables/js/dataTables.bootstrap.min.js', true );
 
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file_options( 'tab_overview_js', 'js/tab_overview.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'tab_overview_css', 'css/tab_overview.css', false );
+                    $this->and_load_enqueue_file_options( 'tab_overview_js', 'js/tab_overview.js', true );
+                    $this->and_load_enqueue_file_options( 'tab_overview_css', 'css/tab_overview.css', false );
 
                     //Tab sections and fields 
-                    settings_fields( 'shortcode_load_overview' );
-                    do_settings_sections( 'shortcode_load_overview' );
+                    settings_fields( 'and_load_overview' );
+                    do_settings_sections( 'and_load_overview' );
 
                 } elseif($active_tab == 'tab_default') {
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file_options( 'tab_default_css', 'css/tab_default.css', false );
-                    $this->shortcode_load_enqueue_file_options( 'tab_default_js', 'js/tab_default.js', true );
+                    $this->and_load_enqueue_file_options( 'tab_default_css', 'css/tab_default.css', false );
+                    $this->and_load_enqueue_file_options( 'tab_default_js', 'js/tab_default.js', true );
 
                     //Tab sections and fields 
-                    settings_fields( 'shortcode_load_default_options' );
-                    do_settings_sections( 'shortcode_load_default_options' );
+                    settings_fields( 'and_load_default_options' );
+                    do_settings_sections( 'and_load_default_options' );
 
                     submit_button();
                 } elseif($active_tab == 'tab_edit') {
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file_options( 'tab_edit_css', 'css/tab_edit.css', false );
-                    $this->shortcode_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
+                    $this->and_load_enqueue_file_options( 'tab_edit_css', 'css/tab_edit.css', false );
+                    $this->and_load_enqueue_file_options( 'tab_edit_js', 'js/tab_edit.js', true );
 
                     //Libraries
-                    $this->shortcode_load_enqueue_file_options( 'ace-js', 'lib/ace-builds/js/ace.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
-                    $this->shortcode_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.js', true );
+                    $this->and_load_enqueue_file_options( 'ace-js', 'lib/ace-builds/js/ace.js', true );
+                    $this->and_load_enqueue_file_options( 'bootstrap-js', 'lib/bootstrap/js/bootstrap.min.js', true );
+                    $this->and_load_enqueue_file_options( 'bootbox-js', 'lib/bootbox/js/bootbox.js', true );
 
                     //Tab sections and fields 
-                    settings_fields( 'shortcode_load_edit_file_options' );
-                    do_settings_sections( 'shortcode_load_edit_file_options' );
+                    settings_fields( 'and_load_edit_file_options' );
+                    do_settings_sections( 'and_load_edit_file_options' );
 
                 } elseif($active_tab == 'tab_help') {
                     //Tab styles and scripts
-                    $this->shortcode_load_enqueue_file_options( 'tab_help_css', 'css/tab_help.css', false );
-                    $this->shortcode_load_enqueue_file_options( 'tab_help_js', 'js/tab_help.js', true );
+                    $this->and_load_enqueue_file_options( 'tab_help_css', 'css/tab_help.css', false );
+                    $this->and_load_enqueue_file_options( 'tab_help_js', 'js/tab_help.js', true );
 
                     //Tab sections and fields 
-                    settings_fields( 'shortcode_load_help_section' );
-                    do_settings_sections( 'shortcode_load_help_section' );
+                    settings_fields( 'and_load_help_section' );
+                    do_settings_sections( 'and_load_help_section' );
                 } // end if
 
                 ?>

@@ -6,10 +6,8 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
 
 function deleteOptions() {
 	$option_names = array(
-		'shortcode_load_default_options',
-		'shortcode_load_new_script_options',
-		'shortcode_load_new_style_options',
-		'shortcode_load_edit_file_options',
+		'and_load_default_options',
+		'and_load_edit_file_options',
 	);
 
 	foreach ($option_names as $option_name) {
@@ -18,9 +16,9 @@ function deleteOptions() {
 }
 
 function dropTable() {
-	//drop shortcode_load db table
+	//drop and_load db table
 	global $wpdb;
-	$table_name = $wpdb->prefix . 'shortcode_load'; 
+	$table_name = $wpdb->prefix . 'and_load'; 
 	$wpdb->query( "DROP TABLE IF EXISTS " . $table_name );
 }
 

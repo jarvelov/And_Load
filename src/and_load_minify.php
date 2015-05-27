@@ -2,10 +2,10 @@
 
 use MatthiasMullie\Minify;
 
-Class ShortcodeLoad_Minify extends ShortcodeLoad {
+Class AndLoad_Minify extends AndLoad {
 
     function __construct() {
-        if( class_exists( 'ShortcodeLoad' ) ) {
+        if( class_exists( 'AndLoad' ) ) {
             if ( ! ( class_exists( 'Minify' ) ) ) {
                 try {
                     require_once( dirname(__FILE__) . '/lib/minify/src/Minify.php' );
@@ -16,14 +16,14 @@ Class ShortcodeLoad_Minify extends ShortcodeLoad {
                 }
             }
         } else {
-            throw new Exception("Class ShortcodeLoad is not loaded. This function can not be called outside it's environment", 6);
+            throw new Exception("Class AndLoad is not loaded. This function can not be called outside it's environment", 6);
         }
     }
 
     /*
     * Minify file content using Matthias Mullie's minify library
     */
-    public function shortcode_load_minify_minify_file($content, $type) {
+    public function and_load_minify_minify_file($content, $type) {
         switch ($type) {
             case 'js':
                 try {

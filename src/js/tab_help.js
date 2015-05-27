@@ -1,3 +1,4 @@
+//Locate the error_id parameter and return it's value
 function getParamError() {
     params = window.location.search.split('&');
     for (var i = params.length - 1; i >= 0; i--) {
@@ -22,11 +23,11 @@ function toggleErrorList() {
     if ( jQuery('#show_hide_error_list > span').hasClass('glyphicon-collapse-down') ) {
         jQuery('#show_hide_error_list > span').removeClass('glyphicon-collapse-down');
         jQuery('#show_hide_error_list > span').addClass('glyphicon-collapse-up');
-        jQuery('#shortcode_load_error_list').show();
+        jQuery('#and_load_error_list').show();
     } else {
         jQuery('#show_hide_error_list > span').removeClass('glyphicon-collapse-up');
         jQuery('#show_hide_error_list > span').addClass('glyphicon-collapse-down');
-        jQuery('#shortcode_load_error_list').hide();
+        jQuery('#and_load_error_list').hide();
     }
 }
 
