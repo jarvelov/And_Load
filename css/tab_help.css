@@ -8,6 +8,12 @@
   margin-right: 5px;
 }
 
+#and_load_donation_container {
+  width: 250px;
+  float: right;
+  margin-top: 20px;
+}
+
 .and_load_help_section {
   border: 3px solid #FEFEFE;
   border-radius: 15px;
