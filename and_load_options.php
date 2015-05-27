@@ -1067,7 +1067,7 @@ Class AndLoad_Options extends AndLoad {
                     $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
 
                     //We also need the id to refer to later, save this to a simple input field as well
-                    $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false; . '"/>';
+                    $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . ( isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false ) . '"/>';
 
                     $this->and_load_editor_init( '', $type );
                 } else {
@@ -1123,7 +1123,7 @@ Class AndLoad_Options extends AndLoad {
             $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]"></textarea>';
 
             //We also need the id to refer to later, save this to a simple input field as well
-            $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false; . '"/>';
+            $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . ( isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false ) . '"/>';
 
             echo $html;
 
