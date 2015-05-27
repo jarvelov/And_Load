@@ -1716,9 +1716,6 @@ Class AndLoad_Options extends AndLoad {
 
     function and_load_options_page(  ) {
 
-            $this->and_load_enqueue_file_options( 'and_load_bootstrap-style', 'lib/bootstrap/css/bootstrap.min.css' );
-            $this->and_load_enqueue_file_options( 'and_load_admin-style', 'css/admin.css' );
-
         if( isset( $_GET[ 'tab' ] ) ) {  
             $active_tab = $_GET[ 'tab' ];  
         } else {
@@ -1792,7 +1789,12 @@ Class AndLoad_Options extends AndLoad {
                 
             </form>
         </div><!-- end wrap -->
+
         <?php
+
+        //Load default styles for all tabs
+        $this->and_load_enqueue_file_options( 'and_load_bootstrap-style', 'lib/bootstrap/css/bootstrap.min.css' );
+        $this->and_load_enqueue_file_options( 'and_load_admin-style', 'css/admin.css' );
 
     }
 }
