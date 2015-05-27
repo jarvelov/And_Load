@@ -130,8 +130,9 @@ License:
     /** shortcode_load_shortcode_file_enqueue_operation
     *
     */
-    function shortcode_load_shortcode_file_enqueue_operation($result) {
-        extract( $result ); //turn array into named variables, see $sql SELECT query above for variable names
+    function shortcode_load_shortcode_file_enqueue_operation($result, $shortcode_args) {
+        extract( $result ); //turn array into named variables, see $sql SELECT query for variable names
+        extract( $shortcode_args ); //turn array into named variables, see render_shortcode function 
 
         //Get default options
         $options_default = get_option( 'shortcode_load_default_options' );
@@ -187,26 +188,26 @@ License:
     /** shortcode_load_render_shortcode
     *
     */
-    function shortcode_load_render_shortcode($args) {
+    function shortcode_load_render_shortcode($atts) {
         // Extract the attributes submitted with the shortcode
-        extract(shortcode_atts(array(
+        $args = (shortcode_atts(array(
             'id' => false,
             'revision_override' => false,
             'minify_override' => false,
             'jquery_override' => false,
             'data' => false,
             'data_wrap' => 'raw'
-            ), $args));
+            ), $atts));
 
         if( $id ) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
 
-
-            $sql = "SELECT name,srcpath,minify,minpath,type,revision FROM ".$table_name." WHERE  ";
+            $sql_limit = 10;
+            $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
 
             $ids = explode(",", $id);
-            for ($i=0; $i < sizeof($ids); $i++) { 
+            for ($i=0; $i < sizeof($ids) OR < $sql_limit; $i++) { 
                 $current_id = $ids[$i];
                 if($i == 0) {
                     $sql .= 'id = ' . intval( $current_id );
@@ -215,7 +216,7 @@ License:
                 }
             }
 
-            $sql .= " LIMIT 50";
+            $sql .= ' LIMIT ' . $sql_limit;
 
             try {
                 $result = $wpdb->get_results($sql, ARRAY_A);    
@@ -223,15 +224,16 @@ License:
                 var_dump($e);
             }
 
+            //TODO: Something prevents the most current revision to be loaded with JS files
             if( isset($result) ) {
                 for ($i=0; $i < sizeof( $result ); $i++) { 
                     $current_file = $result[$i];
-                    $this->shortcode_load_shortcode_file_enqueue_operation($current_file);
+                    $this->shortcode_load_shortcode_file_enqueue_operation($current_file, $args);
                 }
 
                 //Dump data to page if argument was given
                 if($data) {
-                    $this->shortcode_load_dump_shortcode_data($data, $data_wrap);
+                    $this->shortcode_load_dump_shortcode_data( $args['data'], $args['data_wrap'] );
                 }
             }
         }
