@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: And Load
-Plugin URI: http://jarvelov.se/portfolio/and_load
+Plugin URI: http://tobias.jarvelov.se/portfolio/and_load
 Description: Load style or script files using a shortcode.
 Version: 1.0.2
 Author: Tobias Järvelöv
