@@ -1,0 +1,161 @@
+/** Tab Edit CSS **/
+
+/* Edit file form elements */
+
+.control-label {
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+#edit_file_input_container {
+  margin: 15px 0 15px 0;
+  border: 3px double #FEFEFE;
+  padding: 5px 0 5px 0;
+}
+
+#edit_file_editor_settings_container {
+  margin: 15px 0 15px 0;
+  border: 3px double #FEFEFE;
+  padding: 5px 0 5px 0;
+  display: none;
+}
+
+#edit_file_temporary_textarea, #edit_file_current_id {
+  display: none;
+}
+
+.edit_file_select {
+  max-width: 120px;
+  display: inline-block;
+  height: 34px;
+  border-radius: 7px;
+  padding: 6px 12px
+}
+
+.edit_file_input {
+  max-width: 200px;
+  display: inline-block;
+  border-radius: 7px;
+}
+
+#edit_file_file_upload_container {
+  position: absolute;
+  right: 50px;
+  display: inline-block;
+}
+
+#new_file_upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+#new_file_upload_button {
+  position: relative;
+  overflow: hidden;
+  margin-top: -5px;
+}
+
+#new_file_upload_file_name {
+  display: inline-block;
+  max-width: 120px;
+  height: 34px;
+}
+
+#new_file_upload_reset_button {
+  display: none;
+  margin-right: 2px;
+}
+
+#edit_file_revisions_select {
+  margin-top: -5px;
+}
+
+.delete {
+  float: right;
+}
+
+#edit_file_more_settings_button {
+  margin: 0 0 5px 10px;
+}
+
+#edit_file_invalid_file_id_container {
+  border: 3px double #FEFEFE;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#invalid_file_return_link {
+  margin: 15px;
+}
+
+/* Ace styles */
+
+.editor_container {
+  height: 400px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+#editor {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+  resize: both;
+}
+
+/* Wordpress core styling */
+
+.submit {
+  margin: 0;
+  display: inline;
+}
+
+
+/* Mobile device styles */
+
+/* Smartphones (portrait and landscape) */
+@media only screen
+and (max-device-width : 768px) { 
+  .control-label {
+    display: block;
+  }
+
+  .edit_file_input, .edit_file_select, #edit_file_more_settings_button {
+    max-width: 90%;
+    margin: 15px;
+  }
+
+  #edit_file_input_container > p {
+    margin: 15px;
+  }
+
+  #edit_file_more_settings_button {
+    width: 100%;
+  }
+
+  #edit_file_file_upload_container {
+    position: relative;
+    right: 0;
+    display: block;
+  }
+
+  #new_file_upload_file_name {
+    max-width: 50%;
+  }
+} 
+ 
+/* Tablets (portrait and landscape) and desktop */
+@media only screen
+and (min-device-width : 768px) {
+  #edit_file_input_container > p {
+    display: inline;
+  }
+}

@@ -1,0 +1,42 @@
+/** Tab Overview CSS **/
+
+#overview_container {
+    border: 5px double #F3F3F3;
+    border-radius: 10px;
+}
+
+#new_file_button {
+  font-size: 1.2em;
+  line-height: 1em;
+  border-width: 1px;
+  border-style: solid ;
+  border-color: #CCC;
+  -moz-border-top-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  border-image: none;
+  background: #E4E4E4 none repeat scroll 0% 0%;
+  color: #555;
+  text-decoration: none;  
+  max-width: 200px;
+  margin: 15px 0 15px 0;
+}
+
+#new_file_button:hover {
+  background: #EFEFEF;
+  color: #4CB2E7;
+}
+
+#overview_get_started {
+	padding: 20px;
+  text-align: center;
+}
+
+/* Datatables CSS */
+
+.and_load_table_container {
+  max-width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+}
