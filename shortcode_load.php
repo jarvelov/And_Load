@@ -225,6 +225,7 @@ License:
             }
 
             var_dump($sql);
+            break;
 
             //TODO: Something prevents the most current revision to be loaded with JS files
             if( isset($result) ) {
