@@ -1052,8 +1052,6 @@ Class AndLoad_Options extends AndLoad {
 
                 $html .= '</div>'; //end edit_file_editor_settings_container
 
-                echo $html;
-
                 //Load file content
                 $content = $this->and_load_get_file( $srcpath );
 
@@ -1073,6 +1071,8 @@ Class AndLoad_Options extends AndLoad {
                 } else {
                     $this->and_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
+
+                echo $html;
             } else { //A file with the corresponding ID could not be found in the database
                 $html = '<div id="edit_file_invalid_file_id_container" class="bg-danger">';
 
