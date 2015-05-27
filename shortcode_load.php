@@ -232,7 +232,7 @@ License:
                 }
 
                 //Dump data to page if argument was given
-                if($data) {
+                if($args['data']) {
                     $this->shortcode_load_dump_shortcode_data( $args['data'], $args['data_wrap'] );
                 }
             }
