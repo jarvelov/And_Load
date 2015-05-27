@@ -207,7 +207,7 @@ License:
             $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
 
             $ids = explode(",", $id);
-            for ($i=0; $i < sizeof($ids) OR < $sql_limit; $i++) { 
+            for ($i=0; $i < sizeof($ids) OR $i < $sql_limit; $i++) { 
                 $current_id = $ids[$i];
                 if($i == 0) {
                     $sql .= 'id = ' . intval( $current_id );
