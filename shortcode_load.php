@@ -189,6 +189,7 @@ License:
     *
     */
     function shortcode_load_render_shortcode($atts) {
+        $time_pre = microtime(true);
         // Extract the attributes submitted with the shortcode
         $args = (shortcode_atts(array(
             'id' => false,
@@ -196,7 +197,7 @@ License:
             'minify_override' => false,
             'jquery_override' => false,
             'data' => false,
-            'data_wrap' => 'raw'
+            'data_wrap' => false
             ), $atts));
 
         if( $args['id'] ) {
@@ -237,6 +238,9 @@ License:
                 }
             }
         }
+        $time_post = microtime(true);
+        $exec_time = $time_post - $time_pre;
+        echo $exec_time;
     }
     
     /** shortcode_load_enqueue_styles

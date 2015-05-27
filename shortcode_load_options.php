@@ -1209,7 +1209,6 @@ Class ShortcodeLoad_Options extends ShortcodeLoad {
         $html .= '<li>Used with <em>data</em> parameter to wrap the parameter\'s value inside of.</li>';
         $html .=' <li>Accepted values:';
         $html .= '<ul>';
-        $html .= '<li>raw - Default action. Do not wrap data, output it raw.</li>';
         $html .= '<li>script - Wraps content within script tags.</li>';
         $html .= '<li>style - Wraps content within style tags.</li>';
         $html .= '</ul>';
