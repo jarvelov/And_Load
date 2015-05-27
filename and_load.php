@@ -84,9 +84,6 @@ License: GPLv3
                 require(SLDIR . '/' . self::slug.'_options.php');
             }
             $this->options = new AndLoad_Options();
-
-            //Enqueue styles for administration panel
-            $this->and_load_enqueue_styles();
         }
     }
     /** and_load_dump_shortcode_data
@@ -223,17 +220,7 @@ License: GPLv3
             }
         }
     }
-    
-    /** and_load_enqueue_styles
-     * Registers and enqueues stylesheets for the administration panel
-     */
-    private function and_load_enqueue_styles() {
-        if ( is_admin() ) {
-            $this->and_load_enqueue_file( self::slug . '-bootstrap-css', 'lib/bootstrap/css/bootstrap.min.css' );
-            $this->and_load_enqueue_file( self::slug . '-admin-style', 'css/admin.css' );
-        } // end if
-    } // end and_load_enqueue_styles
-    
+
     /** and_load_enqueue_file
      * Helper function for registering and enqueueing scripts and styles.
      *
