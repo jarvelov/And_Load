@@ -1145,7 +1145,7 @@ Class AndLoad_Options extends AndLoad {
         $html .= '<h4>Help and how-to</h4>';
         $html .= '<div id="and_load_help_getting_started">';
 
-        $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.';
+        $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong>. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.';
         $html .= 'If you need support with the plugin check out the plugin\'s <span class="glyphicon glyphicon-new-window"><a href="https://wordpress.org/plugins/and_load">support page</a>. If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</p>';
 
         $html .= '<div id="and_load_donation_container">';
@@ -1259,42 +1259,42 @@ Class AndLoad_Options extends AndLoad {
         //Ace credits
         $html .= '<li><h4>Ace</h4>';
         $html .= '<ul id="and_load_help_credits_ace">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
         $html .= '<li>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_ace
         $html .= '</li>';
 
         $html .= '<li><h4>Datatables</h4>';
         $html .= '<ul id="and_load_help_credits_datatables">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
         $html .= '<li>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_datatables
         $html .= '</li>';
 
         $html .= '<li><h4>Minify</h4>';
         $html .= '<ul id="and_load_help_credits_minify">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
         $html .= '<li>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_minify
         $html .= '</li>';
 
         $html .= '<li><h4>Path Converter</h4>';
         $html .= '<ul id="and_load_help_credits_path_converter">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
         $html .= '<li>License: <a href="https://github.com/matthiasmullie/path-converter/blob/master/LICENSE" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_minify
         $html .= '</li>';
 
         $html .= '<li><h4>Bootstrap</h4>';
         $html .= '<ul id="and_load_help_credits_bootstrap">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
         $html .= '<li>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_bootstrap
         $html .= '</li>';
 
         $html .= '<li><h4>Bootbox.js</h4>';
         $html .= '<ul id="and_load_help_credits_bootbox">';
-        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"><a href="http://bootboxjs.com/" target="_blank">Bootbox.js</a></li>';
+        $html .= '<li>Project URL: <span class="glyphicon glyphicon-new-window"></span><a href="http://bootboxjs.com/" target="_blank">Bootbox.js</a></li>';
         $html .= '<li>License: <a href="http://github.com/makeusabrew/bootbox/blob/master/LICENSE.md" target="_blank">MIT License</a></li>';
         $html .= '</ul>'; // end and_load_help_credits_bootbox
         $html .= '</li>';
