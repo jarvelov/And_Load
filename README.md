@@ -1,7 +1,7 @@
 And load
 ==============
 
-And load is a Wordpress plugin to easily load styles and scripts by using a shortcode. And load lets you create and upload JavaScript and CSS files which then can be loaded by page with the `[and_load]` shortcode. The files are loaded by the [`wp_enqueue_script`](https://codex.wordpress.org/Function_Reference/wp_enqueue_script) and [`wp_enqueue_style`](https://codex.wordpress.org/Function_Reference/wp_enqueue_style) functions in Wordpress.
+And load is a Wordpress plugin to easily load styles and scripts by using a shortcode. And load lets you create and upload JavaScript and CSS files which then can be loaded whenever with the `[and_load]` shortcode. The files are loaded by the [`wp_enqueue_script`](https://codex.wordpress.org/Function_Reference/wp_enqueue_script) and [`wp_enqueue_style`](https://codex.wordpress.org/Function_Reference/wp_enqueue_style) functions in Wordpress.
 
 And load has support to not only load script and style files but it can also output additional data onto the page directly with its `data` parameter. The data can optionally be wrapped inside `<script>` or `<style>` tags for additional customization.
 
