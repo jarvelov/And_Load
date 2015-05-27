@@ -9,9 +9,11 @@ CSS and JavaScript files are automatically compressed (minified) when loaded unl
 
 ##Install
 
-Download a zip file of the most recent version [here](https://github.com/jarvelov/And_Load/releases)
+Download directory from the Wordpress plugins repository.
 
-Or clone the repository with Git into the wp-content/plugins/ directory:
+or
+
+Clone the repository with Git into the wp-content/plugins/ directory:
 `git clone https://github.com/jarvelov/And_Load.git and_load`
 
 ##Usage
