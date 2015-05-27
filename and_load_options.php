@@ -1059,16 +1059,15 @@ Class AndLoad_Options extends AndLoad {
 
                 if($content !== false) {
                     //init editor with content
-                    $current_id = isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false;
 
                     /*Create a textarea to temporarily hold the raw data from Ace editor
                     this data will then be processed when the page is reloaded again (Save Changes button is clicked)
                     The textarea will be continously updated with javascript
                     */
-                    echo '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
+                    $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
 
                     //We also need the id to refer to later, save this to a simple input field as well
-                    echo '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . $current_id . '"/>';
+                    $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false; . '"/>';
 
                     $this->and_load_editor_init( '', $type );
                 } else {
@@ -1116,6 +1115,15 @@ Class AndLoad_Options extends AndLoad {
             $html .= '</div>'; // end edit_file_file_upload_container
 
             $html .= '</div>'; // end edit_file_input_container
+
+            /*Create a textarea to temporarily hold the raw data from Ace editor
+            this data will then be processed when the page is reloaded again (Save Changes button is clicked)
+            The textarea will be continously updated with javascript
+            */
+            $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]"></textarea>';
+
+            //We also need the id to refer to later, save this to a simple input field as well
+            $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false; . '"/>';
 
             echo $html;
 
