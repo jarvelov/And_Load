@@ -6,7 +6,14 @@ And load is a Wordpress plugin to easily load styles and scripts by using a shor
 And load has support to not only load script and style files but it can also output additional data onto the page directly with its `data` parameter. The data can optionally be wrapped inside `<script>` or `<style>` tags for additional customization.
 
 CSS and JavaScript files are automatically compressed (minified) when loaded unless overriden by the `minify_override` parameter or the global option "Minify files" is disabled.
- 
+
+##Install
+
+Download a zip file of the most recent version [here](https://github.com/jarvelov/And_Load/releases)
+
+Or clone the repository with Git into the wp-content/plugins/ directory:
+`git clone https://github.com/jarvelov/And_Load.git and_load`
+
 ##Usage
 
 **`id`**  
