@@ -326,6 +326,8 @@ jQuery(document).ready(function() {
         });
 
         var target = document.getElementById('editor');
-        observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+        if(target != null) {
+            observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+        }
     }
 });
