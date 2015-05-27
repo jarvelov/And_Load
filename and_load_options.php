@@ -1062,7 +1062,7 @@ Class AndLoad_Options extends AndLoad {
                     this data will then be processed when the page is reloaded again (Save Changes button is clicked)
                     The textarea will be continously updated with javascript
                     */
-                    $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
+                    $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]"><![CDATA[' . $content .  ']]></textarea>';
 
                     //We also need the id to refer to later, save this to a simple input field as well
                     $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . ( isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false ) . '"/>';
@@ -1073,7 +1073,7 @@ Class AndLoad_Options extends AndLoad {
                 } else {
 
                     echo $html;
-                    
+
                     $this->and_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
                 } // end if
             } else { //A file with the corresponding ID could not be found in the database
