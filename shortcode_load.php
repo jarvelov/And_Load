@@ -199,6 +199,8 @@ License:
             'data_wrap' => 'raw'
             ), $atts));
 
+        var_dump($args);
+
         if( $id ) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'shortcode_load'; 
@@ -223,9 +225,6 @@ License:
             } catch(Exception $e) {
                 var_dump($e);
             }
-
-            var_dump($sql);
-            break;
 
             //TODO: Something prevents the most current revision to be loaded with JS files
             if( isset($result) ) {
