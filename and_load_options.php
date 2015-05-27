@@ -1150,7 +1150,7 @@ Class AndLoad_Options extends AndLoad {
 
         $html .= '<div id="and_load_donation_container">';
         $html .= '<span>If you like this plugin then consider donating to support it\'s development. It would mean a lot and keep me motivated to keep it updated with neat stuff!</span>';
-        $html .= '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_donations"><input type="hidden" name="business" value="tobias.jarvelov@live.se"><input type="hidden" name="lc" value="US"><input type="hidden" name="item_name" value="And Load"><input type="hidden" name="currency_code" value="USD"><input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypalobjects.com/sv_SE/i/scr/pixel.gif" width="1" height="1"></form>';
+        $html .= '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tobias%2ejarvelov%40live%2ese&lc=US&item_name=And%20Load&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" /></a>';
         $html .= '</div>'; //end and_load_donation_container
         $html .= '</div>'; // end and_load_help_getting_started
         $html .= '</div>'; // end and_load_help
