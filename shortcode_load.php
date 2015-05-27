@@ -213,7 +213,7 @@ License:
                 if($i == 0) {
                     $sql .= 'id = ' . intval( $current_id );
                 } else {
-                    $sql .= ' OR id = ' . intval( $current_id );
+                    //$sql .= ' OR id = ' . intval( $current_id );
                 }
             }
 
