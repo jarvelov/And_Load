@@ -1716,7 +1716,7 @@ Class AndLoad_Options extends AndLoad {
 
     function and_load_options_page(  ) {
 
-            $this->and_load_enqueue_file_options( 'bootstrap-css', 'lib/bootstrap/css/bootstrap.min.css' );
+            $this->and_load_enqueue_file_options( 'and_load_bootstrap-style', 'lib/bootstrap/css/bootstrap.min.css' );
             $this->and_load_enqueue_file_options( 'and_load_admin-style', 'css/admin.css' );
 
         if( isset( $_GET[ 'tab' ] ) ) {  
