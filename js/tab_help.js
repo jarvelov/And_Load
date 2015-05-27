@@ -38,7 +38,7 @@ jQuery('#show_hide_error_list').on('click', function() {
 jQuery(document).ready(function() {
     error_id = getParamError();
 
-    if(error_id) {
+    if ( jQuery('#' + error_id).length > 0 ) {
         toggleErrorList();
         scrollErrorIntoView(error_id);
         jQuery('#' + error_id).addClass('bg-danger');
