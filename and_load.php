@@ -4,7 +4,7 @@
 Plugin Name: And Load
 Plugin URI: http://jarvelov.se/portfolio/and_load
 Description: Load style or script files using a shortcode.
-Version: 1.0
+Version: 1.0.2
 Author: Tobias Järvelöv
 Author Email: tobias@jarvelov.se
 License: GPLv3
