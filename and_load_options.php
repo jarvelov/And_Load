@@ -1145,8 +1145,8 @@ Class AndLoad_Options extends AndLoad {
         $html .= '<h4>Help and how-to</h4>';
         $html .= '<div id="and_load_help_getting_started">';
 
-        $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong>. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.';
-        $html .= 'If you need support with the plugin check out the plugin\'s <span class="glyphicon glyphicon-new-window"><a href="https://wordpress.org/plugins/and_load">support page</a>. If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</p>';
+        $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong>. If you need some more examples than the documentation here there\'s more to find on the And Load project\'s <span class="glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</p>';
+        $html .= '<p>If you need support with the plugin check out the plugin\'s <span class="glyphicon glyphicon-new-window"><a href="https://wordpress.org/plugins/and_load">support page</a>. If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</p>';
 
         $html .= '<div id="and_load_donation_container">';
         $html .= 'If you like this plugin then consider donating to support it\'s development. It would mean a lot and keep me motivated to keep it updated with neat stuff!';
