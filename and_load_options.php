@@ -1055,6 +1055,9 @@ Class AndLoad_Options extends AndLoad {
                 //Load file content
                 $content = $this->and_load_get_file( $srcpath );
 
+                //We need the id to refer to later, save this to a simple input field
+                $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . ( isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false ) . '"/>';
+
                 if($content !== false) {
                     //init editor with content
 
@@ -1064,17 +1067,18 @@ Class AndLoad_Options extends AndLoad {
                     */
                     $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . htmlspecialchars($content) .  '</textarea>';
 
-                    //We also need the id to refer to later, save this to a simple input field as well
-                    $html .= '<input type="text" id="edit_file_current_id" name="and_load_edit_file_options[edit_file_current_id]" value="' . ( isset( $_GET['id'] ) ? ( intval ( $_GET['id'] ) ) : false ) . '"/>';
-
                     echo $html;
 
                     $this->and_load_editor_init( '', $type );
                 } else {
 
+                    $content = 'File content could not be loaded! Please report this error to the developer!';
+
+                    $html .= '<textarea id="edit_file_temporary_textarea" name="and_load_edit_file_options[edit_file_temporary_textarea]">' . $content .  '</textarea>';
+
                     echo $html;
 
-                    $this->and_load_editor_init( 'File content could not be loaded! Please report this error to the developer!', $editor_default_mode_type );
+                    $this->and_load_editor_init( false, $editor_default_mode_type );
                 } // end if
             } else { //A file with the corresponding ID could not be found in the database
                 $html = '<div id="edit_file_invalid_file_id_container" class="bg-danger">';
