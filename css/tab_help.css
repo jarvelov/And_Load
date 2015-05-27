@@ -4,6 +4,10 @@
   margin-top: 10px;
 }
 
+.external_link {
+  margin-right: 5px;
+}
+
 .and_load_help_section {
   border: 3px solid #FEFEFE;
   border-radius: 15px;
