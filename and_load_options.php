@@ -1152,7 +1152,7 @@ Class AndLoad_Options extends AndLoad {
         $html .= '<div id="and_load_help_getting_started">';
 
         $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong></p>';
-        $html .= '<p>More examples and documentation are available on the And Load project\'s <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</p>';
+        $html .= '<p>More examples and documentation are available on the And Load project\'s <span class="external_link glyphicon glyphicon-new-window"></span><a target="_blank" href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</p>';
         $html .= '<p>If you need support with the plugin check out the plugin\'s <span class="external_link glyphicon glyphicon-new-window"></span><a target="_blank" href="https://wordpress.org/support/plugin/and_load"><strong>support page</strong></a>.</p><p>If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</p>';
 
         $html .= '</div>'; // end and_load_help_getting_started
