@@ -9,7 +9,7 @@ CSS and JavaScript files are automatically compressed (minified) when loaded and
 
 ##Install
 
-Download directory from the Wordpress plugins repository.
+Download directly from the Wordpress plugins repository.
 
 or
 
@@ -60,7 +60,7 @@ Say that you have a JavaScript file that looks like this which has ID 3:
 
 Now we can use And Load to call this function from the shortcode by using the `data` and `data_wrap` parameter like so:
 
-`[and_load id="3" data="var myVariable="Hello!" data_wrap="script"]`
+`[and_load id="3" data="var myVariable='Hello!';myFunction(myVariable);" data_wrap="script"]`
 
 Now when the page is loaded we will be greeted with an alert box with the value of myVariable, which in this case is "Hello!".
 
