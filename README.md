@@ -9,7 +9,7 @@ CSS and JavaScript files are automatically compressed (minified) when loaded and
 
 ##Install
 
-Download directory from the Wordpress plugins repository.
+Download directly from the Wordpress plugins repository.
 
 or
 
