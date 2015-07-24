@@ -17,8 +17,8 @@ License: GPLv3
     exit();
   }
 
-  define( 'SLDIR', WP_PLUGIN_DIR . '/and_load' );
-  define( 'SLURL', WP_PLUGIN_URL . '/and_load' );
+  define( 'SLDIR', WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__)) );
+  define( 'SLURL', WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)) );
 
   class AndLoad {
 
