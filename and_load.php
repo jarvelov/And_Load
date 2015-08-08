@@ -27,7 +27,7 @@ License: GPLv3
      *--------------------------------------------*/
     const name = 'And Load';
     const slug = 'and_load';
-    
+
     /**
      * Constructor
      */
@@ -38,10 +38,10 @@ License: GPLv3
         //Hook up to the init action
         add_action( 'init', array( &$this, 'init_and_load' ) );
     }
-    
+
     /**
      * Runs when the plugin is activated
-     */  
+     */
     function install_and_load() {
         /* Create database table */
         global $wpdb;
@@ -78,7 +78,7 @@ License: GPLv3
         if ( ! ( shortcode_exists( 'and_load' ) ) ) {
             add_shortcode( 'and_load', array( &$this, 'and_load_render_shortcode' ) );
         }
-        
+
         if ( is_admin() ) {
             if ( ! ( class_exists("AndLoad_Options") ) ) {
                 require(SLDIR . '/' . self::slug.'_options.php');
@@ -95,7 +95,7 @@ License: GPLv3
             case 'script':
                 $content = '<script type="text/javascript">' . $data . '</script>';
                 break;
-            
+
             case 'style':
                 $content = '<style type="text/css">' . $data . '</style';
                 break;
@@ -113,7 +113,7 @@ License: GPLv3
     */
     function and_load_shortcode_file_enqueue_operation($result, $shortcode_args) {
         extract( $result ); //turn array into named variables, see $sql SELECT query for variable names
-        extract( $shortcode_args ); //turn array into named variables, see render_shortcode function 
+        extract( $shortcode_args ); //turn array into named variables, see render_shortcode function
 
         //Get default options
         $options_default = get_option( 'and_load_default_options' );
@@ -182,14 +182,14 @@ License: GPLv3
 
         if( $args['id'] ) {
             global $wpdb;
-            $table_name = $wpdb->prefix . 'and_load'; 
+            $table_name = $wpdb->prefix . 'and_load';
 
             $sql_limit = 10;
             $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
 
             //Go over all ids and build SQL query
             $ids = explode(",", $args['id']);
-            for ($i=0; $i < sizeof($ids) OR $i < $sql_limit; $i++) { 
+            for ($i=0; $i < sizeof($ids) OR ( ! ($i > $sql_limit; $i++) ) ) { 
                 $current_id = $ids[$i];
                 if($i == 0) {
                     $sql .= 'id = ' . intval( $current_id );
@@ -201,14 +201,14 @@ License: GPLv3
             $sql .= ' LIMIT ' . $sql_limit;
 
             try {
-                $result = $wpdb->get_results($sql, ARRAY_A);    
+                $result = $wpdb->get_results($sql, ARRAY_A);
             } catch(Exception $e) {
                 //var_dump($e);
             }
 
             //TODO: Something prevents the most current revision to be loaded with JS files
             if( isset($result) ) {
-                for ($i=0; $i < sizeof( $result ); $i++) { 
+                for ($i=0; $i < sizeof( $result ); $i++) {
                     $current_file = $result[$i];
                     $this->and_load_shortcode_file_enqueue_operation($current_file, $args);
                 }
