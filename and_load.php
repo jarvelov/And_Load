@@ -189,12 +189,14 @@ License: GPLv3
 
             //Go over all ids and build SQL query
             $ids = explode(",", $args['id']);
-            for ($i=0; $i < sizeof($ids) OR ( ! ($i > $sql_limit; $i++) ) ) { 
-                $current_id = $ids[$i];
-                if($i == 0) {
-                    $sql .= 'id = ' . intval( $current_id );
-                } else {
-                    $sql .= ' OR id = ' . intval( $current_id );
+            for ($i=0; $i < sizeof($ids); $i++) {
+                if ($i < $sql_limit) {
+                    $current_id = $ids[$i];
+                    if($i == 0) {
+                        $sql .= 'id = ' . intval( $current_id );
+                    } else {
+                        $sql .= ' OR id = ' . intval( $current_id );
+                    }
                 }
             }
 
