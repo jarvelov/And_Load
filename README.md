@@ -7,6 +7,22 @@ And load has support to not only load script and style files but it can also out
 
 CSS and JavaScript files are automatically compressed (minified) when loaded and saves every update you make to a new revision of the file so you can easily revert back to a working copy of a file. The plugin includes the [Ace editor](http://ace.c9.io/) with over 20 themes to choose from, syntax highlighting and much more, all to make editing files more fun.
 
+##Upcoming Features
+
+###Add resources
+Ability to upload additional resources such as font files
+
+###Add file from URL
+With an option to periodically download from that location. Useful if one wants to keep up with the latest files from a framework, such as bootstrap
+
+###Manual tagging of revisions
+Ability to tag updates with a comment.
+
+For example: "v1.0" or "Fixed bug in myLoop()"
+
+###Nicer version control
+Show date and manual tag of version
+
 ##Install
 
 Download directly from the Wordpress plugins repository.
@@ -39,7 +55,7 @@ Since And Load autominifies all files it can be somewhat of a problem to debug. 
 `[and_load id="2" minify_override="true"]`
 
 **`data`**  
-Dump additional data to the page before the files are loaded. Very useful in combination with the `data_wrap` parameter if you need to define a variable before a script is loaded or you want to add a CSS class dynamically. 
+Dump additional data to the page before the files are loaded. Very useful in combination with the `data_wrap` parameter if you need to define a variable before a script is loaded or you want to add a CSS class dynamically.
 `[and_load id="2" data="This text will be dumped to the page"]`
 
 **`data_wrap`**  
@@ -68,7 +84,7 @@ Pretty sweet huh?
 
 ###Example 2
 
-Okay, so we have a boring HTML table on our page and we want to freshen it up with some color and nice functions. 
+Okay, so we have a boring HTML table on our page and we want to freshen it up with some color and nice functions.
 
 ```html
 <table id="and_load_example">
@@ -105,7 +121,7 @@ We create a new CSS file with the following content:
   text-align: center;
 }
 
-#and_load_example > tbody > tr:nth-child(odd) > td, 
+#and_load_example > tbody > tr:nth-child(odd) > td,
 #and_load_example > tbody > tr:nth-child(odd) > th {
    background-color: #F3F3F3;
 }
