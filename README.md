@@ -47,7 +47,7 @@ And Load automatically loads the most recent revision of a saved file. If you wa
 `[and_load id="2" revision_override="14"]`
 
 **`jquery_override`**  
-By default `jQuery` is loaded with each script file for your scripting please. If you turn this off globaly you can still enable it for specific files.
+By default `jQuery` is loaded with each script file for your scripting pleasure. If you turn this off globaly you can still enable it for specific files.
 `[and_load id="2" jquery_override="true"]`
 
 **`minify_override`**  
