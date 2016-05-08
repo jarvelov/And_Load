@@ -7,23 +7,31 @@ And load has support to not only load script and style files but it can also out
 
 CSS and JavaScript files are automatically compressed (minified) when loaded and saves every update you make to a new revision of the file so you can easily revert back to a working copy of a file. The plugin includes the [Ace editor](http://ace.c9.io/) with over 20 themes to choose from, syntax highlighting and much more, all to make editing files more fun.
 
-##Upcoming Features
+## Upcoming Features
 
-###Add resources
-Ability to upload additional resources such as font files
+### WP Rest API integration
 
-###Add file from URL
+### Save file content to database
+At the moment And Load saves each file to an actual file on the disk, this isn't really optimal and is prone to be exploited.
+
+### Add resources
+Ability to upload additional resources such as font files.
+
+### Add file from URL
 With an option to periodically download from that location. Useful if one wants to keep up with the latest files from a framework, such as bootstrap
 
-###Manual tagging of revisions
+### Manual tagging of revisions
 Ability to tag updates with a comment.
 
 For example: "v1.0" or "Fixed bug in myLoop()"
 
-###Nicer version control
+### Nicer version control
 Show date and manual tag of version
 
-##Install
+### Bundle
+Load multiple scripts and styles simultaneously by including them in a bundle, then load said bundle with [and_load bundle="bundle-name"]
+
+## Install
 
 Download directly from the Wordpress plugins repository.
 
