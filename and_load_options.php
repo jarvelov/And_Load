@@ -1,14 +1,18 @@
 <?php
 
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 Class AndLoad_Options extends AndLoad {
 
     function __construct() {
         add_action( 'admin_menu', array($this, 'and_load_add_admin_menu') );
         add_action( 'admin_init', array($this, 'and_load_settings_init') );
+        $this->templates = new League\Plates\Engine( dirname(__FILE__) . '/templates');
     } //end __construct
 
     function and_load_add_admin_menu(  ) { 
-        add_options_page( 'And Load', 'And Load', 'manage_options', 'and_load', array($this, 'and_load_options_page') );
+        add_menu_page( 'And_Load', 'And_Load', 'manage_options', 'and_load', array($this, 'and_load_options_page') );
     } // end and_load_add_admin_menu
 
     function and_load_settings_init()  {
@@ -20,7 +24,7 @@ Class AndLoad_Options extends AndLoad {
 
         add_settings_section( 
             'and_load_overview',
-            'Registered scripts and styles',
+            '',
             array($this, 'and_load_overview_callback'),
             'and_load_overview'
         );    
@@ -77,37 +81,6 @@ Class AndLoad_Options extends AndLoad {
         register_setting('and_load_edit_file_options', 'and_load_edit_file_options', array($this, 'and_load_edit_file_callback_sanitize'));
 
         /* Help tab section */
-
-        add_settings_section( 
-            'and_load_help',
-            'Help',
-            array($this, 'and_load_help_callback'),
-            'and_load_help_section'
-        );
-
-        add_settings_field(
-            'and_load_help_documentation',
-            'Documentation',
-            array($this, 'and_load_help_documentation_callback'),
-            'and_load_help_section',
-            'and_load_help'
-        );
-
-        add_settings_field(
-            'and_load_help_credits',
-            'Credits',
-            array($this, 'and_load_help_credits_callback'),
-            'and_load_help_section',
-            'and_load_help'
-        );
-
-        add_settings_field(
-            'and_load_help_debug',
-            'Debug',
-            array($this, 'and_load_help_debug_callback'),
-            'and_load_help_section',
-            'and_load_help'
-        );
 
         register_setting('and_load_help_section', 'and_load_help_section');
 
@@ -662,66 +635,6 @@ Class AndLoad_Options extends AndLoad {
     * Callbacks *
     ************/
 
-    /* Overview tab callbacks */
-
-    function and_load_overview_callback() {
-        echo '<p>Overview of the currently registered scripts and styles</p>'; 
-
-        $files = $this->and_load_get_scripts_styles();
-
-        $html = '<a id="new_file_button" class="btn btn-block btn-sm btn-default" title="Create a new file" href="?page=and_load&amp;tab=tab_edit"><span class="glyphicon glyphicon-plus"></span> New File</a>';
-        $html .= '<div id="overview_container">';
-
-        if(sizeof($files) > 0) {
-            $html .= '<p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
-            $html .= '<div class="and_load_table_container">';
-            $html .= '<table id="overview_table" class="table table-hover table-striped table-bordered display">';
-            $html .= '<thead><th>Id</th><th>Type</th><th>Name</th><th>Revisions</th><th>Last Updated</th><th>Created</th></thead>';
-            $html .= '<tbody>';
-
-            foreach ($files as $file) {
-                extract($file); //id, name, slug, type, revision, updated_timestamp, created_timestamp
-
-                $html .= '<tr>';
-                $html .= '<td>' . $id . '</td>';
-                $html .= '<td>' . strtoupper($type) . '</td>';
-                $html .= '<td ><a href="?page=and_load&amp;tab=tab_edit&amp;id=' . $id . '" title="">' . $name . '</a></td>';
-                $html .= '<td>' . $revision . '</td>';
-                $html .= '<td>' . $updated_timestamp . '</td>';
-                $html .= '<td>' . $created_timestamp . '</td>';
-
-                $html .= '</tr>';
-            }
-
-            $html .= '</tbody></table></div>';
-
-            $options_default = get_option( 'and_load_default_options' );
-
-            $overview_default_table_order_column = $options_default['overview_default_table_order_column'];
-            $overview_table_order_type = $options_default['overview_default_table_sort'];
-
-            ?>
-                <script>
-                var overviewSettings = {
-                    order_column:"<?php echo $overview_default_table_order_column; ?>",
-                    order_type:"<?php echo $overview_table_order_type; ?>"
-                };
-                </script>
-            <?php
-
-        } else {
-            $html .= '<div id="overview_get_started">';
-            $html .= '<h2>No scripts or styles created yet!</h2>';
-            $html .= '<p>To begin click the <em>"New file"</em> button or the <strong><a href="?page=and_load&amp;tab=tab_edit">"Edit file"</a></strong> tab above.</p>';
-            $html .= '<p>For more info and help check out the <strong><a href="?page=and_load&amp;tab=tab_help">Help</a></strong> tab</p>';
-            $html .= '</div>'; //end bg-warning
-        }
-
-        $html .= '</div>'; // end overview_container
-
-        echo $html;        
-    }
-
     function and_load_register_default_options() {
         if( ! get_option('and_load_default_options') ) {
             $options_default = array();
@@ -755,6 +668,16 @@ Class AndLoad_Options extends AndLoad {
         }
     }
 
+    /* Overview tab callbacks */
+
+    function and_load_overview_callback() {
+        echo $this->templates->render('tab_overview', [
+            'header' => [
+                'id', 'type', 'name', 'revisions', 'updated', 'created'
+            ],
+            'files' => $this->and_load_get_scripts_styles()
+        ]);
+    }
     /* Default options tab callbacks */
 
     function and_load_default_options_callback() {
@@ -1141,343 +1064,7 @@ Class AndLoad_Options extends AndLoad {
     /* Help tab callbacks */
 
     function and_load_help_callback() {
-        $html = '<div id="and_load_help">';
-        $html .= '<h4>Help and how-to</h4>';
-        $html .= '<div id="and_load_donation_container">';
-
-        $html .= '<p>If you like this plugin then consider donating to support it\'s development. It would mean a lot!</p>';
-        $html .= '<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tobias%2ejarvelov%40live%2ese&lc=US&item_name=And%20Load%20Wordpress%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" /></a>';
-        $html .= '</div>'; //end and_load_donation_container
-
-        $html .= '<div id="and_load_help_getting_started">';
-
-        $html .= '<p>Hello there! Cool that you\'re using <strong>And Load!</strong></p>';
-        $html .= '<p>More examples and documentation are available on the And Load project\'s <span class="external_link glyphicon glyphicon-new-window"></span><a target="_blank" href="https://github.com/jarvelov/And_Load/blob/master/README.md">GitHub</a> page.</p>';
-        $html .= '<p>If you need support with the plugin check out the plugin\'s <span class="external_link glyphicon glyphicon-new-window"></span><a target="_blank" href="https://wordpress.org/support/plugin/and_load"><strong>support page</strong></a>.</p><p>If you think you have found a bug please file a ticket on the project\'s GitHub page and I\'ll look into it as soon as possible</p>';
-
-        $html .= '</div>'; // end and_load_help_getting_started
-        $html .= '</div>'; // end and_load_help
-
-        echo $html;
-    }
-
-    function and_load_help_documentation_callback() {
-        $html = '<div id="and_load_help_documentation">';
-        $html .= '<h4>Documentation</h4>';
-
-        //Shortcode parameters
-        $html .= '<div class="and_load_help_shortcode_section and_load_help_section" id="and_load_help_shortcode_parameters">';
-        $html .= '<label class="control-label">Shortcode parameters</label>';
-        $html .= '<p>AndLoad accepts the following parameters:</p>';
-
-        $html .= '<ul id="and_load_parameters_list">';
-
-        $html .= '<li><h4>id</h4>';
-        $html .= '<ul id="and_load_parameters_id">';
-        $html .= '<li><strong>Required.</strong> Which file to load. You can specify multiple ids by comma separating them.</li>';
-        $html .= '<li>Accepted values:';
-        $html .= '<ul>';
-        $html .= '<li>Any ID of a registered file (max 10 per shortcode).</li>';
-        $html .= '</ul>';
-        $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2"]</code></p></li>';
-        $html .= '<li><p class="help_example"><code>[and_load id="2,3,4,18"]</code></p></li>';
-        $html .= '</ul>'; // end and_load_parameters_id
-        $html .= '</li>';
-
-        $html .= '<li><h4>revision_override</h4>';
-        $html .= '<ul id="and_load_parameters_revision_override">';
-        $html .= '<li>Load a specific revision of the file. Must be a number representing an existing revision. If omitted or malformed the latest revision is loaded.</li>';
-        $html .=' <li>Accepted values:';
-        $html .= '<ul>';
-        $html .= '<li>Any valid revision number for selected file.</li>';
-        $html .= '</ul>';
-        $html .= '</li>';        
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" revision_override="14"]</code></p>';
-        $html .= '</ul>'; // end and_load_parameters_revision_override
-        $html .= '</li>';
-
-        $html .= '<li><h4>minify_override</h4>';
-        $html .= '<ul id="and_load_parameters_minify_override">';
-        $html .= '<li>Override global "Minify files" setting. Useful when debugging scripts and styles.</li>';
-        $html .=' <li>Accepted values:';
-        $html .= '<ul>';
-        $html .= '<li>"true" - Load the original unminified file.</li>';
-        $html .= '<li>"false" - Loads the minified version, if one exists, else the unminified file is loaded as a fallback.</li>';
-        $html .= '</ul>';
-        $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" minify_override="true"]</code></p>';
-        $html .= '</ul>'; // end and_load_parameters_minify_override
-        $html .= '</li>';
-
-        $html .= '<li><h4>jquery_override</h4>';
-        $html .= '<ul id="and_load_parameters_jquery_override">';
-        $html .= '<li>Override global "Load jQuery with script files" setting.';
-        $html .=' <li>Accepted values:';
-        $html .= '<ul>';
-        $html .= '<li>"true" - If global setting is <em>disabled</em> jQuery is <em>added</em> as a script dependency.</li>';
-        $html .= '<li>"false" - If global setting is <strong>enabled</strong> jQuery is <strong>removed</strong> as a script dependency</li>';
-        $html .= '</ul>';
-        $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" jquery_override="true"]</code></p>';
-        $html .= '</ul>'; // end and_load_parameters_jquery_override
-        $html .= '</li>';
-
-        $html .= '<li><h4>data</h4>';
-        $html .= '<ul id="and_load_parameters_data">';
-        $html .= '<li>This parameter is useful when you need to output extra data from your page, such as javascript variables, dynamic content generated by another plugin or data output from another shortcode. Depending on how other plugins output data from their shortcode it might not work as expected. The content will be dumped to the page <em>before the file is loaded.</em></li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" data="&lt;div class="myDiv"&gt;Content within a div called myDiv&lt;/div&gt;"]</code></p></li>';
-        $html .= '</ul>'; // end and_load_parameters_data
-        $html .= '</li>';
-
-        $html .= '<li><h4>data_wrap</h4>';
-        $html .= '<ul id="and_load_parameters_data_wrap">';
-        $html .= '<li>Used with <em>data</em> parameter to wrap the parameter\'s value inside of.</li>';
-        $html .=' <li>Accepted values:';
-        $html .= '<ul>';
-        $html .= '<li>script - Wraps content within script tags.</li>';
-        $html .= '<li>style - Wraps content within style tags.</li>';
-        $html .= '</ul>';
-        $html .= '</li>';
-        $html .= '<li><p class="help_example_text"><strong>Example:</strong></p><p class="help_example"><code>[and_load id="2" data="var myVariable=\'Check mate, mate!\',mySecondVariable=true;myFunction(myVariable, mySecondVariable);" data_wrap="script"]</code></p></li>';
-        $html .= '</ul>'; // end and_load_parameters_data_wrap
-        $html .= '</li>';
-
-        $html .= '</ul>'; // end and_load_parameters_list
-
-        $html .= '</div>'; // end and_load_help_shortcode_parameters
-
-        $html .= '</div>'; // end and_load_help_documentation
-
-        echo $html;
-    }
-
-    function and_load_help_credits_callback() {
-        $html = '<div id="and_load_help_credits" class="and_load_help_section">';
-        $html .= '<p><span>This plugin would not have been possible without the following projects. </span>';
-        $html .= '<span>Much kudos to everyone in the world contributing to the open source software community!</p>';
-
-        $html .= '<ul id="and_load_credits_list">';
-
-        //Ace credits
-        $html .= '<li><h4>Ace</h4>';
-        $html .= '<ul id="and_load_help_credits_ace">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="http://ace.c9.io/" target="_blank">Ace</a></li>';
-        $html .= '<li>License: <a href="http://github.com/ajaxorg/ace/blob/master/LICENSE" target="_blank">BSD license</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_ace
-        $html .= '</li>';
-
-        $html .= '<li><h4>Datatables</h4>';
-        $html .= '<ul id="and_load_help_credits_datatables">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="http://www.datatables.net" target="_blank">DataTables</a> </li>';
-        $html .= '<li>License: <a href="http://www.datatables.net/license/mit" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_datatables
-        $html .= '</li>';
-
-        $html .= '<li><h4>Minify</h4>';
-        $html .= '<ul id="and_load_help_credits_minify">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="http://github.com/matthiasmullie/minify" target="_blank">Minify (GitHub)</a></li>';
-        $html .= '<li>License: <a href="http://github.com/matthiasmullie/minify/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_minify
-        $html .= '</li>';
-
-        $html .= '<li><h4>Path Converter</h4>';
-        $html .= '<ul id="and_load_help_credits_path_converter">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="https://github.com/matthiasmullie/path-converter" target="_blank">Path Converter (GitHub)</a></li>';
-        $html .= '<li>License: <a href="https://github.com/matthiasmullie/path-converter/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_minify
-        $html .= '</li>';
-
-        $html .= '<li><h4>Bootstrap</h4>';
-        $html .= '<ul id="and_load_help_credits_bootstrap">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></li>';
-        $html .= '<li>License: <a href="http://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_bootstrap
-        $html .= '</li>';
-
-        $html .= '<li><h4>Bootbox.js</h4>';
-        $html .= '<ul id="and_load_help_credits_bootbox">';
-        $html .= '<li>Project URL: <span class="external_link glyphicon glyphicon-new-window"></span><a href="http://bootboxjs.com/" target="_blank">Bootbox.js</a></li>';
-        $html .= '<li>License: <a href="http://github.com/makeusabrew/bootbox/blob/master/LICENSE.md" target="_blank">MIT License</a></li>';
-        $html .= '</ul>'; // end and_load_help_credits_bootbox
-        $html .= '</li>';
-
-        $html .= '</ul>'; // end and_load_credits_list
-
-        $html .= '</div>'; // end and_load_help_credits
-
-        echo $html;
-    }
-
-    function and_load_help_debug_callback() {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'and_load';
-
-        $html = '<div id="and_load_help_debug" class="and_load_help_section">';
-
-        $html .= '<div id="show_hide_error_list" class="btn btn-block btn-default"><span class="glyphicon glyphicon-collapse-down"></span>   Error codes and messages</div>';
-
-        $html .= '<ul id="and_load_error_list" style="display:none">';
-
-        $html .= '<li id="error_id_0"><h4>Error #0</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Could not save file to Wordpress\' <em>uploads</em> folder.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_0
-
-        $html .= '<li id="error_id_1"><h4>Error #1</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Could not create a new entry in the database when saving file.</li>';
-        $html .= '<li>Solution: Verify that the <em>' . $table_name . '</em> table exists in the database and that the database user which Wordpress is using to access it has the appropriate permissions.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_1
-
-        $html .= '<li id="error_id_2"><h4>Error #2</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Database lookup error. No entry with a corresponding ID was found in the database table.</li>';
-        $html .= '<li>Solution: Verify that a row with ID exists in the <em>' . $table_name . '</em> table. If you followed a link from the overview table then delete the file and save it again.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_2
-
-        $html .= '<li id="error_id_3"><h4>Error #3</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Invalid file type stored in database. The column "type" for the file\'s row in the database is malformed.</li>';
-        $html .= '<li>Solution: Delete the file and save it again.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_3
-
-        $html .= '<li id="error_id_4"><h4>Error #4</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Could not update database record when updating file.</li>';
-        $html .= '<li>Solution: Verify that Wordpress user has access to the <em>' . $table_name . '</em> database table.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_4
-
-        $html .= '<li id="error_id_6"><h4>Error #6</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Error in loading minify library files.</li>';
-        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_6
-
-        $html .= '<li id="error_id_7"><h4>Error #7</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Error initializing minify library for JavaScript files.</li>';
-        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_7
-
-        $html .= '<li id="error_id_8"><h4>Error #8</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Error initializing minify library for CSS files.</li>';
-        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_8
-
-        $html .= '<li id="error_id_9"><h4>Error #9</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. File type could not be determined when initializing minify library.</li>';
-        $html .= '<li>Solution: File type may be malformed in database. Delete the file and save a new copy.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_9
-
-        $html .= '<li id="error_id_10"><h4>Error #10</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error minifying file content</li>';
-        $html .= '<li>Solution: The file might have a syntax error preventing it from being minified. Check the syntax and try saving the file again.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_10
-
-        $html .= '<li id="error_id_11"><h4>Error #11</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Internal error. Minify library is not initialized when trying to minify file.</li>';
-        $html .= '<li>Solution: The File\'s type may be malformed in database. Delete the file and save a new copy.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_11
-
-        $html .= '<li id="error_id_12"><h4>Error #12</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error saving file to path.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_12
-
-        $html .= '<li id="error_id_13"><h4>Error #13</h4>';
-        $html .= '<ul>';
-        $html .= '<li>General error saving file.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory. Reinstall plugin if problem persists for new files.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_13
-
-        $html .= '<li id="error_id_14"><h4>Error #14</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error minifying file.</li>';
-        $html .= '<li>Solution: Files may be missing. Reinstall plugin.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_14
-
-        $html .= '<li id="error_id_15"><h4>Error #15</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error loading file with specified ID.</li>';
-        $html .= '<li>Solution: The file might be deleted or no file with that ID has ever been created.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_15
-
-        $html .= '<li id="error_id_16"><h4>Error #16</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error creating directory for files.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_16
-
-        $html .= '<li id="error_id_17"><h4>Error #17</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error creating directory for minified files.</li>';
-        $html .= '<li>Solution: Check permissions for the web server to write to the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_17
-
-        $html .= '<li id="error_id_18"><h4>Error #18</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error deleting file.</li>';
-        $html .= '<li>Solution: Check that the file exists on the server and that the web server has permission to delete files inside the wp-content/uploads directory.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_18
-
-        $html .= '<li id="error_id_19"><h4>Error #19</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error deleting row with specified ID.</li>';
-        $html .= '<li>Solution: The ID refers to a file that is not referenced in the <em>' . $table_name . '</em> database table. This could mean that it has already been deleted. No additional action is necessary.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_19
-
-        $html .= '<li id="error_id_20"><h4>Error #20</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error saving file. Invalid file type.</li>';
-        $html .= '<li>Solution: The file type was invalid. Make sure to select a file type in the drop down list before saving or uploading a file.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_20
-
-        $html .= '<li id="error_id_21"><h4>Error #21</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error saving file. Invalid file name.</li>';
-        $html .= '<li>Solution: The file name is invalid, use another name. The name must be at least one character.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_20
-
-        $html .= '<li id="error_id_22"><h4>Error #22</h4>';
-        $html .= '<ul>';
-        $html .= '<li>Error saving file. File name can not be blank.</li>';
-        $html .= '<li>Solution: The file must be at least one character.</li>';
-        $html .= '</ul>';
-        $html .= '</li>'; // end error_id_22
-
-        $html .= '</ul>'; // end and_load_error_list
-
-        $html .= '</div>'; // end and_load_help_debug
-
-        echo $html;
+        echo $this->templates->render('tab_help');
     }
 
 
@@ -1671,6 +1258,8 @@ Class AndLoad_Options extends AndLoad {
                 default:
                     $editor_mode_type = $mode_type;
                     break;
+            }        foreach ($this->e($header) as $key => $value) {
+                echo '<th class="' . $key . '">' . $value . '</th>';
             }
         } else { //this is a new file, load the default mode type
             switch ($editor_default_mode_type) {
@@ -1717,9 +1306,13 @@ Class AndLoad_Options extends AndLoad {
     function and_load_options_page(  ) {
 
         //Load default styles for all tabs
-        $this->and_load_enqueue_file_options( 'and_load_bootstrap-style', 'lib/bootstrap/css/bootstrap.min.css' );
-        $this->and_load_enqueue_file_options( 'and_load_admin-style', 'css/admin.css' );
 
+        wp_enqueue_style('fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css');
+        wp_enqueue_style('bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+        wp_enqueue_script('bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
+        wp_enqueue_style('open-sans', '//fonts.googleapis.com/css?family=Open+Sans');
+    
+        $this->and_load_enqueue_file_options( 'and_load_admin-style', 'css/admin.css' );
 
         if( isset( $_GET[ 'tab' ] ) ) {  
             $active_tab = $_GET[ 'tab' ];  
@@ -1727,18 +1320,33 @@ Class AndLoad_Options extends AndLoad {
             $active_tab = 'tab_overview';
         } // end if
 
+        $files = sizeof($this->and_load_get_scripts_styles());
+
         ?>
         <div class="wrap">
-            <div class="nav_tab_wrapper">
-                <a href="?page=and_load&amp;tab=tab_overview" class="nav_tab tab_overview <?php echo $active_class = ($active_tab == 'tab_overview') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-list-alt"></span> Overview</a>
-                <a href="?page=and_load&amp;tab=tab_default" class="nav_tab tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-cog"></span> Default Options</a>
-                <a href="?page=and_load&amp;tab=tab_edit" class="nav_tab tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-edit"></span> Edit file</a>
-                <a href="?page=and_load&amp;tab=tab_help" class="nav_tab tab_help <?php echo $active_class = ($active_tab == 'tab_help') ? 'active_tab' : '' ?>"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
-            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="<?php echo $active_class = ($active_tab == 'tab_overview') ? 'active' : '' ?>">
+                    <a href="#tab_overview" class="tab_overview" data-toggle="tab">
+                        <span class="fa fa-list"></span> Overview <span class="badge"><?php echo ($files > 0) ? $files : '' ; ?></span>
+                    </a>
+                </li>
+                <li role="presentation" class="<?php echo $active_class = ($active_tab == 'tab_default') ? 'active' : '' ?>">
+                    <a href="?page=and_load&amp;tab=tab_default" class="tab_default <?php echo $active_class = ($active_tab == 'tab_default') ? 'active_tab' : '' ?>">
+                        <span class="fa fa-cogs"></span> Settings
+                    </a>
+                </li>
+                <li role="presentation" class="<?php echo $active_class = ($active_tab == 'tab_edit') ? 'active' : '' ?>">
+                    <a href="?page=and_load&amp;tab=tab_edit" class="tab_edit <?php echo $active_class = ($active_tab == 'tab_edit') ? 'active_tab' : '' ?>">
+                        <span class="fa fa-pencil"></span> Editor</a>
+                </li>
+                <li role="presentation" class="<?php echo $active_class = ($active_tab == 'tab_help') ? 'active' : '' ?>">
+                    <a href="?page=and_load&amp;tab=tab_help" class="tab_help">
+                        <span class="fa fa-question"></span> Help
+                    </a>
+                </li>
+            </ul>
 
             <form id="and_load_form" action='options.php' method='post' enctype='multipart/form-data'>
-                
-                <h2>And Load</h2>
                 
                 <?php
 
@@ -1786,8 +1394,7 @@ Class AndLoad_Options extends AndLoad {
                     $this->and_load_enqueue_file_options( 'tab_help_js', 'js/tab_help.js', true );
 
                     //Tab sections and fields 
-                    settings_fields( 'and_load_help_section' );
-                    do_settings_sections( 'and_load_help_section' );
+                    $this->and_load_help_callback();
                 } // end if
 
                 ?>

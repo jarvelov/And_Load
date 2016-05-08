@@ -1,48 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
-body {
-  background-color: #E9E9E9;
-}
-
-.wrap {
-  font-family: 'Lato', sans-serif;
-  background-color: #E9E9E9;
+html, body {
+  background-color: #F9F9F9;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #F9F9F9;
 }
 
 /* Nav bar tabs */
 
-.nav_tab_wrapper {
-  margin-top: 1em;
-  border-bottom: 5px double #FEFEFE;
-  display: block;
-}
-
-.nav_tab {
-  font-size: 1.2em;
-  line-height: 1em;
-  border-width: 1px 1px medium;
-  border-style: solid solid none;
-  border-color: #CCC #CCC -moz-use-text-color;
-  -moz-border-top-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  border-image: none;
-  background: #E4E4E4 none repeat scroll 0% 0%;
-  color: #555;
-  display: inline-block;
-  padding: 4px 14px 6px;
-  text-decoration: none;
-  margin: -4px 4px -1px 0px;  
-}
-
-.nav_tab:hover {
-  background-color: #EFEFEF;
-  color: #4CB2E7;
-}
-
-.active_tab {
-  background-color: #F3F3F3;
+.wrap .nav.nav.tabs > li > a {
+  border: 1px solid rgba(221, 221, 221, 0.6) !important;
 }
 
 #container_help_text {
@@ -62,4 +27,8 @@ body {
 
 #help_text {
   margin-left: 2px;
+}
+
+#and_load_error_list {
+  display: none;
 }

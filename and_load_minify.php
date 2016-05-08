@@ -16,7 +16,7 @@ Class AndLoad_Minify extends AndLoad {
                 }
             }
         } else {
-            throw new Exception("Class AndLoad is not loaded. This function can not be called outside it's environment", 6);
+            throw new Exception("Class AndLoad is not loaded. This class can not be called outside its environment", 6);
         }
     }
 

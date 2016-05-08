@@ -37,6 +37,8 @@ License: GPLv3
 
         //Hook up to the init action
         add_action( 'init', array( &$this, 'init_and_load' ) );
+
+        require 'vendor/autoload.php';
     }
 
     /**
@@ -99,6 +101,26 @@ License: GPLv3
             case 'style':
                 $content = '<style type="text/css">' . $data . '</style';
                 break;
+
+            case 'script_url':
+                $content = '(function() {
+                    var d = document, s = d.createElement("script");
+                    s.src = "//' . $data . '";
+                    s.setAttribute("data-timestamp", + new Date());
+                    (d.head || d.body).appendChild(s);
+                })()';
+                break;
+
+            case 'style_url':
+                $content = '(function() {
+                    var d = document, s = d.createElement("style");
+                    s.rel = "stylesheet";
+                    s.href = "//' . $data . '";
+                    s.setAttribute("data-timestamp", + new Date());
+                    (d.head || d.body).appendChild(s);
+                })()';
+                break;
+
             default:
                 break;
         }
