@@ -31,7 +31,8 @@ function toggleErrorList() {
     }
 }
 
-jQuery('#show_hide_error_list').on('click', function() {
+jQuery('#show_hide_error_list').on('click', function(e) {
+    e.preventDefault();
     toggleErrorList();
 });
 

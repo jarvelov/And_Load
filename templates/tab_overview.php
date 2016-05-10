@@ -1,4 +1,4 @@
-<?php $this->layout('template'); ?>
+<?php $this->layout('template', array('active_tab' => 'tab_overview')); ?>
 
 <h1>Overview</h1>
 
@@ -8,20 +8,13 @@
         ?>
         <div id="overview_container" class="col-xs-12">
 
-            <p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>';
+            <p id="container_help_text"><span id="help-title">Tip!</span><span id="help_text">Click the name of the file in the table to view/edit it.</span></p>
 
-            <?php
-                $options_default = get_option( 'and_load_default_options' );
-
-                $overview_default_table_order_column = $options_default['overview_default_table_order_column'];
-                $overview_table_order_type = $options_default['overview_default_table_sort'];
-
-            ?>
             <table class="table table-striped table-bordered table-hover datatables" data-ajax='{"url":"/wp-json/v2/and_load/files"}' data-order='[' . $overview_default_table_order_column . ',' . $overview_table_order_type . ']'>
                 <thead>
                     <?php
-                    foreach ($header as $value) {
-                        echo '<th class="' . $value . '">' . ucfirst($value) . '</th>';
+                    foreach ($settings['overview_default_table_order_columns']['values'] as $key => $value) {
+                        echo '<th class="' . $key . '">' . ucfirst($value) . '</th>';
                     }
                     ?>
                 </thead>

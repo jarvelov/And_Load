@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 /*
 Plugin Name: And Load
 Plugin URI: http://tobias.jarvelov.se/portfolio/and_load
@@ -33,18 +36,16 @@ License: GPLv3
      */
     function __construct() {
         //register an activation hook for the plugin
-        register_activation_hook( __FILE__, array( &$this, 'install_and_load' ) );
+        register_activation_hook( __FILE__, array( $this, 'install_plugin' ) );
 
         //Hook up to the init action
-        add_action( 'init', array( &$this, 'init_and_load' ) );
-
-        require 'vendor/autoload.php';
+        add_action( 'init', array( $this, 'init_plugin' ) );
     }
 
     /**
      * Runs when the plugin is activated
      */
-    function install_and_load() {
+    function install_plugin() {
         /* Create database table */
         global $wpdb;
         $table_name = $wpdb->prefix . 'and_load';
@@ -55,9 +56,6 @@ License: GPLv3
             name varchar(255) DEFAULT '' NOT NULL,
             slug varchar(255) DEFAULT '' NOT NULL,
             type varchar(255) DEFAULT '' NOT NULL,
-            srcpath varchar(255) DEFAULT '' NOT NULL,
-            minify boolean DEFAULT '0' NOT NULL,
-            minpath varchar(255) DEFAULT '',
             revision mediumint(9) DEFAULT '1' NOT NULL,
             created_timestamp timestamp DEFAULT '0000-00-00 00:00:00',
             updated_timestamp timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -71,23 +69,27 @@ License: GPLv3
     /**
      * Runs when the plugin is initialized
      */
-    function init_and_load() {
-        // Setup localization
-        load_plugin_textdomain( self::slug, false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
-        // Load JavaScript and stylesheets
+    function init_plugin() {
+        require 'vendor/autoload.php';
 
         // Register the shortcode: [and_load]
         if ( ! ( shortcode_exists( 'and_load' ) ) ) {
-            add_shortcode( 'and_load', array( &$this, 'and_load_render_shortcode' ) );
+            add_shortcode( 'and_load', array( $this, 'render_shortcode' ) );
         }
 
         if ( is_admin() ) {
-            if ( ! ( class_exists("AndLoad_Options") ) ) {
+            if ( ! ( class_exists('And_Load_Options') ) ) {
                 require(SLDIR . '/' . self::slug.'_options.php');
             }
-            $this->options = new AndLoad_Options();
+            $this->options = new And_Load_Options();
+        }
+
+        if( ! ( class_exists('And_Load_Api') ) ) {
+            require(SLDIR . '/' . self::slug . '_api.php');
+            $this->api = new And_Load_Api();
         }
     }
+
     /** and_load_dump_shortcode_data
     * @data - (string) to be dumped to page
     * @wrap - (string) 'script' | 'style'- Wrap @data within these tags
@@ -188,10 +190,10 @@ License: GPLv3
 
     } // end and_load_shortcode_file_enqueue_operation
 
-    /** and_load_render_shortcode
+    /** render_shortcode
     *
     */
-    function and_load_render_shortcode($atts) {
+    function render_shortcode($atts) {
         // Extract the attributes submitted with the shortcode
         $args = (shortcode_atts(array(
             'id' => false,
@@ -203,46 +205,22 @@ License: GPLv3
             ), $atts));
 
         if( $args['id'] ) {
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'and_load';
-
-            $sql_limit = 10;
-            $sql = 'SELECT name,srcpath,minify,minpath,type,revision FROM ' . $table_name . ' WHERE  ';
-
-            //Go over all ids and build SQL query
-            $ids = explode(",", $args['id']);
-            for ($i=0; $i < sizeof($ids); $i++) {
-                if ($i < $sql_limit) {
-                    $current_id = $ids[$i];
-                    if($i == 0) {
-                        $sql .= 'id = ' . intval( $current_id );
-                    } else {
-                        $sql .= ' OR id = ' . intval( $current_id );
-                    }
-                }
-            }
-
-            $sql .= ' LIMIT ' . $sql_limit;
-
-            try {
-                $result = $wpdb->get_results($sql, ARRAY_A);
-            } catch(Exception $e) {
-                //var_dump($e);
-            }
-
-            //TODO: Something prevents the most current revision to be loaded with JS files
-            if( isset($result) ) {
-                for ($i=0; $i < sizeof( $result ); $i++) {
-                    $current_file = $result[$i];
-                    $this->and_load_shortcode_file_enqueue_operation($current_file, $args);
-                }
-
-                //Dump data to page if argument was given
-                if($args['data']) {
-                    $this->and_load_dump_shortcode_data( $args['data'], $args['data_wrap'] );
-                }
-            }
+            //Enqueue files
         }
+
+        //Dump data to page if argument was given
+        if($args['data']) {
+            $this->and_load_dump_shortcode_data( $args['data'], $args['data_wrap'] );
+        }
+    }
+
+    public function ajax_script($hook) {
+        if( 'index.php' != $hook ) {
+        // Only applies to dashboard panel
+        return;
+        }
+            
+        wp_enqueue_script( 'and-load-ajax-script', plugins_url( '/js/ajax.js', __FILE__ ), array('jquery') );
     }
 
     /** and_load_enqueue_file

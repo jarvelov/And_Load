@@ -240,11 +240,6 @@ jQuery('#new_file_upload_reset_button').on('click', function() {
     jQuery(this).hide(); //hide reset button
 });
 
-//User requested to see more settings, toggle #edit_file_editor_settings_container
-jQuery('#edit_file_more_settings_button').on('click', function() {
-    toggleSettingsDisplay();
-});
-
 //User submitted the form, check if the delete button initiated the submit and prompt for action
 jQuery(document).on("click", ":submit", function(event){
     if(this.id == 'delete') {
@@ -271,21 +266,6 @@ jQuery(document).on("click", ":submit", function(event){
         }
     }
 });
-
-//Logic to hide / show #edit_file_editor_settings_container and add appropriate class to button span to indicate state
-function toggleSettingsDisplay() {
-    if ( jQuery('#edit_file_more_icon').hasClass('glyphicon-collapse-down') ) {
-        jQuery('#edit_file_more_text').text('Less');
-        jQuery('#edit_file_more_icon').removeClass('glyphicon-collapse-down');
-        jQuery('#edit_file_more_icon').addClass('glyphicon-collapse-up');
-        jQuery('#edit_file_editor_settings_container').show();
-    } else {
-        jQuery('#edit_file_more_text').text('More');
-        jQuery('#edit_file_more_icon').removeClass('glyphicon-collapse-up');
-        jQuery('#edit_file_more_icon').addClass('glyphicon-collapse-down');
-        jQuery('#edit_file_editor_settings_container').hide();
-    }
-}
 
 /* document ready 'init' function */
 
@@ -330,4 +310,8 @@ jQuery(document).ready(function() {
             observer.observe(target, { attributes : true, attributeFilter : ['style'] });
         }
     }
+
+
 });
+
+

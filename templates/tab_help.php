@@ -1,10 +1,12 @@
+<?php $this->layout('template', array('active_tab' => 'tab_overview')); ?>
+
 <div id="and_load_help">
     <h4>
         Help and how-to
     </h4>
     <div id="and_load_donation_container">
         <p>
-            If you like this plugin then consider donating to support it\'s development. It would mean a lot!
+            If you like this plugin then consider donating to support it's development. It would mean a lot!
         </p>
         <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tobias%2ejarvelov%40live%2ese&lc=US&item_name=And%20Load%20Wordpress%20Plugin&currency_code=USbn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">
             <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" />
@@ -12,24 +14,22 @@
     </div>
     <div id="and_load_help_getting_started">
         <p>
-            Hello there! Cool that you\'re using
+            Hello there! Cool that you're using
             <strong>
                 And Load!
             </strong>
         </p>
         <p>
-            More examples and documentation are available on the And Load project\'s
-            <span class="external_link glyphicon glyphicon-new-window">
-            </span>
+            More examples and documentation are available on the And Load project page on 
             <a target="_blank" href="https://github.com/jarveloAnd_Load/blob/master/README.md">
+                <span class="glyphicon glyphicon-new-window"></span>
                 GitHub
-            </a> page.
+            </a>
         </p>
         <p>
-            If you need support with the plugin check out the plugin\'s
-            <span class="external_link glyphicon glyphicon-new-window">
-            </span>
+            If you need support with the plugin check out the plugin's
             <a target="_blank" href="https://wordpress.org/support/plugin/and_load" strong>
+                <span class="glyphicon glyphicon-new-window"></span>
                 support page
             </strong>
         </a>
@@ -39,7 +39,7 @@
         </p>
     </div>
 
-    <div id="and_load_help_credits" class="and_load_help_section">';
+    <div id="and_load_help_credits" class="and_load_help_section">
         <p>
             This plugin would not have been possible without the following projects. Much kudos to everyone in the world contributing to the open source software community!
         </p>
@@ -178,8 +178,8 @@
 
                 foreach ($errors as $code => $error) {
                     $html = '<li id="error_id_' . $code . '">';
-                    $html .= '<h4>Error #0</h4>';
-                    $html .= '<ul><li>' . $error['message'] . '</li>';
+                    $html .= '<h4>Error #' . $code . '</h4>';
+                    $html .= '<ul><li>' . $error['error'] . '</li>';
                     $html .= '<li>' . $error['solution'] . '</li></ul>';
 
                     echo $html;
